@@ -1,0 +1,7 @@
+#btnExit:hover{
+    -fx-background-color: red;
+}
+
+.root{
+    -fx-background-color: aliceblue;
+}

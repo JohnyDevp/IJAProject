@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ija.ijaproject.ClassDiagramController">
+   <children>
+      <ToolBar layoutY="35.0" prefWidth="570.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
+        <items>
+          <Button mnemonicParsing="false" text="Save" />
+            <Button mnemonicParsing="false" text="Discard" />
+            <Button mnemonicParsing="false" text="Undo" />
+            <Button fx:id="btnClose" mnemonicParsing="false" onAction="#btnClose" text="Close" />
+            <Button mnemonicParsing="false" text="ADD CLASS" />
+            <Button mnemonicParsing="false" text="ADD RELATION" />
+            <Button mnemonicParsing="false" text="EDIT CLASS" />
+        </items>
+      </ToolBar>
+      <ToolBar layoutX="-7.0" layoutY="-3.0" prefHeight="35.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <Button fx:id="btnCreateNewSequenceDiagram" mnemonicParsing="false" onAction="#createNewSequenceDiagramBtn" text="Create new sequence diagram" />
+         </items>
+      </ToolBar>
+   </children>
+</AnchorPane>
