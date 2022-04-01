@@ -1,5 +1,6 @@
 package ija.ijaproject;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -14,11 +15,15 @@ public class MainController {
      * btnCreateNewClassDiagram button from the main view
      * btnLoadSequenceDiagram button from the main view
      * btnCreateNewSequenceDiagram button from the main view
-     * toolBarTb tool bar from the main view
-     * tabPane tabpane from the main view*/
+     * toolBar from the main view
+     * tabPane from the main view*/
+    @FXML
     public Button btnLoadClassDiagram;
+    @FXML
     public Button btnCreateNewClassDiagram;
+    @FXML
     public ToolBar toolBarTb;
+    @FXML
     public TabPane tabPane;
 
     /**
@@ -38,6 +43,7 @@ public class MainController {
     /**
      * handling action when button createNewClassDiagramBtn is pressed
      * calling diagramTabConstructor with sufficient params */
+    @FXML
     public void createNewClassDiagramBtn() throws Exception{
         diagramTabConstructor( false);
     }
@@ -45,6 +51,7 @@ public class MainController {
     /**
      * handling action when button loadClassDiagramBtn is pressed
      * calling diagramTabConstructor with sufficient params */
+    @FXML
     public void loadClassDiagramBtn() throws Exception{
         diagramTabConstructor( true);
     }
@@ -52,6 +59,7 @@ public class MainController {
     /**
      * handling action when button changeSettingsBtn is pressed
      * */
+    @FXML
     public void changeSettingsBtn(){
         System.out.println("Changing settings...");
 
