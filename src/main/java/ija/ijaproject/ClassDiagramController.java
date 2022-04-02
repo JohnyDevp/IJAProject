@@ -6,11 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -150,7 +148,7 @@ public class ClassDiagramController {
 
 
         ClassObject newObj = new ClassObject();
-        newObj.createRectangle("New class");
+        newObj.createClassObject("New class");
         newObj.addAttribute("name : string");
         newObj.addAttribute("surname : string");
         newObj.addOperation("+ getName()");
@@ -300,7 +298,7 @@ public class ClassDiagramController {
         public Line getLine1() { return this.line1; }
         public Line getLine2() { return this.line2; }
 
-        public void createRectangle(String name){
+        public void createClassObject(String name){
             //create overall classbox => of rectangle
             Rectangle rectangle = new Rectangle(100,100,Color.RED);
             this.classBox = rectangle;
@@ -336,6 +334,10 @@ public class ClassDiagramController {
             this.line2 = line2;
         }
 
+        /**
+         * @param attributeText full text of attribute
+         * method for adding attribute to class diagram graphical representation
+         * */
         public Text addAttribute(String attributeText){
             Text attribute = new Text(attributeText);
 
@@ -365,6 +367,10 @@ public class ClassDiagramController {
 
         }
 
+        /**
+         * @param operationText full text of operation
+         * method for adding opperation to class diagram graphical representation
+         * */
         public Text addOperation(String operationText){
             Text operation = new Text(operationText);
             if (listOfOperations.isEmpty()){
