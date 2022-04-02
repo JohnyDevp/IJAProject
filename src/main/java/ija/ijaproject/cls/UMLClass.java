@@ -149,7 +149,7 @@ public class UMLClass extends Element{
      * method for get list of all operations
      * @return unmodifiable list of all operations
      * */
-    public List<UMLOperation> getUmlOperationsList(){
+    public List<UMLOperation> getUmlOperationList(){
         return Collections.unmodifiableList(this.umlOperationsList);
     }
 }

@@ -1,28 +1,22 @@
 package ija.ijaproject;
 
 
-import javafx.application.Application;
+import ija.ijaproject.cls.ClassDiagram;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,13 +28,7 @@ public class ClassDiagramController {
     @FXML
     public Button btnAddClass;
     @FXML
-    public Canvas canvasId;
-
-    /**
-     * variables for graphic
-     * */
-    double orgSceneX, orgSceneY;
-    double orgTranslateX, orgTranslateY;
+    public Pane pane;
 
     /**
      * variable storing reference for main controller
@@ -63,6 +51,11 @@ public class ClassDiagramController {
     private List<SequenceDiagramController> sequenceDiagramControllersList = new ArrayList<SequenceDiagramController>();
 
     /**
+     * variable storing class diagram
+     * */
+    private ClassDiagram classDiagram;
+
+    /**
      * setter
      * @param tabPane reference of the tab where the diagram has been drawn
      * */
@@ -78,7 +71,7 @@ public class ClassDiagramController {
 
     /**
      * add new sequenceDiagramController to the list of them
-     * @param sequenceDiagramController
+     * @param sequenceDiagramController instance of new sequence diagram controller
      * */
     private void addNewSequenceDiagramControllerToList(SequenceDiagramController sequenceDiagramController){
         this.sequenceDiagramControllersList.add(sequenceDiagramController);
@@ -103,7 +96,7 @@ public class ClassDiagramController {
      * getter
      * @return path of loaded file, when no file loaded returns empty string
      * */
-    public final String getLoadedFilePath() {return this.path; }
+    private final String getLoadedFilePath() {return this.path; }
 
     /**
      * setter
@@ -140,105 +133,106 @@ public class ClassDiagramController {
         getMainController().btnLoadClassDiagram.setDisable(false);
     }
 
+    public ClassObject cls;
+    public Double mousePrevX;
+    public Double mousePrevY;
+    boolean classObjectSelected = false;
+
+
     /**
      * overridden method
      * taking control and starting to work when tab is created
      */
     public void start(){
-        Canvas canvas = this.canvasId;
-        this.createCircle(canvas);
 
-        canvas.setOnMouseClicked(e-> this.select(e));
-        canvas.setOnMouseMoved(e -> { if(this.circle_selected) this.move(e, canvas); });
+        Pane canvas = this.pane;
+        canvas.setCursor(Cursor.CROSSHAIR);
+
+
+        ClassObject newObj = new ClassObject();
+        newObj.createRectangle("New class");
+        newObj.addAttribute("name : string");
+        newObj.addAttribute("surname : string");
+        newObj.addOperation("+ getName()");
+        newObj.addOperation("+ getSurname()");
+        Rectangle clickableCorner = newObj.getClickableCorner();
+
+        this.cls = newObj;
+        System.out.println(newObj.getListOfAttributes().toString());
+        System.out.println(newObj.getListOfOperations().toString());
+
+        //adding all objects elements to canvas
+//        canvas.getChildren().add(rectangle);
+        canvas.getChildren().addAll(newObj.getClassBox(), newObj.getClassName(), newObj.getLine1(), newObj.getLine2(), newObj.getClickableCorner());
+        for (Text attr : newObj.getListOfAttributes()) {canvas.getChildren().add(attr);}
+        for (Text op : newObj.getListOfOperations()) {canvas.getChildren().add(op);}
+
+        //newObj.getClassName().setOnMouseClicked(mouseEvent -> rectangle.getOnMouseClicked());
+
+        clickableCorner.setOnMouseClicked(mouseEvent -> {
+            clickableCorner.setFill(Color.ORANGE);
+        });
+
+        clickableCorner.setOnMousePressed(mouseEvent -> {
+
+            this.mousePrevX = mouseEvent.getX();
+            this.mousePrevY = mouseEvent.getY();
+            this.classObjectSelected = !classObjectSelected;
+            System.out.println(this.mousePrevX + " " + this.mousePrevY+" "+classObjectSelected);
+        });
+
+        clickableCorner.setOnMouseDragged(event -> {
+
+            //preventing from overdrawing the pane surroundings => which is mysteriously possible
+            //if the rectangle is selected => then do actions
+            if((clickableCorner.getY() + (event.getY() - this.mousePrevY)) <= 0) return;
+
+            //count the difference between previous and current mouse position for moving objects
+            Double diffX = event.getX() - this.mousePrevX;
+            Double diffY = event.getY() - this.mousePrevY;
+
+            //previous position of mouse set to current position
+            mousePrevX = event.getX();
+            mousePrevY = event.getY();
+
+            //changing position of each part of diagram
+            clickableCorner.setX(clickableCorner.getX() + diffX);
+            clickableCorner.setY(clickableCorner.getY() + diffY);
+
+            newObj.getClassBox().setX(newObj.getClassBox().getX() + diffX);
+            newObj.getClassBox().setY(newObj.getClassBox().getY() + diffY);
+
+            newObj.getClassName().setX(newObj.getClassName().getX() + diffX);
+            newObj.getClassName().setY(newObj.getClassName().getY() + diffY);
+
+            newObj.getLine1().setStartX(newObj.getLine1().getStartX() + diffX);
+            newObj.getLine1().setStartY(newObj.getLine1().getStartY() + diffY);
+            newObj.getLine1().setEndX(newObj.getLine1().getEndX() + diffX);
+            newObj.getLine1().setEndY(newObj.getLine1().getEndY() + diffY);
+
+            newObj.getLine2().setStartX(newObj.getLine2().getStartX() + diffX);
+            newObj.getLine2().setStartY(newObj.getLine2().getStartY() + diffY);
+            newObj.getLine2().setEndX(newObj.getLine2().getEndX() + diffX);
+            newObj.getLine2().setEndY(newObj.getLine2().getEndY() + diffY);
+
+            for (Text attr : newObj.getListOfAttributes()){
+                attr.setX(attr.getX() + diffX);
+                attr.setY(attr.getY() + diffY);
+            }
+            for (Text op : newObj.getListOfOperations()){
+                op.setX(op.getX() + diffX);
+               op.setY(op.getY() + diffY);
+            }
+
+        });
 
     }
-    double mouse_x = 0.0;
-    double mouse_y = 0.0;
-    double circle_x = 10;
-    double circle_y = 14;
-    double height = 40;
-    double width = 40;
-    boolean circle_selected = false;
-
-    //checks whether the mouse location is within the circle or not
-    private void select(MouseEvent e) {
-
-        double temp_mouse_x = e.getX();
-        double temp_mouse_y = e.getY();
-        double x_max = this.circle_x + this.width;
-        double y_max = this.circle_y + this.height;
-        System.out.println(temp_mouse_x + " >= " + this.circle_x + " " + temp_mouse_x + " <= " + x_max);
-        System.out.println(temp_mouse_y + " >= " + this.circle_y + " " + temp_mouse_y + " <= " + y_max);
-        boolean selected = temp_mouse_x >= this.circle_x && temp_mouse_x <= x_max // x-area
-                &&
-                temp_mouse_y >= this.circle_y && temp_mouse_y <= y_max; //y-area
-
-        if(circle_selected && selected) {
-            //deselect the circle if already selected
-            circle_selected = false;
-        }else {
-            circle_selected = selected;
-        }
-        this.mouse_x = temp_mouse_x;
-        this.mouse_y = temp_mouse_y;
-        System.out.println(circle_selected  );
-    }
-
-    //move circle
-    public void move(MouseEvent e, Canvas canvas) {
-        double change_x = e.getX() - this.mouse_x;
-        double change_y = e.getY() - this.mouse_y;
-        this.circle_x += change_x;
-        this.circle_y += change_y;
-        canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        this.createCircle(canvas);
-        this.mouse_x = e.getX();
-        this.mouse_y = e.getY();
-    }
-
-    public void createCircle(Canvas canvas) {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-
-        //outer circle
-        Stop[] stops = new Stop[]{new Stop(0, Color.LIGHTSKYBLUE), new Stop(1, Color.BLUE)};
-        LinearGradient gradient = new LinearGradient(0.5, 0, 0.5, 1, true, CycleMethod.NO_CYCLE, stops);
-        gc.setFill(gradient);
-        gc.fillOval(this.circle_x, this.circle_y, this.width, this.height);
-        gc.translate(0, 0);
-        gc.fill();
-        gc.stroke();
-
-        // Inner circle
-        stops = new Stop[]{new Stop(0, Color.BLUE), new Stop(1, Color.LIGHTSKYBLUE)};
-        gradient = new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, stops);
-        gc.setFill(gradient);
-        gc.fillOval(this.circle_x + 3, this.circle_y + 3, this.width - 6, this.height - 6);
-        gc.fill();
-        gc.stroke();
-
-    }
-
 
     /**
      * button action handling creating new tab and class for sequence diagram
      * */
     @FXML
     public void createNewSequenceDiagramBtn() throws Exception{
-        diagramTabConstructor();
-    }
-
-    /**
-     * overridden method
-     * parsing file and loading it into tabPane if file has been set up
-     * */
-    protected void parseFile(){
-
-    }
-
-    /**
-     * method for adding new tab for new sequence diagram
-     * */
-    private void diagramTabConstructor() throws Exception{
         System.out.println("Loading sequence diagram...");
 
         //create new tab
@@ -266,6 +260,13 @@ public class ClassDiagramController {
         sequenceDiagramController.start();
     }
 
+    /**
+     * overridden method
+     * parsing file and loading it into tabPane if file has been set up
+     * */
+    protected void parseFile(){
+
+    }
 
 
     /**
@@ -274,14 +275,112 @@ public class ClassDiagramController {
     @FXML
     public void btnAddClass(ActionEvent e){
         System.out.println("Creating a class design...");
-        final Rectangle rectangle = createRectangle();
+        System.out.println(this.cls.getListOfAttributes());
+        this.pane.getChildren().add(this.cls.addAttribute("new"));
 
     }
 
-    //test of creating object
-    private Rectangle createRectangle(){
-        final Rectangle rectangle = new Rectangle(100,100, Color.BLUEVIOLET);
-        rectangle.setOpacity(0.7);
-        return rectangle;
+    /**
+     * class for creating new graphic representation of class
+     * */
+    public class ClassObject {
+        private Rectangle classBox;
+        private Rectangle clickableCorner;
+        private Text className;
+        private Line line1;
+        private List<Text> listOfAttributes = new ArrayList<>();
+        private Line line2;
+        private List<Text> listOfOperations = new ArrayList<>();
+
+        public Rectangle getClassBox(){ return this.classBox;}
+        public Rectangle getClickableCorner() {return this.clickableCorner;}
+        public List<Text> getListOfAttributes() {return this.listOfAttributes;}
+        public List<Text> getListOfOperations() {return this.listOfOperations;}
+        public Text getClassName() {return this.className; }
+        public Line getLine1() { return this.line1; }
+        public Line getLine2() { return this.line2; }
+
+        public void createRectangle(String name){
+            //create overall classbox => of rectangle
+            Rectangle rectangle = new Rectangle(100,100,Color.RED);
+            this.classBox = rectangle;
+            rectangle.setX(0);
+            rectangle.setY(0);
+
+            //create clickable corner
+            Rectangle clickableCorner = new Rectangle(20,20, Color.BLUE);
+            clickableCorner.setX(rectangle.getX() + rectangle.getWidth() - 20);
+            clickableCorner.setY(rectangle.getY());
+            this.clickableCorner = clickableCorner;
+
+            //sets the class name
+            Text className = new Text(name);
+            className.setY(rectangle.getY() + 20);
+            className.setX(rectangle.getX() + 10);
+            this.className = className;
+
+            //sets the two lines which will divide the space of classbox to three parts
+            // 1) class name 2) class attributes 3) class operations
+            Line line1 = new Line();
+            line1.setStartX(rectangle.getX());
+            line1.setStartY(rectangle.getY() + 40);
+            line1.setEndX(rectangle.getX() + rectangle.getWidth());
+            line1.setEndY(line1.getStartY());
+            this.line1 = line1;
+
+            Line line2 = new Line();
+            line2.setStartX(rectangle.getX());
+            line2.setStartY(rectangle.getY() + 60);
+            line2.setEndX(rectangle.getX() + rectangle.getWidth());
+            line2.setEndY(line2.getStartY());
+            this.line2 = line2;
+        }
+
+        public Text addAttribute(String attributeText){
+            Text attribute = new Text(attributeText);
+
+            if (listOfAttributes.isEmpty()){
+                attribute.setY(this.getLine1().getStartY() + 15);
+                attribute.setX(this.getClassName().getX());
+
+                classBox.setHeight(classBox.getHeight() + 15);
+            } else{
+                Text lastAttr = listOfAttributes.get(listOfAttributes.size() -1);
+                attribute.setY(lastAttr.getY() + 15);
+                attribute.setX(lastAttr.getX());
+
+                classBox.setHeight(classBox.getHeight() + 15);
+            }
+
+            //necessary to move all operations under this attributes => operations are under attributes
+            //and also move the line dividing space for attributes and operations
+            this.getLine2().setStartY(this.getLine2().getStartY() + 15);
+            this.getLine2().setEndY(this.getLine2().getEndY() + 15);
+            for(Text attr : getListOfOperations()){
+                attr.setY(attr.getY() + 15);
+            }
+
+            listOfAttributes.add(attribute);
+            return attribute;
+
+        }
+
+        public Text addOperation(String operationText){
+            Text operation = new Text(operationText);
+            if (listOfOperations.isEmpty()){
+                operation.setY(this.getLine2().getStartY() + 15);
+                operation.setX(this.getClassName().getX());
+            }
+            else {
+                Text lastOp = listOfOperations.get(listOfOperations.size() -1 );
+                operation.setY(lastOp.getY() + 15);
+                operation.setX(lastOp.getX());
+            }
+
+            listOfOperations.add(operation);
+            classBox.setHeight(classBox.getHeight() + 15);
+            return operation;
+        }
+
     }
 }
