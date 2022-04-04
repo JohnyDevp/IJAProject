@@ -14,7 +14,7 @@
             <Button mnemonicParsing="false" text="Undo" />
             <Button fx:id="btnClose" mnemonicParsing="false" onAction="#btnClose" text="Close" />
             <Button fx:id="btnAddClass" mnemonicParsing="false" onAction="#btnAddClass" text="ADD CLASS" />
-            <Button mnemonicParsing="false" text="ADD RELATION" />
+            <Button fx:id="btnAddRelation" mnemonicParsing="false" onAction="#btnAddRelation" text="ADD RELATION" />
             <Button mnemonicParsing="false" text="EDIT CLASS" />
         </items>
       </ToolBar>
@@ -23,6 +23,6 @@
             <Button fx:id="btnCreateNewSequenceDiagram" mnemonicParsing="false" onAction="#createNewSequenceDiagramBtn" text="Create new sequence diagram" />
          </items>
       </ToolBar>
-      <Pane fx:id="pane" layoutY="70.0" prefHeight="298.0" prefWidth="617.0" style="-fx-background-color: rgba(0, 100, 100, 0.0);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
+      <Pane fx:id="canvas" layoutY="70.0" prefHeight="298.0" prefWidth="617.0" style="-fx-background-color: rgba(0, 100, 100, 0.0);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
    </children>
 </AnchorPane>
