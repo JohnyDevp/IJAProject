@@ -18,7 +18,6 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,7 +38,7 @@ public class ClassDiagramController {
     public Double mousePrevY;
 
     //defined colors used for class object
-    private final Color currentSelectedClassColor = Color.rgb(227, 68, 36);
+    private final Color selectedClassColor = Color.rgb(227, 68, 36);
     private final Color oldSelectedClassColor = Color.rgb(240, 160, 144);
     private final Color deselectedClassColor = Color.rgb(80, 95, 230);
 
@@ -175,7 +174,7 @@ public class ClassDiagramController {
     }
 
     ClassObject oldSelectedClas = null;
-    ClassObject currentSelectedClass = null;
+    ClassObject selectedClass = null;
 
     /**
      * method for setting currently selected class
@@ -183,17 +182,15 @@ public class ClassDiagramController {
      * */
     private void setSelectedClass(ClassObject selectedClass) {
 
-        //deselect the first previously selected class
-        if (this.oldSelectedClas != null) { this.oldSelectedClas.getClickableCorner().setFill(deselectedClassColor);}
-
-        if (this.currentSelectedClass != null){
-            this.oldSelectedClas = this.currentSelectedClass;
-            this.oldSelectedClas.getClickableCorner().setFill(oldSelectedClassColor);
+        //change color of previously selected class
+        if (this.selectedClass != null){
+            this.selectedClass.getClickableCorner().setFill(deselectedClassColor);
         }
 
-        this.currentSelectedClass = selectedClass;
+        //set new selected class
+        this.selectedClass = selectedClass;
         //change the color to selected for the new selected class
-        selectedClass.getClickableCorner().setFill(currentSelectedClassColor);
+        selectedClass.getClickableCorner().setFill(selectedClassColor);
 
     }
 
@@ -204,19 +201,7 @@ public class ClassDiagramController {
     private void deselectClass(ClassObject deselectedClass){
         //set the color of the class to default
         deselectedClass.getClickableCorner().setFill(deselectedClassColor);
-
-        if (this.oldSelectedClas == deselectedClass){
-            this.oldSelectedClas = null;
-        } else if(this.currentSelectedClass == deselectedClass){
-            //change the current selected class to old selected class old selected class isn't null
-            if (this.oldSelectedClas == null){
-                this.currentSelectedClass = null;
-            } else {
-                this.currentSelectedClass = this.oldSelectedClas;
-                this.currentSelectedClass.getClickableCorner().setFill(currentSelectedClassColor);
-                this.oldSelectedClas = null;
-            }
-        }
+        this.selectedClass = null;
     }
 
     /**
@@ -304,7 +289,7 @@ public class ClassDiagramController {
 
         //clicking on clickable corner (actually rectangle) => changing if it is marked or not
         clickableCorner.setOnMouseClicked(mouseEvent -> {
-            if (classObject == this.oldSelectedClas || classObject == this.currentSelectedClass){
+            if (classObject == this.selectedClass){
                 deselectClass(classObject);
             }else{
                 setSelectedClass(classObject);
@@ -380,16 +365,16 @@ public class ClassDiagramController {
                 if(rel.getRelClassFrom() == classObject){
                     rel.getRelLine().setStartX(rel.getRelLine().getStartX() + diffX);
                     rel.getRelLine().setStartY(rel.getRelLine().getStartY() + diffY);
-                    this.canvas.getChildren().remove(rel.getRelLineEnd());
-                    rel.setNewRelLineEndPosition();
-                    this.canvas.getChildren().add(rel.getRelLineEnd());
                 } else {
                     rel.getRelLine().setEndX(rel.getRelLine().getEndX() + diffX);
                     rel.getRelLine().setEndY(rel.getRelLine().getEndY() + diffY);
-                    this.canvas.getChildren().remove(rel.getRelLineEnd());
-                    rel.setNewRelLineEndPosition();
-                    this.canvas.getChildren().add(rel.getRelLineEnd());
                 }
+
+                this.canvas.getChildren().remove(rel.getRelLineEnd());
+                rel.setNewRelLineEndPosition();
+                this.canvas.getChildren().add(rel.getRelLineEnd());
+                this.canvas.getChildren().remove(rel.getNameOfRelation());
+                rel.setNameOfRelation("neco");
             }
 
         });
@@ -590,13 +575,21 @@ public class ClassDiagramController {
     public class Relation{
         private boolean relationFromSet = false;
         private final relType relationType;
+
         private ClassObject relClassFrom;
         private ClassObject relClassTo;
+
         private final Line relLine;
+
         private Polygon relLineEnd;
         //these to lines are here for the option of association relation => which is created of one simple arrow
         private Line line1 = null;
         private Line line2 = null;
+
+        //labels on the relation line
+        private Text cardinalityByToClass;
+        private Text cardinalityByFromClass;
+        private Text nameOfRelation;
 
         /**
          * constructor
@@ -660,6 +653,8 @@ public class ClassDiagramController {
 
             //creates relation line ending
             setNewRelLineEndPosition();
+
+            setNameOfRelation("neco");
         }
 
         /**
@@ -785,9 +780,43 @@ public class ClassDiagramController {
 
         }
 
+
+        public void setNameOfRelation(String name){
+            Text text = new Text();
+
+            double lineLength = Math.sqrt(Math.pow((this.relLine.getStartY() - this.relLine.getEndY()), 2) + Math.pow((this.relLine.getStartX() - this.relLine.getEndX()),2));
+            double u1 = this.relLine.getEndX() - this.relLine.getStartX();
+            double u2 = this.relLine.getEndY() - this.relLine.getStartY();
+            double Ax = this.relLine.getEndX();
+            double Ay = this.relLine.getEndY();
+            double resultX = Ax - u1*(0.5);
+            double resultY = Ay - u2*(0.5);
+
+            text.setX(resultX);
+            text.setY(resultY);
+            //text.setFill(Color.WHITE);
+            text.setText(name);
+            text.setStyle("-fx-background-color: red");
+            text.setFont(Font.font("verdana", 15));
+            System.out.println(text.toString()+ " "+ lineLength + " " + u1 + " " + u2 + " " +Ax + " " + Ay);
+            System.out.println(resultX + " " + resultY);
+            text.toFront();
+            this.nameOfRelation = text;
+            canvas.getChildren().add(text);
+        }
+
+        public void setCardinalityByToClass(String cardinality){
+
+        }
+
+        public void setCardinalityByFromClass(String cardinality){
+
+        }
+
         /**
          * getters
          * */
+        public Text getNameOfRelation() {return this.nameOfRelation;}
         public boolean getRelationFromSet() {return this.relationFromSet; }
         public ClassObject getRelClassFrom() {return this.relClassFrom; }
         public ClassObject getRelClassTo() {return this.relClassTo; }
