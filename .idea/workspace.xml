@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="all relations has graphical representations">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" afterDir="false" />
-    </list>
+    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="all graphical representations done, missing dialogs, editing both class objects and relations" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -162,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649081560630</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="all graphical representations done, missing dialogs, editing both class objects and relations">
+      <created>1649101230731</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1649101230731</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -186,6 +190,7 @@
     <MESSAGE value="added dialog for adding class object" />
     <MESSAGE value="full design for class diagram done" />
     <MESSAGE value="all relations has graphical representations" />
-    <option name="LAST_COMMIT_MESSAGE" value="all relations has graphical representations" />
+    <MESSAGE value="all graphical representations done, missing dialogs, editing both class objects and relations" />
+    <option name="LAST_COMMIT_MESSAGE" value="all graphical representations done, missing dialogs, editing both class objects and relations" />
   </component>
 </project>
