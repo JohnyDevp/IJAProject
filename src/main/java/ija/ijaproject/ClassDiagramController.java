@@ -251,7 +251,6 @@ public class ClassDiagramController {
         TextInputDialog textInputDialog = new TextInputDialog("Enter class name");
         textInputDialog.setHeaderText("Set up class name");
         Optional<String> result = textInputDialog.showAndWait();
-        //creating a reference on class object
         if (!result.isPresent()){
             System.out.println("Cancel pressed - no class will be created");
             return;
@@ -263,6 +262,7 @@ public class ClassDiagramController {
             return;
         }
 
+        //creating a reference on class object
         //TODO check if the class name doesnt exist
         ClassObject classObject = new ClassObject(textInputDialog.getEditor().getText());
 
@@ -397,23 +397,31 @@ public class ClassDiagramController {
     }
 
     //todo move this to do right place
+    //for knowledge whether clicking on class border means creating new relation
     private boolean createRelation = false;
+    //for temporary storing currently creating relation
     private Relation relation;
-    private boolean changeRelation = false;
     private Relation relationForChange;
+    private enum relType{ASSOCIATION, AGGREGATION, COMPOSITION, GENERALIZATION}
 
     /**
      * method handling clicking on button for creating relation
      * */
     public void btnAddRelation(ActionEvent e){
         //show dialog for getting the relation type
-        String relType;
+        relType rt = null;
         String options[] = {"Association", "Aggregation","Composition", "Generalization"};
         ChoiceDialog dlg = new ChoiceDialog(options[0], options);
         dlg.setHeaderText("Choose type of relation");
         Optional result = dlg.showAndWait();
         if (result.isPresent()){
-            relType = dlg.getSelectedItem().toString();
+            switch (dlg.getSelectedItem().toString()){
+                case "Association": rt = relType.ASSOCIATION; break;
+                case "Aggregation": rt = relType.AGGREGATION; break;
+                case "Composition": rt = relType.COMPOSITION; break;
+                case "Generalization": rt = relType.GENERALIZATION; break;
+            }
+
         } else {
             //cancel was pressed -> so this cant continue
             return;
@@ -423,7 +431,7 @@ public class ClassDiagramController {
         if (!this.createRelation){
             this.createRelation = true;
             //todo combobox dialog for choosing relation type
-            this.relation = new Relation(relType);
+            this.relation = new Relation(rt);
             btnAddRelation.setText("CANCEL RELATION");
         } else {
             this.createRelation = false;
@@ -581,11 +589,14 @@ public class ClassDiagramController {
      * */
     public class Relation{
         private boolean relationFromSet = false;
-        private final String relationType;
+        private final relType relationType;
         private ClassObject relClassFrom;
         private ClassObject relClassTo;
         private final Line relLine;
         private Polygon relLineEnd;
+        //these to lines are here for the option of association relation => which is created of one simple arrow
+        private Line line1 = null;
+        private Line line2 = null;
 
         /**
          * constructor
@@ -593,7 +604,7 @@ public class ClassDiagramController {
          * creating the line and its event for handling selecting this line
          * setting up the relation type
          * */
-        public Relation(String type){
+        public Relation(relType type){
             //set up the line and the event when click on the relation
             this.relLine = new Line();
             this.relLine.setStrokeWidth(2.5);
@@ -647,41 +658,133 @@ public class ClassDiagramController {
             //set up the polygon representing the relation line ending
             this.relLineEnd = new Polygon();
 
-            //TODO => choose which line end to draw
-            double slope = (this.relLine.getStartY() - this.relLine.getEndY()) / (this.relLine.getStartX() - this.relLine.getEndX());
-            double lineAngle = Math.atan(slope);
-
-            double arrowAngle = this.relLine.getStartX() > this.relLine.getEndX() ? Math.toRadians(45) : -Math.toRadians(225);
-            double arrowLength = 20;
-            this.relLineEnd.getPoints().addAll(
-                    //the aim
-                    this.relLine.getEndX(),this.relLine.getEndY(),
-                    //left corner
-                    arrowLength*Math.cos(lineAngle-arrowAngle) +this.relLine.getEndX(), arrowLength*Math.sin(lineAngle-arrowAngle)+this.relLine.getEndY(),
-                    //right corner
-                    arrowLength*Math.cos(lineAngle+arrowAngle) +this.relLine.getEndX(), arrowLength*Math.sin(lineAngle+arrowAngle)+this.relLine.getEndY()
-            );
-
-            this.relLineEnd.setStroke(Color.AQUA);
-
+            //creates relation line ending
+            setNewRelLineEndPosition();
         }
 
+        /**
+         * set the ending polygon which sets the type of the relation
+         * or arrow which is compound of two lines
+         * */
         public void setNewRelLineEndPosition(){
             this.relLineEnd = new Polygon();
+
             double slope = (this.relLine.getStartY() - this.relLine.getEndY()) / (this.relLine.getStartX() - this.relLine.getEndX());
             double lineAngle = Math.atan(slope);
+            double lineLength = Math.sqrt(Math.pow((this.relLine.getStartY() - this.relLine.getEndY()), 2) + Math.pow((this.relLine.getStartX() - this.relLine.getEndX()),2));
+            double arrowAngle, arrowLength, arrowWide;
 
-            double arrowAngle = this.relLine.getStartX() > this.relLine.getEndX() ? Math.toRadians(45) : -Math.toRadians(225);
-            double arrowLength = 20;
-            this.relLineEnd.getPoints().addAll(
-                    //the aim
-                    this.relLine.getEndX(),this.relLine.getEndY(),
-                    //left corner
-                    arrowLength*Math.cos(lineAngle-arrowAngle) +this.relLine.getEndX(), arrowLength*Math.sin(lineAngle-arrowAngle)+this.relLine.getEndY(),
-                    //right corner
-                    arrowLength*Math.cos(lineAngle+arrowAngle) +this.relLine.getEndX(), arrowLength*Math.sin(lineAngle+arrowAngle)+this.relLine.getEndY()
-            );
+            switch (this.relationType){
+                //filled arrow ("big")
+                case GENERALIZATION: {
+                    System.out.println("generalization");
+                    arrowAngle = this.relLine.getStartX() > this.relLine.getEndX() ? Math.toRadians(45) : -Math.toRadians(225);
+                    arrowLength = 20;
+                    this.relLineEnd.getPoints().addAll(
+                            //the aim
+                            this.relLine.getEndX(), this.relLine.getEndY(),
+                            //left corner
+                            arrowLength * Math.cos(lineAngle - arrowAngle) + this.relLine.getEndX(), arrowLength * Math.sin(lineAngle - arrowAngle) + this.relLine.getEndY(),
+                            //right corner
+                            arrowLength * Math.cos(lineAngle + arrowAngle) + this.relLine.getEndX(), arrowLength * Math.sin(lineAngle + arrowAngle) + this.relLine.getEndY()
+                    );
+                    this.relLineEnd.setStroke(Color.BLACK);
+                    this.relLineEnd.setFill(Color.WHITE);
+                }
+                break;
+
+                //white filled 4-point-polygon
+                case AGGREGATION: {
+                    System.out.println("aggregation");
+                    arrowAngle = this.relLine.getStartX() > this.relLine.getEndX() ? Math.toRadians(45) : -Math.toRadians(225);
+                    arrowLength = 15;
+                    arrowWide = 8;
+                    double u1 = this.relLine.getEndX() - this.relLine.getStartX();
+                    double u2 = this.relLine.getEndY() - this.relLine.getStartY();
+                    double Ax = this.relLine.getEndX();
+                    double Ay = this.relLine.getEndY();
+                    double resultX = Ax - u1*(30/lineLength);
+                    double resultY = Ay - u2*(30/lineLength);
+
+                    this.relLineEnd.getPoints().addAll(
+                            //the aim
+                            this.relLine.getEndX(),this.relLine.getEndY(),
+                            //left corner
+                            (arrowLength)*Math.cos(lineAngle-arrowAngle) +this.relLine.getEndX(), arrowWide*Math.sin(lineAngle-arrowAngle)+this.relLine.getEndY(),
+                            //the last point
+                            resultX, resultY,
+                            //right corner
+                            (arrowLength)*Math.cos(lineAngle+arrowAngle) +this.relLine.getEndX(), arrowWide*Math.sin(lineAngle+arrowAngle)+this.relLine.getEndY()
+                    );
+                    this.relLineEnd.setStroke(Color.BLACK);
+                    this.relLineEnd.setFill(Color.WHITE);
+                }
+                break;
+
+                //black normal arrow
+                case ASSOCIATION: {
+                    System.out.println("association");
+                    arrowAngle = this.relLine.getStartX() > this.relLine.getEndX() ? Math.toRadians(45) : -Math.toRadians(225);
+                    arrowLength = 21;
+                    arrowWide = 10;
+                    Line line1 = new Line(
+                            (arrowLength)*Math.cos(lineAngle-arrowAngle) +this.relLine.getEndX(),
+                            arrowWide*Math.sin(lineAngle-arrowAngle)+this.relLine.getEndY(),
+                            this.relLine.getEndX(),
+                            this.relLine.getEndY()
+                    );
+                    Line line2 = new Line(
+                            (arrowLength)*Math.cos(lineAngle+arrowAngle) +this.relLine.getEndX(),
+                            arrowWide*Math.sin(lineAngle+arrowAngle)+this.relLine.getEndY(),
+                            this.relLine.getEndX(),
+                            this.relLine.getEndY()
+                    );
+                    line1.setStrokeWidth(2.5);
+                    line2.setStrokeWidth(2.5);
+
+                    //adding both lines to canvas
+                    //and removing old ones, if exists
+                    //warning it has to be here
+                    if (this.line1 != null) canvas.getChildren().remove(this.line1);
+                    if (this.line2 != null) canvas.getChildren().remove(this.line2);
+                    canvas.getChildren().add(line1);
+                    canvas.getChildren().add(line2);
+                    this.line1 = line1;
+                    this.line2 = line2;
+                }
+                break;
+
+                //black filled 4-point-polygon
+                case COMPOSITION:{
+                    System.out.println("composition");
+                    arrowAngle = this.relLine.getStartX() > this.relLine.getEndX() ? Math.toRadians(45) : -Math.toRadians(225);
+                    arrowLength = 15;
+                    arrowWide = 8;
+                    double u1 = this.relLine.getEndX() - this.relLine.getStartX();
+                    double u2 = this.relLine.getEndY() - this.relLine.getStartY();
+                    double Ax = this.relLine.getEndX();
+                    double Ay = this.relLine.getEndY();
+                    double resultX = Ax - u1*(30/lineLength);
+                    double resultY = Ay - u2*(30/lineLength);
+
+                    this.relLineEnd.getPoints().addAll(
+                            //the aim
+                            this.relLine.getEndX(),this.relLine.getEndY(),
+                            //left corner
+                            (arrowLength)*Math.cos(lineAngle-arrowAngle) +this.relLine.getEndX(), arrowWide*Math.sin(lineAngle-arrowAngle)+this.relLine.getEndY(),
+                            //the last point
+                            resultX, resultY,
+                            //right corner
+                            (arrowLength)*Math.cos(lineAngle+arrowAngle) +this.relLine.getEndX(), arrowWide*Math.sin(lineAngle+arrowAngle)+this.relLine.getEndY()
+                    );
+                    this.relLineEnd.setStroke(Color.BLACK);
+                    this.relLineEnd.setFill(Color.BLACK);
+                }
+                break;
+            }
+
         }
+
         /**
          * getters
          * */
