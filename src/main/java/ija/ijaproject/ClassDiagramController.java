@@ -370,11 +370,18 @@ public class ClassDiagramController {
                     rel.getRelLine().setEndY(rel.getRelLine().getEndY() + diffY);
                 }
 
+                //things that are moved the same way all time when moving relation
                 this.canvas.getChildren().remove(rel.getRelLineEnd());
                 rel.setNewRelLineEndPosition();
                 this.canvas.getChildren().add(rel.getRelLineEnd());
+
                 this.canvas.getChildren().remove(rel.getNameOfRelation());
                 rel.setNameOfRelation("neco");
+                this.canvas.getChildren().remove(rel.getCardinalityByFromClass());
+                rel.setCardinalityByFromClass("0..1");
+                this.canvas.getChildren().remove(rel.getCardinalityByToClass());
+                rel.setCardinalityByToClass("0..*");
+
             }
 
         });
@@ -654,7 +661,10 @@ public class ClassDiagramController {
             //creates relation line ending
             setNewRelLineEndPosition();
 
+            //fixme => this will be set up after dialog shown
             setNameOfRelation("neco");
+            setCardinalityByFromClass("0..1");
+            setCardinalityByToClass("0..*");
         }
 
         /**
@@ -806,17 +816,61 @@ public class ClassDiagramController {
         }
 
         public void setCardinalityByToClass(String cardinality){
+            Text text = new Text();
 
+            //computed values for choose the right place on the relation line for the text label
+            //used parametric representation of line
+            double lineLength = Math.sqrt(Math.pow((this.relLine.getStartY() - this.relLine.getEndY()), 2) + Math.pow((this.relLine.getStartX() - this.relLine.getEndX()),2));
+            double u1 = this.relLine.getEndX() - this.relLine.getStartX();
+            double u2 = this.relLine.getEndY() - this.relLine.getStartY();
+            double Ax = this.relLine.getEndX();
+            double Ay = this.relLine.getEndY();
+            //this place choosing coordinates at the specific point at the line
+            double resultX = Ax - u1*(40/lineLength);
+            double resultY = Ay - u2*(20/lineLength);
+
+            //set the label
+            text.setX(resultX);
+            text.setY(resultY);
+            //todo check cardinality format
+            text.setText(cardinality);
+            text.setFont(Font.font("verdana", 15));
+            text.toFront();
+            this.cardinalityByToClass = text;
+            canvas.getChildren().add(text);
         }
 
         public void setCardinalityByFromClass(String cardinality){
+            Text text = new Text();
 
+            //computed values for choose the right place on the relation line for the text label
+            //used parametric representation of line
+            double lineLength = Math.sqrt(Math.pow((this.relLine.getStartY() - this.relLine.getEndY()), 2) + Math.pow((this.relLine.getStartX() - this.relLine.getEndX()),2));
+            double u1 = this.relLine.getEndX() - this.relLine.getStartX();
+            double u2 = this.relLine.getEndY() - this.relLine.getStartY();
+            double Ax = this.relLine.getEndX();
+            double Ay = this.relLine.getEndY();
+            //this place choosing coordinates at the specific point at the line
+            double resultX = Ax - u1*((lineLength-20)/lineLength);
+            double resultY = Ay - u2*((lineLength-20)/lineLength);
+
+            //set the label
+            text.setX(resultX);
+            text.setY(resultY);
+            //todo check cardinality format
+            text.setText(cardinality);
+            text.setFont(Font.font("verdana", 15));
+            text.toFront();
+            this.cardinalityByFromClass = text;
+            canvas.getChildren().add(text);
         }
 
         /**
          * getters
          * */
         public Text getNameOfRelation() {return this.nameOfRelation;}
+        public Text getCardinalityByToClass() {return this.cardinalityByToClass;}
+        public Text getCardinalityByFromClass() {return this.cardinalityByFromClass;}
         public boolean getRelationFromSet() {return this.relationFromSet; }
         public ClassObject getRelClassFrom() {return this.relClassFrom; }
         public ClassObject getRelClassTo() {return this.relClassTo; }
