@@ -42,6 +42,13 @@ public class ClassDiagramController {
     private final Color oldSelectedClassColor = Color.rgb(240, 160, 144);
     private final Color deselectedClassColor = Color.rgb(80, 95, 230);
 
+    //for knowledge whether clicking on class border means creating new relation
+    private boolean createRelation = false;
+    //for temporary storing currently creating relation
+    private Relation relation;
+    private Relation relationForChange;
+    private enum relType{ASSOCIATION, AGGREGATION, COMPOSITION, GENERALIZATION}
+
     /**
      * variable storing reference for main controller
      * */
@@ -362,43 +369,17 @@ public class ClassDiagramController {
             //position of point where relation begins/ends
             //also redrawing relation line end (arrow, etc.)
             for (Relation rel : classObject.getListOfRelations()){
-                if(rel.getRelClassFrom() == classObject){
-                    rel.getRelLine().setStartX(rel.getRelLine().getStartX() + diffX);
-                    rel.getRelLine().setStartY(rel.getRelLine().getStartY() + diffY);
-                } else {
-                    rel.getRelLine().setEndX(rel.getRelLine().getEndX() + diffX);
-                    rel.getRelLine().setEndY(rel.getRelLine().getEndY() + diffY);
-                }
-
-                //things that are moved the same way all time when moving relation
-                this.canvas.getChildren().remove(rel.getRelLineEnd());
-                rel.setNewRelLineEndPosition();
-                this.canvas.getChildren().add(rel.getRelLineEnd());
-
-                this.canvas.getChildren().remove(rel.getNameOfRelation());
-                rel.setNameOfRelation("neco");
-                this.canvas.getChildren().remove(rel.getCardinalityByFromClass());
-                rel.setCardinalityByFromClass("0..1");
-                this.canvas.getChildren().remove(rel.getCardinalityByToClass());
-                rel.setCardinalityByToClass("0..*");
-
+                rel.recomputeRelationDesign(classObject, diffX, diffY);
             }
 
         });
 
     }
 
-    //todo move this to do right place
-    //for knowledge whether clicking on class border means creating new relation
-    private boolean createRelation = false;
-    //for temporary storing currently creating relation
-    private Relation relation;
-    private Relation relationForChange;
-    private enum relType{ASSOCIATION, AGGREGATION, COMPOSITION, GENERALIZATION}
-
     /**
      * method handling clicking on button for creating relation
      * */
+    @FXML
     public void btnAddRelation(ActionEvent e){
         //show dialog for getting the relation type
         relType rt = null;
@@ -576,6 +557,8 @@ public class ClassDiagramController {
         }
     }
 
+
+
     /**
      * class for storing the relation between two classes
      * */
@@ -667,6 +650,28 @@ public class ClassDiagramController {
             setCardinalityByToClass("0..*");
         }
 
+
+        public void recomputeRelationDesign(ClassObject classObject, double diffX, double diffY){
+            if(getRelClassFrom() == classObject){
+                getRelLine().setStartX(getRelLine().getStartX() + diffX);
+                getRelLine().setStartY(getRelLine().getStartY() + diffY);
+            } else {
+                getRelLine().setEndX(getRelLine().getEndX() + diffX);
+                getRelLine().setEndY(getRelLine().getEndY() + diffY);
+            }
+
+            //things that are moved the same way all time when moving relation
+            canvas.getChildren().remove(getRelLineEnd());
+            setNewRelLineEndPosition();
+            canvas.getChildren().add(getRelLineEnd());
+
+            canvas.getChildren().remove(getNameOfRelation());
+            setNameOfRelation("neco");
+            canvas.getChildren().remove(getCardinalityByFromClass());
+            setCardinalityByFromClass("0..1");
+            canvas.getChildren().remove(getCardinalityByToClass());
+            setCardinalityByToClass("0..*");
+        }
         /**
          * set the ending polygon which sets the type of the relation
          * or arrow which is compound of two lines
@@ -877,4 +882,5 @@ public class ClassDiagramController {
         public Line getRelLine() {return this.relLine; }
         public Polygon getRelLineEnd() {return this.relLineEnd; }
     }
+
 }
