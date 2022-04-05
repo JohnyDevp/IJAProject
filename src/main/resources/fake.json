@@ -1,1 +1,67 @@
-[{"header":"ahoj","methods":["int i"]},{"header":"ahoj","methods":["int i"]}]
+
+{
+  "classDiagram": {
+    "name" : "clsDiag1",
+    "classes": [
+      {
+        "name": "First class",
+        "coordX": 105,
+        "coordY": 200,
+        "attributes": [
+          {
+            "name": "attr1",
+            "type" : "type1"
+          },
+          {
+            "name": "attr2",
+            "type": "type2"
+          }
+        ],
+        "operations": [
+          {
+            "name" : "operation1",
+            "rettype": "rettype1",
+            "args": [
+              {
+                "name": "arg1",
+                "type": "argtype1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+
+      }
+
+    ],
+    "interfaces": [
+
+    ],
+    "relations": [
+      {
+        "relClassFrom" : "nameOfClass",
+        "relClassTo"  : "nameOfClass",
+        "relType": "reltype"
+      }
+    ]
+  },
+
+  "sequenceDiagrams": [
+    {
+      "name" : "seqvDiagram1",
+      "participatedClasses" : [
+
+      ],
+      "actionsDuringTime": [
+        {
+          "startObject" : "start",
+          "endObject" : "end",
+          "nameOfAction" : "name",
+          "typeOfAction" : "type"
+        }
+      ]
+
+    }
+  ]
+}

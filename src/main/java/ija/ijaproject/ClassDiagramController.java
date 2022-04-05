@@ -2,6 +2,7 @@ package ija.ijaproject;
 
 
 import ija.ijaproject.cls.ClassDiagram;
+import ija.ijaproject.cls.SequenceDiagram;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,10 +19,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class ClassDiagramController {
 
@@ -37,9 +35,11 @@ public class ClassDiagramController {
     public Double mousePrevX;
     public Double mousePrevY;
 
+    //currently selected class => graphically changed
+    ClassObject selectedClass = null;
+
     //defined colors used for class object
     private final Color selectedClassColor = Color.rgb(227, 68, 36);
-    private final Color oldSelectedClassColor = Color.rgb(240, 160, 144);
     private final Color deselectedClassColor = Color.rgb(80, 95, 230);
 
     //for knowledge whether clicking on class border means creating new relation
@@ -68,6 +68,7 @@ public class ClassDiagramController {
      * variable storing list of all sequence diagrams
      * */
     private List<SequenceDiagramController> sequenceDiagramControllersList = new ArrayList<SequenceDiagramController>();
+    private List<SequenceDiagram> listOfSequenceDiagrams = new ArrayList<>();
 
     /**
      * variable storing class diagram
@@ -115,7 +116,7 @@ public class ClassDiagramController {
      * getter
      * @return path of loaded file, when no file loaded returns empty string
      * */
-    private final String getLoadedFilePath() {return this.path; }
+    private String getLoadedFilePath() {return this.path; }
 
     /**
      * setter
@@ -131,12 +132,16 @@ public class ClassDiagramController {
      * */
     private MainController getMainController() { return this.mainController;}
 
+
+    /*=============================================================================================================*/
+    /*=============================================================================================================*/
+
     /**
-     * overridden method
+     * setter of class diagram and caller for parsing file => which will work iff file has to be loaded
      * taking control and starting to work when tab is created
      */
     public void start(){
-//        canvas.setCursor(Cursor.No);
+        //todo => get name of class diagram if newly created
         parseFile();
     }
 
@@ -177,11 +182,19 @@ public class ClassDiagramController {
      * parsing file and loading it into tabPane if file has been set up
      * */
     protected void parseFile(){
+        JsonReader jr = new JsonReader();
+        ClassDiagram clsDlg = jr.parseJsonClassDiagram(
+                "C:\\Users\\jhola\\IdeaProjects\\IJAProject\\src\\main\\resources\\fake.json"
+        );
+
+        //todo
+        //if (clsDlg == null)
+
+        listOfSequenceDiagrams = jr.parseJsonSequenceDiagrams(
+                "C:\\Users\\jhola\\IdeaProjects\\IJAProject\\src\\main\\resources\\fake.json"
+        );
 
     }
-
-    ClassObject oldSelectedClas = null;
-    ClassObject selectedClass = null;
 
     /**
      * method for setting currently selected class

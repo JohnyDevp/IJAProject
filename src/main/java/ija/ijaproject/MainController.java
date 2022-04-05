@@ -81,7 +81,7 @@ public class MainController {
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Open diagram file");
                 fileChooser.getExtensionFilters().add(
-                        new FileChooser.ExtensionFilter("JSON", "*.json")
+                        new FileChooser.ExtensionFilter("XML", "*.xml")
                 );
                 File file = fileChooser.showOpenDialog(stage);
                 System.out.println(filePath);

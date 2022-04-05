@@ -42,4 +42,20 @@ public class ClassDiagram extends Element{
         this.umlClassList.add(uc);
         return uc;
     }
+
+    /**
+     * Adds created class to the diagram, if doesnt exists
+     * @param umlClass class to be added
+     * */
+    public boolean addClass(UMLClass umlClass){
+        return umlClassList.add(umlClass);
+    }
+
+    /**
+     * Removes class of the diagram, if exists
+     * @param umlClass class to be deleted
+     * */
+    public void deleteClass(UMLClass umlClass){
+        umlClassList.remove(umlClass);
+    }
 }
