@@ -110,6 +110,7 @@ public class JsonReader {
             switch ((String)classPart.getKey()){
                 case "coordX":{
                     controlSum += 1;
+
                 }
                     break;
                 case "coordY":{

@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="parsing start">
+    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="class diagram interface added">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassObjectGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/ClassDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/ClassDiagram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649225234339</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="class diagram interface added">
+      <created>1649231949319</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1649231949319</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -227,6 +233,7 @@
     <MESSAGE value="all relations has graphical representations" />
     <MESSAGE value="all graphical representations done, missing dialogs, editing both class objects and relations" />
     <MESSAGE value="parsing start" />
-    <option name="LAST_COMMIT_MESSAGE" value="parsing start" />
+    <MESSAGE value="class diagram interface added" />
+    <option name="LAST_COMMIT_MESSAGE" value="class diagram interface added" />
   </component>
 </project>

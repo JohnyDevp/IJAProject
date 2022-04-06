@@ -78,7 +78,10 @@ public class ClassDiagramController {
     /**
      * variable for storing list of graphical representations of classes
      * */
-    private final List<ClassObject> classObjectList = new ArrayList<>();
+    private final List<ClassObject> classObjectList = null;
+
+    /*====================================================================================================================*/
+    /*====================================================================================================================*/
 
     /**
      * setter
