@@ -5,23 +5,20 @@
     "classes": [
       {
         "name": "First class",
-        "coordX": 105,
-        "coordY": 200,
+        "coordX": 105.0,
+        "coordY": 200.0,
         "attributes": [
           {
             "name": "attr1",
             "type" : "type1"
-          },
-          {
-            "name": "attr2",
-            "type": "type2"
           }
         ],
         "operations": [
           {
             "name" : "operation1",
+            "modifier" : "#",
             "rettype": "rettype1",
-            "args": [
+            "params": [
               {
                 "name": "arg1",
                 "type": "argtype1"
@@ -29,11 +26,7 @@
             ]
           }
         ]
-      },
-      {
-
       }
-
     ],
     "interfaces": [
 

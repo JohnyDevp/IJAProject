@@ -6,14 +6,10 @@ import java.util.List;
 
 public class ClassDiagram extends Element{
     /**
-     * list of all classes in class diagram
+     * list of all classes and interfaces in class diagram
      * */
-    private List<UMLClass> umlClassList = new ArrayList<UMLClass>();
+    private List<UMLClassInterfaceTemplate> umlList = new ArrayList<>();
 
-    /**
-     * list of all interfaces in class diagram
-     * */
-    private List<UMLInterface> umlInterfaceList = new ArrayList<UMLInterface>();
 
 
     /**
@@ -32,10 +28,8 @@ public class ClassDiagram extends Element{
      * @return object representing class, if class already exists returns null
      */
     public UMLClass createClass(String name){
-        for(Iterator<UMLClass> itr = umlClassList.iterator(); itr.hasNext();){
-            UMLClass uc = itr.next();
-            if (uc.getName().equals(name))
-            {
+        for (UMLClassInterfaceTemplate umlItem : umlList){
+            if (umlItem.getName().equals(name)){
                 //diagram already contains class with entered name
                 //returns null
                 return null;
@@ -44,7 +38,7 @@ public class ClassDiagram extends Element{
 
         //return newly created instance of UMLClass
         UMLClass uc = new UMLClass(name);
-        this.umlClassList.add(uc);
+        this.umlList.add(uc);
         return uc;
     }
 
@@ -53,7 +47,16 @@ public class ClassDiagram extends Element{
      * @param umlClass class to be added
      * */
     public boolean addClass(UMLClass umlClass){
-        return umlClassList.add(umlClass);
+        for (UMLClassInterfaceTemplate umlItem : umlList){
+            if (umlItem.getName().equals(umlClass.getName())){
+                //diagram already contains class with entered name
+                //returns null
+                return false;
+            }
+        }
+
+        //return newly success of adding instance of UMLClass to list
+        return umlList.add(umlClass);
     }
 
     /**
@@ -61,7 +64,7 @@ public class ClassDiagram extends Element{
      * @param umlClass class to be deleted
      * */
     public void deleteClass(UMLClass umlClass){
-        umlClassList.remove(umlClass);
+        umlList.remove(umlClass);
     }
 
     /**
@@ -71,10 +74,8 @@ public class ClassDiagram extends Element{
      * @return object representing class, if class already exists returns null
      */
     public UMLInterface createInterface(String name){
-        for(Iterator<UMLInterface> itr = umlInterfaceList.iterator(); itr.hasNext();){
-            UMLInterface ui = itr.next();
-            if (ui.getName().equals(name))
-            {
+        for (UMLClassInterfaceTemplate umlItem : umlList){
+            if (umlItem.getName().equals(name)){
                 //diagram already contains class with entered name
                 //returns null
                 return null;
@@ -83,7 +84,7 @@ public class ClassDiagram extends Element{
 
         //return newly created instance of UMLClass
         UMLInterface ui = new UMLInterface(name);
-        this.umlInterfaceList.add(ui);
+        this.umlList.add(ui);
         return ui;
     }
 
@@ -92,7 +93,15 @@ public class ClassDiagram extends Element{
      * @param umlInterface interface to be added
      * */
     public boolean addInterface(UMLInterface umlInterface){
-        return umlInterfaceList.add(umlInterface);
+        for (UMLClassInterfaceTemplate umlItem : umlList){
+            if (umlItem.getName().equals(umlInterface.getName())){
+                //diagram already contains class with entered name
+                return false;
+            }
+        }
+
+        //return newly success of adding instance of UMLClass to list
+        return umlList.add(umlInterface);
     }
 
     /**
@@ -100,6 +109,6 @@ public class ClassDiagram extends Element{
      * @param umlInterface interface to be deleted
      * */
     public void deleteInterface(UMLInterface umlInterface){
-        umlInterfaceList.remove(umlInterface);
+        umlList.remove(umlInterface);
     }
 }

@@ -1,10 +1,6 @@
 package ija.ijaproject.cls;
 
-public class UMLAttribute {
-    /**
-     * name of the attribute
-     * */
-    private String name;
+public class UMLAttribute extends Element{
 
     /**
      * name of the type
@@ -16,7 +12,7 @@ public class UMLAttribute {
      * @param name
      */
     public UMLAttribute(String name) {
-        this.name = name;
+        super(name);
     }
 
     /**
@@ -25,31 +21,18 @@ public class UMLAttribute {
      * @param type attribute type
      * */
     public UMLAttribute(String name, String type){
-        this.name = name;
+        super(name);
         this.type = type;
-    }
-
-    /**
-     * method for setting attr name
-     * @param name new name of attribute
-     * */
-    protected void setName(String name){
-        this.name = name;
     }
 
     /**
      * method for setting attr type
      * @param type new type of attribute
      * */
-    protected void setType(String type){
+    public void setType(String type){
         this.type = type;
     }
 
-    /**
-     * method for returning name
-     * @return attribute name
-     * */
-    public String getName() { return this.name; }
 
     /**
      * method for returning attribute type

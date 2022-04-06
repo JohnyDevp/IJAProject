@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class UMLClass extends UMLInterface{
+public class UMLClass extends UMLClassInterfaceTemplate{
 
     /**
      * list of attributes of class

@@ -13,6 +13,11 @@ public class UMLOperation extends UMLAttribute{
     private List<UMLAttribute> parametersOfOperationList = new ArrayList<UMLAttribute>();
 
     /**
+     * modifier of operation
+     * can be #,-,+
+     * */
+    private char modifier;
+    /**
      * constructor for creating operation just with name
      * @param name name of operation
      * */

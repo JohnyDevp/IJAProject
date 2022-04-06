@@ -1,18 +1,28 @@
 package ija.ijaproject;
 
+import ija.ijaproject.ClassDiagramController;
+import ija.ijaproject.ClassObjectGUI;
 import javafx.scene.Cursor;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class RelationGUI {
-    private boolean relationFromSet = false;
-    private final ClassDiagramController.relType relationType;
 
-    private ClassDiagramController.ClassObject relClassFrom;
-    private ClassDiagramController.ClassObject relClassTo;
+/**
+ * class for storing the relation between two classes
+ * */
+public class RelationGUI{
+
+    private boolean relationFromSet = false;
+    private ClassDiagramController.relType relationType;
+    private Pane canvas;
+
+    private ClassObjectGUI relClassFrom;
+    private ClassObjectGUI relClassTo;
 
     private Line relLine;
 
@@ -27,46 +37,24 @@ public class RelationGUI {
     private Text nameOfRelation;
 
     /**
-     * getters
-     * */
-    public Text getNameOfRelation() {return this.nameOfRelation;}
-    public Text getCardinalityByToClass() {return this.cardinalityByToClass;}
-    public Text getCardinalityByFromClass() {return this.cardinalityByFromClass;}
-    public boolean getRelationFromSet() {return this.relationFromSet; }
-    public ClassDiagramController.ClassObject getRelClassFrom() {return this.relClassFrom; }
-    public ClassDiagramController.ClassObject getRelClassTo() {return this.relClassTo; }
-    public Line getRelLine() {return this.relLine; }
-    public Polygon getRelLineEnd() {return this.relLineEnd; }
-
-    /**
      * constructor
      * @param type type of the relation
      * creating the line and its event for handling selecting this line
      * setting up the relation type
      * */
-    public Relation(ClassDiagramController.relType type){
+    public RelationGUI(ClassDiagramController.relType type, Pane canvas){
         //set up the line and the event when click on the relation
         this.relLine = new Line();
         this.relLine.setStrokeWidth(2.5);
         this.relLine.toBack();
         this.relLine.setCursor(Cursor.HAND);
-        //set the event when click on the line
-        this.relLine.setOnMouseClicked(mouseEvent -> {
-            if (relationForChange != null){
-                relationForChange.relLine.setStroke(Color.BLACK);
-            }
-            if (relationForChange == this){
-                relationForChange = null;
-                this.relLine.setStroke(Color.BLACK);
-            } else {
-                relationForChange = this;
-                this.relLine.setStroke(Color.BLUE);
-            }
-        });
+
 
         //set the type of this relation
         this.relationType = type;
         //create the line from sufficient places
+
+        this.canvas = canvas;
     }
 
 
@@ -76,7 +64,7 @@ public class RelationGUI {
      * @param X X coordinate of the point where the relation starts
      * @param Y Y coordinate of the point where the relation starts
      * */
-    public void setRelationFrom(ClassDiagramController.ClassObject relClassFrom, double X, double Y){
+    public void setRelationFrom(ClassObjectGUI relClassFrom, double X, double Y){
         this.relLine.setStartX(X);
         this.relLine.setStartY(Y);
         this.relationFromSet = true;
@@ -90,7 +78,7 @@ public class RelationGUI {
      * @param X X coordinate of the point where the relation ends
      * @param Y Y coordinate of the point where the relation ends
      * */
-    public void setRelationTo(ClassDiagramController.ClassObject relClassTo, double X, double Y){
+    public void setRelationTo(ClassObjectGUI relClassTo, double X, double Y){
         this.relLine.setEndX(X);
         this.relLine.setEndY(Y);
         this.relClassTo = relClassTo;
@@ -108,7 +96,7 @@ public class RelationGUI {
     }
 
 
-    public void recomputeRelationDesign(ClassDiagramController.ClassObject classObject, double diffX, double diffY){
+    public void recomputeRelationDesign(ClassObjectGUI classObject, double diffX, double diffY){
         if(getRelClassFrom() == classObject){
             getRelLine().setStartX(getRelLine().getStartX() + diffX);
             getRelLine().setStartY(getRelLine().getStartY() + diffY);
@@ -326,4 +314,16 @@ public class RelationGUI {
         this.cardinalityByFromClass = text;
         canvas.getChildren().add(text);
     }
+
+    /**
+     * getters
+     * */
+    public Text getNameOfRelation() {return this.nameOfRelation;}
+    public Text getCardinalityByToClass() {return this.cardinalityByToClass;}
+    public Text getCardinalityByFromClass() {return this.cardinalityByFromClass;}
+    public boolean getRelationFromSet() {return this.relationFromSet; }
+    public ClassObjectGUI getRelClassFrom() {return this.relClassFrom; }
+    public ClassObjectGUI getRelClassTo() {return this.relClassTo; }
+    public Line getRelLine() {return this.relLine; }
+    public Polygon getRelLineEnd() {return this.relLineEnd; }
 }
