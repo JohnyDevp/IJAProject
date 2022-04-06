@@ -14,17 +14,28 @@ import org.json.simple.parser.*;
 
 public class JsonReader {
 
-    private ClassDiagram classDiagram;
+    private ClassDiagram clsDlg;
+    private List<ClassDiagramController.ClassObject> classObjectList = new ArrayList<>();
     private List<ClassDiagramController.Relation> listOfRelations = new ArrayList<>();
+
+    /**getters*/
+    public ClassDiagram getClsDlg() {
+        return this.clsDlg;
+    }
+
+    public List<ClassDiagramController.Relation> getListOfRelations() {
+        return this.listOfRelations;
+    }
+
+    public List<ClassDiagramController.ClassObject> getClassObjectList() {
+        return classObjectList;
+    }
+
     /**
      * method parsing the json file to class diagram representation
      * @param filePath path to json file
      * */
-    public ClassDiagram parseJsonClassDiagram(String filePath) {
-
-        //creating new class diagram, name will be set when read
-        ClassDiagram clsDlg = new ClassDiagram("");;
-        this.classDiagram = clsDlg;
+    public boolean parseJsonClassDiagram(String filePath) {
 
         try {
 
@@ -40,23 +51,24 @@ public class JsonReader {
             // iterating address Map
             Iterator<Map.Entry> itr1 = classDiagram.entrySet().iterator();
 
-
+            //read all information in class diagram
             while (itr1.hasNext()) {
                 Map.Entry clsDiagramElement = itr1.next();
 
-                //classify part of class diagram definition
+                //classify each part of class diagram definition
+
                 if (clsDiagramElement.getKey().equals("name")){
                     clsDlg.setName((String)clsDiagramElement.getValue());
                 } else if (clsDiagramElement.getKey().equals("classes")){
 
-                    //classes array in json => in root
+                    //array of classes in json => in root
                     //save them as json array
                     JSONArray jarClasses = (JSONArray) clsDiagramElement.getValue();
                     Iterator itrThroughClasses = jarClasses.iterator();
                     while (itrThroughClasses.hasNext()) {
                         //call for add class and check for failure
                         if(!addClass((Map)itrThroughClasses.next())){
-                            return null;
+                            return false;
                         }
                     }
 
@@ -67,23 +79,12 @@ public class JsonReader {
                 }
             }
 
-            //sequence diagrams
-            /*JSONArray sequenceDiagrams = ((JSONArray) jsonObject.get("sequenceDiagrams"));
-
-            Iterator itr2 = sequenceDiagrams.iterator();
-            while (itr2.hasNext()) {
-                System.out.println(itr2.toString());
-            }*/
-
-
-
-
         } catch (Exception e){
             System.out.println("ERROR: Loading json file => bad structure");
-            return null;
+            return false;
         }
 
-        return clsDlg;
+        return true;
     }
 
     public List<SequenceDiagram> parseJsonSequenceDiagrams(String filePath){
@@ -93,6 +94,7 @@ public class JsonReader {
     }
 
     /**
+     * parsing class diagram
      * method for adding new class with all its information
      * @param mClasses array of all class definitions(operations, name, attributes, x, y,...)
      * */

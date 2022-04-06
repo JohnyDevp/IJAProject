@@ -151,6 +151,27 @@ public class ClassDiagramController {
     }
 
     /**
+     * overridden method
+     * parsing file and loading it into tabPane if file has been set up
+     * */
+    protected void parseFile(){
+        JsonReader jr = new JsonReader();
+        String tmp_file_path = "C:\\Users\\jhola\\IdeaProjects\\IJAProject\\src\\main\\resources\\fake.json";
+        if(!jr.parseJsonClassDiagram(tmp_file_path)) {
+            //todo parsing failure => exiting tabs
+            return;
+        }
+
+        //todo
+        //if (clsDlg == null)
+
+        listOfSequenceDiagrams = jr.parseJsonSequenceDiagrams(
+                "C:\\Users\\jhola\\IdeaProjects\\IJAProject\\src\\main\\resources\\fake.json"
+        );
+
+    }
+
+    /**
      * button action handling creating new tab and class for sequence diagram
      * */
     @FXML
@@ -180,25 +201,6 @@ public class ClassDiagramController {
 
         //draw if there is something to draw
         sequenceDiagramController.start();
-    }
-
-    /**
-     * overridden method
-     * parsing file and loading it into tabPane if file has been set up
-     * */
-    protected void parseFile(){
-        JsonReader jr = new JsonReader();
-        ClassDiagram clsDlg = jr.parseJsonClassDiagram(
-                "C:\\Users\\jhola\\IdeaProjects\\IJAProject\\src\\main\\resources\\fake.json"
-        );
-
-        //todo
-        //if (clsDlg == null)
-
-        listOfSequenceDiagrams = jr.parseJsonSequenceDiagrams(
-                "C:\\Users\\jhola\\IdeaProjects\\IJAProject\\src\\main\\resources\\fake.json"
-        );
-
     }
 
     /**
@@ -284,114 +286,6 @@ public class ClassDiagramController {
         for (Text attr : classObject.getListOfAttributes()) {canvas.getChildren().add(attr);}
         for (Text op : classObject.getListOfOperations()) {canvas.getChildren().add(op);}
 
-        //clicking on class border
-        classObject.getClassBorder().setOnMouseClicked(event -> {
-            if (!this.createRelation) return; //when relation is not desired to create => return;
-
-            //choose whether is setting the start or end of the relation
-            if (!this.relation.getRelationFromSet()){
-                //start relation
-                this.relation.setRelationFrom(classObject, event.getX(), event.getY());
-                classObject.addRelation(this.relation);
-                System.out.println(event.getX()+ " " + event.getY());
-            } else {
-                //end relation
-                if (this.relation.getRelClassFrom() == classObject) return; //if the click was twice to the same object
-
-                this.relation.setRelationTo(classObject, event.getX(), event.getY());
-
-                //add reference for this relation to the end class object
-                classObject.addRelation(this.relation);
-
-                //disable creating relation and add this line and its end to the canvas
-                this.createRelation = false;
-                btnAddRelation.setText("ADD RELATION");
-                this.canvas.getChildren().addAll(this.relation.getRelLine(), this.relation.getRelLineEnd());
-                System.out.println(this.relation.getRelLine().toString());
-            }
-
-        });
-
-        //clicking on clickable corner (actually rectangle) => changing if it is marked or not
-        clickableCorner.setOnMouseClicked(mouseEvent -> {
-            if (classObject == this.selectedClass){
-                deselectClass(classObject);
-            }else{
-                setSelectedClass(classObject);
-            }
-        });
-
-        //clicking on clickable corner => setting that it is ready to move
-        clickableCorner.setOnMousePressed(mouseEvent -> {
-
-            this.mousePrevX = mouseEvent.getX();
-            this.mousePrevY = mouseEvent.getY();
-        });
-
-        //dragging the clickable corner and with it also the whole object
-        clickableCorner.setOnMouseDragged(event -> {
-
-            //preventing from overdrawing the pane surroundings => which is mysteriously possible
-            //if the rectangle is selected => then do actions
-            if((classObject.getClassBorder().getY() + (event.getY() - this.mousePrevY)) <= 0) return;
-
-            //count the difference between previous and current mouse position for moving objects
-            Double diffX = event.getX() - this.mousePrevX;
-            Double diffY = event.getY() - this.mousePrevY;
-
-            //previous position of mouse set to current position
-            mousePrevX = event.getX();
-            mousePrevY = event.getY();
-
-            //changing position of each part of diagram
-            //position of clickable corner -> actually rectangle at the top of the object
-            clickableCorner.setX(clickableCorner.getX() + diffX);
-            clickableCorner.setY(clickableCorner.getY() + diffY);
-
-            //position of border of object
-            classObject.getClassBorder().setX(classObject.getClassBorder().getX() + diffX);
-            classObject.getClassBorder().setY(classObject.getClassBorder().getY() + diffY);
-
-            //position of the rectangle representing the inner part of object (without border)
-            classObject.getClassBox().setX(classObject.getClassBox().getX() + diffX);
-            classObject.getClassBox().setY(classObject.getClassBox().getY() + diffY);
-
-            //position of text => class name
-            classObject.getClassName().setX(classObject.getClassName().getX() + diffX);
-            classObject.getClassName().setY(classObject.getClassName().getY() + diffY);
-
-            //position of line dividing space between class name and attributes
-            classObject.getLine1().setStartX(classObject.getLine1().getStartX() + diffX);
-            classObject.getLine1().setStartY(classObject.getLine1().getStartY() + diffY);
-            classObject.getLine1().setEndX(classObject.getLine1().getEndX() + diffX);
-            classObject.getLine1().setEndY(classObject.getLine1().getEndY() + diffY);
-
-            //position of line dividing space between class attributes and operation
-            classObject.getLine2().setStartX(classObject.getLine2().getStartX() + diffX);
-            classObject.getLine2().setStartY(classObject.getLine2().getStartY() + diffY);
-            classObject.getLine2().setEndX(classObject.getLine2().getEndX() + diffX);
-            classObject.getLine2().setEndY(classObject.getLine2().getEndY() + diffY);
-
-            //position of text => each attribute
-            for (Text attr : classObject.getListOfAttributes()){
-                attr.setX(attr.getX() + diffX);
-                attr.setY(attr.getY() + diffY);
-            }
-
-            //position of text => each operation
-            for (Text op : classObject.getListOfOperations()){
-                op.setX(op.getX() + diffX);
-                op.setY(op.getY() + diffY);
-            }
-
-            //position of point where relation begins/ends
-            //also redrawing relation line end (arrow, etc.)
-            for (Relation rel : classObject.getListOfRelations()){
-                rel.recomputeRelationDesign(classObject, diffX, diffY);
-            }
-
-        });
-
     }
 
     /**
@@ -435,6 +329,7 @@ public class ClassDiagramController {
      * class for creating new graphic representation of class
      * */
     public class ClassObject {
+        /**graphical parts of class object*/
         private Rectangle classBox;
         private Rectangle classBorder;
         private Rectangle clickableCorner;
@@ -511,6 +406,9 @@ public class ClassDiagramController {
             line2.setEndX(rectangle.getX() + rectangle.getWidth());
             line2.setEndY(line2.getStartY());
             this.line2 = line2;
+
+            //set up actions
+            actionsSetup();
         }
 
         /**
@@ -572,6 +470,120 @@ public class ClassDiagramController {
          * */
         public void addRelation(Relation relation){
             this.listOfRelations.add(relation);
+        }
+
+        /**
+         * method for setting up every possible action and its properties
+         * */
+        private void actionsSetup(){
+
+            //clicking on class border
+            this.getClassBorder().setOnMouseClicked(event -> {
+                if (!createRelation) return; //when relation is not desired to create => return;
+
+                //choose whether is setting the start or end of the relation
+                if (!relation.getRelationFromSet()){
+                    //start relation
+                    relation.setRelationFrom(this, event.getX(), event.getY());
+                    this.addRelation(relation);
+                    System.out.println(event.getX()+ " " + event.getY());
+                } else {
+                    //end relation
+                    if (relation.getRelClassFrom() == this) return; //if the click was twice to the same object
+
+                    relation.setRelationTo(this, event.getX(), event.getY());
+
+                    //add reference for this relation to the end class object
+                    this.addRelation(relation);
+
+                    //disable creating relation and add this line and its end to the canvas
+                    createRelation = false;
+                    btnAddRelation.setText("ADD RELATION");
+                    canvas.getChildren().addAll(relation.getRelLine(), relation.getRelLineEnd());
+                    System.out.println(relation.getRelLine().toString());
+                }
+
+            });
+
+            //clicking on clickable corner (rather rectangle)
+            clickableCorner.setOnMouseClicked(mouseEvent -> {
+                if (this == selectedClass){
+                    deselectClass(this);
+                }else{
+                    setSelectedClass(this);
+                }
+            });
+
+            //clicking on clickable corner => setting that it is ready to move
+            clickableCorner.setOnMousePressed(mouseEvent -> {
+
+                mousePrevX = mouseEvent.getX();
+                mousePrevY = mouseEvent.getY();
+            });
+
+            //dragging the clickable corner and with it also the whole object
+            clickableCorner.setOnMouseDragged(event -> {
+
+                //preventing from overdrawing the pane surroundings => which is mysteriously possible
+                //if the rectangle is selected => then do actions
+                if((this.getClassBorder().getY() + (event.getY() - mousePrevY)) <= 0) return;
+
+                //count the difference between previous and current mouse position for moving objects
+                Double diffX = event.getX() - mousePrevX;
+                Double diffY = event.getY() - mousePrevY;
+
+                //previous position of mouse set to current position
+                mousePrevX = event.getX();
+                mousePrevY = event.getY();
+
+                //changing position of each part of diagram
+                //position of clickable corner -> actually rectangle at the top of the object
+                clickableCorner.setX(clickableCorner.getX() + diffX);
+                clickableCorner.setY(clickableCorner.getY() + diffY);
+
+                //position of border of object
+                this.getClassBorder().setX(this.getClassBorder().getX() + diffX);
+                this.getClassBorder().setY(this.getClassBorder().getY() + diffY);
+
+                //position of the rectangle representing the inner part of object (without border)
+                this.getClassBox().setX(this.getClassBox().getX() + diffX);
+                this.getClassBox().setY(this.getClassBox().getY() + diffY);
+
+                //position of text => class name
+                this.getClassName().setX(this.getClassName().getX() + diffX);
+                this.getClassName().setY(this.getClassName().getY() + diffY);
+
+                //position of line dividing space between class name and attributes
+                this.getLine1().setStartX(this.getLine1().getStartX() + diffX);
+                this.getLine1().setStartY(this.getLine1().getStartY() + diffY);
+                this.getLine1().setEndX(this.getLine1().getEndX() + diffX);
+                this.getLine1().setEndY(this.getLine1().getEndY() + diffY);
+
+                //position of line dividing space between class attributes and operation
+                this.getLine2().setStartX(this.getLine2().getStartX() + diffX);
+                this.getLine2().setStartY(this.getLine2().getStartY() + diffY);
+                this.getLine2().setEndX(this.getLine2().getEndX() + diffX);
+                this.getLine2().setEndY(this.getLine2().getEndY() + diffY);
+
+                //position of text => each attribute
+                for (Text attr : this.getListOfAttributes()){
+                    attr.setX(attr.getX() + diffX);
+                    attr.setY(attr.getY() + diffY);
+                }
+
+                //position of text => each operation
+                for (Text op : this.getListOfOperations()){
+                    op.setX(op.getX() + diffX);
+                    op.setY(op.getY() + diffY);
+                }
+
+                //position of point where relation begins/ends
+                //also redrawing relation line end (arrow, etc.)
+                for (Relation rel : this.getListOfRelations()){
+                    rel.recomputeRelationDesign(this, diffX, diffY);
+                }
+
+            });
         }
     }
 

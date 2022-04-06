@@ -13,12 +13,41 @@ public class UMLInterface extends Element{
     protected List<UMLOperation> umlOperationsList = new ArrayList<UMLOperation>();
 
     /**
+     * variables for storing position of this class on pane
+     * */
+    private double Xcoord = 0.0;
+    private double Ycoord = 0.0;
+
+    /**
      * constructor
-     * Creating an instance of class representing class in UML diagram
-     * @param name name of class
+     * Creating an instance of object representing object in UML diagram
+     * @param name name of object
      */
     public UMLInterface(String name){
         super(name);
+    }
+
+    /**
+     * setter
+     * @param xcoord X coordination of the object on pane
+     * */
+    public void setXcoord(double xcoord) {
+        Xcoord = xcoord;
+    }
+
+    /**
+     * setter
+     * @param ycoord Y coordination of the object on pane
+     * */
+    public void setYcoord(double ycoord) {
+        Ycoord = ycoord;
+    }
+
+    /**
+     * getter
+     * @return X coordination of object*/
+    public double getXcoord() {
+        return Xcoord;
     }
 
     /**
