@@ -14,13 +14,17 @@ import org.json.simple.parser.*;
 
 public class JsonReader {
 
+    private ClassDiagram classDiagram;
+    private List<ClassDiagramController.Relation> listOfRelations = new ArrayList<>();
     /**
      * method parsing the json file to class diagram representation
      * @param filePath path to json file
      * */
     public ClassDiagram parseJsonClassDiagram(String filePath) {
 
+        //creating new class diagram, name will be set when read
         ClassDiagram clsDlg = new ClassDiagram("");;
+        this.classDiagram = clsDlg;
 
         try {
 
@@ -30,27 +34,36 @@ public class JsonReader {
             // typecasting obj to JSONObject
             JSONObject jsonObject = (JSONObject) obj;
 
-            //getting fields of all arrays => sequence diagrams, relations
-            //and class diagram(not an array)
+            //getting fields of all arrays => sequence diagrams, relations and class diagram(not an array)
             //class diagram
             Map classDiagram = ((Map) jsonObject.get("classDiagram"));
             // iterating address Map
             Iterator<Map.Entry> itr1 = classDiagram.entrySet().iterator();
+
+
             while (itr1.hasNext()) {
-                Map.Entry clsDiagElement = itr1.next();
-                if (clsDiagElement.getKey() == "name"){
-                    clsDlg.setName((String)clsDiagElement.getValue());
-                } else if (clsDiagElement.getKey() == "classes"){
-                    JSONArray jarClasses = (JSONArray) clsDiagElement.getValue();
-                    Iterator itr2 = jarClasses.iterator();
-                    while (itr2.hasNext()) {
-                        System.out.println(itr2.ge);
+                Map.Entry clsDiagramElement = itr1.next();
+
+                //classify part of class diagram definition
+                if (clsDiagramElement.getKey().equals("name")){
+                    clsDlg.setName((String)clsDiagramElement.getValue());
+                } else if (clsDiagramElement.getKey().equals("classes")){
+
+                    //classes array in json => in root
+                    //save them as json array
+                    JSONArray jarClasses = (JSONArray) clsDiagramElement.getValue();
+                    Iterator itrThroughClasses = jarClasses.iterator();
+                    while (itrThroughClasses.hasNext()) {
+                        //call for add class and check for failure
+                        if(!addClass((Map)itrThroughClasses.next())){
+                            return null;
+                        }
                     }
 
-                } else if (clsDiagElement.getKey() == "interfaces"){
-                    JSONArray jarInterfaces = (JSONArray) clsDiagElement.getValue();
-                } else if (clsDiagElement.getKey() == "relations"){
-                    JSONArray jarRelations = (JSONArray) clsDiagElement.getValue();
+                } else if (clsDiagramElement.getKey().equals("interfaces")){
+                    JSONArray jarInterfaces = (JSONArray) clsDiagramElement.getValue();
+                } else if (clsDiagramElement.getKey().equals("relations")){
+                    JSONArray jarRelations = (JSONArray) clsDiagramElement.getValue();
                 }
             }
 
@@ -62,8 +75,6 @@ public class JsonReader {
                 System.out.println(itr2.toString());
             }*/
 
-            //relations
-            JSONArray relations = ((JSONArray) jsonObject.get("relations"));
 
 
 
@@ -81,15 +92,107 @@ public class JsonReader {
         return listOfSequenceDiagrams;
     }
 
-    private void addClass(Map jarClasses){
+    /**
+     * method for adding new class with all its information
+     * @param mClasses array of all class definitions(operations, name, attributes, x, y,...)
+     * */
+    private boolean addClass(Map mClasses){
+        Iterator<Map.Entry> itr1 = mClasses.entrySet().iterator();
 
+        //this variable is handling sum, that's pointing out whether were defined all the necessary information in json
+        int controlSum = 0;
+
+        while (itr1.hasNext()) {
+            Map.Entry classPart = itr1.next();
+
+            switch ((String)classPart.getKey()){
+                case "coordX":{
+                    controlSum += 1;
+                }
+                    break;
+                case "coordY":{
+                    controlSum += 1;
+
+                }
+
+                    break;
+                case "operations": {
+                    controlSum += 1;
+                }
+                    break;
+
+                case "attributes":{
+                    controlSum += 1;
+                }
+                    break;
+
+            }
+        }
+
+        return (controlSum == 4);
     }
 
-    private void addInterface(Map jarClasses){
+    /**
+     * method for adding new interface with all its information
+     * @param mInterface array of all interface definitions(operations, name, x, y,...)
+     * */
+    private void addInterface(Map mInterface){
 
+        Iterator<Map.Entry> itr = mInterface.entrySet().iterator();
+
+        while (itr.hasNext()) {
+            Map.Entry classPart = itr.next();
+
+            switch ((String)classPart.getKey()){
+                case "name":{
+
+                }
+                    break;
+
+                case "coordX": {
+
+                }
+                    break;
+                case "coordY":{
+
+                }
+                    break;
+                case "operations":{}
+                    break;
+
+            }
+        }
     }
 
-    private void addRelation(Map jarClasses){
+    /**
+     * method for adding new relation with all its information
+     * @param mRelations array of all relation definitions(start class, end class, x, y,...)
+     * */
+    private void addRelation(Map mRelations){
+        Iterator<Map.Entry> itr = mRelations.entrySet().iterator();
 
+        while (itr.hasNext()) {
+            Map.Entry classPart = itr.next();
+
+            switch ((String) classPart.getKey()) {
+                case "relClassFrom": {
+
+                }
+                break;
+
+                case "relClassTo": {
+
+                }
+                break;
+                case "coordY": {
+
+                }
+                break;
+                case "operations": {
+                }
+                break;
+
+            }
+        }
     }
 }

@@ -8,11 +8,6 @@ import java.util.List;
 public class UMLClass extends Element{
 
     /**
-     * name of the class
-     * */
-    protected String name;
-
-    /**
      * list of attributes of class
      * */
     protected java.util.List<UMLAttribute> umlAttributesList = new ArrayList<UMLAttribute>();
@@ -70,11 +65,11 @@ public class UMLClass extends Element{
 
     /**
      * find and get attribute according its name
-     * helper method for deleteAttribute()
+     * also helper method for deleteAttribute()
      * @param name attribute name
      * @return UMLAttribute or null if not found
      * */
-    private UMLAttribute findAttribute(String name) {
+    public UMLAttribute findAttribute(String name) {
         for (Iterator<UMLAttribute> itr = umlAttributesList.iterator(); itr.hasNext(); ) {
             UMLAttribute umlAttribute = itr.next();
 
@@ -99,7 +94,7 @@ public class UMLClass extends Element{
     /**
      * adding an operation (which is parameter) of this class
      * @param operation parameter represent the whole operation
-     * @return true or false according successfullness of this method
+     * @return true or false according success of this method
      * */
     public boolean addOperation(UMLOperation operation){
         if (umlOperationsList.contains(operation)) {
@@ -127,11 +122,11 @@ public class UMLClass extends Element{
 
     /**
      * find and get operation according its name
-     * helper method for deleteOperation()
+     * also helper method for deleteOperation()
      * @param name operation name
      * @return UMLOperation or null if not found
      * */
-    private UMLOperation findOperation(String name) {
+    public UMLOperation findOperation(String name) {
         for (Iterator<UMLOperation> itr = umlOperationsList.iterator(); itr.hasNext(); ) {
             UMLOperation umlOperation = itr.next();
 

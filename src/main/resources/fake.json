@@ -40,9 +40,12 @@
     ],
     "relations": [
       {
+        "name": "relationName",
+        "relType": "reltype",
         "relClassFrom" : "nameOfClass",
         "relClassTo"  : "nameOfClass",
-        "relType": "reltype"
+        "cardinalityByFrom": "cardinality1",
+        "cardinalityByToClass" : "cardinality2"
       }
     ]
   },

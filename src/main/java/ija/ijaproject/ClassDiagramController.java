@@ -73,7 +73,12 @@ public class ClassDiagramController {
     /**
      * variable storing class diagram
      * */
-    private ClassDiagram classDiagram;
+    private final ClassDiagram classDiagram = null;
+
+    /**
+     * variable for storing list of graphical representations of classes
+     * */
+    private final List<ClassObject> classObjectList = new ArrayList<>();
 
     /**
      * setter
@@ -249,7 +254,7 @@ public class ClassDiagramController {
      * method handling clicking on button for adding new class
      * */
     @FXML
-    public void btnAddClass(ActionEvent e){
+    public void btnAddClass(){
         System.out.println("Creating a class object...");
 
         //get class name from dialog
@@ -281,7 +286,7 @@ public class ClassDiagramController {
 
         //clicking on class border
         classObject.getClassBorder().setOnMouseClicked(event -> {
-            if (!this.createRelation) return; //when relation is not desired to create
+            if (!this.createRelation) return; //when relation is not desired to create => return;
 
             //choose whether is setting the start or end of the relation
             if (!this.relation.getRelationFromSet()){
@@ -569,8 +574,6 @@ public class ClassDiagramController {
             this.listOfRelations.add(relation);
         }
     }
-
-
 
     /**
      * class for storing the relation between two classes
