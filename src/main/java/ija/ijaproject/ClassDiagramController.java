@@ -1,10 +1,7 @@
 package ija.ijaproject;
 
 
-import ija.ijaproject.cls.ClassDiagram;
-import ija.ijaproject.cls.SequenceDiagram;
-import ija.ijaproject.cls.UMLClass;
-import ija.ijaproject.cls.UMLClassInterfaceTemplate;
+import ija.ijaproject.cls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -154,14 +151,22 @@ public class ClassDiagramController {
      * parsing file and loading it into tabPane if file has been set up
      * */
     protected void parseFile(){
-        /*JsonReader jr = new JsonReader();
+        JsonReader jr = new JsonReader();
         String tmp_file_path = "C:\\Users\\jhola\\IdeaProjects\\IJAProject\\src\\main\\resources\\fake.json";
         if(jr.parseJsonClassDiagram(tmp_file_path)) {
-            this.classObjectList = jr.getClassObjectList();
+            this.classDiagram = jr.getClsDiagram();
             //add all created objects to canvas and list of them
-            for(ClassObjectGUI cog : this.classObjectList){
-                addClassOnCanvasAndSetActions(cog);
+            for(UMLClassInterfaceTemplate umlObject : this.classDiagram.getUmlObjectsList()){
+                //according to class create the right GUI
+                if (umlObject.getClass() == UMLClass.class){
+                    ClassObjectGUI clsObjGUI = new ClassObjectGUI((UMLClass) umlObject);
+                    addClassOnCanvasAndSetActions(clsObjGUI);
+
+                } else if (umlObject.getClass() == UMLInterface.class){
+                    //handle the interface
+                }
             }
+
         } else {
             return;
         }
@@ -169,9 +174,9 @@ public class ClassDiagramController {
         //todo
         //if (clsDlg == null)
 
-        listOfSequenceDiagrams = jr.parseJsonSequenceDiagrams(
+        jr.parseJsonSequenceDiagrams(
                 "C:\\Users\\jhola\\IdeaProjects\\IJAProject\\src\\main\\resources\\fake.json"
-        );*/
+        );
     }
 
     /**

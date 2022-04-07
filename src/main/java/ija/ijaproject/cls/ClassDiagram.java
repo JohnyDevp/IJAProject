@@ -10,7 +10,8 @@ public class ClassDiagram extends Element{
      * */
     private List<UMLClassInterfaceTemplate> umlList = new ArrayList<>();
 
-
+    /**getter*/
+    public List<UMLClassInterfaceTemplate> getUmlObjectsList(){return this.umlList;}
 
     /**
      * constructor

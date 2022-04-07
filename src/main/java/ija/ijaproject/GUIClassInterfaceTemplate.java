@@ -1,5 +1,6 @@
 package ija.ijaproject;
 
+import ija.ijaproject.cls.UMLAttribute;
 import ija.ijaproject.cls.UMLClass;
 import ija.ijaproject.cls.UMLClassInterfaceTemplate;
 import ija.ijaproject.cls.UMLOperation;
@@ -72,16 +73,16 @@ public abstract class GUIClassInterfaceTemplate {
     /**
      * creating all graphical objects for necessary for empty class
      */
-    public void createClassObjectGUI(){
+    protected void createClassObjectGUI(){
         //create border of the object
-        Rectangle rectangleBorder = new Rectangle(100,130, Color.BLACK);
+        Rectangle rectangleBorder = new Rectangle(100,90, Color.BLACK);
         rectangleBorder.setX(getXcoord());
         rectangleBorder.setY(getYcoord());
         rectangleBorder.setCursor(Cursor.CROSSHAIR);
         this.classBorder = rectangleBorder;
 
         //create overall classbox => of rectangle
-        Rectangle rectangle = new Rectangle(90,120,Color.rgb(237, 233, 221, 0.6));
+        Rectangle rectangle = new Rectangle(90,80,Color.rgb(237, 233, 221, 0.6));
         rectangle.setX(getXcoord() + 5);
         rectangle.setY(getYcoord() + 5);
         this.classBox = rectangle;
@@ -115,7 +116,7 @@ public abstract class GUIClassInterfaceTemplate {
 
         Line line2 = new Line();
         line2.setStartX(rectangle.getX());
-        line2.setStartY(line1.getStartY() + 30);
+        line2.setStartY(line1.getStartY() + 15);
         line2.setEndX(rectangle.getX() + rectangle.getWidth());
         line2.setEndY(line2.getStartY());
         this.line2 = line2;
@@ -127,8 +128,15 @@ public abstract class GUIClassInterfaceTemplate {
      * */
     public Text addOperation(UMLOperation umlOperation){
         //set the text of label in graphical representation of class
+        StringBuilder textOfOperation = new StringBuilder(umlOperation.getName() + " (");
+        for (UMLAttribute umlParam : umlOperation.getParametersOfOperationList()){
+            textOfOperation.append(umlParam.getName()).append(" : ").append(umlParam.getType());
+        }
+        textOfOperation.append(") : ").append(umlOperation.getType());
 
-        Text operation = new Text(umlOperation.getName());
+        //set text of operation (see on canvas)
+        Text operation = new Text(textOfOperation.toString());
+
 
         if (listOfOperations.isEmpty()){
             operation.setY(this.getLine2().getStartY() + 15);
@@ -141,8 +149,41 @@ public abstract class GUIClassInterfaceTemplate {
         }
 
         listOfOperations.add(operation);
-        classBox.setHeight(classBox.getHeight() + 15);
+
+        //reset the class height of border and box
+        getClassBox().setHeight(getClassBox().getHeight() + 15);
+        getClassBorder().setHeight(getClassBorder().getHeight() + 15);
+
+        //resize classbox iff necessary
+        resizeClassWidth(operation.getLayoutBounds().getWidth());
+
         return operation;
+    }
+
+    /**
+     * method for resizing class width
+     * resizing width of class gui iff necessary (according to text width)
+     * */
+    protected void resizeClassWidth(double width){
+        if (width < getClassBox().getWidth() + 5){ return ;}
+
+        //center class name
+        this.getClassNameLabel().setX(
+                this.getClassBorder().getX() + ((width+20) / 2) - getClassNameLabel().getLayoutBounds().getWidth()/2
+        );
+
+        //clickable corner
+        this.getClickableCorner().setX(
+                this.getClassBorder().getX() + ((width+20) / 2) - getClickableCorner().getWidth()/2
+        );
+
+        //box and border
+        this.getClassBox().setWidth(width + 10);
+        this.getClassBorder().setWidth(width + 20);
+
+        //lines
+        this.getLine1().setEndX(getLine1().getStartX() + width + 10);
+        this.getLine2().setEndX(getLine2().getStartX() + width + 10);
     }
 
     /**

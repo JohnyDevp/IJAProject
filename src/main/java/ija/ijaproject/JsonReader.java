@@ -1,10 +1,7 @@
 package ija.ijaproject;
 
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import ija.ijaproject.cls.*;
 import org.json.simple.JSONArray;
@@ -13,7 +10,11 @@ import org.json.simple.parser.*;
 
 
 public class JsonReader {
+
+    /**
+     * this is class diagram which will be*/
     private ClassDiagram clsDiagram = new ClassDiagram("");
+
     private List<ClassObjectGUI> classObjectList = new ArrayList<>();
 
     private List<RelationGUI> listOfRelations = new ArrayList<>();
@@ -91,10 +92,14 @@ public class JsonReader {
         return true;
     }
 
-    public List<SequenceDiagram> parseJsonSequenceDiagrams(String filePath){
+    /**
+     * method parsing the json file to sequence diagrams representation
+     * @param filePath path to json file
+     */
+    public boolean parseJsonSequenceDiagrams(String filePath){
         List<SequenceDiagram> listOfSequenceDiagrams = new ArrayList<>();
 
-        return listOfSequenceDiagrams;
+        return true;
     }
 
     /**
@@ -103,128 +108,107 @@ public class JsonReader {
      * @param mClasses array of all class definitions(operations, name, attributes, x, y,...)
      */
     private boolean addClass(Map mClasses){
-        Iterator<Map.Entry> itr1 = mClasses.entrySet().iterator();
+        //create new uml class => intern representation (non-graphical)
+        UMLClass umlClass;
 
-        //create new guiclass object
-        UMLClass umlClass = clsDiagram.createClass("tmpName");
 
-        //this variable is handling sum, that's pointing out whether were defined all the necessary information in json
-        int controlSum = 0;
+        /**/
+        //get name of class
+        String name = (String)mClasses.get("name");
+        if (name != null) {
+            //create new class and handle potential inconsistency
+            umlClass = clsDiagram.createClass(name);
+            if (umlClass == null ) { System.out.println("ERROR: Two classes of the same name, the second one has been removed"); }
+        }
+        else { System.out.println("ERROR: Currently created class has no class name: removed.");return false;}
 
-        while (itr1.hasNext()) {
-            Map.Entry classItem = itr1.next();
+        //get the xcoord
+        Double xcoord = (Double)mClasses.get("Xcoord");
+        if (xcoord != null) {
+            //add xcoord to representation of new uml class
+            umlClass.setXcoord(xcoord);
+        }
+        else { System.out.println("ERROR: Currently created class has no xcoord: removed.");return false;}
 
-            switch ((String)classItem.getKey()){
-                case "name":{
-                    controlSum +=1;
-                    umlClass.setName((String) classItem.getValue());
-                }
-                    break;
-                case "coordX":{
-                    controlSum += 1;
-                    umlClass.setXcoord((Double) classItem.getValue());
-                }
-                    break;
-                case "coordY":{
-                    controlSum += 1;
-                    umlClass.setYcoord((Double) classItem.getValue());
-                }
-                    break;
-                case "operations": {
-                    controlSum += 1;
-                    //array of operations in json => in root
-                    //save them as json array
-                    JSONArray jarOperations = (JSONArray) classItem.getValue();
-                    Iterator itrThroughOperations = jarOperations.iterator();
-                    while (itrThroughOperations.hasNext()) {
-                        Map mOperations = (Map)itrThroughOperations.next();
-                        Iterator<Map.Entry> itrOperations = mOperations.entrySet().iterator();
+        //get the ycoord
+        Double ycoord = (Double)mClasses.get("Ycoord");
+        if (ycoord != null) {
+            //add ycoord to representation of new uml class
+            umlClass.setXcoord(xcoord);
+        }
+        else { System.out.println("ERROR: Currently created class has no ycoord: removed.");return false;}
 
-                        //creating new operation
-                        UMLOperation umlOperation = new UMLOperation("");
+        //get the operations
+        JSONArray jarOperations = (JSONArray) mClasses.get("operations");
+        if (jarOperations != null){
+            //loop through array of operations, add them to the umlCLass
+            Iterator itrThroughOperations = jarOperations.iterator();
+            while (itrThroughOperations.hasNext()) {
 
-                        //iterate through items of one operation
-                        while(itrOperations.hasNext()){
-                            Map.Entry operationItem =itrOperations.next();
+                //create new umlOperation
+                UMLOperation umlOperation;
+                Map mOperation = (Map)itrThroughOperations.next();
 
-                            switch ((String) operationItem.getKey()) {
-                                case "name":
-                                    umlOperation.setName((String) operationItem.getValue());
-                                    break;
-                                case "rettype":
-                                    umlOperation.setType((String) operationItem.getValue());
-                                    break;
-                                case "params":
-                                    JSONArray jarOperationArg = (JSONArray) operationItem.getValue();
-                                    Iterator itrThroughOperationArg = jarOperationArg.iterator();
+                //get operation name and return type and create operation (call its constructor)
+                String operationName = (String)mOperation.get("name");
+                String returnType = (String)mOperation.get("rettype");
+                if (operationName != null && returnType != null) { umlOperation = new UMLOperation(operationName, returnType); }
+                else {return false;}
 
-                                    while (itrThroughOperationArg.hasNext()){
-                                        Map mOpArg = (Map)itrThroughOperationArg.next();
-                                        Iterator<Map.Entry> itrOpArg = mOpArg.entrySet().iterator();
+                //get operations params, loop through them and add them to umlOperation
+                JSONArray jarAttributes = (JSONArray) mOperation.get("params");
+                if (jarAttributes != null){
+                    //loop through params
+                    Iterator itrThroughParams = jarAttributes.iterator();
+                    while(itrThroughParams.hasNext()){
+                        Map mParam = (Map)itrThroughParams.next();
 
-                                        //creates instance of UMLAttribute to store this parameter
-                                        UMLAttribute param = new UMLAttribute("");
+                        //create new umlAttribute (as param of operation) and add values to it
+                        UMLAttribute umlAttribute;
+                        String paramName = (String)mParam.get("name");
+                        String type = (String)mParam.get("type");
+                        if (paramName != null && type != null){
+                            umlAttribute = new UMLAttribute(paramName, type);
+                        } else {return false;}
 
-                                        while(itrOpArg.hasNext()){
-                                            Map.Entry argItem = itrOpArg.next();
-                                            switch ((String) argItem.getKey()){
-                                                case "name":
-                                                    param.setName((String) argItem.getValue());
-                                                    break;
-                                                case "type":
-                                                    param.setType((String) argItem.getValue());
-                                                    break;
-                                            }
-                                        }
-                                        //add the parameter to operation
-                                        umlOperation.addOperationParameter(param);
-                                    }
-                                    break;
-                            }
-                        }
-
-                        //add operation to class
-                        umlClass.addOperation(umlOperation);
-
-                    }
-
-                }
-                    break;
-
-                case "attributes":{
-                    controlSum += 1;
-                    //array of attributes in json => in root
-                    //save them as json array
-                    JSONArray jarOperations = (JSONArray) classItem.getValue();
-                    Iterator itrThroughOperations = jarOperations.iterator();
-                    while (itrThroughOperations.hasNext()) {
-                        Map mOperations = (Map)itrThroughOperations.next();
-                        Iterator<Map.Entry> itrOperations = mOperations.entrySet().iterator();
-
-                        UMLAttribute umlAttribute = new UMLAttribute("");
-
-                        //iterate through items of one operation
-                        while(itrOperations.hasNext()){
-                            Map.Entry operationItem =itrOperations.next();
-
-                            switch ((String) operationItem.getKey()) {
-                                case "name":
-                                    umlAttribute.setName((String) operationItem.getValue());
-                                    break;
-                                case "type":
-                                    umlAttribute.setType((String) operationItem.getValue());
-                                    break;
-                            }
-                        }
-                        umlClass.addAttribute(umlAttribute);
-
+                        //add the param to operation
+                        umlOperation.addOperationParameter(umlAttribute);
                     }
                 }
-                    break;
+
+                //add operation to umlClass
+                umlClass.addOperation(umlOperation);
             }
         }
+        else {System.out.println("ERROR: Currently created class has no operations array: removed.");return false;}
 
-        return (controlSum == 5);
+        //get the attributes
+        JSONArray jarAttributes = (JSONArray) mClasses.get("attributes");
+        if (jarAttributes != null){
+            //loop through attributes and add them to the umlClass
+            Iterator itrThroughAttributes = jarAttributes.iterator();
+            while(itrThroughAttributes.hasNext()){
+                Map mAttributes = (Map) itrThroughAttributes.next();
+
+                //create new umlAttribtue
+                UMLAttribute umlAttribute;
+
+                String attrName = (String) mAttributes.get("name");
+                String attrType = (String) mAttributes.get("type");
+
+                //if name and type are set then called constructor of umlAttribute
+                if(attrName != null && attrType != null){
+                    umlAttribute = new UMLAttribute(attrName, attrType);
+                } else {return false;}
+
+                //add umlAttribute to the class
+                umlClass.addAttribute(umlAttribute);
+            }
+        }
+        else {System.out.println("ERROR: Currently created class has no attributes array: removed.");return false;}
+        /**/
+
+        return true;
     }
 
     /**

@@ -5,8 +5,8 @@
     "classes": [
       {
         "name": "First class",
-        "coordX": 105.0,
-        "coordY": 200.0,
+        "Xcoord": 105.0,
+        "Ycoord": 200.0,
         "attributes": [
           {
             "name": "attr1",

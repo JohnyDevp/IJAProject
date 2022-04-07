@@ -50,6 +50,13 @@ public abstract class UMLClassInterfaceTemplate extends Element{
     }
 
     /**
+     * getter
+     * @return Y coordination of object*/
+    public double getYcoord() {
+        return Ycoord;
+    }
+
+    /**
      * adding an operation (which is parameter) of this class
      * @param operation parameter represent the whole operation
      * @return true or false according successfullness of this method

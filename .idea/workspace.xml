@@ -4,20 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="gui remaster begin">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/GUIClassInterfaceTemplate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/InterfaceObjectGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplate.java" afterDir="false" />
+    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="parsing class to umlclass object, missing creating gui uml class from the UMLClass">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassObjectGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassObjectGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/GUIClassInterfaceTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/GUIClassInterfaceTemplate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/ClassDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/ClassDiagram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLAttribute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLOperation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fake.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fake.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,6 +56,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
@@ -96,6 +91,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648796535780</updated>
+      <workItem from="1649259737337" duration="237000" />
+      <workItem from="1649329445871" duration="5895000" />
     </task>
     <task id="LOCAL-00001" summary="structure done">
       <created>1648809516399</created>
@@ -223,8 +220,18 @@
       <option name="project" value="LOCAL" />
       <updated>1649234449163</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="parsing class to umlclass object, missing creating gui uml class from the UMLClass">
+      <created>1649253349267</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1649253349267</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -251,6 +258,7 @@
     <MESSAGE value="parsing start" />
     <MESSAGE value="class diagram interface added" />
     <MESSAGE value="gui remaster begin" />
-    <option name="LAST_COMMIT_MESSAGE" value="gui remaster begin" />
+    <MESSAGE value="parsing class to umlclass object, missing creating gui uml class from the UMLClass" />
+    <option name="LAST_COMMIT_MESSAGE" value="parsing class to umlclass object, missing creating gui uml class from the UMLClass" />
   </component>
 </project>

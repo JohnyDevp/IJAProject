@@ -1,5 +1,6 @@
 package ija.ijaproject;
 
+import ija.ijaproject.cls.UMLAttribute;
 import ija.ijaproject.cls.UMLClass;
 import ija.ijaproject.cls.UMLOperation;
 import javafx.scene.Cursor;
@@ -23,15 +24,8 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate{
      * */
     private UMLClass umlClass;
 
-    /**
-     * starting position on canvas
-     * */
-    private double Xcoord = 0.0, Ycoord = 0.0;
-    private String className;
-
     /**graphical parts of class object*/
     private List<Text> listOfAttributes = new ArrayList<>();
-
 
     /**
      * getters
@@ -46,27 +40,52 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate{
         super(umlClass);
         this.umlClass = umlClass;
 
+        setName(umlClass.getName());
+        this.setXcoord(umlClass.getXcoord());
+        this.setYcoord(umlClass.getYcoord());
+
+
+        //create graphical representation
+        this.createClassObjectGUI();
+
+        //add attributes
+        for (UMLAttribute umlAttribute : umlClass.getUmlAttributesList()){
+            this.addAttribute(umlAttribute);
+        }
+
+        //add operations
+        for (UMLOperation umlOperation : umlClass.getUmlOperationList()){
+            this.addOperation(umlOperation);
+        }
     }
 
     /**
-     * @param attributeText full text of attribute
+     * @param umlAttribute intern representation of uml attribute
+     *                     from that this method extract attribute name and type
      * method for adding attribute to class diagram graphical representation
      * */
-    public Text addAttribute(String attributeText){
-        Text attribute = new Text(attributeText);
+    public Text addAttribute(UMLAttribute umlAttribute){
+
+        Text attribute = new Text(umlAttribute.getName() + " : " + umlAttribute.getType());
+        attribute.setId(umlAttribute.getName());
 
         if (listOfAttributes.isEmpty()){
             attribute.setY(this.getLine1().getStartY() + 15);
             attribute.setX(this.getClassNameLabel().getX());
 
-            getClassBox().setHeight(getClassBox().getHeight() + 15);
         } else{
             Text lastAttr = listOfAttributes.get(listOfAttributes.size() -1);
             attribute.setY(lastAttr.getY() + 15);
             attribute.setX(lastAttr.getX());
 
-            getClassBox().setHeight(getClassBox().getHeight() + 15);
         }
+
+        //reset the class height of border and box
+        getClassBox().setHeight(getClassBox().getHeight() + 15);
+        getClassBorder().setHeight(getClassBorder().getHeight() + 15);
+
+        //resizing width of class gui if necessary (according to text width)
+        this.resizeClassWidth(attribute.getLayoutBounds().getWidth());
 
         //necessary to move all operations under this attributes => operations are under attributes
         //and also move the line dividing space for attributes and operations
