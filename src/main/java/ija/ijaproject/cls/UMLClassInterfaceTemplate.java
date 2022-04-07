@@ -62,10 +62,20 @@ public abstract class UMLClassInterfaceTemplate extends Element{
      * @return true or false according successfullness of this method
      * */
     public boolean addOperation(UMLOperation operation){
+        //operation can exists with same name but not with same return type
         if (umlOperationsList.contains(operation)) {
             //list already contains the attribute
             return false;
         } else {
+            for (UMLOperation umlOperation : umlOperationsList){
+                //same name but different type => error
+                if (!umlOperation.getType().equals(operation.getType()) && umlOperation.getName().equals(operation.getName())){
+                    return false;
+                }
+            }
+
+            //added operation differs at least in one parameter against other operations, or is whole the same as one of others=>
+            //then adding will fail
             return umlOperationsList.add(operation);
         }
     }

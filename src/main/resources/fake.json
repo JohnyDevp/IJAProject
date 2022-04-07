@@ -29,7 +29,24 @@
       }
     ],
     "interfaces": [
-
+      {
+        "name": "Test interface",
+        "Xcoord": 200.0,
+        "Ycoord": 200.0,
+        "operations": [
+          {
+            "name" : "operation1",
+            "modifier" : "#",
+            "rettype": "rettype1",
+            "params": [
+              {
+                "name": "arg1",
+                "type": "argtype1"
+              }
+            ]
+          }
+        ]
+      }
     ],
     "relations": [
       {

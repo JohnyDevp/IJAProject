@@ -4,14 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="parsing class to umlclass object, missing creating gui uml class from the UMLClass">
+    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="loading class from json done, interface and relations missing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassObjectGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassObjectGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/GUIClassInterfaceTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/GUIClassInterfaceTemplate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/InterfaceObjectGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/InterfaceObjectGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/ClassDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/ClassDiagram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLOperation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fake.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fake.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +42,7 @@
     </file-type-list>
   </component>
   <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="a7f4b5f4-449e-4603-84ad-5826362df49c" />
+    <option name="defaultAccountId" value="dd1c2761-b65e-4f26-86f9-5e0cab19e0d0" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -61,7 +64,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.39425287" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -92,7 +95,7 @@
       <option name="presentableId" value="Default" />
       <updated>1648796535780</updated>
       <workItem from="1649259737337" duration="237000" />
-      <workItem from="1649329445871" duration="5895000" />
+      <workItem from="1649329445871" duration="12088000" />
     </task>
     <task id="LOCAL-00001" summary="structure done">
       <created>1648809516399</created>
@@ -227,7 +230,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649253349267</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="loading class from json done, interface and relations missing">
+      <created>1649335469867</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1649335469867</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,6 +269,7 @@
     <MESSAGE value="class diagram interface added" />
     <MESSAGE value="gui remaster begin" />
     <MESSAGE value="parsing class to umlclass object, missing creating gui uml class from the UMLClass" />
-    <option name="LAST_COMMIT_MESSAGE" value="parsing class to umlclass object, missing creating gui uml class from the UMLClass" />
+    <MESSAGE value="loading class from json done, interface and relations missing" />
+    <option name="LAST_COMMIT_MESSAGE" value="loading class from json done, interface and relations missing" />
   </component>
 </project>

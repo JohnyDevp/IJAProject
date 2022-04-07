@@ -1,5 +1,6 @@
 package ija.ijaproject;
 
+import ija.ijaproject.cls.ClassDiagram;
 import ija.ijaproject.cls.UMLAttribute;
 import ija.ijaproject.cls.UMLClass;
 import ija.ijaproject.cls.UMLOperation;
@@ -19,10 +20,6 @@ import java.util.List;
  * class for creating new graphic representation of class
  * */
 public class ClassObjectGUI extends GUIClassInterfaceTemplate{
-    /**
-     * logical and intern representation of class
-     * */
-    private UMLClass umlClass;
 
     /**graphical parts of class object*/
     private List<Text> listOfAttributes = new ArrayList<>();
@@ -31,6 +28,7 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate{
      * getters
      * */
     public List<Text> getListOfAttributes() {return this.listOfAttributes;}
+    public UMLClass getUmlClass() { return (UMLClass) super.object; }
 
     /**
      * constructor for creating the class object
@@ -38,34 +36,34 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate{
      * */
     public ClassObjectGUI(UMLClass umlClass){
         super(umlClass);
-        this.umlClass = umlClass;
-
-        setName(umlClass.getName());
-        this.setXcoord(umlClass.getXcoord());
-        this.setYcoord(umlClass.getYcoord());
-
-
-        //create graphical representation
-        this.createClassObjectGUI();
 
         //add attributes
         for (UMLAttribute umlAttribute : umlClass.getUmlAttributesList()){
-            this.addAttribute(umlAttribute);
+            this.addAtributeFromConstructor(umlAttribute);
         }
 
-        //add operations
-        for (UMLOperation umlOperation : umlClass.getUmlOperationList()){
-            this.addOperation(umlOperation);
-        }
     }
 
     /**
      * @param umlAttribute intern representation of uml attribute
      *                     from that this method extract attribute name and type
      * method for adding attribute to class diagram graphical representation
+     * @return null if the uml attribute either with this name or whole the same already exists as attribute of this class
      * */
     public Text addAttribute(UMLAttribute umlAttribute){
 
+        //if the attribute with the name is already there then it will fail and return null
+        if (!getUmlClass().addAttribute(umlAttribute)) {return null;}
+
+        return addAtributeFromConstructor(umlAttribute);
+
+    }
+
+    /**
+     * method without control => has been checked already => called by constructor
+     * non-adding umlattribute to umlclass => already there when calling from constructor
+     * */
+    private Text addAtributeFromConstructor(UMLAttribute umlAttribute){
         Text attribute = new Text(umlAttribute.getName() + " : " + umlAttribute.getType());
         attribute.setId(umlAttribute.getName());
 
@@ -97,8 +95,6 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate{
 
         listOfAttributes.add(attribute);
         return attribute;
-
     }
-
 
 }

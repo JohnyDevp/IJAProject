@@ -21,8 +21,8 @@ public class RelationGUI{
     private ClassDiagramController.relType relationType;
     private Pane canvas;
 
-    private ClassObjectGUI relClassFrom;
-    private ClassObjectGUI relClassTo;
+    private GUIClassInterfaceTemplate relClassFrom;
+    private GUIClassInterfaceTemplate relClassTo;
 
     private Line relLine;
 
@@ -64,7 +64,7 @@ public class RelationGUI{
      * @param X X coordinate of the point where the relation starts
      * @param Y Y coordinate of the point where the relation starts
      * */
-    public void setRelationFrom(ClassObjectGUI relClassFrom, double X, double Y){
+    public void setRelationFrom(GUIClassInterfaceTemplate relClassFrom, double X, double Y){
         this.relLine.setStartX(X);
         this.relLine.setStartY(Y);
         this.relationFromSet = true;
@@ -78,7 +78,7 @@ public class RelationGUI{
      * @param X X coordinate of the point where the relation ends
      * @param Y Y coordinate of the point where the relation ends
      * */
-    public void setRelationTo(ClassObjectGUI relClassTo, double X, double Y){
+    public void setRelationTo(GUIClassInterfaceTemplate relClassTo, double X, double Y){
         this.relLine.setEndX(X);
         this.relLine.setEndY(Y);
         this.relClassTo = relClassTo;
@@ -96,7 +96,7 @@ public class RelationGUI{
     }
 
 
-    public void recomputeRelationDesign(ClassObjectGUI classObject, double diffX, double diffY){
+    public void recomputeRelationDesign(GUIClassInterfaceTemplate classObject, double diffX, double diffY){
         if(getRelClassFrom() == classObject){
             getRelLine().setStartX(getRelLine().getStartX() + diffX);
             getRelLine().setStartY(getRelLine().getStartY() + diffY);
@@ -322,8 +322,8 @@ public class RelationGUI{
     public Text getCardinalityByToClass() {return this.cardinalityByToClass;}
     public Text getCardinalityByFromClass() {return this.cardinalityByFromClass;}
     public boolean getRelationFromSet() {return this.relationFromSet; }
-    public ClassObjectGUI getRelClassFrom() {return this.relClassFrom; }
-    public ClassObjectGUI getRelClassTo() {return this.relClassTo; }
+    public GUIClassInterfaceTemplate getRelClassFrom() {return this.relClassFrom; }
+    public GUIClassInterfaceTemplate getRelClassTo() {return this.relClassTo; }
     public Line getRelLine() {return this.relLine; }
     public Polygon getRelLineEnd() {return this.relLineEnd; }
 }

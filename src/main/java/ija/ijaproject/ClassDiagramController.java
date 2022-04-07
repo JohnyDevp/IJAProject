@@ -28,7 +28,7 @@ public class ClassDiagramController {
     public Double mousePrevY;
 
     //currently selected class => graphically changed
-    ClassObjectGUI selectedClass = null;
+    GUIClassInterfaceTemplate selectedClass = null;
 
     //defined colors used for class object
     private final Color selectedClassColor = Color.rgb(227, 68, 36);
@@ -157,13 +157,17 @@ public class ClassDiagramController {
             this.classDiagram = jr.getClsDiagram();
             //add all created objects to canvas and list of them
             for(UMLClassInterfaceTemplate umlObject : this.classDiagram.getUmlObjectsList()){
+
                 //according to class create the right GUI
+                //CLASS
                 if (umlObject.getClass() == UMLClass.class){
                     ClassObjectGUI clsObjGUI = new ClassObjectGUI((UMLClass) umlObject);
-                    addClassOnCanvasAndSetActions(clsObjGUI);
+                    addClassOrInterfaceOnCanvasAndSetActions(clsObjGUI);
 
                 } else if (umlObject.getClass() == UMLInterface.class){
-                    //handle the interface
+                    //INTERFACE
+                    InterfaceObjectGUI infObjGUI = new InterfaceObjectGUI((UMLInterface) umlObject);
+                    addClassOrInterfaceOnCanvasAndSetActions(infObjGUI);
                 }
             }
 
@@ -183,7 +187,7 @@ public class ClassDiagramController {
      * method for setting currently selected class
      * @param selectedClass class to be selected
      * */
-    private void setSelectedClass(ClassObjectGUI selectedClass) {
+    private void setSelectedClass(GUIClassInterfaceTemplate selectedClass) {
 
         //change color of previously selected class
         if (this.selectedClass != null){
@@ -201,7 +205,7 @@ public class ClassDiagramController {
      * method for setting currently selected class
      * @param deselectedClass class to be deselected
      * */
-    private void deselectClass(ClassObjectGUI deselectedClass){
+    private void deselectClass(GUIClassInterfaceTemplate deselectedClass){
         //set the color of the class to default
         deselectedClass.getClickableCorner().setFill(deselectedClassColor);
         this.selectedClass = null;
@@ -292,7 +296,7 @@ public class ClassDiagramController {
         }
         ClassObjectGUI classObject = new ClassObjectGUI(umlClass);
         classObject.createClassObjectGUI();
-        addClassOnCanvasAndSetActions(classObject);
+        addClassOrInterfaceOnCanvasAndSetActions(classObject);
     }
 
     /**
@@ -336,7 +340,7 @@ public class ClassDiagramController {
      * method for adding each class object from object list to canvas
      * and adding actions to handler for enabling control of these classes
      * */
-    public void addClassOnCanvasAndSetActions(ClassObjectGUI classObject){
+    public void addClassOrInterfaceOnCanvasAndSetActions(GUIClassInterfaceTemplate classObject){
         //adding all objects elements to canvas
         canvas.getChildren().addAll(
                 classObject.getClassBorder(),
@@ -346,8 +350,16 @@ public class ClassDiagramController {
                 classObject.getLine2(),
                 classObject.getClickableCorner()
         );
-        //adding attributes
-        for (Text attr : classObject.getListOfAttributes()) {canvas.getChildren().add(attr);}
+        //add label interface iff interface
+        if (classObject.getClass() == InterfaceObjectGUI.class){
+            canvas.getChildren().add(((InterfaceObjectGUI)classObject).getLabelOfInterface());
+        }
+
+        //adding attributes iff class
+        if (classObject.getClass() == ClassObjectGUI.class){
+            for (Text attr : ((ClassObjectGUI)classObject).getListOfAttributes()) {canvas.getChildren().add(attr);}
+        }
+
         //adding operations
         for (Text op : classObject.getListOfOperations()) {canvas.getChildren().add(op);}
 
@@ -443,12 +455,21 @@ public class ClassDiagramController {
             classObject.getLine2().setEndX(classObject.getLine2().getEndX() + diffX);
             classObject.getLine2().setEndY(classObject.getLine2().getEndY() + diffY);
 
-            //position of text => each attribute
-            for (Text attr : classObject.getListOfAttributes()){
-                attr.setX(attr.getX() + diffX);
-                attr.setY(attr.getY() + diffY);
+            //position of label <<interface>> iff interface
+            if (classObject.getClass() == InterfaceObjectGUI.class){
+                ((InterfaceObjectGUI)classObject).getLabelOfInterface().setX(((InterfaceObjectGUI)classObject).getLabelOfInterface().getX() + diffX);
+                ((InterfaceObjectGUI)classObject).getLabelOfInterface().setY(((InterfaceObjectGUI)classObject).getLabelOfInterface().getY() + diffY);
             }
 
+            //position of text => each attribute
+            //only for class
+            if (classObject.getClass() == ClassObjectGUI.class) {
+
+                for (Text attr : ((ClassObjectGUI)classObject).getListOfAttributes()) {
+                    attr.setX(attr.getX() + diffX);
+                    attr.setY(attr.getY() + diffY);
+                }
+            }
             //position of text => each operation
             for (Text op : classObject.getListOfOperations()){
                 op.setX(op.getX() + diffX);

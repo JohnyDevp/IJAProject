@@ -15,22 +15,10 @@ public class JsonReader {
      * this is class diagram which will be*/
     private ClassDiagram clsDiagram = new ClassDiagram("");
 
-    private List<ClassObjectGUI> classObjectList = new ArrayList<>();
-
-    private List<RelationGUI> listOfRelations = new ArrayList<>();
-
     /**
      * getters*/
     public ClassDiagram getClsDiagram() {
         return this.clsDiagram;
-    }
-
-    public List<RelationGUI> getListOfRelations() {
-        return this.listOfRelations;
-    }
-
-    public List<ClassObjectGUI> getClassObjectList() {
-        return classObjectList;
     }
 
     /**
@@ -63,7 +51,6 @@ public class JsonReader {
                     this.clsDiagram.setName((String)clsDiagramElement.getValue());
                 }
                 else if (clsDiagramElement.getKey().equals("classes")){
-
                     //array of classes in json => in root
                     //save them as json array
                     JSONArray jarClasses = (JSONArray) clsDiagramElement.getValue();
@@ -74,10 +61,18 @@ public class JsonReader {
                             return false;
                         }
                     }
-
                 }
-                else if (clsDiagramElement.getKey().equals("interfaces")){
+                else if (clsDiagramElement.getKey().equals("interfaces")) {
+                    //array of interfaces in json => in root
+                    //save them as json array
                     JSONArray jarInterfaces = (JSONArray) clsDiagramElement.getValue();
+                    Iterator itrThroughInterface = jarInterfaces.iterator();
+                    while (itrThroughInterface.hasNext()) {
+                        //call for add class and check for failure
+                        if (!addInterface((Map) itrThroughInterface.next())) {
+                            return false;
+                        }
+                    }
                 }
                 else if (clsDiagramElement.getKey().equals("relations")){
                     JSONArray jarRelations = (JSONArray) clsDiagramElement.getValue();
@@ -151,8 +146,12 @@ public class JsonReader {
 
                 //get operation name and return type and create operation (call its constructor)
                 String operationName = (String)mOperation.get("name");
+                String operationModifier = (String) mOperation.get("modifier");
                 String returnType = (String)mOperation.get("rettype");
-                if (operationName != null && returnType != null) { umlOperation = new UMLOperation(operationName, returnType); }
+
+                if (operationName != null && returnType != null && operationModifier != null) {
+                    umlOperation = new UMLOperation(operationName, returnType, operationModifier.toCharArray()[0]);
+                }
                 else {return false;}
 
                 //get operations params, loop through them and add them to umlOperation
@@ -213,34 +212,88 @@ public class JsonReader {
 
     /**
      * method for adding new interface with all its information
-     * @param mInterface array of all interface definitions(operations, name, x, y,...)
+     * @param mInterfaces array of all interface definitions(operations, name, x, y,...)
      */
-    private void addInterface(Map mInterface){
+    private boolean addInterface(Map mInterfaces){
 
-        Iterator<Map.Entry> itr = mInterface.entrySet().iterator();
+        //create new uml class => intern representation (non-graphical)
+        UMLInterface umlInterface;
 
-        while (itr.hasNext()) {
-            Map.Entry classPart = itr.next();
+        /**/
+        //get name of class
+        String name = (String)mInterfaces.get("name");
+        if (name != null) {
+            //create new class and handle potential inconsistency
+            umlInterface = clsDiagram.createInterface(name);
+            if (umlInterface == null ) { System.out.println("ERROR: Two classes of the same name, the second one has been removed"); }
+        }
+        else { System.out.println("ERROR: Currently created class has no class name: removed.");return false;}
 
-            switch ((String)classPart.getKey()){
-                case "name":{
+        //get the xcoord
+        Double xcoord = (Double)mInterfaces.get("Xcoord");
+        if (xcoord != null) {
+            //add xcoord to representation of new uml class
+            umlInterface.setXcoord(xcoord);
+        }
+        else { System.out.println("ERROR: Currently created class has no xcoord: removed.");return false;}
 
+        //get the ycoord
+        Double ycoord = (Double)mInterfaces.get("Ycoord");
+        if (ycoord != null) {
+            //add ycoord to representation of new uml class
+            umlInterface.setXcoord(xcoord);
+        }
+        else { System.out.println("ERROR: Currently created class has no ycoord: removed.");return false;}
+
+        //get the operations
+        JSONArray jarOperations = (JSONArray) mInterfaces.get("operations");
+        if (jarOperations != null){
+            //loop through array of operations, add them to the umlCLass
+            Iterator itrThroughOperations = jarOperations.iterator();
+            while (itrThroughOperations.hasNext()) {
+
+                //create new umlOperation
+                UMLOperation umlOperation;
+                Map mOperation = (Map)itrThroughOperations.next();
+
+                //get operation name and return type and create operation (call its constructor)
+                String operationName = (String)mOperation.get("name");
+                String operationModifier = (String) mOperation.get("modifier");
+                String returnType = (String)mOperation.get("rettype");
+
+                if (operationName != null && returnType != null && operationModifier != null) {
+                    umlOperation = new UMLOperation(operationName, returnType, operationModifier.toCharArray()[0]);
                 }
-                    break;
+                else {return false;}
 
-                case "coordX": {
+                //get operations params, loop through them and add them to umlOperation
+                JSONArray jarAttributes = (JSONArray) mOperation.get("params");
+                if (jarAttributes != null){
+                    //loop through params
+                    Iterator itrThroughParams = jarAttributes.iterator();
+                    while(itrThroughParams.hasNext()){
+                        Map mParam = (Map)itrThroughParams.next();
 
+                        //create new umlAttribute (as param of operation) and add values to it
+                        UMLAttribute umlAttribute;
+                        String paramName = (String)mParam.get("name");
+                        String type = (String)mParam.get("type");
+                        if (paramName != null && type != null){
+                            umlAttribute = new UMLAttribute(paramName, type);
+                        } else {return false;}
+
+                        //add the param to operation
+                        umlOperation.addOperationParameter(umlAttribute);
+                    }
                 }
-                    break;
-                case "coordY":{
 
-                }
-                    break;
-                case "operations":{}
-                    break;
-
+                //add operation to umlClass
+                umlInterface.addOperation(umlOperation);
             }
         }
+        else {System.out.println("ERROR: Currently created class has no operations array: removed.");return false;}
+
+        return true;
     }
 
     /**

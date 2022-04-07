@@ -39,8 +39,7 @@ public class UMLClass extends UMLClassInterfaceTemplate{
         }
 
         //attribute hasn't been set yet
-        this.umlAttributesList.add(attr);
-        return true;
+        return this.umlAttributesList.add(attr);
 
     }
 

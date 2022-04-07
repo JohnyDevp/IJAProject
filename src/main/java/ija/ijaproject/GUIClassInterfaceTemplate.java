@@ -22,6 +22,11 @@ import java.util.List;
 public abstract class GUIClassInterfaceTemplate {
 
     /**
+     * object representing intern class/interface representation
+     * */
+    protected UMLClassInterfaceTemplate object;
+
+    /**
      * starting position on canvas
      * */
     private double Xcoord = 0.0, Ycoord = 0.0;
@@ -47,6 +52,7 @@ public abstract class GUIClassInterfaceTemplate {
     /**
      * getters
      * */
+    public UMLClassInterfaceTemplate getObject() {return this.object; }
     public double getXcoord() {return this.Xcoord;}
     public double getYcoord() {return  this.Ycoord;}
     public Text getClassNameLabel() {return this.classNameLabel; }
@@ -63,11 +69,24 @@ public abstract class GUIClassInterfaceTemplate {
 
     /**
      * constructor for creating the class object
-     * @param ucit instance of UMLclass/UMLinterface
+     * @param umlClassInterfaceTemplate instance of UMLclass/UMLinterface
      * */
-    public GUIClassInterfaceTemplate(UMLClassInterfaceTemplate ucit){
-        this.name = ucit.getName();
+    public GUIClassInterfaceTemplate(UMLClassInterfaceTemplate umlClassInterfaceTemplate){
+        //set the intern object representation
+        this.object = umlClassInterfaceTemplate;
 
+        //set necessary information about class/interface
+        setName(umlClassInterfaceTemplate.getName());
+        this.setXcoord(umlClassInterfaceTemplate.getXcoord());
+        this.setYcoord(umlClassInterfaceTemplate.getYcoord());
+
+        //create graphical representation
+        this.createClassObjectGUI();
+
+        //add operations
+        for (UMLOperation umlOperation : umlClassInterfaceTemplate.getUmlOperationList()){
+            this.addOperationFromConstructor(umlOperation);
+        }
     }
 
     /**
@@ -125,39 +144,15 @@ public abstract class GUIClassInterfaceTemplate {
     /**
      * @param umlOperation UMLOperation object => stores all information about this operation
      * method for adding opperation to class diagram graphical representation
+     * @return null if the operation is bad considering other operations (same name-different type or whole the same)
+     *         or the Text element representing the operation
      * */
     public Text addOperation(UMLOperation umlOperation){
-        //set the text of label in graphical representation of class
-        StringBuilder textOfOperation = new StringBuilder(umlOperation.getName() + " (");
-        for (UMLAttribute umlParam : umlOperation.getParametersOfOperationList()){
-            textOfOperation.append(umlParam.getName()).append(" : ").append(umlParam.getType());
-        }
-        textOfOperation.append(") : ").append(umlOperation.getType());
 
-        //set text of operation (see on canvas)
-        Text operation = new Text(textOfOperation.toString());
+        //if the operation with the name is already there then it will fail and return null
+        if (!this.object.addOperation(umlOperation)) {return null;}
 
-
-        if (listOfOperations.isEmpty()){
-            operation.setY(this.getLine2().getStartY() + 15);
-            operation.setX(this.getClassNameLabel().getX());
-        }
-        else {
-            Text lastOp = listOfOperations.get(listOfOperations.size() -1 );
-            operation.setY(lastOp.getY() + 15);
-            operation.setX(lastOp.getX());
-        }
-
-        listOfOperations.add(operation);
-
-        //reset the class height of border and box
-        getClassBox().setHeight(getClassBox().getHeight() + 15);
-        getClassBorder().setHeight(getClassBorder().getHeight() + 15);
-
-        //resize classbox iff necessary
-        resizeClassWidth(operation.getLayoutBounds().getWidth());
-
-        return operation;
+       return addOperationFromConstructor(umlOperation);
     }
 
     /**
@@ -191,6 +186,45 @@ public abstract class GUIClassInterfaceTemplate {
      * */
     public void addRelation(RelationGUI relation){
         this.listOfRelations.add(relation);
+    }
+
+    /**
+     * method only for constructor
+     * => non-adding operation to operation list of uml class => already there
+     * */
+    private Text addOperationFromConstructor(UMLOperation umlOperation){
+        //set the text of label in graphical representation of class
+        StringBuilder textOfOperation = new StringBuilder(umlOperation.getModifier() + umlOperation.getName() + " (");
+        for (UMLAttribute umlParam : umlOperation.getParametersOfOperationList()){
+            textOfOperation.append(umlParam.getName()).append(" : ").append(umlParam.getType());
+        }
+        textOfOperation.append(") : ").append(umlOperation.getType());
+
+        //set text of operation (see on canvas)
+        Text operation = new Text(textOfOperation.toString());
+
+
+        if (listOfOperations.isEmpty()){
+            operation.setY(this.getLine2().getStartY() + 15);
+            operation.setX(this.getClassNameLabel().getX());
+        }
+        else {
+            Text lastOp = listOfOperations.get(listOfOperations.size() -1 );
+            operation.setY(lastOp.getY() + 15);
+            operation.setX(lastOp.getX());
+        }
+
+        //add operation to list of operations
+        listOfOperations.add(operation);
+
+        //reset the class height of border and box
+        getClassBox().setHeight(getClassBox().getHeight() + 15);
+        getClassBorder().setHeight(getClassBorder().getHeight() + 15);
+
+        //resize classbox iff necessary
+        resizeClassWidth(operation.getLayoutBounds().getWidth());
+
+        return operation;
     }
 
 }
