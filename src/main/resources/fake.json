@@ -51,11 +51,15 @@
     "relations": [
       {
         "name": "relationName",
-        "relType": "reltype",
+        "relType": "association",
         "relClassFrom" : "nameOfClass",
         "relClassTo"  : "nameOfClass",
-        "cardinalityByFrom": "cardinality1",
-        "cardinalityByToClass" : "cardinality2"
+        "cardinalityByFromClass": "0",
+        "cardinalityByToClass" : "*",
+        "startXcoord" : 100.5,
+        "startYcoord" : 80.2,
+        "endXcoord" : 54.2,
+        "endYcoord": 45.0
       }
     ]
   },

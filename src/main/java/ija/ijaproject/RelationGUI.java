@@ -2,6 +2,7 @@ package ija.ijaproject;
 
 import ija.ijaproject.ClassDiagramController;
 import ija.ijaproject.ClassObjectGUI;
+import ija.ijaproject.cls.UMLRelation;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
@@ -18,7 +19,7 @@ import javafx.scene.text.Text;
 public class RelationGUI{
 
     private boolean relationFromSet = false;
-    private ClassDiagramController.relType relationType;
+    private UMLRelation.RelationType relationType;
     private Pane canvas;
 
     private GUIClassInterfaceTemplate relClassFrom;
@@ -38,11 +39,25 @@ public class RelationGUI{
 
     /**
      * constructor
-     * @param type type of the relation
+     * @param umlRelation type of the relation
      * creating the line and its event for handling selecting this line
      * setting up the relation type
      * */
-    public RelationGUI(ClassDiagramController.relType type, Pane canvas){
+ /*   public RelationGUI(UMLRelation umlRelation, Pane canvas){
+
+        //set up the line and the event when click on the relation
+        this.relLine = new Line();
+        this.relLine.setStrokeWidth(2.5);
+        this.relLine.toBack();
+        this.relLine.setCursor(Cursor.HAND);
+
+        //set type of relation
+        this.relationType = umlRelation.getRelationType();
+
+
+    }*/
+
+    public RelationGUI(UMLRelation.RelationType type, Pane canvas){
         //set up the line and the event when click on the relation
         this.relLine = new Line();
         this.relLine.setStrokeWidth(2.5);

@@ -305,17 +305,17 @@ public class ClassDiagramController {
     @FXML
     public void btnAddRelation(ActionEvent e){
         //show dialog for getting the relation type
-        relType rt = null;
+        UMLRelation.RelationType rt = null;
         String options[] = {"Association", "Aggregation","Composition", "Generalization"};
         ChoiceDialog dlg = new ChoiceDialog(options[0], options);
         dlg.setHeaderText("Choose type of relation");
         Optional result = dlg.showAndWait();
         if (result.isPresent()){
             switch (dlg.getSelectedItem().toString()){
-                case "Association": rt = relType.ASSOCIATION; break;
-                case "Aggregation": rt = relType.AGGREGATION; break;
-                case "Composition": rt = relType.COMPOSITION; break;
-                case "Generalization": rt = relType.GENERALIZATION; break;
+                case "Association": rt = UMLRelation.RelationType.ASSOCIATION; break;
+                case "Aggregation": rt = UMLRelation.RelationType.AGGREGATION; break;
+                case "Composition": rt = UMLRelation.RelationType.COMPOSITION; break;
+                case "Generalization": rt = UMLRelation.RelationType.GENERALIZATION; break;
             }
 
         } else {

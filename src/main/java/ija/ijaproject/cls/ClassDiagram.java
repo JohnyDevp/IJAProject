@@ -10,8 +10,18 @@ public class ClassDiagram extends Element{
      * */
     private List<UMLClassInterfaceTemplate> umlList = new ArrayList<>();
 
+    /**
+     * list of all relations in this diagram
+     * */
+    private List<UMLRelation> umlRelationList = new ArrayList<>();
+
     /**getter*/
     public List<UMLClassInterfaceTemplate> getUmlObjectsList(){return this.umlList;}
+
+    /**getter*/
+    public List<UMLRelation> getUmlRelationList() {
+        return umlRelationList;
+    }
 
     /**
      * constructor
@@ -111,5 +121,48 @@ public class ClassDiagram extends Element{
      * */
     public void deleteInterface(UMLInterface umlInterface){
         umlList.remove(umlInterface);
+    }
+
+    /**
+     * @param o can be either name of object or object to found
+     * @return found object or null if not found or bad object has been passed
+     * */
+    public UMLClassInterfaceTemplate findObject(Object o){
+        if (o.getClass() == String.class){
+            for (UMLClassInterfaceTemplate umlObject : getUmlObjectsList()){
+                if (umlObject.getName() == (String)o){
+                    return umlObject;
+                }
+            }
+        } else if (o.getClass() == UMLClass.class || o.getClass() == UMLInterface.class){
+            return getUmlObjectsList().get(getUmlObjectsList().indexOf(o));
+        } else {
+            return null;
+        }
+        return  null;
+    }
+    /**
+     * @param name of new relation
+     * @return UMLRelation object
+     * */
+    public UMLRelation createRelation(String name){
+        UMLRelation umlRelation = new UMLRelation(name);
+        this.getUmlRelationList().add(umlRelation);
+        return umlRelation;
+    }
+
+    /**
+     * @param umlRelation relation object
+     * @return boolean according success of adding operation
+     */
+    public boolean addRelation(UMLRelation umlRelation){
+        return getUmlRelationList().add(umlRelation);
+    }
+
+    /**
+     * @param umlRelation relation object to be removed
+     * */
+    public void removeRelation(UMLRelation umlRelation){
+        getUmlRelationList().remove(umlRelation);
     }
 }
