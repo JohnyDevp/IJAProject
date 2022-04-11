@@ -401,6 +401,7 @@ public class JsonReader {
                 return false;
         }
 
+
         //set classes => they have to already exist
         if (clsDiagram.findObject(relClassFrom) != null && clsDiagram.findObject(relClassTo) != null){
             umlRelation.setRelationFromObject(clsDiagram.findObject(relClassFrom));
@@ -411,8 +412,8 @@ public class JsonReader {
         }
 
         //set relation cardinality
-        if (cardinalityByFromCls.matches("[0-9]+[\\.][\\.][0-9]+|[0-9]+[\\.][\\.][\\*]|[\\*]|[0-9]+") &&
-                cardinalityByToCls.matches("[0-9]+[\\.][\\.][0-9]+|[0-9]+[\\.][\\.][\\*]|[\\*]|[0-9]+")){
+        if ((cardinalityByFromCls.matches("[0-9]+[\\.][\\.][0-9]+|[0-9]+[\\.][\\.][\\*]|[\\*]|[0-9]+") || cardinalityByFromCls=="") &&
+                (cardinalityByToCls.matches("[0-9]+[\\.][\\.][0-9]+|[0-9]+[\\.][\\.][\\*]|[\\*]|[0-9]+") || cardinalityByToCls=="")){
             umlRelation.setCardinalityByFromClass(cardinalityByFromCls);
             umlRelation.setCardinalityByToClass(cardinalityByToCls);
         }else {

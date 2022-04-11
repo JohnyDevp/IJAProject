@@ -4,14 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="interface gui added, relations missing">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLRelation.java" afterDir="false" />
+    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="interface gui added, relations added, gui relation missing">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/AddObjectDialogController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/dlg/EditObjectDialogController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/addObjectDialog_view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/editObject_view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/editRelation_view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/GUIClassInterfaceTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/GUIClassInterfaceTemplate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/ClassDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/ClassDiagram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/dlg/AddClassController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/dlg/EditClassController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/dlg/EditRelationDialogController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fake.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fake.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/addClassDialog_view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/editClassDialog_view.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,11 +65,19 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.39425287" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jhola\IdeaProjects\IJAProject\src\main\resources\ija\ijaproject\views" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="ija.ijaproject" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -93,7 +110,8 @@
       <workItem from="1649259737337" duration="237000" />
       <workItem from="1649329445871" duration="12716000" />
       <workItem from="1649415588119" duration="11512000" />
-      <workItem from="1649505205181" duration="476000" />
+      <workItem from="1649505205181" duration="556000" />
+      <workItem from="1649669408263" duration="10115000" />
     </task>
     <task id="LOCAL-00001" summary="structure done">
       <created>1648809516399</created>
@@ -242,7 +260,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649346942787</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="interface gui added, relations added, gui relation missing">
+      <created>1649505738869</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1649505738869</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -276,6 +301,11 @@
     <MESSAGE value="parsing class to umlclass object, missing creating gui uml class from the UMLClass" />
     <MESSAGE value="loading class from json done, interface and relations missing" />
     <MESSAGE value="interface gui added, relations missing" />
-    <option name="LAST_COMMIT_MESSAGE" value="interface gui added, relations missing" />
+    <MESSAGE value="interface gui added, relations added, gui relation missing" />
+    <option name="LAST_COMMIT_MESSAGE" value="interface gui added, relations added, gui relation missing" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

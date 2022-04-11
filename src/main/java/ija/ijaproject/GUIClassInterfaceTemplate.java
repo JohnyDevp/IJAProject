@@ -1,9 +1,6 @@
 package ija.ijaproject;
 
-import ija.ijaproject.cls.UMLAttribute;
-import ija.ijaproject.cls.UMLClass;
-import ija.ijaproject.cls.UMLClassInterfaceTemplate;
-import ija.ijaproject.cls.UMLOperation;
+import ija.ijaproject.cls.*;
 import javafx.scene.Cursor;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -81,7 +78,7 @@ public abstract class GUIClassInterfaceTemplate {
         this.setYcoord(umlClassInterfaceTemplate.getYcoord());
 
         //create graphical representation
-        this.createClassObjectGUI();
+        this.createClassInterfaceObjectGUI();
 
         //add operations
         for (UMLOperation umlOperation : umlClassInterfaceTemplate.getUmlOperationList()){
@@ -92,7 +89,7 @@ public abstract class GUIClassInterfaceTemplate {
     /**
      * creating all graphical objects for necessary for empty class
      */
-    protected void createClassObjectGUI(){
+    protected void createClassInterfaceObjectGUI(){
         //create border of the object
         Rectangle rectangleBorder = new Rectangle(100,90, Color.BLACK);
         rectangleBorder.setX(getXcoord());

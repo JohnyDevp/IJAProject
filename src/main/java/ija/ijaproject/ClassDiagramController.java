@@ -5,12 +5,17 @@ import ija.ijaproject.cls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.*;
 
 public class ClassDiagramController {
@@ -70,7 +75,7 @@ public class ClassDiagramController {
     /**
      * variable for storing list of graphical representations of classes
      * */
-    private List<ClassObjectGUI> classObjectList = null;
+    private List<GUIClassInterfaceTemplate> GUIObjectsList = null;
 
     /*====================================================================================================================*/
     /*====================================================================================================================*/
@@ -142,6 +147,7 @@ public class ClassDiagramController {
      */
     public void start(){
         //todo => get name of class diagram if newly created
+        //FIXME warning will there be this name ??
         this.classDiagram = new ClassDiagram("test");
         parseFile();
     }
@@ -155,6 +161,7 @@ public class ClassDiagramController {
         String tmp_file_path = "C:\\Users\\jhola\\IdeaProjects\\IJAProject\\src\\main\\resources\\fake.json";
         if(jr.parseJsonClassDiagram(tmp_file_path)) {
             this.classDiagram = jr.getClsDiagram();
+            GUIObjectsList = new ArrayList<>();
             //add all created objects to canvas and list of them
             for(UMLClassInterfaceTemplate umlObject : this.classDiagram.getUmlObjectsList()){
 
@@ -163,14 +170,32 @@ public class ClassDiagramController {
                 if (umlObject.getClass() == UMLClass.class){
                     ClassObjectGUI clsObjGUI = new ClassObjectGUI((UMLClass) umlObject);
                     addClassOrInterfaceOnCanvasAndSetActions(clsObjGUI);
+                    GUIObjectsList.add(clsObjGUI);
 
                 } else if (umlObject.getClass() == UMLInterface.class){
                     //INTERFACE
                     InterfaceObjectGUI infObjGUI = new InterfaceObjectGUI((UMLInterface) umlObject);
                     addClassOrInterfaceOnCanvasAndSetActions(infObjGUI);
+                    GUIObjectsList.add(infObjGUI);
                 }
             }
 
+            //add relations to canvas and to classes/interfaces which it is connected to
+            for(UMLRelation umlRelation : this.classDiagram.getUmlRelationList()){
+                //create graphical representation
+                RelationGUI relationGUI = new RelationGUI(umlRelation, this.canvas);
+                addRelationOnCanvasAndSetActions(relationGUI);
+                //loop through graphical representation of classes and interfaces and when there is match between UMLClass of relation
+                // and graphical representation then add this relation to
+                for (GUIClassInterfaceTemplate guiObject : GUIObjectsList) {
+                    if (guiObject.getObject() == umlRelation.getRelationFromObject() ||
+                        guiObject.getObject() == umlRelation.getRelationToObject()) {
+
+                        //add graphical representation of relation to the GUIObject
+                        guiObject.addRelation(relationGUI);
+                    }
+                }
+            }
         } else {
             return;
         }
@@ -268,35 +293,37 @@ public class ClassDiagramController {
      * method handling clicking on button for adding new class
      * */
     @FXML
-    public void btnAddClass(){
+    public void btnAddClass() throws IOException {
+        //show creating dialog
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("views/addObjectDialog_view.fxml"));
+        Parent parent = fxmlLoader.load();
+        AddObjectDialogController dlgController = fxmlLoader.<AddObjectDialogController>getController();
+        dlgController.setMainClassDiagram(this.classDiagram);
+
+
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+
+        if (dlgController.getCreatedObject() == null) return;
+
         System.out.println("Creating a class object...");
 
-        //get class name from dialog
-        TextInputDialog textInputDialog = new TextInputDialog("Enter class name");
-        textInputDialog.setHeaderText("Set up class name");
-        Optional<String> result = textInputDialog.showAndWait();
-        if (!result.isPresent()){
-            System.out.println("Cancel pressed - no class will be created");
-            return;
-        }
-
-        //if the field is empty
-        if (textInputDialog.getEditor().getText().isEmpty()) {
-            System.out.println("FAIL");
-            return;
-        }
-
         //creating a reference on class object
-        //TODO check if the class name doesnt exist
-
-        UMLClass umlClass = this.classDiagram.createClass(textInputDialog.getEditor().getText());
-        if (umlClass == null) {
-            System.out.println("ERROR: Class with this name already exists");
-            return;
+        GUIClassInterfaceTemplate guiObject = null;
+        if (dlgController.getCreatedObject().getClass() == UMLClass.class){
+            guiObject = new ClassObjectGUI((UMLClass) dlgController.getCreatedObject());
+            guiObject.createClassInterfaceObjectGUI();
+        } else if (dlgController.getCreatedObject().getClass() == UMLInterface.class){
+            guiObject = new InterfaceObjectGUI((UMLInterface) dlgController.getCreatedObject());
+            guiObject.createClassInterfaceObjectGUI();
         }
-        ClassObjectGUI classObject = new ClassObjectGUI(umlClass);
-        classObject.createClassObjectGUI();
-        addClassOrInterfaceOnCanvasAndSetActions(classObject);
+
+        //add the object on canvas
+        if (guiObject != null) addClassOrInterfaceOnCanvasAndSetActions(guiObject);
+
     }
 
     /**
@@ -371,14 +398,14 @@ public class ClassDiagramController {
             //choose whether is setting the start or end of the relation
             if (!this.relation.getRelationFromSet()){
                 //start relation
-                this.relation.setRelationFrom(classObject, event.getX(), event.getY());
+                this.relation.setRelationFrom(classObject.getObject(), event.getX(), event.getY());
                 classObject.addRelation(relation);
                 System.out.println(event.getX()+ " " + event.getY());
             } else {
                 //end relation
-                if (this.relation.getRelClassFrom() == classObject) return; //if the click was twice to the same object
+                if (this.relation.getRelClassFrom() == classObject.getObject()) return; //if the click was twice to the same object
 
-                this.relation.setRelationTo(classObject, event.getX(), event.getY());
+                this.relation.setRelationTo(classObject.getObject(), event.getX(), event.getY());
 
                 //add reference for this relation to the end class object
                 classObject.addRelation(relation);
@@ -479,7 +506,7 @@ public class ClassDiagramController {
             //position of point where relation begins/ends
             //also redrawing relation line end (arrow, etc.)
             for (RelationGUI rel : classObject.getListOfRelations()){
-                rel.recomputeRelationDesign(classObject, diffX, diffY);
+                rel.recomputeRelationDesign(classObject.getObject(), diffX, diffY);
             }
 
         });
@@ -508,328 +535,5 @@ public class ClassDiagramController {
         });
     }
 
-    /**
-     * class for storing the relation between two classes
-     * */
-   /* public class Relation{
-        private boolean relationFromSet = false;
-        private final relType relationType;
 
-        private ClassObjectGUI relClassFrom;
-        private ClassObjectGUI relClassTo;
-
-        private final Line relLine;
-
-        private Polygon relLineEnd;
-        //these to lines are here for the option of association relation => which is created of one simple arrow
-        private Line line1 = null;
-        private Line line2 = null;
-
-        //labels on the relation line
-        private Text cardinalityByToClass;
-        private Text cardinalityByFromClass;
-        private Text nameOfRelation;
-
-        *//**
-         * constructor
-         * @param type type of the relation
-         * creating the line and its event for handling selecting this line
-         * setting up the relation type
-         * *//*
-        public Relation(relType type){
-            //set up the line and the event when click on the relation
-            this.relLine = new Line();
-            this.relLine.setStrokeWidth(2.5);
-            this.relLine.toBack();
-            this.relLine.setCursor(Cursor.HAND);
-            //set the event when click on the line
-            this.relLine.setOnMouseClicked(mouseEvent -> {
-                if (relationForChange != null){
-                    relationForChange.relLine.setStroke(Color.BLACK);
-                }
-                if (relationForChange == this){
-                    relationForChange = null;
-                    this.relLine.setStroke(Color.BLACK);
-                } else {
-                    relationForChange = this;
-                    this.relLine.setStroke(Color.BLUE);
-                }
-            });
-
-            //set the type of this relation
-            this.relationType = type;
-            //create the line from sufficient places
-        }
-
-
-        *//**
-         * set all information about relation beginning
-         * @param relClassFrom class that is at beginning of this relation
-         * @param X X coordinate of the point where the relation starts
-         * @param Y Y coordinate of the point where the relation starts
-         * *//*
-        public void setRelationFrom(ClassObjectGUI relClassFrom, double X, double Y){
-            this.relLine.setStartX(X);
-            this.relLine.setStartY(Y);
-            this.relationFromSet = true;
-            this.relClassFrom = relClassFrom;
-        }
-
-        *//**
-         * set all information about relation ending
-         * also creating sufficient line ending
-         * @param relClassTo class that is at end of this relation
-         * @param X X coordinate of the point where the relation ends
-         * @param Y Y coordinate of the point where the relation ends
-         * *//*
-        public void setRelationTo(ClassObjectGUI relClassTo, double X, double Y){
-            this.relLine.setEndX(X);
-            this.relLine.setEndY(Y);
-            this.relClassTo = relClassTo;
-
-            //set up the polygon representing the relation line ending
-            this.relLineEnd = new Polygon();
-
-            //creates relation line ending
-            setNewRelLineEndPosition();
-
-            //fixme => this will be set up after dialog shown
-            setNameOfRelation("neco");
-            setCardinalityByFromClass("0..1");
-            setCardinalityByToClass("0..*");
-        }
-
-
-        public void recomputeRelationDesign(ClassObjectGUI classObject, double diffX, double diffY){
-            if(getRelClassFrom() == classObject){
-                getRelLine().setStartX(getRelLine().getStartX() + diffX);
-                getRelLine().setStartY(getRelLine().getStartY() + diffY);
-            } else {
-                getRelLine().setEndX(getRelLine().getEndX() + diffX);
-                getRelLine().setEndY(getRelLine().getEndY() + diffY);
-            }
-
-            //things that are moved the same way all time when moving relation
-            canvas.getChildren().remove(getRelLineEnd());
-            setNewRelLineEndPosition();
-            canvas.getChildren().add(getRelLineEnd());
-
-            canvas.getChildren().remove(getNameOfRelation());
-            setNameOfRelation("neco");
-            canvas.getChildren().remove(getCardinalityByFromClass());
-            setCardinalityByFromClass("0..1");
-            canvas.getChildren().remove(getCardinalityByToClass());
-            setCardinalityByToClass("0..*");
-        }
-        *//**
-         * set the ending polygon which sets the type of the relation
-         * or arrow which is compound of two lines
-         * *//*
-        public void setNewRelLineEndPosition(){
-            this.relLineEnd = new Polygon();
-
-            double slope = (this.relLine.getStartY() - this.relLine.getEndY()) / (this.relLine.getStartX() - this.relLine.getEndX());
-            double lineAngle = Math.atan(slope);
-            double lineLength = Math.sqrt(Math.pow((this.relLine.getStartY() - this.relLine.getEndY()), 2) + Math.pow((this.relLine.getStartX() - this.relLine.getEndX()),2));
-            double arrowAngle, arrowLength, arrowWide;
-
-            switch (this.relationType){
-                //filled arrow ("big")
-                case GENERALIZATION: {
-                    System.out.println("generalization");
-                    arrowAngle = this.relLine.getStartX() > this.relLine.getEndX() ? Math.toRadians(45) : -Math.toRadians(225);
-                    arrowLength = 20;
-                    this.relLineEnd.getPoints().addAll(
-                            //the aim
-                            this.relLine.getEndX(), this.relLine.getEndY(),
-                            //left corner
-                            arrowLength * Math.cos(lineAngle - arrowAngle) + this.relLine.getEndX(), arrowLength * Math.sin(lineAngle - arrowAngle) + this.relLine.getEndY(),
-                            //right corner
-                            arrowLength * Math.cos(lineAngle + arrowAngle) + this.relLine.getEndX(), arrowLength * Math.sin(lineAngle + arrowAngle) + this.relLine.getEndY()
-                    );
-                    this.relLineEnd.setStroke(Color.BLACK);
-                    this.relLineEnd.setFill(Color.WHITE);
-                }
-                break;
-
-                //white filled 4-point-polygon
-                case AGGREGATION: {
-                    System.out.println("aggregation");
-                    arrowAngle = this.relLine.getStartX() > this.relLine.getEndX() ? Math.toRadians(45) : -Math.toRadians(225);
-                    arrowLength = 15;
-                    arrowWide = 8;
-                    double u1 = this.relLine.getEndX() - this.relLine.getStartX();
-                    double u2 = this.relLine.getEndY() - this.relLine.getStartY();
-                    double Ax = this.relLine.getEndX();
-                    double Ay = this.relLine.getEndY();
-                    double resultX = Ax - u1*(30/lineLength);
-                    double resultY = Ay - u2*(30/lineLength);
-
-                    this.relLineEnd.getPoints().addAll(
-                            //the aim
-                            this.relLine.getEndX(),this.relLine.getEndY(),
-                            //left corner
-                            (arrowLength)*Math.cos(lineAngle-arrowAngle) +this.relLine.getEndX(), arrowWide*Math.sin(lineAngle-arrowAngle)+this.relLine.getEndY(),
-                            //the last point
-                            resultX, resultY,
-                            //right corner
-                            (arrowLength)*Math.cos(lineAngle+arrowAngle) +this.relLine.getEndX(), arrowWide*Math.sin(lineAngle+arrowAngle)+this.relLine.getEndY()
-                    );
-                    this.relLineEnd.setStroke(Color.BLACK);
-                    this.relLineEnd.setFill(Color.WHITE);
-                }
-                break;
-
-                //black normal arrow
-                case ASSOCIATION: {
-                    System.out.println("association");
-                    arrowAngle = this.relLine.getStartX() > this.relLine.getEndX() ? Math.toRadians(45) : -Math.toRadians(225);
-                    arrowLength = 21;
-                    arrowWide = 10;
-                    Line line1 = new Line(
-                            (arrowLength)*Math.cos(lineAngle-arrowAngle) +this.relLine.getEndX(),
-                            arrowWide*Math.sin(lineAngle-arrowAngle)+this.relLine.getEndY(),
-                            this.relLine.getEndX(),
-                            this.relLine.getEndY()
-                    );
-                    Line line2 = new Line(
-                            (arrowLength)*Math.cos(lineAngle+arrowAngle) +this.relLine.getEndX(),
-                            arrowWide*Math.sin(lineAngle+arrowAngle)+this.relLine.getEndY(),
-                            this.relLine.getEndX(),
-                            this.relLine.getEndY()
-                    );
-                    line1.setStrokeWidth(2.5);
-                    line2.setStrokeWidth(2.5);
-
-                    //adding both lines to canvas
-                    //and removing old ones, if exists
-                    //warning it has to be here
-                    if (this.line1 != null) canvas.getChildren().remove(this.line1);
-                    if (this.line2 != null) canvas.getChildren().remove(this.line2);
-                    canvas.getChildren().add(line1);
-                    canvas.getChildren().add(line2);
-                    this.line1 = line1;
-                    this.line2 = line2;
-                }
-                break;
-
-                //black filled 4-point-polygon
-                case COMPOSITION:{
-                    System.out.println("composition");
-                    arrowAngle = this.relLine.getStartX() > this.relLine.getEndX() ? Math.toRadians(45) : -Math.toRadians(225);
-                    arrowLength = 15;
-                    arrowWide = 8;
-                    double u1 = this.relLine.getEndX() - this.relLine.getStartX();
-                    double u2 = this.relLine.getEndY() - this.relLine.getStartY();
-                    double Ax = this.relLine.getEndX();
-                    double Ay = this.relLine.getEndY();
-                    double resultX = Ax - u1*(30/lineLength);
-                    double resultY = Ay - u2*(30/lineLength);
-
-                    this.relLineEnd.getPoints().addAll(
-                            //the aim
-                            this.relLine.getEndX(),this.relLine.getEndY(),
-                            //left corner
-                            (arrowLength)*Math.cos(lineAngle-arrowAngle) +this.relLine.getEndX(), arrowWide*Math.sin(lineAngle-arrowAngle)+this.relLine.getEndY(),
-                            //the last point
-                            resultX, resultY,
-                            //right corner
-                            (arrowLength)*Math.cos(lineAngle+arrowAngle) +this.relLine.getEndX(), arrowWide*Math.sin(lineAngle+arrowAngle)+this.relLine.getEndY()
-                    );
-                    this.relLineEnd.setStroke(Color.BLACK);
-                    this.relLineEnd.setFill(Color.BLACK);
-                }
-                break;
-            }
-
-        }
-
-
-        public void setNameOfRelation(String name){
-            Text text = new Text();
-
-            double lineLength = Math.sqrt(Math.pow((this.relLine.getStartY() - this.relLine.getEndY()), 2) + Math.pow((this.relLine.getStartX() - this.relLine.getEndX()),2));
-            double u1 = this.relLine.getEndX() - this.relLine.getStartX();
-            double u2 = this.relLine.getEndY() - this.relLine.getStartY();
-            double Ax = this.relLine.getEndX();
-            double Ay = this.relLine.getEndY();
-            double resultX = Ax - u1*(0.5);
-            double resultY = Ay - u2*(0.5);
-
-            text.setX(resultX);
-            text.setY(resultY);
-            //text.setFill(Color.WHITE);
-            text.setText(name);
-            text.setStyle("-fx-background-color: red");
-            text.setFont(Font.font("verdana", 15));
-            System.out.println(text.toString()+ " "+ lineLength + " " + u1 + " " + u2 + " " +Ax + " " + Ay);
-            System.out.println(resultX + " " + resultY);
-            text.toFront();
-            this.nameOfRelation = text;
-            canvas.getChildren().add(text);
-        }
-
-        public void setCardinalityByToClass(String cardinality){
-            Text text = new Text();
-
-            //computed values for choose the right place on the relation line for the text label
-            //used parametric representation of line
-            double lineLength = Math.sqrt(Math.pow((this.relLine.getStartY() - this.relLine.getEndY()), 2) + Math.pow((this.relLine.getStartX() - this.relLine.getEndX()),2));
-            double u1 = this.relLine.getEndX() - this.relLine.getStartX();
-            double u2 = this.relLine.getEndY() - this.relLine.getStartY();
-            double Ax = this.relLine.getEndX();
-            double Ay = this.relLine.getEndY();
-            //this place choosing coordinates at the specific point at the line
-            double resultX = Ax - u1*(40/lineLength);
-            double resultY = Ay - u2*(20/lineLength);
-
-            //set the label
-            text.setX(resultX);
-            text.setY(resultY);
-            //todo check cardinality format
-            text.setText(cardinality);
-            text.setFont(Font.font("verdana", 15));
-            text.toFront();
-            this.cardinalityByToClass = text;
-            canvas.getChildren().add(text);
-        }
-
-        public void setCardinalityByFromClass(String cardinality){
-            Text text = new Text();
-
-            //computed values for choose the right place on the relation line for the text label
-            //used parametric representation of line
-            double lineLength = Math.sqrt(Math.pow((this.relLine.getStartY() - this.relLine.getEndY()), 2) + Math.pow((this.relLine.getStartX() - this.relLine.getEndX()),2));
-            double u1 = this.relLine.getEndX() - this.relLine.getStartX();
-            double u2 = this.relLine.getEndY() - this.relLine.getStartY();
-            double Ax = this.relLine.getEndX();
-            double Ay = this.relLine.getEndY();
-            //this place choosing coordinates at the specific point at the line
-            double resultX = Ax - u1*((lineLength-20)/lineLength);
-            double resultY = Ay - u2*((lineLength-20)/lineLength);
-
-            //set the label
-            text.setX(resultX);
-            text.setY(resultY);
-            //todo check cardinality format
-            text.setText(cardinality);
-            text.setFont(Font.font("verdana", 15));
-            text.toFront();
-            this.cardinalityByFromClass = text;
-            canvas.getChildren().add(text);
-        }
-
-        *//**
-         * getters
-         * *//*
-        public Text getNameOfRelation() {return this.nameOfRelation;}
-        public Text getCardinalityByToClass() {return this.cardinalityByToClass;}
-        public Text getCardinalityByFromClass() {return this.cardinalityByFromClass;}
-        public boolean getRelationFromSet() {return this.relationFromSet; }
-        public ClassObjectGUI getRelClassFrom() {return this.relClassFrom; }
-        public ClassObjectGUI getRelClassTo() {return this.relClassTo; }
-        public Line getRelLine() {return this.relLine; }
-        public Polygon getRelLineEnd() {return this.relLineEnd; }
-    }
-*/
 }

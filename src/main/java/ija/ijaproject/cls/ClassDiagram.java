@@ -130,7 +130,7 @@ public class ClassDiagram extends Element{
     public UMLClassInterfaceTemplate findObject(Object o){
         if (o.getClass() == String.class){
             for (UMLClassInterfaceTemplate umlObject : getUmlObjectsList()){
-                if (umlObject.getName() == (String)o){
+                if (umlObject.getName().equals(o)){
                     return umlObject;
                 }
             }

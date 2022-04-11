@@ -4,9 +4,9 @@
     "name" : "clsDiag1",
     "classes": [
       {
-        "name": "First class",
-        "Xcoord": 105.0,
-        "Ycoord": 200.0,
+        "name": "firstcls",
+        "Xcoord": 5.0,
+        "Ycoord": 20.0,
         "attributes": [
           {
             "name": "attr1",
@@ -30,7 +30,7 @@
     ],
     "interfaces": [
       {
-        "name": "Test interface",
+        "name": "inf1",
         "Xcoord": 200.0,
         "Ycoord": 200.0,
         "operations": [
@@ -52,8 +52,8 @@
       {
         "name": "relationName",
         "relType": "association",
-        "relClassFrom" : "nameOfClass",
-        "relClassTo"  : "nameOfClass",
+        "relClassFrom" : "firstcls",
+        "relClassTo"  : "inf1",
         "cardinalityByFromClass": "0",
         "cardinalityByToClass" : "*",
         "startXcoord" : 100.5,

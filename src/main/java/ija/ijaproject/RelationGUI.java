@@ -2,6 +2,7 @@ package ija.ijaproject;
 
 import ija.ijaproject.ClassDiagramController;
 import ija.ijaproject.ClassObjectGUI;
+import ija.ijaproject.cls.UMLClassInterfaceTemplate;
 import ija.ijaproject.cls.UMLRelation;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
@@ -22,8 +23,8 @@ public class RelationGUI{
     private UMLRelation.RelationType relationType;
     private Pane canvas;
 
-    private GUIClassInterfaceTemplate relClassFrom;
-    private GUIClassInterfaceTemplate relClassTo;
+    private UMLClassInterfaceTemplate relClassFrom;
+    private UMLClassInterfaceTemplate relClassTo;
 
     private Line relLine;
 
@@ -43,8 +44,9 @@ public class RelationGUI{
      * creating the line and its event for handling selecting this line
      * setting up the relation type
      * */
- /*   public RelationGUI(UMLRelation umlRelation, Pane canvas){
-
+    public RelationGUI(UMLRelation umlRelation, Pane canvas){
+        //set the canvas
+        this.canvas = canvas;
         //set up the line and the event when click on the relation
         this.relLine = new Line();
         this.relLine.setStrokeWidth(2.5);
@@ -54,8 +56,15 @@ public class RelationGUI{
         //set type of relation
         this.relationType = umlRelation.getRelationType();
 
+        //set relation start and end objects
+        setRelationFrom(umlRelation.getRelationFromObject(), umlRelation.getStartX(), umlRelation.getStartY());
+        setRelationTo(umlRelation.getRelationToObject(), umlRelation.getEndX(), umlRelation.getEndY());
 
-    }*/
+        //set relation attributes
+        setNameOfRelation(umlRelation.getName());
+        setCardinalityByFromClass(umlRelation.getCardinalityByFromClass());
+        setCardinalityByToClass(umlRelation.getCardinalityByToClass());
+    }
 
     public RelationGUI(UMLRelation.RelationType type, Pane canvas){
         //set up the line and the event when click on the relation
@@ -79,7 +88,7 @@ public class RelationGUI{
      * @param X X coordinate of the point where the relation starts
      * @param Y Y coordinate of the point where the relation starts
      * */
-    public void setRelationFrom(GUIClassInterfaceTemplate relClassFrom, double X, double Y){
+    public void setRelationFrom(UMLClassInterfaceTemplate relClassFrom, double X, double Y){
         this.relLine.setStartX(X);
         this.relLine.setStartY(Y);
         this.relationFromSet = true;
@@ -93,7 +102,7 @@ public class RelationGUI{
      * @param X X coordinate of the point where the relation ends
      * @param Y Y coordinate of the point where the relation ends
      * */
-    public void setRelationTo(GUIClassInterfaceTemplate relClassTo, double X, double Y){
+    public void setRelationTo(UMLClassInterfaceTemplate relClassTo, double X, double Y){
         this.relLine.setEndX(X);
         this.relLine.setEndY(Y);
         this.relClassTo = relClassTo;
@@ -104,14 +113,10 @@ public class RelationGUI{
         //creates relation line ending
         setNewRelLineEndPosition();
 
-        //fixme => this will be set up after dialog shown
-        setNameOfRelation("neco");
-        setCardinalityByFromClass("0..1");
-        setCardinalityByToClass("0..*");
     }
 
 
-    public void recomputeRelationDesign(GUIClassInterfaceTemplate classObject, double diffX, double diffY){
+    public void recomputeRelationDesign(UMLClassInterfaceTemplate classObject, double diffX, double diffY){
         if(getRelClassFrom() == classObject){
             getRelLine().setStartX(getRelLine().getStartX() + diffX);
             getRelLine().setStartY(getRelLine().getStartY() + diffY);
@@ -337,8 +342,8 @@ public class RelationGUI{
     public Text getCardinalityByToClass() {return this.cardinalityByToClass;}
     public Text getCardinalityByFromClass() {return this.cardinalityByFromClass;}
     public boolean getRelationFromSet() {return this.relationFromSet; }
-    public GUIClassInterfaceTemplate getRelClassFrom() {return this.relClassFrom; }
-    public GUIClassInterfaceTemplate getRelClassTo() {return this.relClassTo; }
+    public UMLClassInterfaceTemplate getRelClassFrom() {return this.relClassFrom; }
+    public UMLClassInterfaceTemplate getRelClassTo() {return this.relClassTo; }
     public Line getRelLine() {return this.relLine; }
     public Polygon getRelLineEnd() {return this.relLineEnd; }
 }
