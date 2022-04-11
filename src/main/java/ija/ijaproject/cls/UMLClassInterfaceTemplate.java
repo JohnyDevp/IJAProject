@@ -72,6 +72,19 @@ public abstract class UMLClassInterfaceTemplate extends Element{
                 if (!umlOperation.getType().equals(operation.getType()) && umlOperation.getName().equals(operation.getName())){
                     return false;
                 }
+
+                //everything same => error (checking each param)
+                if (umlOperation.getType().equals(operation.getType()) && umlOperation.getName().equals(operation.getName())){
+                    for (UMLAttribute operAttr : operation.getParametersOfOperationList()){
+                        for (UMLAttribute thisOperAttr : umlOperation.getParametersOfOperationList()){
+                            if (operAttr.getName().equals(thisOperAttr.getName()) && operAttr.getType().equals(thisOperAttr.getType())){
+                                return false;
+                            }
+                        }
+                    }
+                    //when there are no params but same names and types
+                    if (operation.getParametersOfOperationList().isEmpty() && umlOperation.getParametersOfOperationList().isEmpty()) return false;
+                }
             }
 
             //added operation differs at least in one parameter against other operations, or is whole the same as one of others=>

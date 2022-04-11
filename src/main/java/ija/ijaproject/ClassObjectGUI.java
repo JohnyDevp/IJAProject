@@ -14,7 +14,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * class for creating new graphic representation of class
@@ -24,11 +26,16 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate{
     /**graphical parts of class object*/
     private List<Text> listOfAttributes = new ArrayList<>();
 
+    private Map<UMLAttribute,Text> mapOfAttributes = new HashMap<UMLAttribute,Text>();
+
     /**
      * getters
      * */
     public List<Text> getListOfAttributes() {return this.listOfAttributes;}
     public UMLClass getUmlClass() { return (UMLClass) super.object; }
+    public Map<UMLAttribute,Text> getMapOfAttributes() {
+        return mapOfAttributes;
+    }
 
     /**
      * constructor for creating the class object
@@ -59,11 +66,24 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate{
 
     }
 
+    /**function for removing attribute from graphical and all others intern representation
+     * remove from canvas HAS TO BE DONE BEFORE !!!!
+     * */
+    public void removeAttribute(UMLAttribute umlAttribute){
+        //remove text representation
+        this.listOfAttributes.remove(this.mapOfAttributes.get(umlAttribute));
+        //remove map representation
+        this.mapOfAttributes.remove(umlAttribute);
+        //remove intern representation
+        ((UMLClass)this.getObject()).deleteAttribute(umlAttribute.getName());
+    }
+
     /**
      * method without control => has been checked already => called by constructor
      * non-adding umlattribute to umlclass => already there when calling from constructor
      * */
     private Text addAtributeFromConstructor(UMLAttribute umlAttribute){
+
         Text attribute = new Text(umlAttribute.getName() + " : " + umlAttribute.getType());
         attribute.setId(umlAttribute.getName());
 
@@ -92,6 +112,9 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate{
         for(Text attr : getListOfOperations()){
             attr.setY(attr.getY() + 15);
         }
+
+        //add attributes to map
+        this.mapOfAttributes.put(umlAttribute,attribute);
 
         listOfAttributes.add(attribute);
         return attribute;

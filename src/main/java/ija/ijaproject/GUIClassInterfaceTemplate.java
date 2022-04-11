@@ -2,6 +2,7 @@ package ija.ijaproject;
 
 import ija.ijaproject.cls.*;
 import javafx.scene.Cursor;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -11,7 +12,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * class for creating new graphic representation of class
@@ -22,6 +25,9 @@ public abstract class GUIClassInterfaceTemplate {
      * object representing intern class/interface representation
      * */
     protected UMLClassInterfaceTemplate object;
+
+    /**map for operation => its uml and graphical representation*/
+    private Map<UMLOperation, Text> mapOfOperations = new HashMap<UMLOperation, Text>();
 
     /**
      * starting position on canvas
@@ -43,7 +49,6 @@ public abstract class GUIClassInterfaceTemplate {
     /**setters*/
     public void setXcoord(double xcoord) {this.Xcoord = xcoord;}
     public void setYcoord(double ycoord) {this.Ycoord = ycoord;    }
-
     public void setName(String name) {this.name = name;}
 
     /**
@@ -63,6 +68,10 @@ public abstract class GUIClassInterfaceTemplate {
 
     private final Color selectedClassColor = Color.rgb(227, 68, 36);
     private final Color deselectedClassColor = Color.rgb(80, 95, 230);
+
+    public Map<UMLOperation, Text> getMapOfOperations() {
+        return mapOfOperations;
+    }
 
     /**
      * constructor for creating the class object
@@ -186,6 +195,14 @@ public abstract class GUIClassInterfaceTemplate {
     }
 
     /**
+     * method which goes through relations and when it detects a generalization it will mark methods, which are overridden*/
+    public void markOperationsWhileGeneralization(Pane canvas){
+        for (RelationGUI relationGUI : getListOfRelations()){
+            //todo
+        }
+    }
+
+    /**
      * method only for constructor
      * => non-adding operation to operation list of uml class => already there
      * */
@@ -220,6 +237,9 @@ public abstract class GUIClassInterfaceTemplate {
 
         //resize classbox iff necessary
         resizeClassWidth(operation.getLayoutBounds().getWidth());
+
+        //map operation
+        this.mapOfOperations.put(umlOperation, operation);
 
         return operation;
     }

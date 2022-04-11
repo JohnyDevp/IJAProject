@@ -33,7 +33,7 @@ public class UMLClass extends UMLClassInterfaceTemplate{
             UMLAttribute umlAttribute = itr.next();
 
             //if attribute has been find with desired name then fail
-            if (umlAttribute.getName() == attr.getName()) {
+            if (umlAttribute.getName().equals(attr.getName())) {
                 return false;
             }
         }
@@ -69,7 +69,7 @@ public class UMLClass extends UMLClassInterfaceTemplate{
             UMLAttribute umlAttribute = itr.next();
 
             //if attribute has been find with desired name
-            if (umlAttribute.getName() == name) {
+            if (umlAttribute.getName().equals(name)) {
                 return umlAttribute;
             }
         }

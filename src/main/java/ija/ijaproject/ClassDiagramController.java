@@ -149,7 +149,11 @@ public class ClassDiagramController {
         //todo => get name of class diagram if newly created
         //FIXME warning will there be this name ??
         this.classDiagram = new ClassDiagram("test");
-        parseFile();
+
+        //if is set file for loading then load it from its path
+        if (!getLoadedFilePath().equals("")){
+            parseFile();
+        }
     }
 
     /**
@@ -158,7 +162,8 @@ public class ClassDiagramController {
      * */
     protected void parseFile(){
         JsonReader jr = new JsonReader();
-        String tmp_file_path = "C:\\Users\\jhola\\IdeaProjects\\IJAProject\\src\\main\\resources\\fake.json";
+        String tmp_file_path = getLoadedFilePath();
+
         if(jr.parseJsonClassDiagram(tmp_file_path)) {
             this.classDiagram = jr.getClsDiagram();
             GUIObjectsList = new ArrayList<>();
@@ -361,6 +366,22 @@ public class ClassDiagramController {
             this.relation = null;
             btnAddRelation.setText("ADD RELATION");
         }
+    }
+
+    @FXML
+    public void btnEditObject(ActionEvent e) throws IOException {
+        //show creating dialog
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("views/editObjectDialog_view.fxml"));
+        Parent parent = fxmlLoader.load();
+        EditObjectDialogController dlgController = fxmlLoader.<EditObjectDialogController>getController();
+        dlgController.init(this.selectedClass, this.classDiagram, this.canvas);
+
+
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     /**

@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="151.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ija.ijaproject.dlg.EditRelationDialogController">
+<AnchorPane prefHeight="151.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ija.ijaproject.EditRelationDialogController">
    <children>
       <TextField fx:id="txtField" layoutX="151.0" layoutY="74.0" />
       <Label layoutX="20.0" layoutY="78.0" text="Name of class/interface" />

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ija.ijaproject.ClassDiagramController">
+<AnchorPane prefHeight="524.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ija.ijaproject.ClassDiagramController">
    <children>
       <ToolBar layoutY="35.0" prefWidth="570.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
         <items>
@@ -13,9 +13,9 @@
             <Button mnemonicParsing="false" text="Discard" />
             <Button mnemonicParsing="false" text="Undo" />
             <Button fx:id="btnClose" mnemonicParsing="false" onAction="#btnClose" text="Close" />
-            <Button fx:id="btnAddClass" mnemonicParsing="false" onAction="#btnAddClass" text="ADD CLASS" />
+            <Button fx:id="btnAddClass" mnemonicParsing="false" onAction="#btnAddClass" text="ADD CLASS/INTERFACE" />
             <Button fx:id="btnAddRelation" mnemonicParsing="false" onAction="#btnAddRelation" text="ADD RELATION" />
-            <Button mnemonicParsing="false" text="EDIT CLASS" />
+            <Button fx:id="btnEditObject" mnemonicParsing="false" onAction="#btnEditObject" text="EDIT CLASS/INTERFACE" />
         </items>
       </ToolBar>
       <ToolBar layoutX="-7.0" layoutY="-3.0" prefHeight="35.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -23,6 +23,6 @@
             <Button fx:id="btnCreateNewSequenceDiagram" mnemonicParsing="false" onAction="#createNewSequenceDiagramBtn" text="Create new sequence diagram" />
          </items>
       </ToolBar>
-      <Pane fx:id="canvas" layoutY="70.0" prefHeight="298.0" prefWidth="617.0" style="-fx-background-color: rgba(0, 100, 100, 0.0);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
+      <Pane fx:id="canvas" layoutY="70.0" prefHeight="297.0" prefWidth="617.0" style="-fx-background-color: rgba(0, 100, 100, 0.0);" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
    </children>
 </AnchorPane>

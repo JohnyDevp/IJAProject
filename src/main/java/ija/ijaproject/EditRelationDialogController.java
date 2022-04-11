@@ -1,4 +1,4 @@
-package ija.ijaproject.dlg;
+package ija.ijaproject;
 
 public class EditRelationDialogController {
 }
