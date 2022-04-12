@@ -25,7 +25,7 @@ public class UMLRelation extends Element{
      * @param name name of relation*/
     public UMLRelation(String name){
         super(name);
-        //set the coordinates to values which indicates that it is out of pane => not defined
+        //set the coordinates to values which indicates that it is out of pane - not defined
         setStartX(-1.0);
         setStartY(-1.0);
         setEndX(-1.0);

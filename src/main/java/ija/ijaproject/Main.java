@@ -18,12 +18,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * class starting whole gui
+ * @author xholan11
+ * */
 public class Main extends Application {
 
     //main class loading first design window
     @Override
     public void start(Stage stage) throws IOException {
-        //load main fxml file and create the scene (stage is created => and passed as parameter)
+        //load main fxml file and create the scene (stage is created - and passed as parameter)
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/home_view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
@@ -49,7 +53,7 @@ public class Main extends Application {
     }
 
 
-    //MAIN METHOD => starting the application
+    //MAIN METHOD - starting the application
     public static void main(String[] args) {
         //gives control to the design methods
         Application.launch();

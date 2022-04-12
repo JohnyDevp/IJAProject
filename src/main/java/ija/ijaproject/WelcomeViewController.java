@@ -9,7 +9,7 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 /**
- * controller for welcome view => view with info about controlling this app
+ * controller for welcome view - view with info about controlling this app
  * @author xzimol04
  * */
 public class WelcomeViewController {

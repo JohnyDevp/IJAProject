@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- * Dialog for adding new attribute => for adding attribute as attribute and attribute as param for operation
+ * Dialog for adding new attribute - for adding attribute as attribute and attribute as param for operation
  * @author xholan11
  * */
 
@@ -46,7 +46,7 @@ public class AddAttributeDialogController {
     }
 
     /**
-     * method for closing this stage => from */
+     * method for closing this stage - from */
     private void closeStage(ActionEvent event) {
         Node source = (Node)  event.getSource();
         Stage stage  = (Stage) source.getScene().getWindow();

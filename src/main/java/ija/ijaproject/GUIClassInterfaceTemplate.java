@@ -28,7 +28,7 @@ public abstract class GUIClassInterfaceTemplate {
      * */
     protected UMLClassInterfaceTemplate object;
 
-    /**map for operation => its uml and graphical representation*/
+    /**map for operation - its uml and graphical representation*/
     private Map<UMLOperation, Text> mapOfOperations = new HashMap<UMLOperation, Text>();
 
     /**
@@ -108,7 +108,7 @@ public abstract class GUIClassInterfaceTemplate {
         rectangleBorder.setCursor(Cursor.CROSSHAIR);
         this.classBorder = rectangleBorder;
 
-        //create overall classbox => of rectangle
+        //create overall classbox - of rectangle
         Rectangle rectangle = new Rectangle(90,80,Color.rgb(237, 233, 221, 0.6));
         rectangle.setX(getXcoord() + 5);
         rectangle.setY(getYcoord() + 5);
@@ -150,7 +150,7 @@ public abstract class GUIClassInterfaceTemplate {
     }
 
     /**
-     * @param umlOperation UMLOperation object => stores all information about this operation
+     * @param umlOperation UMLOperation object - stores all information about this operation
      * method for adding opperation to class diagram graphical representation
      * @return null if the operation is bad considering other operations (same name-different type or whole the same)
      *         or the Text element representing the operation
@@ -206,7 +206,7 @@ public abstract class GUIClassInterfaceTemplate {
 
     /**
      * method only for constructor
-     * => non-adding operation to operation list of uml class => already there
+     * - non-adding operation to operation list of uml class - already there
      * */
     private Text addOperationFromConstructor(UMLOperation umlOperation){
         //set the text of label in graphical representation of class

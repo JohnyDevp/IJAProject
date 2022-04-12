@@ -82,8 +82,8 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate{
     }
 
     /**
-     * method without control => has been checked already => called by constructor
-     * non-adding umlattribute to umlclass => already there when calling from constructor
+     * method without control - has been checked already - called by constructor
+     * non-adding umlattribute to umlclass - already there when calling from constructor
      * */
     private Text addAtributeFromConstructor(UMLAttribute umlAttribute){
 
@@ -108,7 +108,7 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate{
         //resizing width of class gui if necessary (according to text width)
         this.resizeClassWidth(attribute.getLayoutBounds().getWidth());
 
-        //necessary to move all operations under this attributes => operations are under attributes
+        //necessary to move all operations under this attributes - operations are under attributes
         //and also move the line dividing space for attributes and operations
         this.getLine2().setStartY(this.getLine2().getStartY() + 15);
         this.getLine2().setEndY(this.getLine2().getEndY() + 15);

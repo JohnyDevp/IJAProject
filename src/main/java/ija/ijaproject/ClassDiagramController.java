@@ -37,7 +37,7 @@ public class ClassDiagramController {
     public Double mousePrevX;
     public Double mousePrevY;
 
-    //currently selected class => graphically changed
+    //currently selected class - graphically changed
     GUIClassInterfaceTemplate selectedClass = null;
 
     //defined colors used for class object
@@ -147,11 +147,11 @@ public class ClassDiagramController {
     /*=============================================================================================================*/
 
     /**
-     * setter of class diagram and caller for parsing file => which will work iff file has to be loaded
+     * setter of class diagram and caller for parsing file - which will work iff file has to be loaded
      * taking control and starting to work when tab is created
      */
     public void start(){
-        //todo => get name of class diagram if newly created
+        //todo - get name of class diagram if newly created
         //FIXME warning will there be this name ??
         this.classDiagram = new ClassDiagram("test");
 
@@ -293,7 +293,7 @@ public class ClassDiagramController {
 
 
         //TODO properly close classDiagram file
-        //remove first tab => close classDiagram
+        //remove first tab - close classDiagram
         getTabPane().getTabs().remove(0);
         getMainController().btnCreateNewClassDiagram.setDisable(false);
         getMainController().btnLoadClassDiagram.setDisable(false);
@@ -419,7 +419,7 @@ public class ClassDiagramController {
         //adding event handlers
         //clicking on class border
         classObject.getClassBorder().setOnMouseClicked(event -> {
-            if (!this.createRelation) return; //when relation is not desired to create => return;
+            if (!this.createRelation) return; //when relation is not desired to create - return;
 
             //choose whether is setting the start or end of the relation
             if (!this.relation.getRelationFromSet()){
@@ -440,7 +440,7 @@ public class ClassDiagramController {
                 this.createRelation = false;
                 this.btnAddRelation.setText("ADD RELATION");
 
-                //todo => place for creating dialog to setup relation params
+                //todo - place for creating dialog to setup relation params
                 addRelationOnCanvasAndSetActions(this.relation);
 //                this.canvas.getChildren().addAll(this.relation.getRelLine(), this.relation.getRelLineEnd());
                 System.out.println(this.relation.getRelLine().toString());
@@ -457,7 +457,7 @@ public class ClassDiagramController {
             }
         });
 
-        //clicking on clickable corner => setting that it is ready to move
+        //clicking on clickable corner - setting that it is ready to move
         classObject.getClickableCorner().setOnMousePressed(mouseEvent -> {
 
             mousePrevX = mouseEvent.getX();
@@ -467,8 +467,8 @@ public class ClassDiagramController {
         //dragging the clickable corner and with it also the whole object
         classObject.getClickableCorner().setOnMouseDragged(event -> {
 
-            //preventing from overdrawing the pane surroundings => which is mysteriously possible
-            //if the rectangle is selected => then do actions
+            //preventing from overdrawing the pane surroundings - which is mysteriously possible
+            //if the rectangle is selected - then do actions
             if((classObject.getClassBorder().getY() + (event.getY() - mousePrevY)) <= 0) return;
 
             //count the difference between previous and current mouse position for moving objects
@@ -492,7 +492,7 @@ public class ClassDiagramController {
             classObject.getClassBox().setX(classObject.getClassBox().getX() + diffX);
             classObject.getClassBox().setY(classObject.getClassBox().getY() + diffY);
 
-            //position of text => class name
+            //position of text - class name
             classObject.getClassNameLabel().setX(classObject.getClassNameLabel().getX() + diffX);
             classObject.getClassNameLabel().setY(classObject.getClassNameLabel().getY() + diffY);
 
@@ -514,7 +514,7 @@ public class ClassDiagramController {
                 ((InterfaceObjectGUI)classObject).getLabelOfInterface().setY(((InterfaceObjectGUI)classObject).getLabelOfInterface().getY() + diffY);
             }
 
-            //position of text => each attribute
+            //position of text - each attribute
             //only for class
             if (classObject.getClass() == ClassObjectGUI.class) {
 
@@ -523,7 +523,7 @@ public class ClassDiagramController {
                     attr.setY(attr.getY() + diffY);
                 }
             }
-            //position of text => each operation
+            //position of text - each operation
             for (Text op : classObject.getListOfOperations()){
                 op.setX(op.getX() + diffX);
                 op.setY(op.getY() + diffY);

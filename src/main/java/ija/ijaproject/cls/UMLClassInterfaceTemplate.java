@@ -72,12 +72,12 @@ public abstract class UMLClassInterfaceTemplate extends Element{
             return false;
         } else {
             for (UMLOperation umlOperation : umlOperationsList){
-                //same name but different type => error
+                //same name but different type - error
                 if (!umlOperation.getType().equals(operation.getType()) && umlOperation.getName().equals(operation.getName())){
                     return false;
                 }
 
-                //everything same => error (checking each param)
+                //everything same - error (checking each param)
                 if (umlOperation.getType().equals(operation.getType()) && umlOperation.getName().equals(operation.getName())){
                     for (UMLAttribute operAttr : operation.getParametersOfOperationList()){
                         for (UMLAttribute thisOperAttr : umlOperation.getParametersOfOperationList()){
@@ -91,7 +91,7 @@ public abstract class UMLClassInterfaceTemplate extends Element{
                 }
             }
 
-            //added operation differs at least in one parameter against other operations, or is whole the same as one of others=>
+            //added operation differs at least in one parameter against other operations, or is whole the same as one of others-
             //then adding will fail
             return umlOperationsList.add(operation);
         }

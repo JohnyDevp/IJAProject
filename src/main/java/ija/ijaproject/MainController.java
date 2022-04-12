@@ -39,7 +39,7 @@ public class MainController {
      * */
     private Stage stage;
 
-    public void onShown() throws IOException {
+    public void initialize() throws IOException {
         //show creating dialog
         FXMLLoader fxmlLoaderWelcome = new FXMLLoader(getClass().getResource("views/welcome_view.fxml"));
         Parent parent = fxmlLoaderWelcome.load();
@@ -94,7 +94,7 @@ public class MainController {
     private void diagramTabConstructor(Boolean isLoader) throws Exception{
         System.out.println("Loading class diagram...");
 
-        //get the path for loaded diagram => if there is request for load
+        //get the path for loaded diagram - if there is request for load
         String filePath = "";
         if (isLoader){
             try{

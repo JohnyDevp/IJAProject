@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 /**
- * Controller for editting either class or interface in class diagram => editting attributes and operations
+ * Controller for editting either class or interface in class diagram - editting attributes and operations
  * @author xholan11
  * */
 public class EditObjectDialogController {
@@ -55,7 +55,7 @@ public class EditObjectDialogController {
     public TextField txtOperationType;
 
     private GUIClassInterfaceTemplate guiObject;
-    //for the possibility of renaming object => has to be checked
+    //for the possibility of renaming object - has to be checked
     private ClassDiagram clsDiag;
     private Pane canvas;
     private List<UMLAttribute> attributesOfOperation = new ArrayList<>();
@@ -90,7 +90,7 @@ public class EditObjectDialogController {
         //load combobox with attributes
         if (guiObject.getClass() == ClassObjectGUI.class){
             cmbAttributes.getItems().clear();
-            //loop through text array and add texts (which have to be unique => code is set to satisfy that) to cmbbox
+            //loop through text array and add texts (which have to be unique - code is set to satisfy that) to cmbbox
             for(Text txtAttr : ((ClassObjectGUI) guiObject).getListOfAttributes()){
                 cmbAttributes.getItems().add(txtAttr.getText());
             }
@@ -102,13 +102,13 @@ public class EditObjectDialogController {
      * */
     private void loadCmbOperations(){
         cmbOperations.getItems().clear();
-        //load combobox with operations => this is for both interface and class
+        //load combobox with operations - this is for both interface and class
         for (Text txtOper : guiObject.getListOfOperations()){
             cmbOperations.getItems().add(txtOper.getText());
         }
     }
 
-    /**adding attribute => for class*/
+    /**adding attribute - for class*/
     public void btnAddAttribute(ActionEvent actionEvent) throws IOException {
         //show creating dialog
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("views/editObjectDialogAddAttribute_view.fxml"));
@@ -135,7 +135,7 @@ public class EditObjectDialogController {
 
     }
 
-    /**button for deleting attribute from class object => chosen in combobox*/
+    /**button for deleting attribute from class object - chosen in combobox*/
     public void btnDeleteAttribute(ActionEvent actionEvent) {
         //loop the map of attributes and when find then remove it
         for (Map.Entry<UMLAttribute,Text> mapAttr : ((ClassObjectGUI)guiObject).getMapOfAttributes().entrySet()){
@@ -186,7 +186,7 @@ public class EditObjectDialogController {
 
         //try to add it to class and according to success add it to cmbbox
         Text txtOpr = this.guiObject.addOperation(newOperation);
-        if(txtOpr == null) return; //fail => already exists
+        if(txtOpr == null) return; //fail - already exists
         else {
             //add it to canvas
             this.canvas.getChildren().add(txtOpr);

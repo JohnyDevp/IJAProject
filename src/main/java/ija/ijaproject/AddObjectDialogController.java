@@ -36,7 +36,7 @@ public class AddObjectDialogController {
     }
 
     /**
-     * method handling clicking on OK button => adding new object to class diagram
+     * method handling clicking on OK button - adding new object to class diagram
      * */
     public void btnOkClick(ActionEvent e){
         boolean isInterface = checkBox.isSelected();
@@ -72,7 +72,7 @@ public class AddObjectDialogController {
     }
 
     /**
-     * setter of class diagram => to be able to add there new object
+     * setter of class diagram - to be able to add there new object
      * */
     public void setMainClassDiagram(ClassDiagram mainClassDiagram) {
         this.mainClassDiagram = mainClassDiagram;
@@ -85,7 +85,7 @@ public class AddObjectDialogController {
         return this.createdObject;
     }
     /**
-     * method for closing this stage => from */
+     * method for closing this stage - from */
     private void closeStage(ActionEvent event) {
         Node source = (Node)  event.getSource();
         Stage stage  = (Stage) source.getScene().getWindow();

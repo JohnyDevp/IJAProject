@@ -30,7 +30,7 @@ public class RelationGUI{
     private Line relLine;
 
     private Polygon relLineEnd;
-    //these to lines are here for the option of association relation => which is created of one simple arrow
+    //these to lines are here for the option of association relation - which is created of one simple arrow
     private Line line1 = null;
     private Line line2 = null;
 

@@ -41,7 +41,7 @@ public class JsonReader {
             // typecasting obj to JSONObject
             JSONObject jsonObject = (JSONObject) obj;
 
-            //getting fields of all arrays => sequence diagrams, relations and class diagram(not an array)
+            //getting fields of all arrays - sequence diagrams, relations and class diagram(not an array)
             //class diagram
             Map classDiagram = ((Map) jsonObject.get("classDiagram"));
             String classDiagramName = (String) classDiagram.get("name");
@@ -59,7 +59,7 @@ public class JsonReader {
 
             //process classes (not necessary)
             if (jarClasses != null) {
-                //array of classes in json => in root
+                //array of classes in json - in root
                 //iterate through them and add them to diagram
                 Iterator itrThroughClasses = jarClasses.iterator();
                 while (itrThroughClasses.hasNext()) {
@@ -72,7 +72,7 @@ public class JsonReader {
 
             //process interfaces (not necessary)
             if (jarInterfaces != null) {
-                //array of interfaces in json => in root
+                //array of interfaces in json - in root
                 //iterate through them and add them to diagram
                 Iterator itrThroughInterface = jarInterfaces.iterator();
                 while (itrThroughInterface.hasNext()) {
@@ -85,7 +85,7 @@ public class JsonReader {
 
             //process relations
             if (jarRelations != null) {
-                //array of relations in json => in root
+                //array of relations in json - in root
                 //iterate through them and add them to diagram
                 Iterator itrThroughRelations = jarRelations.iterator();
                 while (itrThroughRelations.hasNext()) {
@@ -97,7 +97,7 @@ public class JsonReader {
             }
 
         } catch (Exception e) {
-            System.out.println("ERROR: Loading json file => bad structure");
+            System.out.println("ERROR: Loading json file - bad structure");
             return false;
         }
 
@@ -122,7 +122,7 @@ public class JsonReader {
      * @param mClasses array of all class definitions(operations, name, attributes, x, y,...)
      */
     private boolean addClass(Map mClasses) {
-        //create new uml class => intern representation (non-graphical)
+        //create new uml class - intern representation (non-graphical)
         UMLClass umlClass;
 
 
@@ -253,7 +253,7 @@ public class JsonReader {
      */
     private boolean addInterface(Map mInterfaces) {
 
-        //create new uml class => intern representation (non-graphical)
+        //create new uml class - intern representation (non-graphical)
         UMLInterface umlInterface;
 
         /**/
@@ -352,7 +352,7 @@ public class JsonReader {
      * @param mRelation array of all relation definitions(start class, end class, x, y,...)
      */
     private boolean addRelation(Map mRelation) {
-        //create new uml class => intern representation (non-graphical)
+        //create new uml class - intern representation (non-graphical)
         UMLRelation umlRelation;
 
         /**/
@@ -405,7 +405,7 @@ public class JsonReader {
         }
 
 
-        //set classes => they have to already exist
+        //set classes - they have to already exist
         if (clsDiagram.findObject(relClassFrom) != null && clsDiagram.findObject(relClassTo) != null){
             umlRelation.setRelationFromObject(clsDiagram.findObject(relClassFrom));
             umlRelation.setRelationToObject(clsDiagram.findObject(relClassTo));
