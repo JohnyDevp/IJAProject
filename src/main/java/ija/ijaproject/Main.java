@@ -1,10 +1,17 @@
+/**
+ * Main class starting the application
+ * @author xzimol04
+ * */
+
 package ija.ijaproject;
 
 import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.FileWriter;
@@ -38,48 +45,14 @@ public class Main extends Application {
         stage.setScene(scene);
 
         stage.show();
-    }
 
-    //TEST just for preparing purposes
-    public static void testJson(){
-        ClassDatatype rel = new ClassDatatype();
-        rel.setHeader("ahoj");
-        ArrayList methods = new ArrayList<String>();
-        methods.add("int i");
-        rel.setMethods(methods);
-
-        ClassDatatype rel2 = new ClassDatatype();
-        rel2.setHeader("ahoj");
-        ArrayList methods2 = new ArrayList<String>();
-        methods2.add("int i");
-        rel2.setMethods(methods2);
-
-        ArrayList<ClassDatatype> classes = new ArrayList<ClassDatatype>();
-        classes.add(rel);
-        classes.add(rel2);
-
-        Gson gson = new Gson();
-        String conv = gson.toJson(classes);
-
-        //Write JSON file
-        try (FileWriter file = new FileWriter("src/main/resources/fake.json")) {
-            //We can write any JSONArray or JSONObject instance to the file
-            System.out.println("Hey there");
-            file.write(conv);
-            file.flush();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
     //MAIN METHOD => starting the application
     public static void main(String[] args) {
         //gives control to the design methods
-
         Application.launch();
-//        testJson();
 
     }
 }

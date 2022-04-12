@@ -3,6 +3,10 @@ package ija.ijaproject;
 import ija.ijaproject.cls.UMLInterface;
 import javafx.scene.text.Text;
 
+/**
+ * gui representation of interface in class diagram
+ * @author xzimol04
+ * */
 public class InterfaceObjectGUI extends GUIClassInterfaceTemplate{
 
     private Text interfaceLabel;

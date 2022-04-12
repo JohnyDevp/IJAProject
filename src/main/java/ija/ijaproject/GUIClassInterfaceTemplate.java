@@ -1,3 +1,4 @@
+
 package ija.ijaproject;
 
 import ija.ijaproject.cls.*;
@@ -17,7 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * class for creating new graphic representation of class
+ * template for class and interface fui representation
+ * @author xholan11
  * */
 public abstract class GUIClassInterfaceTemplate {
 

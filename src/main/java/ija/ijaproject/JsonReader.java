@@ -8,7 +8,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
 
-
+/**
+ * class for parsing json file into class and sequence diagram
+ * @author xholan11
+ * */
 public class JsonReader {
 
     /**

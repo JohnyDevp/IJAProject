@@ -6,11 +6,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="151.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ija.ijaproject.AddObjectDialogController">
+<AnchorPane prefHeight="153.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ija.ijaproject.AddObjectDialogController">
    <children>
-      <TextField fx:id="txtField" layoutX="151.0" layoutY="74.0" />
+      <TextField fx:id="txtField" layoutX="188.0" layoutY="74.0" />
       <Label layoutX="20.0" layoutY="78.0" text="Name of class/interface" />
-      <CheckBox fx:id="checkBox" layoutX="151.0" layoutY="35.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="78.0" text="Interface" />
-      <Button fx:id="btnOk" layoutX="284.0" layoutY="112.0" mnemonicParsing="false" onAction="#btnOkClick" text="OK" />
+      <CheckBox fx:id="checkBox" layoutX="188.0" layoutY="37.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="154.0" text="Interface" />
+      <Button fx:id="btnOk" layoutX="324.0" layoutY="115.0" mnemonicParsing="false" onAction="#btnOkClick" text="OK" />
    </children>
 </AnchorPane>

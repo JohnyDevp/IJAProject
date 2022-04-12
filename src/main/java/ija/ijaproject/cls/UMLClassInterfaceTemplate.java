@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * class representing template for both interface and class
+ * @author xholan11
+ */
 public abstract class UMLClassInterfaceTemplate extends Element{
     /**
      * list of operations of class

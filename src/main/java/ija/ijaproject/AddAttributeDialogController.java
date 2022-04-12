@@ -1,3 +1,4 @@
+
 package ija.ijaproject;
 
 import ija.ijaproject.cls.*;
@@ -7,6 +8,10 @@ import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Dialog for adding new attribute => for adding attribute as attribute and attribute as param for operation
+ * @author xholan11
+ * */
 
 public class AddAttributeDialogController {
 

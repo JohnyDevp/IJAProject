@@ -1,3 +1,5 @@
+
+
 package ija.ijaproject;
 
 import ija.ijaproject.cls.ClassDiagram;
@@ -20,6 +22,7 @@ import java.util.Map;
 
 /**
  * class for creating new graphic representation of class
+ * @author xholan11
  * */
 public class ClassObjectGUI extends GUIClassInterfaceTemplate{
 

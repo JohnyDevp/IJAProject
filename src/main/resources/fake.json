@@ -5,8 +5,8 @@
     "classes": [
       {
         "name": "firstcls",
-        "Xcoord": 5.0,
-        "Ycoord": 20.0,
+        "Xcoord": 0.0,
+        "Ycoord": 0.0,
         "attributes": [
           {
             "name": "attr1",
@@ -32,7 +32,7 @@
       {
         "name": "inf1",
         "Xcoord": 200.0,
-        "Ycoord": 200.0,
+        "Ycoord": 0.0,
         "operations": [
           {
             "name" : "operation1",
@@ -56,10 +56,10 @@
         "relClassTo"  : "inf1",
         "cardinalityByFromClass": "0",
         "cardinalityByToClass" : "*",
-        "startXcoord" : 100.5,
-        "startYcoord" : 80.2,
-        "endXcoord" : 54.2,
-        "endYcoord": 45.0
+        "startXcoord" : 0.0,
+        "startYcoord" : 20.0,
+        "endXcoord" : 200.0,
+        "endYcoord": 20.0
       }
     ]
   },

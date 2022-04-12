@@ -1,5 +1,9 @@
 package ija.ijaproject.cls;
 
+/**
+ * class representing element in string format => to be inherited
+ * @author dr.Koci
+ * */
 public class Element {
 
     private String name;

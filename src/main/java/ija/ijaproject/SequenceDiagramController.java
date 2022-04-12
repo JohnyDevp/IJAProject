@@ -3,6 +3,10 @@ package ija.ijaproject;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
+/**
+ * controller for gui for sequence diagram
+ * @author xzimol04
+ * */
 public class SequenceDiagramController {
     /**
      * variable storing tab where this diagram is stored

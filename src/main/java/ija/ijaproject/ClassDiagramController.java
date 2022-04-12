@@ -1,3 +1,5 @@
+
+
 package ija.ijaproject;
 
 
@@ -17,7 +19,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.*;
-
+/**
+ * Controller for class diagram GUI
+ * @author xzimol04
+ * */
 public class ClassDiagramController {
 
 

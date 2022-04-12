@@ -1,5 +1,9 @@
 package ija.ijaproject.cls;
 
+/**
+ * class representing uml attribute of class or of operation in class or interface
+ * @author xholan11
+ * @author dr.Koci*/
 public class UMLAttribute extends Element{
 
     /**

@@ -2,13 +2,21 @@ package ija.ijaproject;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 
+/**
+ * controller for handling creating or loading new class diagram from main window
+ * @author xholan11
+ * */
 public class MainController {
     /**
      * btnLoadClassDiagram button from the main view
@@ -31,6 +39,19 @@ public class MainController {
      * */
     private Stage stage;
 
+    public void onShown() throws IOException {
+        //show creating dialog
+        FXMLLoader fxmlLoaderWelcome = new FXMLLoader(getClass().getResource("views/welcome_view.fxml"));
+        Parent parent = fxmlLoaderWelcome.load();
+        WelcomeViewController dlgController = fxmlLoaderWelcome.<WelcomeViewController>getController();
+
+        Scene sceneWelcome = new Scene(parent);
+        Stage stageWelcome = new Stage();
+        stageWelcome.initModality(Modality.APPLICATION_MODAL);
+        stageWelcome.setScene(sceneWelcome);
+        stageWelcome.showAndWait();
+
+    }
 
     /**
      * @param stage

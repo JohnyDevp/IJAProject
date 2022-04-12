@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * class representing uml class
+ * @author xholan11
+ * @author dr.Koci*/
 public class UMLClass extends UMLClassInterfaceTemplate{
 
     /**

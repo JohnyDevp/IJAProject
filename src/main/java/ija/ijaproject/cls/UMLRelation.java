@@ -1,5 +1,9 @@
 package ija.ijaproject.cls;
 
+/**
+ * class representing uml relation between uml classes and interfaces
+ * @author xzimol04
+ * */
 public class UMLRelation extends Element{
     /**
      * type accesible through all classes to determine type of relation

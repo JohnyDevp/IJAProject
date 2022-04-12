@@ -16,6 +16,7 @@ import javafx.scene.text.Text;
 
 /**
  * class for storing the relation between two classes
+ * @author xholan11
  * */
 public class RelationGUI{
 

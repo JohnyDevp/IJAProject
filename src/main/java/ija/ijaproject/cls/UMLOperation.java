@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * class for representing uml operation for both interface and class
+ * @author xzimol04
+ * */
 public class UMLOperation extends UMLAttribute{
 
     /**

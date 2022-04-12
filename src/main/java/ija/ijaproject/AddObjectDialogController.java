@@ -1,3 +1,5 @@
+
+
 package ija.ijaproject;
 
 import ija.ijaproject.cls.ClassDiagram;
@@ -11,7 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+/**
+ * Dialog for adding new interface or class to diagram
+ * @author xholan11
+ * */
 public class AddObjectDialogController {
     @FXML
     public Button btnOk;

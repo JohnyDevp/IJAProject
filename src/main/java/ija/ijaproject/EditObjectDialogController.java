@@ -1,3 +1,5 @@
+
+
 package ija.ijaproject;
 
 import ija.ijaproject.cls.ClassDiagram;
@@ -22,7 +24,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * Controller for editting either class or interface in class diagram => editting attributes and operations
+ * @author xholan11
+ * */
 public class EditObjectDialogController {
 
     @FXML

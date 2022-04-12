@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * class representing the whole class diagram with its items
+ * @author xholan11
+ * */
 public class ClassDiagram extends Element{
     /**
      * list of all classes and interfaces in class diagram
