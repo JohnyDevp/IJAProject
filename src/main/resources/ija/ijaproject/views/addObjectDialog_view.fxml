@@ -8,9 +8,9 @@
 
 <AnchorPane prefHeight="153.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ija.ijaproject.AddObjectDialogController">
    <children>
-      <TextField fx:id="txtField" layoutX="188.0" layoutY="74.0" />
-      <Label layoutX="20.0" layoutY="78.0" text="Name of class/interface" />
-      <CheckBox fx:id="checkBox" layoutX="188.0" layoutY="37.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="154.0" text="Interface" />
-      <Button fx:id="btnOk" layoutX="324.0" layoutY="115.0" mnemonicParsing="false" onAction="#btnOkClick" text="OK" />
+      <TextField fx:id="txtField" layoutX="188.0" layoutY="74.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="74.0" />
+      <Label layoutX="20.0" layoutY="78.0" text="Name of class/interface" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="224.0" AnchorPane.topAnchor="78.0" />
+      <CheckBox fx:id="checkBox" layoutX="188.0" layoutY="37.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="154.0" text="Interface" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="56.0" AnchorPane.topAnchor="37.0" />
+      <Button fx:id="btnOk" layoutX="324.0" layoutY="115.0" mnemonicParsing="false" onAction="#btnOkClick" text="OK" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="324.0" AnchorPane.rightAnchor="37.0" AnchorPane.topAnchor="115.0" />
    </children>
 </AnchorPane>

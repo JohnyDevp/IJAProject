@@ -214,7 +214,7 @@ public class ClassDiagramController {
         //if (clsDlg == null)
 
         jr.parseJsonSequenceDiagrams(
-                "C:\\Users\\jhola\\IdeaProjects\\IJAProject\\src\\main\\resources\\fake.json"
+                "C:\\Users\\jhola\\IdeaProjects\\IJAProject\\src\\main\\resources\\test.json"
         );
     }
 

@@ -4,46 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="add object dialog added, loading complete, saving to be done">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/WelcomeViewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/welcome_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_win_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_linux_11_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_win_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_linux_11_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_win_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_linux_11_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_win_11_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_linux_11_0_2.xml" afterDir="false" />
+    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="javadoc added">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/Launcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IJAProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/IJAProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/AddAttributeDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/AddAttributeDialogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/AddObjectDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/AddObjectDialogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDatatype.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassObjectGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassObjectGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/EditObjectDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/EditObjectDialogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/EditRelationDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/EditRelationDialogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/GUIClassInterfaceTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/GUIClassInterfaceTemplate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/InterfaceObjectGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/InterfaceObjectGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationDatatype.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/ClassDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/ClassDiagram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/Element.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/SequenceDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/SequenceDiagram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLAttribute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLOperation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLRelation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLRelation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fake.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fake.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fake.jsonn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/addObjectDialog_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/addObjectDialog_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/editObjectDialogAddAttribute_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/editObjectDialogAddAttribute_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/editObjectDialog_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/editObjectDialog_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/editRelationDialog_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/editRelationDialog_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/home_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/home_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fake.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +35,7 @@
     </file-type-list>
   </component>
   <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="dd1c2761-b65e-4f26-86f9-5e0cab19e0d0" />
+    <option name="defaultAccountId" value="b474b9e7-5412-429b-9982-c1ba05a3c903" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -92,7 +57,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.39425287" />
-    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -138,7 +103,7 @@
       <workItem from="1649415588119" duration="11512000" />
       <workItem from="1649505205181" duration="556000" />
       <workItem from="1649669408263" duration="27475000" />
-      <workItem from="1649784186822" duration="3451000" />
+      <workItem from="1649784186822" duration="5347000" />
     </task>
     <task id="LOCAL-00001" summary="structure done">
       <created>1648809516399</created>
@@ -301,7 +266,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649691552075</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="javadoc added">
+      <created>1649787677652</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1649787677652</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -337,7 +309,8 @@
     <MESSAGE value="interface gui added, relations missing" />
     <MESSAGE value="interface gui added, relations added, gui relation missing" />
     <MESSAGE value="add object dialog added, loading complete, saving to be done" />
-    <option name="LAST_COMMIT_MESSAGE" value="add object dialog added, loading complete, saving to be done" />
+    <MESSAGE value="javadoc added" />
+    <option name="LAST_COMMIT_MESSAGE" value="javadoc added" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
