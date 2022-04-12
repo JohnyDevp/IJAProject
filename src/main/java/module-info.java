@@ -1,4 +1,4 @@
-module com.example.ijaproject {
+module ija.ijaproject {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.google.gson;
