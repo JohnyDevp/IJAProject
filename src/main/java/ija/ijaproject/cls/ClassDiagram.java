@@ -82,6 +82,11 @@ public class ClassDiagram extends Element{
         umlList.remove(umlClass);
     }
 
+    /**remove object representation from uml class diagram*/
+    public void deleteObject(UMLClassInterfaceTemplate umlObject){
+        umlList.remove(umlObject);
+    }
+
     /**
      * Creates an instance of UML interface and inserts it into diagram
      * If the name already exists returns null

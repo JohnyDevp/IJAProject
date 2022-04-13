@@ -5,4 +5,5 @@ package ija.ijaproject.cls;
  * @author xholan11
  * */
 public class SequenceDiagram {
+
 }

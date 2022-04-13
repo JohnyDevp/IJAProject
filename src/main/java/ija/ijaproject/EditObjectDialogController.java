@@ -2,14 +2,12 @@
 
 package ija.ijaproject;
 
-import ija.ijaproject.cls.ClassDiagram;
-import ija.ijaproject.cls.UMLAttribute;
-import ija.ijaproject.cls.UMLClass;
-import ija.ijaproject.cls.UMLOperation;
+import ija.ijaproject.cls.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -171,6 +169,18 @@ public class EditObjectDialogController {
     }
 
     public void btnDeleteOperation(ActionEvent actionEvent) {
+        //loop the map of attributes and when find then remove it
+        for (Map.Entry<UMLOperation,Text> mapAttr : ((ClassObjectGUI)guiObject).getMapOfOperations().entrySet()){
+            if(cmbOperations.getValue() == mapAttr.getValue().getText()){
+                //remove from canvas
+                this.canvas.getChildren().remove(mapAttr.getValue());
+                //remove attribute's representations
+                guiObject.removeOperation(mapAttr.getKey());
+            }
+        }
+        //reload combobox
+        loadCmbOperations();
+        cmbOperations.setItems(cmbOperations.getItems());
     }
 
     public void btnAddOperation(ActionEvent actionEvent) {
@@ -190,10 +200,10 @@ public class EditObjectDialogController {
         else {
             //add it to canvas
             this.canvas.getChildren().add(txtOpr);
-            //reload combobox
-            loadCmbOperations();
-            cmbAttributes.setItems(cmbAttributes.getItems());
         }
+        //reload combobox
+        loadCmbOperations();
+        cmbAttributes.setItems(cmbAttributes.getItems());
     }
 
     /**add attribute for operation*/
@@ -215,5 +225,59 @@ public class EditObjectDialogController {
             //add attribute to the list of attributes for operation
             this.attributesOfOperation.add(dlgController.getUmlAttribute());
         }
+    }
+
+    /**remove whole object*/
+    public void btnRemove(ActionEvent e){
+        //remove all relations from intern representation
+        this.clsDiag.deleteObject(this.guiObject.getObject());
+
+        //remove object from canvas
+        this.canvas.getChildren().removeAll(
+                this.guiObject.getClassBorder(),
+                this.guiObject.getClassBox(),
+                this.guiObject.getClassNameLabel(),
+                this.guiObject.getLine1(),
+                this.guiObject.getLine2(),
+                this.guiObject.getClickableCorner()
+        );
+        if (this.guiObject.getClass() == InterfaceObjectGUI.class){
+            canvas.getChildren().remove(((InterfaceObjectGUI)this.guiObject).getLabelOfInterface());
+        }
+        //adding attributes iff class
+        if (this.guiObject.getClass() == ClassObjectGUI.class){
+            for (Text attr : ((ClassObjectGUI)this.guiObject).getListOfAttributes()) {canvas.getChildren().remove(attr);}
+        }
+        for (Text op : this.guiObject.getListOfOperations()) {canvas.getChildren().remove(op);}
+
+        //remove all relation related to this object
+        for (RelationGUI relationGUI : this.guiObject.getListOfRelations()){
+            //remove relation from class diagram
+            this.clsDiag.removeRelation(relationGUI.getUmlRelation());
+
+            //remove relation from canvas
+            relationGUI.removeFromCanvas();
+
+            //change all colored operations in when it was generalization relation
+            relationGUI.setRelationType(UMLRelation.RelationType.ASSOCIATION);
+        }
+
+        //remove relation references
+        for (RelationGUI relationGUI : this.guiObject.getListOfRelations()){
+            // relationGUI.getRelClassToGUI().getListOfRelations().remove(relationGUI);
+            relationGUI.getRelClassFromGUI().getListOfRelations().remove(relationGUI);
+        }
+
+
+        //close this dialog
+        closeStage(e);
+    }
+
+    /**
+     * method for closing this stage - from */
+    private void closeStage(ActionEvent event) {
+        Node source = (Node)  event.getSource();
+        Stage stage  = (Stage) source.getScene().getWindow();
+        stage.close();
     }
 }

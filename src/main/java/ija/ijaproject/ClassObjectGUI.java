@@ -2,17 +2,8 @@
 
 package ija.ijaproject;
 
-import ija.ijaproject.cls.ClassDiagram;
 import ija.ijaproject.cls.UMLAttribute;
 import ija.ijaproject.cls.UMLClass;
-import ija.ijaproject.cls.UMLOperation;
-import javafx.scene.Cursor;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
@@ -27,9 +18,8 @@ import java.util.Map;
 public class ClassObjectGUI extends GUIClassInterfaceTemplate{
 
     /**graphical parts of class object*/
-    private List<Text> listOfAttributes = new ArrayList<>();
-
-    private Map<UMLAttribute,Text> mapOfAttributes = new HashMap<UMLAttribute,Text>();
+    protected List<Text> listOfAttributes = new ArrayList<>();
+    protected Map<UMLAttribute,Text> mapOfAttributes = new HashMap<UMLAttribute,Text>();
 
     /**
      * getters
@@ -79,7 +69,11 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate{
         this.mapOfAttributes.remove(umlAttribute);
         //remove intern representation
         ((UMLClass)this.getObject()).deleteAttribute(umlAttribute.getName());
+
+        //resize class gui iff necessary
+        this.resizeObjectGUI();
     }
+
 
     /**
      * method without control - has been checked already - called by constructor
@@ -91,35 +85,38 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate{
         attribute.setId(umlAttribute.getName());
 
         if (listOfAttributes.isEmpty()){
-            attribute.setY(this.getLine1().getStartY() + 15);
-            attribute.setX(this.getClassNameLabel().getX());
+            //attribute.setY(this.getLine1().getStartY() + 15);
+            //attribute.setX(this.getClassNameLabel().getX());
 
         } else{
-            Text lastAttr = listOfAttributes.get(listOfAttributes.size() -1);
-            attribute.setY(lastAttr.getY() + 15);
-            attribute.setX(lastAttr.getX());
+            //Text lastAttr = listOfAttributes.get(listOfAttributes.size() -1);
+            //attribute.setY(lastAttr.getY() + 15);
+            //attribute.setX(lastAttr.getX());
 
         }
 
         //reset the class height of border and box
-        getClassBox().setHeight(getClassBox().getHeight() + 15);
-        getClassBorder().setHeight(getClassBorder().getHeight() + 15);
+        //getClassBox().setHeight(getClassBox().getHeight() + 15);
+        //getClassBorder().setHeight(getClassBorder().getHeight() + 15);
 
-        //resizing width of class gui if necessary (according to text width)
-        this.resizeClassWidth(attribute.getLayoutBounds().getWidth());
+
 
         //necessary to move all operations under this attributes - operations are under attributes
         //and also move the line dividing space for attributes and operations
-        this.getLine2().setStartY(this.getLine2().getStartY() + 15);
-        this.getLine2().setEndY(this.getLine2().getEndY() + 15);
-        for(Text attr : getListOfOperations()){
-            attr.setY(attr.getY() + 15);
-        }
+        //this.getLine2().setStartY(this.getLine2().getStartY() + 15);
+        //this.getLine2().setEndY(this.getLine2().getEndY() + 15);
+        //for(Text attr : getListOfOperations()){
+        //    attr.setY(attr.getY() + 15);
+        //}
 
         //add attributes to map
         this.mapOfAttributes.put(umlAttribute,attribute);
 
         listOfAttributes.add(attribute);
+
+        //resizing width of class gui if necessary (according to text width)
+        this.resizeObjectGUI();
+
         return attribute;
     }
 

@@ -48,7 +48,8 @@ public class ClassDiagramController {
     private boolean createRelation = false;
     //for temporary storing currently creating relation
     private RelationGUI relation;
-    private RelationGUI relationForChange;
+    private RelationGUI selectedRelation;
+
     public enum relType{ASSOCIATION, AGGREGATION, COMPOSITION, GENERALIZATION}
 
     /**
@@ -198,9 +199,12 @@ public class ClassDiagramController {
                 //loop through graphical representation of classes and interfaces and when there is match between UMLClass of relation
                 // and graphical representation then add this relation to
                 for (GUIClassInterfaceTemplate guiObject : GUIObjectsList) {
-                    if (guiObject.getObject() == umlRelation.getRelationFromObject() ||
-                        guiObject.getObject() == umlRelation.getRelationToObject()) {
-
+                    if (guiObject.getObject() == umlRelation.getRelationFromObject()) {
+                        relationGUI.setRelationFrom(umlRelation.getRelationFromObject(),guiObject, umlRelation.getStartX(), umlRelation.getStartY());
+                        //add graphical representation of relation to the GUIObject
+                        guiObject.addRelation(relationGUI);
+                    } else if(guiObject.getObject() == umlRelation.getRelationToObject()) {
+                        relationGUI.setRelationTo(umlRelation.getRelationToObject(), guiObject, umlRelation.getEndX(), umlRelation.getEndY());
                         //add graphical representation of relation to the GUIObject
                         guiObject.addRelation(relationGUI);
                     }
@@ -360,7 +364,8 @@ public class ClassDiagramController {
             return;
         }
 
-
+        //if the button was pressed for creating relation then start its creation
+        //if it was pressed for cancel creating relation then cancel it
         if (!this.createRelation){
             this.createRelation = true;
             //todo combobox dialog for choosing relation type
@@ -373,8 +378,11 @@ public class ClassDiagramController {
         }
     }
 
+    /**method handling creating dialog for editing object*/
     @FXML
     public void btnEditObject(ActionEvent e) throws IOException {
+        if (this.selectedClass == null) return; // if no object is selected then return
+
         //show creating dialog
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("views/editObjectDialog_view.fxml"));
         Parent parent = fxmlLoader.load();
@@ -389,6 +397,31 @@ public class ClassDiagramController {
         stage.showAndWait();
     }
 
+    /**method for handling creating dialog for editing relation*/
+    @FXML
+    public void btnEditRelation(ActionEvent e) throws IOException{
+        if (this.selectedRelation == null) return; // if no object is selected then return
+
+        //show creating dialog
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("views/editRelationDialog_view.fxml"));
+        Parent parent = fxmlLoader.load();
+        EditRelationDialogController dlgController = fxmlLoader.<EditRelationDialogController>getController();
+        dlgController.init(this.selectedRelation, this.canvas, this.classDiagram);
+
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+
+
+    }
+
+    /**method for handling saving current state of class diagram to json file*/
+    @FXML
+    public void btnSave(ActionEvent e){
+
+    }
     /**
      * method for adding each class object from object list to canvas
      * and adding actions to handler for enabling control of these classes
@@ -424,14 +457,14 @@ public class ClassDiagramController {
             //choose whether is setting the start or end of the relation
             if (!this.relation.getRelationFromSet()){
                 //start relation
-                this.relation.setRelationFrom(classObject.getObject(), event.getX(), event.getY());
+                this.relation.setRelationFrom(classObject.getObject(), classObject, event.getX(), event.getY());
                 classObject.addRelation(relation);
                 System.out.println(event.getX()+ " " + event.getY());
             } else {
                 //end relation
                 if (this.relation.getRelClassFrom() == classObject.getObject()) return; //if the click was twice to the same object
 
-                this.relation.setRelationTo(classObject.getObject(), event.getX(), event.getY());
+                this.relation.setRelationTo(classObject.getObject(), classObject, event.getX(), event.getY());
 
                 //add reference for this relation to the end class object
                 classObject.addRelation(relation);
@@ -440,9 +473,12 @@ public class ClassDiagramController {
                 this.createRelation = false;
                 this.btnAddRelation.setText("ADD RELATION");
 
-                //todo - place for creating dialog to setup relation params
+                //add uml representation of relation to class diagram
+                UMLRelation umlRelation = new UMLRelation("", relation.getRelClassFrom(), relation.getRelClassTo(), relation.getRelationType());
+                this.classDiagram.addRelation(umlRelation);
+                relation.setUmlRelation(umlRelation);
+
                 addRelationOnCanvasAndSetActions(this.relation);
-//                this.canvas.getChildren().addAll(this.relation.getRelLine(), this.relation.getRelLineEnd());
                 System.out.println(this.relation.getRelLine().toString());
             }
 
@@ -544,18 +580,18 @@ public class ClassDiagramController {
      * */
     public void addRelationOnCanvasAndSetActions(RelationGUI relation){
         //add relation on canvas
-        this.canvas.getChildren().addAll(relation.getRelLine(), relation.getRelLineEnd());
+        //this.canvas.getChildren().addAll(relation.getRelLine(), relation.getRelLineEnd());
 
         //set the event when click on the line
         relation.getRelLine().setOnMouseClicked(mouseEvent -> {
-            if (relationForChange != null){
-                relationForChange.getRelLine().setStroke(Color.BLACK);
+            if (selectedRelation != null){
+                selectedRelation.getRelLine().setStroke(Color.BLACK);
             }
-            if (relationForChange == relation){
-                relationForChange = null;
+            if (selectedRelation == relation){
+                selectedRelation = null;
                 relation.getRelLine().setStroke(Color.BLACK);
             } else {
-                relationForChange = relation;
+                selectedRelation = relation;
                 relation.getRelLine().setStroke(Color.BLUE);
             }
         });

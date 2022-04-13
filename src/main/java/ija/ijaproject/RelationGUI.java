@@ -22,10 +22,13 @@ public class RelationGUI{
 
     private boolean relationFromSet = false;
     private UMLRelation.RelationType relationType;
+    private UMLRelation umlRelation;
     private Pane canvas;
 
     private UMLClassInterfaceTemplate relClassFrom;
+    private GUIClassInterfaceTemplate relClassFromGUI;
     private UMLClassInterfaceTemplate relClassTo;
+    private GUIClassInterfaceTemplate relClassToGUI;
 
     private Line relLine;
 
@@ -40,8 +43,8 @@ public class RelationGUI{
     private Text nameOfRelation;
 
     /**
-     * constructor
-     * @param umlRelation type of the relation
+     * constructor used when loading from while - everything is known
+     * @param umlRelation representation of relation
      * creating the line and its event for handling selecting this line
      * setting up the relation type
      * */
@@ -56,17 +59,19 @@ public class RelationGUI{
 
         //set type of relation
         this.relationType = umlRelation.getRelationType();
+        this.umlRelation = umlRelation;
 
-        //set relation start and end objects
-        setRelationFrom(umlRelation.getRelationFromObject(), umlRelation.getStartX(), umlRelation.getStartY());
-        setRelationTo(umlRelation.getRelationToObject(), umlRelation.getEndX(), umlRelation.getEndY());
-
+        /*//set relation start and end objects
+        setRelationFrom(umlRelation.getRelationFromObject(),null, umlRelation.getStartX(), umlRelation.getStartY());
+        setRelationTo(umlRelation.getRelationToObject(), null, umlRelation.getEndX(), umlRelation.getEndY());
+*/
         //set relation attributes
         setNameOfRelation(umlRelation.getName());
         setCardinalityByFromClass(umlRelation.getCardinalityByFromClass());
         setCardinalityByToClass(umlRelation.getCardinalityByToClass());
     }
 
+    /**constructor used when relation created in gui*/
     public RelationGUI(UMLRelation.RelationType type, Pane canvas){
         //set up the line and the event when click on the relation
         this.relLine = new Line();
@@ -82,6 +87,17 @@ public class RelationGUI{
         this.canvas = canvas;
     }
 
+    /**set uml relation if it hasnt been set yet*/
+    public void setUmlRelation(UMLRelation umlRelation) {
+        this.umlRelation = umlRelation;
+    }
+
+    /**set relation type for gui and also graphical representation*/
+    public void setRelationType(UMLRelation.RelationType relationType) {
+        this.relationType = relationType;
+        this.umlRelation.setRelationType(relationType);
+        generalizationStateHandling();
+    }
 
     /**
      * set all information about relation beginning
@@ -89,11 +105,12 @@ public class RelationGUI{
      * @param X X coordinate of the point where the relation starts
      * @param Y Y coordinate of the point where the relation starts
      * */
-    public void setRelationFrom(UMLClassInterfaceTemplate relClassFrom, double X, double Y){
+    public void setRelationFrom(UMLClassInterfaceTemplate relClassFrom, GUIClassInterfaceTemplate relClassFromGUI, double X, double Y){
         this.relLine.setStartX(X);
         this.relLine.setStartY(Y);
         this.relationFromSet = true;
         this.relClassFrom = relClassFrom;
+        this.relClassFromGUI = relClassFromGUI;
     }
 
     /**
@@ -103,21 +120,46 @@ public class RelationGUI{
      * @param X X coordinate of the point where the relation ends
      * @param Y Y coordinate of the point where the relation ends
      * */
-    public void setRelationTo(UMLClassInterfaceTemplate relClassTo, double X, double Y){
+    public void setRelationTo(UMLClassInterfaceTemplate relClassTo, GUIClassInterfaceTemplate relClassToGUI,double X, double Y){
         this.relLine.setEndX(X);
         this.relLine.setEndY(Y);
         this.relClassTo = relClassTo;
-
+        this.relClassToGUI = relClassToGUI;
         //set up the polygon representing the relation line ending
         this.relLineEnd = new Polygon();
 
+        this.canvas.getChildren().add(getRelLine());
+        //check whether the end isn't interface, so the start object would have colored operations(method) when the
         //creates relation line ending
         setNewRelLineEndPosition();
 
+        //if there is a generalization then handle overridden methods
+        generalizationStateHandling();
+
+    }
+
+    /**when the relation is generalization it is necessary to check for the overriding methods*/
+    public void generalizationStateHandling(){
+        if(relClassToGUI == null || relClassFromGUI == null) return;
+
+        for (Text txtOperation : getRelClassFromGUI().getListOfOperations()){
+            //if there is going for generalization
+            if (getRelationType() == UMLRelation.RelationType.GENERALIZATION){
+                for (Text txtOverrideOperation : getRelClassToGUI().getListOfOperations()){
+                    System.out.println(txtOperation.getText().substring(1));
+                    System.out.println(txtOverrideOperation.getText().substring(1));
+                    if (txtOperation.getText().substring(1).equals(txtOverrideOperation.getText().substring(1))){
+                        txtOperation.setFill(Color.ORANGE);
+                    }
+                }
+            } else { txtOperation.setFill(Color.BLACK);}
+        }
     }
 
 
+    /**method for moving the relation on canvas*/
     public void recomputeRelationDesign(UMLClassInterfaceTemplate classObject, double diffX, double diffY){
+        //decide what end position of relation to change
         if(getRelClassFrom() == classObject){
             getRelLine().setStartX(getRelLine().getStartX() + diffX);
             getRelLine().setStartY(getRelLine().getStartY() + diffY);
@@ -127,22 +169,29 @@ public class RelationGUI{
         }
 
         //things that are moved the same way all time when moving relation
-        canvas.getChildren().remove(getRelLineEnd());
+        //canvas.getChildren().remove(getRelLineEnd());
         setNewRelLineEndPosition();
-        canvas.getChildren().add(getRelLineEnd());
+        //canvas.getChildren().add(getRelLineEnd());
 
-        canvas.getChildren().remove(getNameOfRelation());
-        setNameOfRelation("neco");
-        canvas.getChildren().remove(getCardinalityByFromClass());
-        setCardinalityByFromClass("0..1");
-        canvas.getChildren().remove(getCardinalityByToClass());
-        setCardinalityByToClass("0..*");
+        //change position of relation attributes (iff exist)
+        //canvas.getChildren().remove(getNameOfRelation());
+        //canvas.getChildren().remove(getCardinalityByToClass());
+        //canvas.getChildren().remove(getCardinalityByFromClass());
+
+        if (getNameOfRelation() != null && !getNameOfRelation().getText().equals("")) setNameOfRelation(getNameOfRelation().getText());
+        if ( getCardinalityByFromClass() != null && getCardinalityByToClass() != null && !(getCardinalityByFromClass().getText().equals("") && getCardinalityByToClass().getText().equals(""))) {
+            setCardinalityByFromClass(getCardinalityByFromClass().getText());
+            setCardinalityByToClass(getCardinalityByToClass().getText());
+        }
     }
+
     /**
      * set the ending polygon which sets the type of the relation
      * or arrow which is compound of two lines
      * */
     public void setNewRelLineEndPosition(){
+        //remove the rel line ending if already on canvas
+        this.canvas.getChildren().removeAll(getRelLineEnd(), line1, line2);
         this.relLineEnd = new Polygon();
 
         double slope = (this.relLine.getStartY() - this.relLine.getEndY()) / (this.relLine.getStartX() - this.relLine.getEndX());
@@ -259,10 +308,14 @@ public class RelationGUI{
             break;
         }
 
+        this.canvas.getChildren().add(getRelLineEnd());
     }
 
 
     public void setNameOfRelation(String name){
+        //remove the label with name of relation if has been set already
+        this.canvas.getChildren().remove(this.getNameOfRelation());
+
         Text text = new Text();
 
         double lineLength = Math.sqrt(Math.pow((this.relLine.getStartY() - this.relLine.getEndY()), 2) + Math.pow((this.relLine.getStartX() - this.relLine.getEndX()),2));
@@ -287,6 +340,9 @@ public class RelationGUI{
     }
 
     public void setCardinalityByToClass(String cardinality){
+        //remove from canvas the label with cardinality, if set already
+        this.canvas.getChildren().remove(getCardinalityByToClass());
+
         Text text = new Text();
 
         //computed values for choose the right place on the relation line for the text label
@@ -312,6 +368,9 @@ public class RelationGUI{
     }
 
     public void setCardinalityByFromClass(String cardinality){
+        //remove the label with cardinality from canvas if it has been set already
+        this.canvas.getChildren().remove(getCardinalityByFromClass());
+
         Text text = new Text();
 
         //computed values for choose the right place on the relation line for the text label
@@ -336,14 +395,42 @@ public class RelationGUI{
         canvas.getChildren().add(text);
     }
 
+    /**function for removal relation from canvas*/
+    public void removeFromCanvas(){
+        this.canvas.getChildren().removeAll(
+                this.getRelLine(),
+                this.getNameOfRelation(),
+                this.getCardinalityByToClass(),
+                this.getCardinalityByFromClass(),
+                this.getRelLineEnd(),
+                this.line1,
+                this.line2
+        );
+
+    }
+
     /**
      * getters
      * */
     public Text getNameOfRelation() {return this.nameOfRelation;}
+
+    public UMLRelation getUmlRelation() {
+        return umlRelation;
+    }
+
     public Text getCardinalityByToClass() {return this.cardinalityByToClass;}
     public Text getCardinalityByFromClass() {return this.cardinalityByFromClass;}
     public boolean getRelationFromSet() {return this.relationFromSet; }
+    public UMLRelation.RelationType getRelationType() {
+        return relationType;
+    }
+    public GUIClassInterfaceTemplate getRelClassFromGUI() {
+        return relClassFromGUI;
+    }
     public UMLClassInterfaceTemplate getRelClassFrom() {return this.relClassFrom; }
+    public GUIClassInterfaceTemplate getRelClassToGUI() {
+        return relClassToGUI;
+    }
     public UMLClassInterfaceTemplate getRelClassTo() {return this.relClassTo; }
     public Line getRelLine() {return this.relLine; }
     public Polygon getRelLineEnd() {return this.relLineEnd; }

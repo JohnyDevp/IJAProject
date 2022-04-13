@@ -27,9 +27,13 @@ public class InterfaceObjectGUI extends GUIClassInterfaceTemplate{
         //set the label of interface
         this.getClassNameLabel().setY(this.getClassNameLabel().getY() - 2);
 
+
         Text label = new Text("<<interface>>");
         label.setX(this.getClassBorder().getX() + this.getClassBorder().getWidth()/2 - label.getLayoutBounds().getWidth()/2);
         label.setY(this.getClassNameLabel().getY() + 13);
         this.interfaceLabel = label;
+        resizeObjectGUI();
+
     }
+
 }

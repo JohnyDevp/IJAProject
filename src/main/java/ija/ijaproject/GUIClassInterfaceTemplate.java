@@ -3,7 +3,6 @@ package ija.ijaproject;
 
 import ija.ijaproject.cls.*;
 import javafx.scene.Cursor;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -88,6 +87,13 @@ public abstract class GUIClassInterfaceTemplate {
         this.setXcoord(umlClassInterfaceTemplate.getXcoord());
         this.setYcoord(umlClassInterfaceTemplate.getYcoord());
 
+        //necessary to initialize attributes list if class takes part
+        //this has to be here=> otherwise it will fail when resizing methods will be called
+        if (this.object.getClass() == UMLClass.class){
+            ((ClassObjectGUI)this).listOfAttributes = new ArrayList<>();
+            ((ClassObjectGUI)this).mapOfAttributes = new HashMap<>();
+        }
+
         //create graphical representation
         this.createClassInterfaceObjectGUI();
 
@@ -101,6 +107,7 @@ public abstract class GUIClassInterfaceTemplate {
      * creating all graphical objects for necessary for empty class
      */
     protected void createClassInterfaceObjectGUI(){
+
         //create border of the object
         Rectangle rectangleBorder = new Rectangle(100,90, Color.BLACK);
         rectangleBorder.setX(getXcoord());
@@ -117,36 +124,39 @@ public abstract class GUIClassInterfaceTemplate {
         //sets the class name
         Text className = new Text(this.name);
         className.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
-        className.setY(rectangle.getY() + 35);
-        className.setX(rectangle.getX() + 5);
+        //className.setY(rectangle.getY() + 35);
+        //className.setX(rectangle.getX() + 5);
         this.classNameLabel = className;
 
         //resizing both rectangle and its border
-        rectangle.setWidth(className.getLayoutBounds().getWidth()+ 10);
-        rectangleBorder.setWidth(className.getLayoutBounds().getWidth()+ 20);
+        //rectangle.setWidth(className.getLayoutBounds().getWidth()+ 10);
+        //rectangleBorder.setWidth(className.getLayoutBounds().getWidth()+ 20);
 
         //create clickable corner
         Rectangle clickableCorner = new Rectangle(rectangleBorder.getWidth() / 2,20, deselectedClassColor);
-        clickableCorner.setX(rectangleBorder.getX() + rectangleBorder.getWidth()/2 - clickableCorner.getWidth()/2 );
-        clickableCorner.setY(rectangle.getY());
+        //clickableCorner.setX(rectangleBorder.getX() + rectangleBorder.getWidth()/2 - clickableCorner.getWidth()/2 );
+        //clickableCorner.setY(rectangle.getY());
         clickableCorner.setCursor(Cursor.MOVE);
         this.clickableCorner = clickableCorner;
 
         //sets the two lines which will divide the space of classbox to three parts
         // 1) class name 2) class attributes 3) class operations
         Line line1 = new Line();
-        line1.setStartX(rectangle.getX());
-        line1.setStartY(className.getY() + 15);
-        line1.setEndX(rectangle.getX() + rectangle.getWidth());
-        line1.setEndY(line1.getStartY());
+        //line1.setStartX(rectangle.getX());
+        //line1.setStartY(className.getY() + 15);
+        //line1.setEndX(rectangle.getX() + rectangle.getWidth());
+        //line1.setEndY(line1.getStartY());
         this.line1 = line1;
 
         Line line2 = new Line();
-        line2.setStartX(rectangle.getX());
-        line2.setStartY(line1.getStartY() + 15);
-        line2.setEndX(rectangle.getX() + rectangle.getWidth());
-        line2.setEndY(line2.getStartY());
+        //line2.setStartX(rectangle.getX());
+        //line2.setStartY(line1.getStartY() + 15);
+        //line2.setEndX(rectangle.getX() + rectangle.getWidth());
+        //line2.setEndY(line2.getStartY());
         this.line2 = line2;
+
+        //resize class gui iff necessary
+        resizeObjectGUI();
     }
 
     /**
@@ -156,37 +166,122 @@ public abstract class GUIClassInterfaceTemplate {
      *         or the Text element representing the operation
      * */
     public Text addOperation(UMLOperation umlOperation){
-
         //if the operation with the name is already there then it will fail and return null
         if (!this.object.addOperation(umlOperation)) {return null;}
 
        return addOperationFromConstructor(umlOperation);
     }
 
+    /**remove operation and all its references*/
+    public void removeOperation(UMLOperation umlOperation){
+        //remove text representation
+        this.listOfOperations.remove(this.mapOfOperations.get(umlOperation));
+        //remove map representation
+        this.mapOfOperations.remove(umlOperation);
+        //remove intern representation
+        ((UMLClass)this.getObject()).deleteOperation(umlOperation.getName());
+
+        //resize class gui iff necessary
+        resizeObjectGUI();
+    }
+
     /**
      * method for resizing class width
      * resizing width of class gui iff necessary (according to text width)
      * */
-    protected void resizeClassWidth(double width){
-        if (width < getClassBox().getWidth() + 5){ return ;}
+    protected void resizeObjectGUI(){
+        //width of border
+        double newWidth = 90;
+        double curr_max = 0;
+        double height = 105;
 
-        //center class name
-        this.getClassNameLabel().setX(
-                this.getClassBorder().getX() + ((width+20) / 2) - getClassNameLabel().getLayoutBounds().getWidth()/2
-        );
+        //loop through all items which object consists of and decide whether to get smaller or weider
+        if (this.getClassNameLabel().getLayoutBounds().getWidth() > curr_max) curr_max =this.getClassNameLabel().getLayoutBounds().getWidth();
+
+        if (this.getClass() == InterfaceObjectGUI.class && ((InterfaceObjectGUI)this).getLabelOfInterface() != null) {
+            if (((InterfaceObjectGUI)this).getLabelOfInterface().getLayoutBounds().getWidth() > curr_max) curr_max= ((InterfaceObjectGUI)this).getLabelOfInterface().getLayoutBounds().getWidth();
+            height += 15;
+        }
+        if (this.getClass() == ClassObjectGUI.class){
+            for (Text txtAttribute : ((ClassObjectGUI)this).getListOfAttributes()){
+                if (txtAttribute.getLayoutBounds().getWidth() > curr_max) curr_max = txtAttribute.getLayoutBounds().getWidth();
+                height += 15;
+            }
+        }
+        for (Text txtOperation : this.getListOfOperations()){
+            if (txtOperation.getLayoutBounds().getWidth() > curr_max) curr_max = txtOperation.getLayoutBounds().getWidth();
+            height += 15;
+        }
+
+        //set desired width
+        if (newWidth < curr_max) newWidth = curr_max;
+        
+        //resize=================================================
+        newWidth += 20;
+        //  border
+        this.getClassBorder().setWidth(newWidth);
+        this.getClassBorder().setHeight(height+10);
+        double currentHeightFromBordersY=this.getClassBorder().getY();
+
+        // box
+        currentHeightFromBordersY += 5;
+        this.getClassBox().setWidth(newWidth - 10);
+        this.getClassBox().setHeight(height);
+        this.getClassBox().setY(currentHeightFromBordersY);
 
         //clickable corner
+        currentHeightFromBordersY += 0;
         this.getClickableCorner().setX(
-                this.getClassBorder().getX() + ((width+20) / 2) - getClickableCorner().getWidth()/2
+                this.getClassBorder().getX() + (newWidth / 2) - getClickableCorner().getWidth()/2
         );
+        this.getClickableCorner().setY(currentHeightFromBordersY);
 
-        //box and border
-        this.getClassBox().setWidth(width + 10);
-        this.getClassBorder().setWidth(width + 20);
+        // class name
+        currentHeightFromBordersY += 35;
+        this.getClassNameLabel().setX(
+                this.getClassBorder().getX() + (newWidth/ 2) - getClassNameLabel().getLayoutBounds().getWidth()/2
+        );
+        this.getClassNameLabel().setY(currentHeightFromBordersY);
 
-        //lines
-        this.getLine1().setEndX(getLine1().getStartX() + width + 10);
-        this.getLine2().setEndX(getLine2().getStartX() + width + 10);
+        //possible label interface
+        if (this.getClass() == InterfaceObjectGUI.class && ((InterfaceObjectGUI)this).getLabelOfInterface() != null) {
+            currentHeightFromBordersY += 20;
+            ((InterfaceObjectGUI)this).getLabelOfInterface().setY(currentHeightFromBordersY);
+            ((InterfaceObjectGUI)this).getLabelOfInterface().setX(
+                    this.getClassBorder().getX() + (newWidth/ 2) - ((InterfaceObjectGUI)this).getLabelOfInterface().getLayoutBounds().getWidth()/2
+            );
+        }
+
+        //line 1
+        currentHeightFromBordersY += 20;
+        this.getLine1().setStartX(getClassBorder().getX());
+        this.getLine1().setEndX(getClassBorder().getX() + newWidth);
+        this.getLine1().setStartY(currentHeightFromBordersY);
+        this.getLine1().setEndY(currentHeightFromBordersY);
+
+        //attributes
+        if (this.getClass() == ClassObjectGUI.class){
+            for (Text txtAttribute : ((ClassObjectGUI)this).getListOfAttributes()){
+                txtAttribute.setX(getClassBorder().getX() + 10);
+                currentHeightFromBordersY += 20;
+                txtAttribute.setY(currentHeightFromBordersY);
+            }
+        }
+
+        //line 2
+        currentHeightFromBordersY += 20;
+        this.getLine2().setStartX(getClassBorder().getX());
+        this.getLine2().setEndX(getClassBorder().getX() + newWidth);
+        this.getLine2().setStartY(currentHeightFromBordersY);
+        this.getLine2().setEndY(currentHeightFromBordersY);
+
+        //operations
+        for (Text txtOperation : this.getListOfOperations()){
+            txtOperation.setX(getClassBorder().getX() + 10);
+            currentHeightFromBordersY += 20;
+            txtOperation.setY(currentHeightFromBordersY);
+        }
+
     }
 
     /**
@@ -196,13 +291,6 @@ public abstract class GUIClassInterfaceTemplate {
         this.listOfRelations.add(relation);
     }
 
-    /**
-     * method which goes through relations and when it detects a generalization it will mark methods, which are overridden*/
-    public void markOperationsWhileGeneralization(Pane canvas){
-        for (RelationGUI relationGUI : getListOfRelations()){
-            //todo
-        }
-    }
 
     /**
      * method only for constructor
@@ -219,29 +307,33 @@ public abstract class GUIClassInterfaceTemplate {
         //set text of operation (see on canvas)
         Text operation = new Text(textOfOperation.toString());
 
-
         if (listOfOperations.isEmpty()){
-            operation.setY(this.getLine2().getStartY() + 15);
-            operation.setX(this.getClassNameLabel().getX());
+            //operation.setY(this.getLine2().getStartY() + 15);
+            //operation.setX(this.getClassNameLabel().getX());
         }
         else {
-            Text lastOp = listOfOperations.get(listOfOperations.size() -1 );
-            operation.setY(lastOp.getY() + 15);
-            operation.setX(lastOp.getX());
+            //Text lastOp = listOfOperations.get(listOfOperations.size() -1 );
+            //operation.setY(lastOp.getY() + 15);
+            //operation.setX(lastOp.getX());
         }
 
         //add operation to list of operations
         listOfOperations.add(operation);
 
         //reset the class height of border and box
-        getClassBox().setHeight(getClassBox().getHeight() + 15);
-        getClassBorder().setHeight(getClassBorder().getHeight() + 15);
+        //getClassBox().setHeight(getClassBox().getHeight() + 15);
+        //getClassBorder().setHeight(getClassBorder().getHeight() + 15);
 
         //resize classbox iff necessary
-        resizeClassWidth(operation.getLayoutBounds().getWidth());
+        resizeObjectGUI();
 
         //map operation
         this.mapOfOperations.put(umlOperation, operation);
+
+        //notify all relation that there is new operation which is possible to be overridden
+        for (RelationGUI relationGUI : this.getListOfRelations()) {
+            relationGUI.generalizationStateHandling();
+        }
 
         return operation;
     }
