@@ -112,6 +112,7 @@ public class EditObjectDialogController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("views/editObjectDialogAddAttribute_view.fxml"));
         Parent parent = fxmlLoader.load();
         AddAttributeDialogController dlgController = fxmlLoader.<AddAttributeDialogController>getController();
+        dlgController.init(true);
 
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
@@ -201,6 +202,10 @@ public class EditObjectDialogController {
             //add it to canvas
             this.canvas.getChildren().add(txtOpr);
         }
+
+        //remove all attributes from operation list - if there will be another adding of new operation
+        this.attributesOfOperation = new ArrayList<>();
+
         //reload combobox
         loadCmbOperations();
         cmbAttributes.setItems(cmbAttributes.getItems());
@@ -212,6 +217,7 @@ public class EditObjectDialogController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("views/editObjectDialogAddAttribute_view.fxml"));
         Parent parent = fxmlLoader.load();
         AddAttributeDialogController dlgController = fxmlLoader.<AddAttributeDialogController>getController();
+        dlgController.init(false);
 
         Scene scene = new Scene(parent);
         Stage stage = new Stage();

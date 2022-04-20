@@ -221,15 +221,17 @@ public class JsonReader {
             while (itrThroughAttributes.hasNext()) {
                 Map mAttributes = (Map) itrThroughAttributes.next();
 
-                //create new umlAttribtue
+                //create new umlAttribute
                 UMLAttribute umlAttribute;
 
+                String attrModifier = (String) mAttributes.get("modifier");
                 String attrName = (String) mAttributes.get("name");
                 String attrType = (String) mAttributes.get("type");
 
                 //if name and type are set then called constructor of umlAttribute
-                if (attrName != null && attrType != null) {
-                    umlAttribute = new UMLAttribute(attrName, attrType);
+                if (attrModifier != null && attrName != null && attrType != null) {
+                    if (!"#~+-".contains(attrModifier)) return false; //attribute has bad modifier
+                    umlAttribute = new UMLAttribute(attrModifier.toCharArray()[0],attrName, attrType);
                 } else {
                     return false;
                 }

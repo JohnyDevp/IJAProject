@@ -4,21 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="version 1.1">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonWriter.java" afterDir="false" />
+    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="version 1.2 class diagram missing only saving and undo operation">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/Errors.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceObjectGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceRelationGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/AddAttributeDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/AddAttributeDialogController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassObjectGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassObjectGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/EditObjectDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/EditObjectDialogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/EditRelationDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/EditRelationDialogController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/GUIClassInterfaceTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/GUIClassInterfaceTemplate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/InterfaceObjectGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/InterfaceObjectGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/ClassDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/ClassDiagram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/SequenceDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/SequenceDiagram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/classDiagram_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/classDiagram_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/editObjectDialog_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/editObjectDialog_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/editRelationDialog_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/editRelationDialog_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLAttribute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLOperation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/editObjectDialogAddAttribute_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/editObjectDialogAddAttribute_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/sequenceDiagram_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/sequenceDiagram_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +120,7 @@
       <workItem from="1649669408263" duration="27475000" />
       <workItem from="1649784186822" duration="5378000" />
       <workItem from="1649790966590" duration="592000" />
-      <workItem from="1649791924847" duration="34815000" />
+      <workItem from="1649791924847" duration="54386000" />
     </task>
     <task id="LOCAL-00001" summary="structure done">
       <created>1648809516399</created>
@@ -307,7 +311,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649791979908</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="version 1.2 class diagram missing only saving and undo operation">
+      <created>1649886610791</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1649886610791</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -347,7 +358,8 @@
     <MESSAGE value="launcher class added" />
     <MESSAGE value="version 1.0" />
     <MESSAGE value="version 1.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 1.1" />
+    <MESSAGE value="version 1.2 class diagram missing only saving and undo operation" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 1.2 class diagram missing only saving and undo operation" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

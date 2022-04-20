@@ -278,8 +278,6 @@ public class ClassDiagramController {
         //add reference for this controller to the list
         addNewSequenceDiagramControllerToList(sequenceDiagramController);
 
-        //draw if there is something to draw
-        sequenceDiagramController.start();
     }
 
     /**
@@ -304,7 +302,7 @@ public class ClassDiagramController {
     }
 
     /**
-     * method handling clicking on button for adding new class
+     * method handling clicking on button for adding new class or interface
      * */
     @FXML
     public void btnAddClass() throws IOException {

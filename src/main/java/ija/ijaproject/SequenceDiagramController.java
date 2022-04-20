@@ -1,13 +1,27 @@
 package ija.ijaproject;
 
+import ija.ijaproject.cls.SequenceDiagram;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * controller for gui for sequence diagram
  * @author xzimol04
  * */
 public class SequenceDiagramController {
+
+    /**variable storing all the objects taking part in this diagram*/
+    private List<SequenceObjectGUI> sequenceObjectGUIList = new ArrayList<>();
+
+    /**variable storing all the relations taking part in this diagram*/
+    private List<SequenceRelationGUI> sequenceRelationGUIList = new ArrayList<>();
+
+    /**variable storing the intern representation of this sequence diagram*/
+    private SequenceDiagram sequenceDiagram = new SequenceDiagram("");
+
     /**
      * variable storing tab where this diagram is stored
      * */
@@ -60,10 +74,11 @@ public class SequenceDiagramController {
     }
 
     /**
-     * method for starting drawing diagram
+     * method for starting drawing diagram from existing file
+     * it is called from ClassDiagramController
      * */
-    public void start(){
-
+    public void init(SequenceDiagram sequenceDiagram){
+        this.sequenceDiagram = sequenceDiagram;
     }
 
 }

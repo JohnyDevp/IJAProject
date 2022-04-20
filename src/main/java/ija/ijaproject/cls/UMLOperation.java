@@ -17,12 +17,6 @@ public class UMLOperation extends UMLAttribute{
     private List<UMLAttribute> parametersOfOperationList = new ArrayList<UMLAttribute>();
 
     /**
-     * modifier of operation
-     * can be #,-,+
-     * */
-    private char modifier;
-
-    /**
      * constructor for creating operation just with name
      * @param name name of operation
      * */
@@ -35,18 +29,8 @@ public class UMLOperation extends UMLAttribute{
      * @param name name of operation
      * @param returnType return type of operation
      * */
-    public UMLOperation(String name, String returnType) {
-        super(name, returnType);
-    }
-
-    /**
-     * constructor for creating operation with name and its type
-     * @param name name of operation
-     * @param returnType return type of operation
-     * */
     public UMLOperation(String name, String returnType, Character modifier) {
-        super(name, returnType);
-        this.modifier = modifier;
+        super(modifier, name, returnType);
     }
 
     /**
@@ -77,10 +61,4 @@ public class UMLOperation extends UMLAttribute{
         return Collections.unmodifiableList(this.parametersOfOperationList);
     }
 
-    /**
-     * getter
-     * @return modifier of operation*/
-    public char getModifier() {
-        return modifier;
-    }
 }

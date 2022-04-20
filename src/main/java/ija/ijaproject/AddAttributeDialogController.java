@@ -5,6 +5,7 @@ import ija.ijaproject.cls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -16,12 +17,25 @@ import javafx.stage.Stage;
 public class AddAttributeDialogController {
 
     @FXML
+    public ComboBox cmbModifier;
+
+    @FXML
     public TextField txtAttrName;
 
     @FXML
     public TextField txtAttrType;
 
     private UMLAttribute umlAttribute = null;
+
+    public boolean isCmbModifierEnabled = false;
+
+    public void init(boolean isCmbModifierEnabled){
+        if (isCmbModifierEnabled){
+            cmbModifier.getItems().addAll("#","-","+","~");
+            cmbModifier.getSelectionModel().selectFirst();
+        }
+        this.isCmbModifierEnabled = isCmbModifierEnabled;
+    }
 
     @FXML
     public void btnAddAttribute(ActionEvent actionEvent) {
@@ -33,8 +47,11 @@ public class AddAttributeDialogController {
             System.out.println("Name and type has to be set");
             return;
         }
-
-        this.umlAttribute = new UMLAttribute(name, type);
+        if (isCmbModifierEnabled){
+            this.umlAttribute = new UMLAttribute(cmbModifier.getValue().toString().toCharArray()[0], name, type);
+        }else {
+            this.umlAttribute = new UMLAttribute(name, type);
+        }
         closeStage(actionEvent);
     }
 

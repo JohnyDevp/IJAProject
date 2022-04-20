@@ -9,6 +9,7 @@
         "Ycoord": 0.0,
         "attributes": [
           {
+            "modifier" : "#",
             "name": "attr1",
             "type" : "type1"
           }
@@ -68,7 +69,12 @@
     {
       "name" : "seqvDiagram1",
       "participatedClasses" : [
-
+        {
+          "name": "cls1"
+        },
+        {
+          "name" : "cls2"
+        }
       ],
       "actionsDuringTime": [
         {

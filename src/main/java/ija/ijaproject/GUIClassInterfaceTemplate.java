@@ -124,35 +124,19 @@ public abstract class GUIClassInterfaceTemplate {
         //sets the class name
         Text className = new Text(this.name);
         className.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
-        //className.setY(rectangle.getY() + 35);
-        //className.setX(rectangle.getX() + 5);
         this.classNameLabel = className;
-
-        //resizing both rectangle and its border
-        //rectangle.setWidth(className.getLayoutBounds().getWidth()+ 10);
-        //rectangleBorder.setWidth(className.getLayoutBounds().getWidth()+ 20);
 
         //create clickable corner
         Rectangle clickableCorner = new Rectangle(rectangleBorder.getWidth() / 2,20, deselectedClassColor);
-        //clickableCorner.setX(rectangleBorder.getX() + rectangleBorder.getWidth()/2 - clickableCorner.getWidth()/2 );
-        //clickableCorner.setY(rectangle.getY());
         clickableCorner.setCursor(Cursor.MOVE);
         this.clickableCorner = clickableCorner;
 
         //sets the two lines which will divide the space of classbox to three parts
         // 1) class name 2) class attributes 3) class operations
         Line line1 = new Line();
-        //line1.setStartX(rectangle.getX());
-        //line1.setStartY(className.getY() + 15);
-        //line1.setEndX(rectangle.getX() + rectangle.getWidth());
-        //line1.setEndY(line1.getStartY());
         this.line1 = line1;
 
         Line line2 = new Line();
-        //line2.setStartX(rectangle.getX());
-        //line2.setStartY(line1.getStartY() + 15);
-        //line2.setEndX(rectangle.getX() + rectangle.getWidth());
-        //line2.setEndY(line2.getStartY());
         this.line2 = line2;
 
         //resize class gui iff necessary

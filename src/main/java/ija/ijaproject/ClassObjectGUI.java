@@ -81,33 +81,9 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate{
      * */
     private Text addAtributeFromConstructor(UMLAttribute umlAttribute){
 
-        Text attribute = new Text(umlAttribute.getName() + " : " + umlAttribute.getType());
+        Text attribute = new Text(umlAttribute.getModifier() +umlAttribute.getName() + " : " + umlAttribute.getType());
         attribute.setId(umlAttribute.getName());
 
-        if (listOfAttributes.isEmpty()){
-            //attribute.setY(this.getLine1().getStartY() + 15);
-            //attribute.setX(this.getClassNameLabel().getX());
-
-        } else{
-            //Text lastAttr = listOfAttributes.get(listOfAttributes.size() -1);
-            //attribute.setY(lastAttr.getY() + 15);
-            //attribute.setX(lastAttr.getX());
-
-        }
-
-        //reset the class height of border and box
-        //getClassBox().setHeight(getClassBox().getHeight() + 15);
-        //getClassBorder().setHeight(getClassBorder().getHeight() + 15);
-
-
-
-        //necessary to move all operations under this attributes - operations are under attributes
-        //and also move the line dividing space for attributes and operations
-        //this.getLine2().setStartY(this.getLine2().getStartY() + 15);
-        //this.getLine2().setEndY(this.getLine2().getEndY() + 15);
-        //for(Text attr : getListOfOperations()){
-        //    attr.setY(attr.getY() + 15);
-        //}
 
         //add attributes to map
         this.mapOfAttributes.put(umlAttribute,attribute);

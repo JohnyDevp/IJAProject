@@ -10,6 +10,7 @@ public class UMLAttribute extends Element{
      * name of the type
      * */
     private String type;
+    private Character modifier;
 
     /**
      * constructor
@@ -19,14 +20,19 @@ public class UMLAttribute extends Element{
         super(name);
     }
 
+    public UMLAttribute(String name, String type){
+        super(name);
+        this.type = type;
+    }
     /**
      * constructor for attribute defined with name and type
      * @param name attribute name
      * @param type attribute type
      * */
-    public UMLAttribute(String name, String type){
+    public UMLAttribute(Character modifier, String name, String type){
         super(name);
         this.type = type;
+        this.modifier = modifier;
     }
 
     /**
@@ -44,4 +50,8 @@ public class UMLAttribute extends Element{
      * */
     public String getType() { return this.type; }
 
+    /**modifier getter*/
+    public Character getModifier() {
+        return modifier;
+    }
 }
