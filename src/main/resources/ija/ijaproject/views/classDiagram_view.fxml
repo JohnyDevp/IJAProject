@@ -7,6 +7,11 @@
 
 <AnchorPane prefHeight="524.0" prefWidth="929.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ija.ijaproject.ClassDiagramController">
    <children>
+      <ToolBar layoutX="-7.0" layoutY="-3.0" prefHeight="35.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <Button fx:id="btnCreateNewSequenceDiagram" mnemonicParsing="false" onAction="#createNewSequenceDiagramBtn" text="Create new sequence diagram" />
+         </items>
+      </ToolBar>
       <ToolBar layoutY="35.0" prefWidth="570.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
         <items>
           <Button fx:id="btnSave" mnemonicParsing="false" onAction="#btnSave" text="Save" />
@@ -17,11 +22,6 @@
             <Button fx:id="btnEditObject" mnemonicParsing="false" onAction="#btnEditObject" text="EDIT CLASS/INTERFACE" />
             <Button fx:id="btnEditRelation" mnemonicParsing="false" onAction="#btnEditRelation" text="EDIT RELATION" />
         </items>
-      </ToolBar>
-      <ToolBar layoutX="-7.0" layoutY="-3.0" prefHeight="35.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <items>
-            <Button fx:id="btnCreateNewSequenceDiagram" mnemonicParsing="false" onAction="#createNewSequenceDiagramBtn" text="Create new sequence diagram" />
-         </items>
       </ToolBar>
       <Pane fx:id="canvas" layoutY="70.0" prefHeight="453.0" prefWidth="830.0" style="-fx-background-color: rgba(0, 100, 100, 0.0);" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
    </children>

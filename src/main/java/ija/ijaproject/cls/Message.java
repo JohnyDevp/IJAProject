@@ -6,26 +6,26 @@ public class Message {
      **/
     public enum MessageType  {SYNC, ASYNC, RETURN, CREATE, DESTROY};
 
-    private Integer timeStamp;
+    private Double Ycoord;
     private UMLClass umlClass;
     private UMLOperation umlOperation;
     private Message.MessageType messageType;
 
-    public Message(Integer timeStamp, UMLClass umlClass, UMLOperation umlOperation, Message.MessageType messageType){
-        this.timeStamp  = timeStamp;
+    public Message(Double Ycoord, UMLClass umlClass, UMLOperation umlOperation, Message.MessageType messageType){
+        this.Ycoord  = Ycoord;
         this.umlClass = umlClass;
         this.messageType = messageType;
         this.umlOperation = umlOperation;
     }
 
     /**setters*/
-    public void setTimeStamp(Integer timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setYCoord(Double Ycoord) {
+        this.Ycoord = Ycoord;
     }
 
     /**getter*/
-    public Integer getTimeStamp() {
-        return timeStamp;
+    public Double getYCoord() {
+        return Ycoord;
     }
 
     /**getter*/

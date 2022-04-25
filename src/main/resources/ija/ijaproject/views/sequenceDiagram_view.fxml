@@ -13,8 +13,12 @@
             <Button mnemonicParsing="false" text="Discard" />
             <Button mnemonicParsing="false" text="Undo" />
             <Button fx:id="btnClose" mnemonicParsing="false" onAction="#btnClose" text="Close" />
+            <Button fx:id="btnAddClass" mnemonicParsing="false" onAction="#btnAddClass" text="ADD CLASS" />
+            <Button fx:id="btnAddMessage" mnemonicParsing="false" onAction="#btnAddMessage" text="ADD MESSAGE" />
+            <Button fx:id="btnDeleteClass" mnemonicParsing="false" text="DELETE CLASS" />
+            <Button fx:id="btnDeleteMessage" mnemonicParsing="false" onAction="#btnDeleteMessage" text="DELETE MESSAGE" />
          </items>
       </ToolBar>
-      <Pane layoutY="34.0" prefHeight="366.0" prefWidth="600.0" />
+      <Pane fx:id="canvas" layoutY="34.0" prefHeight="366.0" prefWidth="767.0" />
    </children>
 </AnchorPane>

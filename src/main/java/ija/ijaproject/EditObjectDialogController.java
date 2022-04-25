@@ -270,8 +270,13 @@ public class EditObjectDialogController {
 
         //remove relation references
         for (RelationGUI relationGUI : this.guiObject.getListOfRelations()){
-            // relationGUI.getRelClassToGUI().getListOfRelations().remove(relationGUI);
-            relationGUI.getRelClassFromGUI().getListOfRelations().remove(relationGUI);
+
+            if (relationGUI.getRelClassFromGUI().getClass() == this.guiObject.getClass()){
+                relationGUI.getRelClassToGUI().getListOfRelations().remove(relationGUI);
+            } else if (relationGUI.getRelClassToGUI().getClass() == this.guiObject.getClass()) {
+                relationGUI.getRelClassFromGUI().getListOfRelations().remove(relationGUI);
+            }
+
         }
 
 

@@ -278,6 +278,12 @@ public class ClassDiagramController {
         //add reference for this controller to the list
         addNewSequenceDiagramControllerToList(sequenceDiagramController);
 
+        //create new sequence diagram - name according number of already existing diagram controllers
+        SequenceDiagram sequenceDiagram = new SequenceDiagram("seqDiag" + sequenceDiagramControllersList.size());
+
+        //initialize new sequence diagram
+        sequenceDiagramController.init(sequenceDiagram, this.classDiagram);
+
     }
 
     /**

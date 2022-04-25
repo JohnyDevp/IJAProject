@@ -154,7 +154,7 @@ public class JsonReader {
         Double ycoord = (Double) mClasses.get("Ycoord");
         if (ycoord != null) {
             //add ycoord to representation of new uml class
-            umlClass.setXcoord(xcoord);
+            umlClass.setYcoord(ycoord);
         } else {
             System.out.println("ERROR: Currently created class has no ycoord: removed.");
             return false;
