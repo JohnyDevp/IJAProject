@@ -150,6 +150,7 @@ public class ClassDiagram extends Element{
         }
         return  null;
     }
+
     /**
      * @param name of new relation
      * @return UMLRelation object

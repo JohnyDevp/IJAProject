@@ -60,6 +60,7 @@ public abstract class UMLClassInterfaceTemplate extends Element{
         return Ycoord;
     }
 
+
     /**
      * adding an operation (which is parameter) of this class
      * @param operation parameter represent the whole operation
@@ -71,25 +72,37 @@ public abstract class UMLClassInterfaceTemplate extends Element{
             //list already contains the attribute
             return false;
         } else {
+            //test each operation already added with operation desired to add
             for (UMLOperation umlOperation : umlOperationsList){
-                //same name but different type - error
-                if (!umlOperation.getType().equals(operation.getType()) && umlOperation.getName().equals(operation.getName())){
-                    return false;
+                //different name -> continue
+                if (!umlOperation.getName().equals(operation.getName())){
+                    continue;
                 }
 
-                //everything same - error (checking each param)
-                if (umlOperation.getType().equals(operation.getType()) && umlOperation.getName().equals(operation.getName())){
-                    for (UMLAttribute operAttr : operation.getParametersOfOperationList()){
-                        for (UMLAttribute thisOperAttr : umlOperation.getParametersOfOperationList()){
-                            if (operAttr.getName().equals(thisOperAttr.getName()) && operAttr.getType().equals(thisOperAttr.getType())){
-                                return false;
-                            }
-                        }
+                //each param is the same in order (considering adding operation and some of existing operations) - error
+                //loop through params in operation and test for conformity
+
+                //test for size of both lists - if different, continue (no error then)
+                if (operation.getParametersOfOperationList().size() != umlOperation.getParametersOfOperationList().size()) {continue;}
+
+                boolean error = true;
+                for (int index = 0; index < operation.getParametersOfOperationList().size(); index++){
+                    //get first param of adding operation
+                    UMLAttribute paramFromOpForAdding = operation.getParametersOfOperationList().get(index);
+                    UMLAttribute paramFromOperationFromList = umlOperation.getParametersOfOperationList().get(index);
+                    //different type -> continue
+                    if (!paramFromOpForAdding.getType().equals(paramFromOperationFromList.getType())){
+                        error = false;
+                        break;
                     }
-                    //when there are no params but same names and types
-                    if (operation.getParametersOfOperationList().isEmpty() && umlOperation.getParametersOfOperationList().isEmpty()) return false;
+                }
+
+                //same name and same parameters - error
+                if (error){
+                    return false;
                 }
             }
+
 
             //added operation differs at least in one parameter against other operations, or is whole the same as one of others-
             //then adding will fail

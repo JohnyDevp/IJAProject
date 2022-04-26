@@ -16,14 +16,11 @@ public class SequenceDiagram extends Element{
     /**list of all messages used in this sequence diagram*/
     private List<Message> messageList = new ArrayList<>();
 
-    /**variable storing last time used for sending message*/
-    private Integer lastTimeStamp;
 
     /**constructor
      * @param name name of sequence diagram*/
     public SequenceDiagram(String name){
         super(name);
-        lastTimeStamp = 0;
     }
 
     /**method for adding new participated class in sequence diagram
@@ -67,11 +64,5 @@ public class SequenceDiagram extends Element{
      * @return map [integer, messageType] representing what type of message is sent in what time*/
     public List<Message> getMessageList() {
         return this.messageList;
-    }
-
-    /**getter
-     * @return the last*/
-    public Integer getLastTimeStamp() {
-        return lastTimeStamp;
     }
 }
