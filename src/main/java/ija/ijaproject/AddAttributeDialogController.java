@@ -17,13 +17,13 @@ import javafx.stage.Stage;
 public class AddAttributeDialogController {
 
     @FXML
-    public ComboBox cmbModifier;
+    private ComboBox cmbModifier;
 
     @FXML
-    public TextField txtAttrName;
+    private TextField txtAttrName;
 
     @FXML
-    public TextField txtAttrType;
+    private TextField txtAttrType;
 
     private UMLAttribute umlAttribute = null;
 

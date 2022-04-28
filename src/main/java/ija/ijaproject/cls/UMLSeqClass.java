@@ -24,15 +24,18 @@ public class UMLSeqClass extends Element{
         return Xcoord;
     }
 
-    /**constructor*/
+    /**constructor - when non-existing uml object is add in sequence diagram*/
     public UMLSeqClass(String name, Double xcoord){
         super(name);
         setXcoord(xcoord);
+        //create temporary uml class
+        this.umlClass = new UMLClass("*");
     }
 
     /**constructor*/
     public UMLSeqClass(UMLClass umlClass, Double xcoord){
         super(umlClass.getName());
+        this.umlClass = umlClass;
         setXcoord(xcoord);
     }
 

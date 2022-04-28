@@ -7,13 +7,18 @@ public class Message {
     public enum MessageType  {SYNC, ASYNC, RETURN, CREATE, DESTROY};
 
     private Double Ycoord;
-    private UMLClass umlClass;
+    private UMLSeqClass classSender;
+    private UMLSeqClass classReceiver;
     private UMLOperation umlOperation;
     private Message.MessageType messageType;
 
-    public Message(Double Ycoord, UMLClass umlClass, UMLOperation umlOperation, Message.MessageType messageType){
+    private Boolean senderDeactivation = false;
+    private Boolean receiverDeactivation = false;
+
+    public Message(Double Ycoord, UMLSeqClass classSender, UMLSeqClass classReceiver, UMLOperation umlOperation, Message.MessageType messageType){
         this.Ycoord  = Ycoord;
-        this.umlClass = umlClass;
+        this.classSender = classSender;
+        this.classReceiver = classReceiver;
         this.messageType = messageType;
         this.umlOperation = umlOperation;
     }
@@ -21,6 +26,26 @@ public class Message {
     /**setters*/
     public void setYCoord(Double Ycoord) {
         this.Ycoord = Ycoord;
+    }
+
+    /**setter*/
+    public void setSenderDeactivation(Boolean senderDeactivation) {
+        this.senderDeactivation = senderDeactivation;
+    }
+
+    /**setter*/
+    public void setReceiverDeactivation(Boolean receiverDeactivation) {
+        this.receiverDeactivation = receiverDeactivation;
+    }
+
+    /**getter*/
+    public Boolean getReceiverDeactivation() {
+        return receiverDeactivation;
+    }
+
+    /**getter*/
+    public Boolean getSenderDeactivation() {
+        return senderDeactivation;
     }
 
     /**getter*/
@@ -34,12 +59,13 @@ public class Message {
     }
 
     /**getter*/
-    public UMLClass getUmlClass() {
-        return umlClass;
+    public UMLSeqClass getClassSender() {
+        return classSender;
     }
 
     /**getter*/
     public UMLOperation getUmlOperation() {
         return umlOperation;
     }
+
 }

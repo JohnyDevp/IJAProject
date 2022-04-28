@@ -372,7 +372,6 @@ public class ClassDiagramController {
         //if it was pressed for cancel creating relation then cancel it
         if (!this.createRelation){
             this.createRelation = true;
-            //todo combobox dialog for choosing relation type
             this.relation = new RelationGUI(rt, this.canvas);
             btnAddRelation.setText("CANCEL RELATION");
         } else {

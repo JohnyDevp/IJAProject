@@ -11,9 +11,6 @@ import java.util.List;
  * @author dr.Koci*/
 public class UMLClass extends UMLClassInterfaceTemplate{
 
-    /***/
-    private List<Double> YcoordsForSequenceDiagramList = new ArrayList<>();
-
     /**
      * list of attributes of class
      * */

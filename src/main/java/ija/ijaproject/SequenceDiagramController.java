@@ -3,10 +3,17 @@ package ija.ijaproject;
 import ija.ijaproject.cls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +28,7 @@ public class SequenceDiagramController {
     private List<SequenceObjectGUI> sequenceObjectGUIList = new ArrayList<>();
 
     /**variable storing all the relations taking part in this diagram*/
-    private List<SequenceRelationGUI> sequenceRelationGUIList = new ArrayList<>();
+    private List<SequenceMessageGUI> sequenceMessageGUIList = new ArrayList<>();
 
     /**variable storing the intern representation of this sequence diagram*/
     private SequenceDiagram sequenceDiagram = new SequenceDiagram("");
@@ -153,6 +160,9 @@ public class SequenceDiagramController {
         //-1 coord says that it is not set yet
         UMLSeqClass umlSeqClass = new UMLSeqClass(chosenUmlClass, 0.0);
 
+        //add it to the diagram
+        this.sequenceDiagram.addObject(umlSeqClass);
+
         //create object gui
         SequenceObjectGUI sequenceObjectGUI = new SequenceObjectGUI(umlSeqClass, this.sequenceDiagram, this.canvas);
         this.sequenceObjectGUIList.add(sequenceObjectGUI);
@@ -216,30 +226,57 @@ public class SequenceDiagramController {
             //reset previous mouse X coord
             this.mouseX = mouseEvent.getX();
 
-            //test for not taking class object outside the canvas
-            if (sequenceObjectGUI.getObjBackground().getX() + diffX <= 0) { return; }
-
-            //move all parts of the class
-
-            //background
-            sequenceObjectGUI.getObjBackground().setX(sequenceObjectGUI.getObjBackground().getX() + diffX);
-            //label
-            sequenceObjectGUI.getObjNameText().setX(sequenceObjectGUI.getObjNameText().getX() + diffX);
-            //line
-            sequenceObjectGUI.getObjectTimeLine().setStartX(sequenceObjectGUI.getObjectTimeLine().getStartX() + diffX);
-            sequenceObjectGUI.getObjectTimeLine().setEndX(sequenceObjectGUI.getObjectTimeLine().getEndX() + diffX);
-
-            //move all messages
-            for (SequenceRelationGUI sequenceRelationGUI : sequenceObjectGUI.getSequenceRelationGUIList()){
-                //first choose type of message
-
-            }
-
-
+            sequenceObjectGUI.moveObject(diffX);
         });
 
         sequenceObjectGUI.getObjectTimeLine().setOnMouseClicked(mouseEvent -> {
-            //todo - raise dailog => for creation of new message
+            sequenceObjectGUI.moveActiveArea();
+            if (mouseEvent.getButton() != MouseButton.SECONDARY){ return; }
+
+            //show creating dialog
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("views/addMessageDialog_view.fxml"));
+            Parent parent = null;
+            try {
+                parent = fxmlLoader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            AddMessageDialogController dlgController = fxmlLoader.<AddMessageDialogController>getController();
+            dlgController.init(this.sequenceDiagram);
+
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+
+            //if not valid data has been chosen - return
+            if (!dlgController.getDataValid()){ return; }
+
+            //create message
+            Message newMsg = this.sequenceDiagram.createMessage(mouseEvent.getY(), sequenceObjectGUI.getUmlSeqClass(), dlgController.getSeqClassReceiver(),dlgController.getMessageOperation(),dlgController.getMessageType());
+            //set if newMsg activate or deactivate the related objects
+            newMsg.setReceiverDeactivation(dlgController.getDeactivateReceiver());
+            newMsg.setSenderDeactivation(dlgController.getDeactivateSender());
+
+            //find gui of receiver
+            SequenceObjectGUI guiReceiverObject = null;
+            for(SequenceObjectGUI guiObj : this.sequenceObjectGUIList){
+                if (guiObj.getUmlSeqClass() == dlgController.getSeqClassReceiver()){
+                    guiReceiverObject = guiObj;
+                }
+            }
+
+            //create gui for this message
+            //and set messageGui reference to its related objects
+            if (guiReceiverObject != null){
+                SequenceMessageGUI newMessageGui = new SequenceMessageGUI(newMsg, sequenceObjectGUI, guiReceiverObject, this.canvas);
+                //add message to the list of messages
+                this.sequenceMessageGUIList.add(newMessageGui);
+                //add to related objects
+                sequenceObjectGUI.addSendingMessageGui(newMessageGui);
+                guiReceiverObject.addReceivingMessageGui(newMessageGui);
+            }
 
         });
     }

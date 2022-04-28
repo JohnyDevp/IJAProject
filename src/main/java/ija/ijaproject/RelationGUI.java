@@ -146,8 +146,6 @@ public class RelationGUI{
             //if there is going for generalization
             if (getRelationType() == UMLRelation.RelationType.GENERALIZATION){
                 for (Text txtOverrideOperation : getRelClassToGUI().getListOfOperations()){
-                    System.out.println(txtOperation.getText().substring(1));
-                    System.out.println(txtOverrideOperation.getText().substring(1));
                     if (txtOperation.getText().substring(1).equals(txtOverrideOperation.getText().substring(1))){
                         txtOperation.setFill(Color.ORANGE);
                     }

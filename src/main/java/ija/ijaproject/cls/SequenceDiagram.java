@@ -29,6 +29,17 @@ public class SequenceDiagram extends Element{
         if (this.listOfObjectsParticipants.contains(umlSeqClass)){
             return false;
         } else {
+            //count all instances
+            //if there is more than one of one class, then add some number in brackets after the name of the other instances
+            int numOfSeqInstances = 0;
+            for (UMLSeqClass classItr : listOfObjectsParticipants){
+                if (classItr.getUmlClass().getName().equals(umlSeqClass.getUmlClass().getName())){
+                    numOfSeqInstances++;
+                }
+            }
+            if (numOfSeqInstances >= 1){
+                umlSeqClass.setName(umlSeqClass.getName() + "(" + numOfSeqInstances + ")");
+            }
             return this.listOfObjectsParticipants.add(umlSeqClass);
         }
     }
@@ -36,12 +47,13 @@ public class SequenceDiagram extends Element{
     /**adding message to specific position - rest of messages will move forward +1
      * @param messageType type of the message (sync, async, ...)
      * @param Ycoord Y coordination on timeline of object
-     * @param umlClass class which is sending the message
+     * @param classSender class which is sending the message
+     * @param classReceiver class which is receiving the message
      * @param umlOperation operation representing the method which is called*/
-    public Message createMessage(Double Ycoord, UMLClass umlClass, UMLOperation umlOperation, Message.MessageType messageType){
+    public Message createMessage(Double Ycoord, UMLSeqClass classSender, UMLSeqClass classReceiver, UMLOperation umlOperation, Message.MessageType messageType){
         //create new message
         Message msg;
-        msg = new Message(Ycoord, umlClass, umlOperation, messageType);
+        msg = new Message(Ycoord, classSender, classReceiver, umlOperation, messageType);
         return msg;
     }
 
