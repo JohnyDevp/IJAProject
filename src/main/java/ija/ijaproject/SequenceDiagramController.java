@@ -173,20 +173,59 @@ public class SequenceDiagramController {
 
     }
 
+    /**
+     * method handling adding message
+     */
     public void btnAddMessage(){
 
     }
 
-    public void btnDeleteClass(){
+    /**
+     * object deleting actions - button click handling
+     * @param e
+     */
+    public void btnDeleteClass(ActionEvent e){
+        if (this.selectedObject == null) { return; }
 
+        //notify all its related messages
+        for (SequenceMessageGUI sequenceMessageGUI : this.selectedObject.getSendingMessageGUIList()){
+            removeMessage(sequenceMessageGUI);
+        }
+
+        for (SequenceMessageGUI sequenceMessageGUI : this.selectedObject.getReceivingMessageGUIList()){
+            removeMessage(sequenceMessageGUI);
+        }
+
+        //remove class gui
+        this.selectedObject.removeSequenceObjectGui();
+
+        //remove intern class representation - uml seq class
+        this.sequenceDiagram.removeObject(this.selectedObject.getUmlSeqClass());
+
+        //remove class from the list of gui objects
+        this.sequenceObjectGUIList.remove(this.selectedObject);
+
+        //set currently selected object to null
+        this.selectedObject = null;
     }
 
-    public void btnDeleteMessage(){
+    /**
+     * message deleting actions - button click handling
+     * @param e
+     */
+    public void btnDeleteMessage(ActionEvent e){
+        if (this.selectedMessage == null) return;
+        else {
+            //notify related objects about message deletion
+            this.selectedMessage.notifyObjectsAboutDeletion();
 
+            removeMessage(this.selectedMessage);
+        }
     }
 
     /*=================================================================================================================*/
     SequenceObjectGUI selectedObject = null; //variable storing currently selected object
+    private SequenceMessageGUI selectedMessage = null; //variable for storing currently selected message
     private Double mouseX = 0.0;
 
     /**
@@ -218,6 +257,7 @@ public class SequenceDiagramController {
         });
 
         sequenceObjectGUI.getObjBackground().setOnMousePressed(mouseEvent -> {
+            //set the current mouse position for the next possibility of making difference
             this.mouseX = mouseEvent.getX();
         });
 
@@ -226,11 +266,12 @@ public class SequenceDiagramController {
             //reset previous mouse X coord
             this.mouseX = mouseEvent.getX();
 
+            //notify the object about moving
             sequenceObjectGUI.moveObject(diffX);
         });
 
         sequenceObjectGUI.getObjectTimeLine().setOnMouseClicked(mouseEvent -> {
-            sequenceObjectGUI.moveActiveArea();
+            //if the click wasn't right-click then return
             if (mouseEvent.getButton() != MouseButton.SECONDARY){ return; }
 
             //show creating dialog
@@ -270,14 +311,56 @@ public class SequenceDiagramController {
             //create gui for this message
             //and set messageGui reference to its related objects
             if (guiReceiverObject != null){
-                SequenceMessageGUI newMessageGui = new SequenceMessageGUI(newMsg, sequenceObjectGUI, guiReceiverObject, this.canvas);
+                SequenceMessageGUI newMessageGui = new SequenceMessageGUI(this.sequenceDiagram, newMsg, sequenceObjectGUI, guiReceiverObject, this.canvas);
                 //add message to the list of messages
                 this.sequenceMessageGUIList.add(newMessageGui);
                 //add to related objects
                 sequenceObjectGUI.addSendingMessageGui(newMessageGui);
                 guiReceiverObject.addReceivingMessageGui(newMessageGui);
+                //set new message actions
+                setMessageActions(newMessageGui);
             }
 
         });
+    }
+
+    /**
+     * private method for setting actions for message
+     * */
+    private void setMessageActions(SequenceMessageGUI sequenceMessageGUI){
+        sequenceMessageGUI.getMessageLine().setOnMouseClicked(mouseEvent -> {
+            //change color of the previously selected object
+            if (this.selectedMessage != null){
+                this.selectedMessage.getMessageLine().setFill(Color.BLACK);
+                if (sequenceMessageGUI == this.selectedMessage){
+                    this.selectedMessage = null;
+                    return;
+                }
+            } else {
+                //set new selected object
+                this.selectedMessage = sequenceMessageGUI;
+                sequenceMessageGUI.getMessageLine().setFill(Color.ORANGE);
+            }
+        });
+    }
+
+    /**
+     * private function for removing message - shared part used when deleting object and deleting message itself
+     * @param sequenceMessageGUI
+     */
+    private void removeMessage(SequenceMessageGUI sequenceMessageGUI){
+        //remove all graphical parts of the message
+        sequenceMessageGUI.removeMessageGui();
+
+        //remove message internal representation
+        this.sequenceDiagram.deleteMessage(sequenceMessageGUI.getUmlMessage());
+
+        //remove it from the list
+        this.sequenceMessageGUIList.remove(sequenceMessageGUI);
+
+        //if this message is currently selected then set currently selected message to null
+        if (this.selectedMessage == sequenceMessageGUI) {
+            this.selectedMessage = null;
+        }
     }
 }

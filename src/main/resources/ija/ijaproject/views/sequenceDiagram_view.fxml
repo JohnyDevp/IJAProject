@@ -15,7 +15,7 @@
             <Button fx:id="btnClose" mnemonicParsing="false" onAction="#btnClose" text="Close" />
             <Button fx:id="btnAddClass" mnemonicParsing="false" onAction="#btnAddClass" text="ADD CLASS" />
             <Button fx:id="btnAddMessage" mnemonicParsing="false" onAction="#btnAddMessage" text="ADD MESSAGE" />
-            <Button fx:id="btnDeleteClass" mnemonicParsing="false" text="DELETE CLASS" />
+            <Button fx:id="btnDeleteClass" mnemonicParsing="false" onAction="#btnDeleteClass" text="DELETE CLASS" />
             <Button fx:id="btnDeleteMessage" mnemonicParsing="false" onAction="#btnDeleteMessage" text="DELETE MESSAGE" />
          </items>
       </ToolBar>

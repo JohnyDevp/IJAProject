@@ -4,20 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="adding operation fixed, gui adding operation fix tbd">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/AddMessageDialogController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/addMessageDialog_view.fxml" afterDir="false" />
+    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="sequence diagram added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/AddAttributeDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/AddAttributeDialogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceMessageGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceMessageGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceObjectGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceObjectGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceRelationGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceMessageGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/SequenceDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/SequenceDiagram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLSeqClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLSeqClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/sequenceDiagram_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/sequenceDiagram_view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +116,7 @@
       <workItem from="1651129042787" duration="18996000" />
       <workItem from="1651159128885" duration="7588000" />
       <workItem from="1651173866298" duration="2782000" />
-      <workItem from="1651176811824" duration="5118000" />
+      <workItem from="1651176811824" duration="15836000" />
     </task>
     <task id="LOCAL-00001" summary="structure done">
       <created>1648809516399</created>
@@ -342,7 +335,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650987443473</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="sequence diagram added">
+      <created>1651182705388</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1651182705388</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -385,18 +385,8 @@
     <MESSAGE value="version 1.2 class diagram missing only saving and undo operation" />
     <MESSAGE value="sequence diagram intern repres. done, gui almost" />
     <MESSAGE value="adding operation fixed, gui adding operation fix tbd" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding operation fixed, gui adding operation fix tbd" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java</url>
-          <line>232</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="sequence diagram added" />
+    <option name="LAST_COMMIT_MESSAGE" value="sequence diagram added" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

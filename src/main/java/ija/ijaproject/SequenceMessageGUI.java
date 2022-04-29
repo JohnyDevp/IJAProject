@@ -6,10 +6,15 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class SequenceMessageGUI {
+    //implicitly set minimal Y for each not message
+    //defined according to where ends the box of object
+    private static final int YCOORD_BEGIN = 80;
+
+    private SequenceDiagram sequenceDiagram;
+
     private Message.MessageType messageType;
     private Message umlMessage;
 
@@ -24,10 +29,15 @@ public class SequenceMessageGUI {
 
     private Line messageLine;
 
-    private Polygon relLineEnd;
+    private Polygon messageArrow;
 
     //labels on the relation line
     private Text messageText;
+
+    /**getter*/
+    public Message getUmlMessage() {
+        return umlMessage;
+    }
 
     /**getter*/
     public Boolean getDeactivateReceiver() {
@@ -60,7 +70,10 @@ public class SequenceMessageGUI {
      * @param objectReceiver
      * @param canvas
      */
-    public SequenceMessageGUI(Message message, SequenceObjectGUI objectSender, SequenceObjectGUI objectReceiver, Pane canvas){
+    public SequenceMessageGUI(SequenceDiagram sequenceDiagram, Message message, SequenceObjectGUI objectSender, SequenceObjectGUI objectReceiver, Pane canvas){
+        //set sequence diagram
+        this.sequenceDiagram = sequenceDiagram;
+
         //set the canvas
         this.canvas = canvas;
 
@@ -76,11 +89,26 @@ public class SequenceMessageGUI {
         this.deactivateSender = message.getSenderDeactivation();
         this.deactivateReceiver = message.getReceiverDeactivation();
 
+        //always deactivate receiver when destroy message is the type
+        if (this.messageType == Message.MessageType.DESTROY) this.deactivateReceiver = true;
+
         createMessageGui();
     }
 
-    public void deleteMessageGui(){
 
+    public void notifyObjectsAboutDeletion(){
+        this.objectSender.removeSendingMessageGui(this);
+        this.objectReceiver.removeReceivingMessageGui(this);
+    }
+
+    /**remove only gui of message and its intern representation*/
+    public void removeMessageGui(){
+        //remove from canvas
+        this.canvas.getChildren().removeAll(
+                this.messageText,
+                this.messageLine,
+                this.messageArrow
+        );
     }
 
     /**
@@ -102,6 +130,11 @@ public class SequenceMessageGUI {
             double diffY = mouseEvent.getY() - this.mousePrevY;
             this.mousePrevY = mouseEvent.getY();
 
+            //test whether it can be moved
+            if (this.umlMessage.getYCoord() + diffY < YCOORD_BEGIN) {
+                return;
+            }
+
             this.umlMessage.setYCoord(this.umlMessage.getYCoord() + diffY);
 
             messageGuiMove();
@@ -113,6 +146,11 @@ public class SequenceMessageGUI {
         this.messageLine.setStartY(this.umlMessage.getYCoord());
         this.messageLine.setEndX(this.objectReceiver.getObjectTimeLine().getStartX());
         this.messageLine.setEndY(this.umlMessage.getYCoord());
+
+        //set dashed if the message has return type
+        if(messageType == Message.MessageType.RETURN){
+            this.messageLine.getStrokeDashArray().addAll(20d, 20d);
+        }
 
         //set text of message
         //create operation text
@@ -132,7 +170,7 @@ public class SequenceMessageGUI {
         //add everything on canvas
         this.canvas.getChildren().addAll(
                 this.messageLine,
-                this.relLineEnd,
+                this.messageArrow,
                 this.messageText
         );
 
@@ -142,7 +180,7 @@ public class SequenceMessageGUI {
      * creates message end - it has to be recomputed every time it has been moved
      */
     private void createMessageLineEnding(){
-        this.relLineEnd = new Polygon();
+        this.messageArrow = new Polygon();
 
         double slope = (this.messageLine.getStartY() - this.messageLine.getEndY()) / (this.messageLine.getStartX() - this.messageLine.getEndX());
         double lineAngle = Math.atan(slope);
@@ -151,7 +189,7 @@ public class SequenceMessageGUI {
 
         arrowAngle = this.messageLine.getStartX() > this.messageLine.getEndX() ? Math.toRadians(45) : -Math.toRadians(225);
         arrowLength = 20;
-        this.relLineEnd.getPoints().addAll(
+        this.messageArrow.getPoints().addAll(
                 //the aim
                 this.messageLine.getEndX(), this.messageLine.getEndY(),
                 //left corner
@@ -159,8 +197,8 @@ public class SequenceMessageGUI {
                 //right corner
                 arrowLength * Math.cos(lineAngle + arrowAngle) + this.messageLine.getEndX(), arrowLength * Math.sin(lineAngle + arrowAngle) + this.messageLine.getEndY()
         );
-        this.relLineEnd.setStroke(Color.BLACK);
-        this.relLineEnd.setFill(Color.WHITE);
+        this.messageArrow.setStroke(Color.BLACK);
+        this.messageArrow.setFill(Color.WHITE);
 
         /*switch (this.messageType){
             case CREATE: break;
@@ -192,9 +230,9 @@ public class SequenceMessageGUI {
         this.messageText.setY(this.umlMessage.getYCoord() - 20);
 
         //reset the ending part of line (firstly remove it from canvas, then add)
-        this.canvas.getChildren().remove(this.relLineEnd);
+        this.canvas.getChildren().remove(this.messageArrow);
         createMessageLineEnding();
-        this.canvas.getChildren().add(this.relLineEnd);
+        this.canvas.getChildren().add(this.messageArrow);
 
         //notify the related objects about movement of active area
         this.objectSender.moveActiveArea();

@@ -1,5 +1,6 @@
 package ija.ijaproject;
 
+import ija.ijaproject.cls.Message;
 import ija.ijaproject.cls.SequenceDiagram;
 import ija.ijaproject.cls.UMLSeqClass;
 import javafx.scene.layout.Pane;
@@ -9,11 +10,15 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SequenceObjectGUI {
     //implicitly set Y for each object (not message)
-    private static final int YCOORD = 30;
+    private static final int YCOORD_BEGIN = 30;
+
+    //variable storing whether this object is destroyed (value greated then -1) or not (value -1)
+    private Double objectDestroyedPosition = -1.0;
 
     //pane - canvas reference
     private Pane canvas;
@@ -52,7 +57,18 @@ public class SequenceObjectGUI {
     public UMLSeqClass getUmlSeqClass() {
         return umlSeqClass;
     }
-
+    /**getter*/
+    public List<SequenceMessageGUI> getReceivingMessageGUIList() {
+        return Collections.unmodifiableList(receivingMessageGUIList);
+    }
+    /**getter*/
+    public List<SequenceMessageGUI> getSendingMessageGUIList() {
+        return Collections.unmodifiableList(sendingMessageGUIList);
+    }
+    /**getter*/
+    public Double getObjectDestroyedPosition() {
+        return objectDestroyedPosition;
+    }
 
     /**constructor*/
     public SequenceObjectGUI(UMLSeqClass umlClass, SequenceDiagram sequenceDiagram, Pane canvas){
@@ -73,12 +89,12 @@ public class SequenceObjectGUI {
         //create objects background
         Rectangle objBackground = new Rectangle();
         objBackground.setWidth(objWidth);
-        objBackground.setHeight(60);
+        objBackground.setHeight(40);
         objBackground.setFill(Color.LIGHTCYAN);
         objBackground.setStroke(Color.BLACK);
         //SET X AND Y COORD OF BOX
         objBackground.setX(this.umlSeqClass.getXcoord());
-        objBackground.setY(YCOORD);
+        objBackground.setY(YCOORD_BEGIN);
 
         //compute half of the background of the object exactly on X axis
         Double halfOnXAxis = objBackground.getWidth() / 2 + objBackground.getX();
@@ -87,7 +103,7 @@ public class SequenceObjectGUI {
 
         //SET TEXT Y,X COORD
         objName.setX(halfOnXAxis - objName.getLayoutBounds().getWidth()/2);
-        objName.setY((YCOORD + bottomOfBackgroundOnYAxis) / 2);
+        objName.setY((YCOORD_BEGIN + bottomOfBackgroundOnYAxis) / 2);
 
         //create object timeline
         Line timeLine = new Line();
@@ -166,9 +182,24 @@ public class SequenceObjectGUI {
     /**method for adding message related to this object*/
     public void addReceivingMessageGui(SequenceMessageGUI sequenceMessageGUI){
         this.receivingMessageGUIList.add(sequenceMessageGUI);
+        //if the message is of type destroy then it is implicitly deactivating
+        if (sequenceMessageGUI.getMessageType() == Message.MessageType.DESTROY){
+            this.objectDestroyedPosition = sequenceMessageGUI.getMessageLine().getEndY();
+            deactivateObject(sequenceMessageGUI);
+            return;
+        }
+
         if (sequenceMessageGUI.getDeactivateReceiver()){
             deactivateObject(sequenceMessageGUI);
         } else {activateObject(sequenceMessageGUI, false);}
+    }
+
+    public void removeReceivingMessageGui(SequenceMessageGUI sequenceMessageGUI){
+        //remove the message
+        this.receivingMessageGUIList.remove(sequenceMessageGUI);
+
+        //move all the active-rectangles
+        moveActiveArea();
     }
 
     /**method for adding message, related to this object by being sending from it, to the list of sending message */
@@ -179,20 +210,27 @@ public class SequenceObjectGUI {
         } else {activateObject(sequenceMessageGUI, true);}
     }
 
+    public void removeSendingMessageGui(SequenceMessageGUI sequenceMessageGUI){
+        //remove the message
+        this.sendingMessageGUIList.remove(sequenceMessageGUI);
+
+        //move all the active-rectangles
+        moveActiveArea();
+    }
+
     /**
      * method handling removing this object from gui
      */
     public void removeSequenceObjectGui(){
-        //destroy all messages
-        for (SequenceMessageGUI sequenceMessageGUI : sendingMessageGUIList){
+        //remove active areas
+        for (Rectangle rect : timeLineActiveRectangleList){ this.canvas.getChildren().remove(rect); }
 
-        }
-
-        for (SequenceMessageGUI sequenceMessageGUI : receivingMessageGUIList){
-
-        }
-
-        //remove all parts of object from canvas from canvas
+        //remove all parts of object from canvas
+        this.canvas.getChildren().removeAll(
+                this.objBackground,
+                this.objNameText,
+                this.objectTimeLine
+        );
     }
 
     /**
@@ -251,6 +289,10 @@ public class SequenceObjectGUI {
             rectangle.setHeight(time);
         }
 
+        //if the destroying object life time is set then set height as max value, if time is greater
+        if (rectangle.getHeight() + rectangle.getY() > objectDestroyedPosition && objectDestroyedPosition > -1.0){
+            rectangle.setHeight(objectDestroyedPosition);
+        }
         rectangle.setFill(Color.AQUA);
 
         //add rectangle on canvas and to the list of active-announcing rectangles
@@ -275,6 +317,11 @@ public class SequenceObjectGUI {
                 activeRect.setHeight(sequenceMessageGUI.getMessageLine().getStartY() - activeRect.getY());
 
             }
+        }
+
+        //if the destroyed object position is set then shortened the life-line
+        if (this.objectDestroyedPosition > -1.0){
+            this.objectTimeLine.setEndY(sequenceMessageGUI.getMessageLine().getEndY());
         }
     }
 }
