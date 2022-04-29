@@ -3,15 +3,19 @@ package ija.ijaproject;
 import java.io.FileReader;
 import java.util.*;
 
+import com.google.gson.Gson;
+
 import ija.ijaproject.cls.*;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
 
 /**
  * class for parsing json file into class and sequence diagram
+ * 
  * @author xholan11
- * */
+ */
 public class JsonReader {
 
     /**
@@ -38,63 +42,11 @@ public class JsonReader {
             // parsing file
             Object obj = new JSONParser().parse(new FileReader(filePath));
 
-            // typecasting obj to JSONObject
-            JSONObject jsonObject = (JSONObject) obj;
+            Gson gson = new Gson();
 
-            //getting fields of all arrays - sequence diagrams, relations and class diagram(not an array)
-            //class diagram
-            Map classDiagram = ((Map) jsonObject.get("classDiagram"));
-            String classDiagramName = (String) classDiagram.get("name");
-            JSONArray jarClasses = (JSONArray) classDiagram.get("classes");
-            JSONArray jarInterfaces = (JSONArray) classDiagram.get("interfaces");
-            JSONArray jarRelations = (JSONArray) classDiagram.get("relations");
+            ClassDiagram cl = gson.fromJson(obj.toString(), ClassDiagram.class);
 
-            //process class name -> necessary
-            if (classDiagramName != null) {
-                this.clsDiagram.setName(classDiagramName);
-            } else {
-                System.out.println("error - bad structure");
-                return false;
-            }
-
-            //process classes (not necessary)
-            if (jarClasses != null) {
-                //array of classes in json - in root
-                //iterate through them and add them to diagram
-                Iterator itrThroughClasses = jarClasses.iterator();
-                while (itrThroughClasses.hasNext()) {
-                    //call for add class and check for failure
-                    if (!addClass((Map) itrThroughClasses.next())) {
-                        return false;
-                    }
-                }
-            }
-
-            //process interfaces (not necessary)
-            if (jarInterfaces != null) {
-                //array of interfaces in json - in root
-                //iterate through them and add them to diagram
-                Iterator itrThroughInterface = jarInterfaces.iterator();
-                while (itrThroughInterface.hasNext()) {
-                    //call for add class and check for failure
-                    if (!addInterface((Map) itrThroughInterface.next())) {
-                        return false;
-                    }
-                }
-            }
-
-            //process relations
-            if (jarRelations != null) {
-                //array of relations in json - in root
-                //iterate through them and add them to diagram
-                Iterator itrThroughRelations = jarRelations.iterator();
-                while (itrThroughRelations.hasNext()) {
-                    //call for add class and check for failure
-                    if (!addRelation((Map) itrThroughRelations.next())) {
-                        return false;
-                    }
-                }
-            }
+            System.out.print(("Loaded"));
 
         } catch (Exception e) {
             System.out.println("ERROR: Loading json file - bad structure");
@@ -119,18 +71,18 @@ public class JsonReader {
      * parsing class diagram
      * method for adding new class with all its information
      *
-     * @param mClasses array of all class definitions(operations, name, attributes, x, y,...)
+     * @param mClasses array of all class definitions(operations, name, attributes,
+     *                 x, y,...)
      */
     private boolean addClass(Map mClasses) {
-        //create new uml class - intern representation (non-graphical)
+        // create new uml class - intern representation (non-graphical)
         UMLClass umlClass;
 
-
         /**/
-        //get name of class
+        // get name of class
         String name = (String) mClasses.get("name");
         if (name != null) {
-            //create new class and handle potential inconsistency
+            // create new class and handle potential inconsistency
             umlClass = clsDiagram.createClass(name);
             if (umlClass == null) {
                 System.out.println("ERROR: Two classes of the same name, the second one has been removed");
@@ -140,38 +92,39 @@ public class JsonReader {
             return false;
         }
 
-        //get the xcoord
+        // get the xcoord
         Double xcoord = (Double) mClasses.get("Xcoord");
         if (xcoord != null) {
-            //add xcoord to representation of new uml class
+            // add xcoord to representation of new uml class
             umlClass.setXcoord(xcoord);
         } else {
             System.out.println("ERROR: Currently created class has no xcoord: removed.");
             return false;
         }
 
-        //get the ycoord
+        // get the ycoord
         Double ycoord = (Double) mClasses.get("Ycoord");
         if (ycoord != null) {
-            //add ycoord to representation of new uml class
+            // add ycoord to representation of new uml class
             umlClass.setYcoord(ycoord);
         } else {
             System.out.println("ERROR: Currently created class has no ycoord: removed.");
             return false;
         }
 
-        //get the operations
+        // get the operations
         JSONArray jarOperations = (JSONArray) mClasses.get("operations");
         if (jarOperations != null) {
-            //loop through array of operations, add them to the umlCLass
+            // loop through array of operations, add them to the umlCLass
             Iterator itrThroughOperations = jarOperations.iterator();
             while (itrThroughOperations.hasNext()) {
 
-                //create new umlOperation
+                // create new umlOperation
                 UMLOperation umlOperation;
                 Map mOperation = (Map) itrThroughOperations.next();
 
-                //get operation name and return type and create operation (call its constructor)
+                // get operation name and return type and create operation (call its
+                // constructor)
                 String operationName = (String) mOperation.get("name");
                 String operationModifier = (String) mOperation.get("modifier");
                 String returnType = (String) mOperation.get("rettype");
@@ -182,15 +135,15 @@ public class JsonReader {
                     return false;
                 }
 
-                //get operations params, loop through them and add them to umlOperation
+                // get operations params, loop through them and add them to umlOperation
                 JSONArray jarAttributes = (JSONArray) mOperation.get("params");
                 if (jarAttributes != null) {
-                    //loop through params
+                    // loop through params
                     Iterator itrThroughParams = jarAttributes.iterator();
                     while (itrThroughParams.hasNext()) {
                         Map mParam = (Map) itrThroughParams.next();
 
-                        //create new umlAttribute (as param of operation) and add values to it
+                        // create new umlAttribute (as param of operation) and add values to it
                         UMLAttribute umlAttribute;
                         String paramName = (String) mParam.get("name");
                         String type = (String) mParam.get("type");
@@ -200,12 +153,12 @@ public class JsonReader {
                             return false;
                         }
 
-                        //add the param to operation
+                        // add the param to operation
                         umlOperation.addOperationParameter(umlAttribute);
                     }
                 }
 
-                //add operation to umlClass
+                // add operation to umlClass
                 umlClass.addOperation(umlOperation);
             }
         } else {
@@ -213,30 +166,31 @@ public class JsonReader {
             return false;
         }
 
-        //get the attributes
+        // get the attributes
         JSONArray jarAttributes = (JSONArray) mClasses.get("attributes");
         if (jarAttributes != null) {
-            //loop through attributes and add them to the umlClass
+            // loop through attributes and add them to the umlClass
             Iterator itrThroughAttributes = jarAttributes.iterator();
             while (itrThroughAttributes.hasNext()) {
                 Map mAttributes = (Map) itrThroughAttributes.next();
 
-                //create new umlAttribute
+                // create new umlAttribute
                 UMLAttribute umlAttribute;
 
                 String attrModifier = (String) mAttributes.get("modifier");
                 String attrName = (String) mAttributes.get("name");
                 String attrType = (String) mAttributes.get("type");
 
-                //if name and type are set then called constructor of umlAttribute
+                // if name and type are set then called constructor of umlAttribute
                 if (attrModifier != null && attrName != null && attrType != null) {
-                    if (!"#~+-".contains(attrModifier)) return false; //attribute has bad modifier
-                    umlAttribute = new UMLAttribute(attrModifier.toCharArray()[0],attrName, attrType);
+                    if (!"#~+-".contains(attrModifier))
+                        return false; // attribute has bad modifier
+                    umlAttribute = new UMLAttribute(attrModifier.toCharArray()[0], attrName, attrType);
                 } else {
                     return false;
                 }
 
-                //add umlAttribute to the class
+                // add umlAttribute to the class
                 umlClass.addAttribute(umlAttribute);
             }
         } else {
@@ -251,18 +205,19 @@ public class JsonReader {
     /**
      * method for adding new interface with all its information
      *
-     * @param mInterfaces array of all interface definitions(operations, name, x, y,...)
+     * @param mInterfaces array of all interface definitions(operations, name, x,
+     *                    y,...)
      */
     private boolean addInterface(Map mInterfaces) {
 
-        //create new uml class - intern representation (non-graphical)
+        // create new uml class - intern representation (non-graphical)
         UMLInterface umlInterface;
 
         /**/
-        //get name of class
+        // get name of class
         String name = (String) mInterfaces.get("name");
         if (name != null) {
-            //create new class and handle potential inconsistency
+            // create new class and handle potential inconsistency
             umlInterface = clsDiagram.createInterface(name);
             if (umlInterface == null) {
                 System.out.println("ERROR: Two classes of the same name, the second one has been removed");
@@ -272,38 +227,39 @@ public class JsonReader {
             return false;
         }
 
-        //get the xcoord
+        // get the xcoord
         Double xcoord = (Double) mInterfaces.get("Xcoord");
         if (xcoord != null) {
-            //add xcoord to representation of new uml class
+            // add xcoord to representation of new uml class
             umlInterface.setXcoord(xcoord);
         } else {
             System.out.println("ERROR: Currently created class has no xcoord: removed.");
             return false;
         }
 
-        //get the ycoord
+        // get the ycoord
         Double ycoord = (Double) mInterfaces.get("Ycoord");
         if (ycoord != null) {
-            //add ycoord to representation of new uml class
+            // add ycoord to representation of new uml class
             umlInterface.setXcoord(xcoord);
         } else {
             System.out.println("ERROR: Currently created class has no ycoord: removed.");
             return false;
         }
 
-        //get the operations
+        // get the operations
         JSONArray jarOperations = (JSONArray) mInterfaces.get("operations");
         if (jarOperations != null) {
-            //loop through array of operations, add them to the umlCLass
+            // loop through array of operations, add them to the umlCLass
             Iterator itrThroughOperations = jarOperations.iterator();
             while (itrThroughOperations.hasNext()) {
 
-                //create new umlOperation
+                // create new umlOperation
                 UMLOperation umlOperation;
                 Map mOperation = (Map) itrThroughOperations.next();
 
-                //get operation name and return type and create operation (call its constructor)
+                // get operation name and return type and create operation (call its
+                // constructor)
                 String operationName = (String) mOperation.get("name");
                 String operationModifier = (String) mOperation.get("modifier");
                 String returnType = (String) mOperation.get("rettype");
@@ -314,15 +270,15 @@ public class JsonReader {
                     return false;
                 }
 
-                //get operations params, loop through them and add them to umlOperation
+                // get operations params, loop through them and add them to umlOperation
                 JSONArray jarAttributes = (JSONArray) mOperation.get("params");
                 if (jarAttributes != null) {
-                    //loop through params
+                    // loop through params
                     Iterator itrThroughParams = jarAttributes.iterator();
                     while (itrThroughParams.hasNext()) {
                         Map mParam = (Map) itrThroughParams.next();
 
-                        //create new umlAttribute (as param of operation) and add values to it
+                        // create new umlAttribute (as param of operation) and add values to it
                         UMLAttribute umlAttribute;
                         String paramName = (String) mParam.get("name");
                         String type = (String) mParam.get("type");
@@ -332,12 +288,12 @@ public class JsonReader {
                             return false;
                         }
 
-                        //add the param to operation
+                        // add the param to operation
                         umlOperation.addOperationParameter(umlAttribute);
                     }
                 }
 
-                //add operation to umlClass
+                // add operation to umlClass
                 umlInterface.addOperation(umlOperation);
             }
         } else {
@@ -351,44 +307,45 @@ public class JsonReader {
     /**
      * method for adding new relation with all its information
      *
-     * @param mRelation array of all relation definitions(start class, end class, x, y,...)
+     * @param mRelation array of all relation definitions(start class, end class, x,
+     *                  y,...)
      */
     private boolean addRelation(Map mRelation) {
-        //create new uml class - intern representation (non-graphical)
+        // create new uml class - intern representation (non-graphical)
         UMLRelation umlRelation;
 
         /**/
-        //get name of class
+        // get name of class
         String name = (String) mRelation.get("name");
-        //get type of relation
+        // get type of relation
         String relType = (String) mRelation.get("relType");
-        //get classes of relation
+        // get classes of relation
         String relClassFrom = (String) mRelation.get("relClassFrom");
         String relClassTo = (String) mRelation.get("relClassTo");
-        //get cardinality
+        // get cardinality
         String cardinalityByFromCls = (String) mRelation.get("cardinalityByFromClass");
         String cardinalityByToCls = (String) mRelation.get("cardinalityByToClass");
-        //get the coords
+        // get the coords
         Double startXcoord = (Double) mRelation.get("startXcoord");
         Double startYcoord = (Double) mRelation.get("startYcoord");
         Double endXcoord = (Double) mRelation.get("endXcoord");
         Double endYcoord = (Double) mRelation.get("endYcoord");
 
-        //check for null
-        if (name == null ||relType == null || relClassFrom == null || relClassTo == null ||
-            cardinalityByFromCls == null || cardinalityByToCls == null ||
-            startXcoord == null || startYcoord == null || endXcoord == null || endYcoord == null){
+        // check for null
+        if (name == null || relType == null || relClassFrom == null || relClassTo == null ||
+                cardinalityByFromCls == null || cardinalityByToCls == null ||
+                startXcoord == null || startYcoord == null || endXcoord == null || endYcoord == null) {
             System.out.println("Error: bad relation definition: removed");
             return false;
         }
 
-        //create new relation
+        // create new relation
         umlRelation = clsDiagram.createRelation(name);
 
-        //chane reltyp to upper case
+        // chane reltyp to upper case
         relType = relType.toUpperCase();
-        //set relation type
-        switch (relType){
+        // set relation type
+        switch (relType) {
             case "ASSOCIATION":
                 umlRelation.setRelationType(UMLRelation.RelationType.ASSOCIATION);
                 break;
@@ -406,9 +363,8 @@ public class JsonReader {
                 return false;
         }
 
-
-        //set classes - they have to already exist
-        if (clsDiagram.findObject(relClassFrom) != null && clsDiagram.findObject(relClassTo) != null){
+        // set classes - they have to already exist
+        if (clsDiagram.findObject(relClassFrom) != null && clsDiagram.findObject(relClassTo) != null) {
             umlRelation.setRelationFromObject(clsDiagram.findObject(relClassFrom));
             umlRelation.setRelationToObject(clsDiagram.findObject(relClassTo));
         } else {
@@ -416,16 +372,18 @@ public class JsonReader {
             return false;
         }
 
-        //set relation cardinality
-        if ((cardinalityByFromCls.matches("[0-9]+[\\.][\\.][0-9]+|[0-9]+[\\.][\\.][\\*]|[\\*]|[0-9]+") || cardinalityByFromCls=="") &&
-                (cardinalityByToCls.matches("[0-9]+[\\.][\\.][0-9]+|[0-9]+[\\.][\\.][\\*]|[\\*]|[0-9]+") || cardinalityByToCls=="")){
+        // set relation cardinality
+        if ((cardinalityByFromCls.matches("[0-9]+[\\.][\\.][0-9]+|[0-9]+[\\.][\\.][\\*]|[\\*]|[0-9]+")
+                || cardinalityByFromCls == "") &&
+                (cardinalityByToCls.matches("[0-9]+[\\.][\\.][0-9]+|[0-9]+[\\.][\\.][\\*]|[\\*]|[0-9]+")
+                        || cardinalityByToCls == "")) {
             umlRelation.setCardinalityByFromClass(cardinalityByFromCls);
             umlRelation.setCardinalityByToClass(cardinalityByToCls);
-        }else {
+        } else {
             System.out.println("Bad cardinality");
             return false;
         }
-        //sets coords
+        // sets coords
         umlRelation.setStartX(startXcoord);
         umlRelation.setStartY(startYcoord);
         umlRelation.setEndX(endXcoord);
