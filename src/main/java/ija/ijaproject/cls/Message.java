@@ -18,6 +18,12 @@ public class Message {
     public Boolean senderDeactivation = false;
     public Boolean receiverDeactivation = false;
 
+    /**
+     * Default constructor used for json parsing
+     */
+    public Message() {
+    }
+
     public Message(Double Ycoord, UMLSeqClass classSender, UMLSeqClass classReceiver, UMLOperation umlOperation,
             Message.MessageType messageType) {
         this.Ycoord = Ycoord;

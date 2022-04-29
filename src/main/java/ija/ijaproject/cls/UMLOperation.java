@@ -18,6 +18,12 @@ public class UMLOperation extends UMLAttribute {
     public List<UMLAttribute> parametersOfOperationList = new ArrayList<UMLAttribute>();
 
     /**
+     * Default constructor used for json parsing
+     */
+    public UMLOperation() {
+    }
+
+    /**
      * constructor for creating operation just with name
      * 
      * @param name name of operation

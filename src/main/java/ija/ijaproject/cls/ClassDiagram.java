@@ -20,6 +20,12 @@ public class ClassDiagram extends Element {
      */
     public List<UMLRelation> umlRelationList = new ArrayList<>();
 
+    /**
+     * Default constructor used for json parsing
+     */
+    public ClassDiagram() {
+    }
+
     /** getter */
     public List<UMLClassInterfaceTemplate> getUmlObjectsList() {
         return this.umlList;

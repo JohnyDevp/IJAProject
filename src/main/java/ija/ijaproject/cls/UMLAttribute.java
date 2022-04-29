@@ -16,6 +16,12 @@ public class UMLAttribute extends Element {
     public Character modifier;
 
     /**
+     * Default constructor used for JSON parsing
+     */
+    public UMLAttribute() {
+    }
+
+    /**
      * constructor
      * 
      * @param name

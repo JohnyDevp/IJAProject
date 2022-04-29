@@ -6,6 +6,9 @@ public class UMLSeqClass extends Element {
 
     public Double Xcoord;
 
+    public UMLSeqClass() {
+    }
+
     /** getter */
     public UMLClass getUmlClass() {
         return umlClass;

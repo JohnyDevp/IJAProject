@@ -21,6 +21,7 @@ public class JsonWriter {
         try {
 
             GsonBuilder builder = new GsonBuilder();
+            builder.setPrettyPrinting().serializeNulls();
             Gson gson = builder.create();
 
             // UMLAttribute attr = new UMLAttribute('a', "tom", "string");

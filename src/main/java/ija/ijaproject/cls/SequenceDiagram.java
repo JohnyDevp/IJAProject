@@ -19,6 +19,12 @@ public class SequenceDiagram extends Element {
     public List<Message> messageList = new ArrayList<>();
 
     /**
+     * Json constructor used for json parsing
+     */
+    public SequenceDiagram() {
+    }
+
+    /**
      * constructor
      * 
      * @param name name of sequence diagram

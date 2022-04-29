@@ -44,6 +44,8 @@ public class JsonReader {
 
             Gson gson = new Gson();
 
+            UMLClassInterfaceTemplate inter = new UMLClassInterfaceTemplate();
+
             ClassDiagram cl = gson.fromJson(obj.toString(), ClassDiagram.class);
 
             System.out.print(("Loaded"));

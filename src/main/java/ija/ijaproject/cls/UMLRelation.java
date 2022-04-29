@@ -23,6 +23,9 @@ public class UMLRelation extends Element {
     public double startX, startY;
     public double endX, endY;
 
+    public UMLRelation() {
+    }
+
     /**
      * constructor
      * 

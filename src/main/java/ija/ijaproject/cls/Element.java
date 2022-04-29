@@ -10,6 +10,12 @@ public class Element {
     public String name;
 
     /**
+     * used for json parsing
+     */
+    public Element() {
+    }
+
+    /**
      * constructor
      * 
      * @param name name of element

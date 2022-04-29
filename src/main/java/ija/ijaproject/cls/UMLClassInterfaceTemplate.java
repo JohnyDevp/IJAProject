@@ -10,7 +10,7 @@ import java.util.List;
  * 
  * @author xholan11
  */
-public abstract class UMLClassInterfaceTemplate extends Element {
+public class UMLClassInterfaceTemplate extends Element {
     /**
      * list of operations of class
      */
@@ -21,6 +21,12 @@ public abstract class UMLClassInterfaceTemplate extends Element {
      */
     public double Xcoord = 0.0;
     public double Ycoord = 0.0;
+
+    /**
+     * Default constructor used for json parsing
+     */
+    public UMLClassInterfaceTemplate() {
+    }
 
     /**
      * constructor
