@@ -5,12 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="sequence diagram added">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceMessageGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceMessageGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceObjectGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceObjectGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/ClassDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/ClassDiagram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/Element.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/SequenceDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/SequenceDiagram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/sequenceDiagram_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/sequenceDiagram_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLAttribute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLOperation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLRelation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLRelation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLSeqClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLSeqClass.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,6 +124,7 @@
       <workItem from="1651159128885" duration="7588000" />
       <workItem from="1651173866298" duration="2782000" />
       <workItem from="1651176811824" duration="15836000" />
+      <workItem from="1651241521321" duration="693000" />
     </task>
     <task id="LOCAL-00001" summary="structure done">
       <created>1648809516399</created>
@@ -387,6 +395,22 @@
     <MESSAGE value="adding operation fixed, gui adding operation fix tbd" />
     <MESSAGE value="sequence diagram added" />
     <option name="LAST_COMMIT_MESSAGE" value="sequence diagram added" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonWriter.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonWriter.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

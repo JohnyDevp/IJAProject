@@ -1,5 +1,7 @@
 package ija.ijaproject;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import ija.ijaproject.cls.ClassDiagram;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -10,45 +12,16 @@ import java.util.Map;
 
 public class JsonWriter {
 
-    /**method processing saving class diagram*/
-    public boolean saveClassDiagramToFile(String pathToFile, ClassDiagram classDiagram){
-        try{
-            // create new JSONObject
-            JSONObject jsonObject = new JSONObject();
+    /** method processing saving class diagram */
+    public boolean saveClassDiagramToFile(String pathToFile, ClassDiagram classDiagram) {
+        try {
 
-            //delete potentional previously created diagram
-            Map jsonClsDlg = (Map)jsonObject.get("classDiagram");
-            if (jsonClsDlg != null) { jsonObject.remove("classDiagram"); }
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.create();
 
-            //create the class diagram itself
-            //basic information about class diagram
-            Map mRoot = new LinkedHashMap(4);
-            //add name to root
-            mRoot.put("name", classDiagram.getName());
+            String result = gson.toJson(classDiagram);
 
-            //process classes==========================
-            JSONArray jarClasses = new JSONArray();
-
-            //put classes to root
-            mRoot.put("classes",jarClasses);
-
-            //process interfaces=======================
-            JSONArray jarInterfaces = new JSONArray();
-            //put interfaces to root
-            mRoot.put("interfaces", jarInterfaces);
-
-            //process relations==============================
-            JSONArray jarRelations = new JSONArray();
-            //put relations to root
-            mRoot.put("relations", jarRelations);
-
-
-            //final put whole class diagram to json
-            mRoot.put("classDiagram", mRoot);
-
-
-
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
