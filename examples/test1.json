@@ -1,0 +1,20 @@
+{
+  "umlList": [
+    {
+      "umlAttributesList": [],
+      "umlOperationsList": [],
+      "Xcoord": 0.0,
+      "Ycoord": 0.0,
+      "name": "arstt"
+    },
+    {
+      "umlAttributesList": [],
+      "umlOperationsList": [],
+      "Xcoord": 0.0,
+      "Ycoord": 0.0,
+      "name": "bbbb"
+    }
+  ],
+  "umlRelationList": [],
+  "name": "test"
+}

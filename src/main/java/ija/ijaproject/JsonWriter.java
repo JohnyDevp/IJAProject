@@ -7,7 +7,9 @@ import ija.ijaproject.cls.UMLAttribute;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import java.io.FileWriter;
 
+import java.io.BufferedWriter;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -21,11 +23,16 @@ public class JsonWriter {
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
 
-            UMLAttribute attr = new UMLAttribute('a', "tom", "string");
+            // UMLAttribute attr = new UMLAttribute('a', "tom", "string");
 
-            String result = gson.toJson(attr);
+            String result = gson.toJson(classDiagram);
 
             System.out.println(result);
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter("examples/test1.json"));
+            writer.write(result);
+
+            writer.close();
 
         } catch (Exception e) {
             e.printStackTrace();
