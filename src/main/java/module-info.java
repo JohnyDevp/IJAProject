@@ -5,6 +5,9 @@ module ija.ijaproject {
     requires java.xml;
     requires json.simple;
 
+    exports ija.ijaproject.cls to com.google.gson;
+
     opens ija.ijaproject to javafx.fxml;
+
     exports ija.ijaproject;
 }

@@ -14,7 +14,7 @@ public abstract class UMLClassInterfaceTemplate extends Element {
     /**
      * list of operations of class
      */
-    protected List<UMLOperation> umlOperationsList = new ArrayList<UMLOperation>();
+    public List<UMLOperation> umlOperationsList = new ArrayList<UMLOperation>();
 
     /**
      * variables for storing position of this class on pane
