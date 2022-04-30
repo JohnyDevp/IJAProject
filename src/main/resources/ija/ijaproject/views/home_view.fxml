@@ -12,8 +12,9 @@
       <ToolBar fx:id="toolBarTb" layoutY="7.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="36.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <Button mnemonicParsing="false" onAction="#changeSettingsBtn" text="Settings" />
-            <Button fx:id="btnLoadClassDiagram" mnemonicParsing="false" onAction="#loadClassDiagramBtn" prefHeight="26.0" prefWidth="158.0" text="Load class diagram" />
+            <Button fx:id="btnLoadClassDiagram" mnemonicParsing="false" onAction="#loadClassDiagramBtn" prefHeight="26.0" prefWidth="158.0" text="Load file" />
             <Button fx:id="btnCreateNewClassDiagram" mnemonicParsing="false" onAction="#createNewClassDiagramBtn" prefHeight="26.0" prefWidth="193.0" text="Create new class diagram" />
+            <Button fx:id="bntSaveAll" mnemonicParsing="false" onAction="#saveAll" prefHeight="26.0" prefWidth="193.0" text="Save" />
          </items>
       </ToolBar>
       <TabPane fx:id="tabPane" layoutY="36.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="363.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
