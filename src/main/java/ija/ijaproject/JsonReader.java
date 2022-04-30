@@ -1,10 +1,20 @@
 package ija.ijaproject;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+// import java.lang.ProcessBuilder.Redirect.Type;
+import java.lang.reflect.Type;
 import java.util.*;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
+
+import java.util.ArrayList;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import ija.ijaproject.cls.*;
 
@@ -23,6 +33,8 @@ public class JsonReader {
      * this is class diagram which will be
      */
     private ClassDiagram clsDiagram = new ClassDiagram("");
+    private ArrayList<SequenceDiagram> sequenceDiagrams = new ArrayList<SequenceDiagram>();
+    private ArrayList<UMLRelation> relations = new ArrayList<UMLRelation>();
 
     /**
      * getters
@@ -41,7 +53,7 @@ public class JsonReader {
         try {
 
             // parsing file
-            Object obj = new JSONParser().parse(new FileReader(filePath));
+            JsonObject obj = (JsonObject) new JSONParser().parse(new FileReader(filePath));
             GsonBuilder builder = new GsonBuilder();
             builder.registerTypeAdapter(UMLClassInterfaceTemplate.class,
                     new UMLClassInterfaceTemplateSeriliazer());
@@ -49,7 +61,7 @@ public class JsonReader {
                     new UMLClassInterfaceTemplateDesirializer());
             Gson gson = builder.create();
 
-            this.clsDiagram = gson.fromJson(obj.toString(), ClassDiagram.class);
+            this.clsDiagram = gson.fromJson(obj.get("classDiagram"), ClassDiagram.class);
 
             System.out.print(("Loaded"));
 
@@ -69,7 +81,68 @@ public class JsonReader {
     public boolean parseJsonSequenceDiagrams(String filePath) {
         List<SequenceDiagram> listOfSequenceDiagrams = new ArrayList<>();
 
-        return true;
+        // parsing file
+
+        try {
+            JsonObject obj = (JsonObject) new JSONParser().parse(new FileReader(filePath));
+            GsonBuilder builder = new GsonBuilder();
+
+            Gson gson = builder.create();
+
+            Type sequenceListType = new TypeToken<ArrayList<SequenceDiagram>>() {
+            }.getType();
+            this.sequenceDiagrams = gson.fromJson(obj.get("sequenceDiagrams"), sequenceListType);
+
+            return true;
+        } catch (JsonSyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean parseJsonRelationships(String filePath) {
+
+        try {
+            JsonObject obj = (JsonObject) new JSONParser().parse(new FileReader(filePath));
+            GsonBuilder builder = new GsonBuilder();
+
+            Gson gson = builder.create();
+
+            Type relationListType = new TypeToken<ArrayList<UMLRelation>>() {
+            }.getType();
+            this.sequenceDiagrams = gson.fromJson(obj.get("relationships"), relationListType);
+
+            return true;
+        } catch (JsonSyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
