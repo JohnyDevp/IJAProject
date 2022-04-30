@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.util.*;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import ija.ijaproject.cls.*;
 
@@ -41,12 +42,14 @@ public class JsonReader {
 
             // parsing file
             Object obj = new JSONParser().parse(new FileReader(filePath));
+            GsonBuilder builder = new GsonBuilder();
+            builder.registerTypeAdapter(UMLClassInterfaceTemplate.class,
+                    new UMLClassInterfaceTemplateSeriliazer());
+            builder.registerTypeAdapter(UMLClassInterfaceTemplate.class,
+                    new UMLClassInterfaceTemplateDesirializer());
+            Gson gson = builder.create();
 
-            Gson gson = new Gson();
-
-            UMLClassInterfaceTemplate inter = new UMLClassInterfaceTemplate();
-
-            ClassDiagram cl = gson.fromJson(obj.toString(), ClassDiagram.class);
+            this.clsDiagram = gson.fromJson(obj.toString(), ClassDiagram.class);
 
             System.out.print(("Loaded"));
 

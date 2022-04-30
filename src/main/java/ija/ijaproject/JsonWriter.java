@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ija.ijaproject.cls.ClassDiagram;
 import ija.ijaproject.cls.UMLAttribute;
+import ija.ijaproject.cls.UMLClassInterfaceTemplate;
+import ija.ijaproject.cls.UMLClassInterfaceTemplateDesirializer;
+import ija.ijaproject.cls.UMLClassInterfaceTemplateSeriliazer;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,6 +25,10 @@ public class JsonWriter {
 
             GsonBuilder builder = new GsonBuilder();
             builder.setPrettyPrinting().serializeNulls();
+            builder.registerTypeAdapter(UMLClassInterfaceTemplate.class,
+                    new UMLClassInterfaceTemplateSeriliazer());
+            builder.registerTypeAdapter(UMLClassInterfaceTemplate.class,
+                    new UMLClassInterfaceTemplateDesirializer());
             Gson gson = builder.create();
 
             // UMLAttribute attr = new UMLAttribute('a', "tom", "string");

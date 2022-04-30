@@ -5,14 +5,16 @@
       "umlOperationsList": [],
       "Xcoord": 0.0,
       "Ycoord": 0.0,
-      "name": "ahoj"
+      "name": "auto",
+      "isInterface": false
     },
     {
       "umlAttributesList": [],
       "umlOperationsList": [],
       "Xcoord": 0.0,
       "Ycoord": 0.0,
-      "name": "tom"
+      "name": "toma",
+      "isInterface": false
     }
   ],
   "umlRelationList": [],
