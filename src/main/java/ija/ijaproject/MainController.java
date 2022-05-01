@@ -14,9 +14,11 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * controller for handling creating or loading new class diagram from main window
+ * controller for handling creating or loading new class diagram from main
+ * window
+ * 
  * @author xholan11
- * */
+ */
 public class MainController {
     /**
      * btnLoadClassDiagram button from the main view
@@ -24,7 +26,8 @@ public class MainController {
      * btnLoadSequenceDiagram button from the main view
      * btnCreateNewSequenceDiagram button from the main view
      * toolBar from the main view
-     * tabPane from the main view*/
+     * tabPane from the main view
+     */
     @FXML
     public Button btnLoadClassDiagram;
     @FXML
@@ -36,11 +39,11 @@ public class MainController {
 
     /**
      * stage for view which is handling by this controller
-     * */
+     */
     private Stage stage;
 
     public void initialize() throws IOException {
-        //show creating dialog
+        // show creating dialog
         FXMLLoader fxmlLoaderWelcome = new FXMLLoader(getClass().getResource("views/welcome_view.fxml"));
         Parent parent = fxmlLoaderWelcome.load();
         WelcomeViewController dlgController = fxmlLoaderWelcome.<WelcomeViewController>getController();
@@ -55,61 +58,71 @@ public class MainController {
 
     /**
      * @param stage
-     * setting the stage for this view
-     * */
-    public void setStage(Stage stage){
+     *              setting the stage for this view
+     */
+    public void setStage(Stage stage) {
         this.stage = stage;
     }
 
     /**
      * handling action when button createNewClassDiagramBtn is pressed
-     * calling diagramTabConstructor with sufficient params */
+     * calling diagramTabConstructor with sufficient params
+     */
     @FXML
-    public void createNewClassDiagramBtn() throws Exception{
-        diagramTabConstructor( false);
+    public void createNewClassDiagramBtn() throws Exception {
+        diagramTabConstructor(false);
+    }
+
+    /**
+     * handling action when button createNewClassDiagramBtn is pressed
+     * calling diagramTabConstructor with sufficient params
+     */
+    @FXML
+    public void saveAll() throws Exception {
+        diagramTabConstructor(false);
     }
 
     /**
      * handling action when button loadClassDiagramBtn is pressed
-     * calling diagramTabConstructor with sufficient params */
+     * calling diagramTabConstructor with sufficient params
+     */
     @FXML
-    public void loadClassDiagramBtn() throws Exception{
-        diagramTabConstructor( true);
+    public void loadClassDiagramBtn() throws Exception {
+        diagramTabConstructor(true);
     }
 
     /**
      * handling action when button changeSettingsBtn is pressed
-     * */
+     */
     @FXML
-    public void changeSettingsBtn(){
+    public void changeSettingsBtn() {
         System.out.println("Changing settings...");
 
     }
 
-
     /**
-     * @param isLoader for know whether is the diagram loaded from existing file or not
-     * creates blank window for either sequence or class diagram
-     * */
-    private void diagramTabConstructor(Boolean isLoader) throws Exception{
-        System.out.println("Loading class diagram...");
+     * @param isLoader for know whether is the diagram loaded from existing file or
+     *                 not
+     *                 creates blank window for either sequence or class diagram
+     */
+    private void diagramTabConstructor(Boolean isLoader) throws Exception {
+        System.out.println("Loading file diagram...");
 
-        //get the path for loaded diagram - if there is request for load
+        // get the path for loaded diagram - if there is request for load
         String filePath = "";
-        if (isLoader){
-            try{
-                //open file explorer dialog to choose a file to be load
+        if (isLoader) {
+            try {
+                // open file explorer dialog to choose a file to be load
                 FileChooser fileChooser = new FileChooser();
-                fileChooser.setTitle("Open diagram file");
+                fileChooser.setTitle("Open file");
                 fileChooser.getExtensionFilters().add(
-                        new FileChooser.ExtensionFilter("JSON", "*.json")
-                );
+                        new FileChooser.ExtensionFilter("JSON", "*.json"));
                 File file = fileChooser.showOpenDialog(stage);
                 System.out.println(filePath);
 
-                //if the dialog has been closed then is necessary to exit the tab
-                //raising an alert
-                if (file == null){
+                // if the dialog has been closed then is necessary to exit the tab
+                // raising an alert
+                if (file == null) {
                     System.out.println("fail");
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
@@ -117,7 +130,7 @@ public class MainController {
                     alert.showAndWait();
                     return;
                 } else {
-                    //if the file has been chosen the set its path to variable
+                    // if the file has been chosen the set its path to variable
                     filePath = file.getPath();
                 }
             } catch (Exception e) {
@@ -126,31 +139,33 @@ public class MainController {
             }
         }
 
-
-        //create new tab
+        // create new tab
         Tab tab = new Tab("Class diagram");
 
-
-        //load desired view to the anchorPane and then set the anchorPane as tab content
+        // load desired view to the anchorPane and then set the anchorPane as tab
+        // content
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("views/classDiagram_view.fxml"));
         AnchorPane anch = loader.load();
 
-        //get controller from either sequence or class diagram
+        FXMLLoader loader2 = new FXMLLoader(Main.class.getResource("sequenceDiagram_view.fxml"));
+        // AnchorPane anch2 = loader.load();
+
+        // get controller from either sequence or class diagram
         ClassDiagramController classDiagramController = loader.getController();
+        SequenceDiagramController sequenceDiagramController = loader2.getController();
         tab.setContent(anch);
 
-        //add tab to tabPane
+        // add tab to tabPane
         this.tabPane.getTabs().add(tab);
 
-        //sets all necessary information for DiagramController
+        // sets all necessary information for DiagramController
         classDiagramController.setLoadedFilePath(filePath);
         classDiagramController.setTabPane(this.tabPane);
         classDiagramController.setMainController(this);
 
-        //disable buttons for loading and creating class diagram
+        // disable buttons for loading and creating class diagram
         this.btnLoadClassDiagram.setDisable(true);
         this.btnCreateNewClassDiagram.setDisable(true);
-
 
         classDiagramController.start();
     }

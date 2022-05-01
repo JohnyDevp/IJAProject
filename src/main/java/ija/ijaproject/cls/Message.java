@@ -2,81 +2,93 @@ package ija.ijaproject.cls;
 
 public class Message {
 
-    /**message types
+    /**
+     * message types
      **/
-    public enum MessageType  {SYNC, ASYNC, RETURN, CREATE, DESTROY};
+    public enum MessageType {
+        SYNC, ASYNC, RETURN, CREATE, DESTROY
+    };
 
-    private Double Ycoord;
-    private UMLSeqClass classSender;
-    private UMLSeqClass classReceiver;
-    private UMLOperation umlOperation;
-    private Message.MessageType messageType;
+    public Double Ycoord;
+    public UMLSeqClass classSender;
+    public UMLSeqClass classReceiver;
+    public UMLOperation umlOperation;
+    public Message.MessageType messageType;
 
-    private Boolean senderDeactivation = false;
-    private Boolean receiverDeactivation = false;
+    public Boolean senderDeactivation = false;
+    public Boolean receiverDeactivation = false;
 
-    public Message(Double Ycoord, UMLSeqClass classSender, UMLSeqClass classReceiver, UMLOperation umlOperation, Message.MessageType messageType){
-        this.Ycoord  = Ycoord;
+    /**
+     * Default constructor used for json parsing
+     */
+    public Message() {
+    }
+
+    public Message(Double Ycoord, UMLSeqClass classSender, UMLSeqClass classReceiver, UMLOperation umlOperation,
+            Message.MessageType messageType) {
+        this.Ycoord = Ycoord;
         this.classSender = classSender;
         this.classReceiver = classReceiver;
         this.messageType = messageType;
         this.umlOperation = umlOperation;
     }
 
-    /**setters*/
+    /** setters */
     public void setYCoord(Double Ycoord) {
         this.Ycoord = Ycoord;
     }
 
-    /**setter*/
+    /** setter */
     public void setSenderDeactivation(Boolean senderDeactivation) {
         this.senderDeactivation = senderDeactivation;
     }
 
-    /**setter*/
+    /** setter */
     public void setReceiverDeactivation(Boolean receiverDeactivation) {
         this.receiverDeactivation = receiverDeactivation;
     }
 
-    /**setter*/
+    /** setter */
     public void setClassReceiver(UMLSeqClass classReceiver) {
         this.classReceiver = classReceiver;
     }
 
-    /**setter*/
+    /** setter */
     public void setClassSender(UMLSeqClass classSender) {
         this.classSender = classSender;
     }
 
-    /**getter*/
+    /** getter */
     public Boolean getReceiverDeactivation() {
         return receiverDeactivation;
     }
 
-    /**getter*/
+    /** getter */
     public Boolean getSenderDeactivation() {
         return senderDeactivation;
     }
 
-    /**getter*/
+    /** getter */
     public Double getYCoord() {
         return Ycoord;
     }
 
-    /**getter*/
+    /** getter */
     public MessageType getMessageType() {
         return messageType;
     }
 
-    /**getter*/
+    /** getter */
     public UMLSeqClass getClassSender() {
         return classSender;
     }
 
-    /**getter*/
-    public UMLSeqClass getClassReceiver(){ return  classReceiver;}
+    /** getter */
+    public UMLSeqClass getClassReceiver() {
+        return classReceiver;
+    }
 
-    /**getter*/
+    /** getter */
     public UMLOperation getUmlOperation() {
         return umlOperation;
     }

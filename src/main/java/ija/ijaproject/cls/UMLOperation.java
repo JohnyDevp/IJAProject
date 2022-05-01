@@ -7,57 +7,68 @@ import java.util.List;
 
 /**
  * class for representing uml operation for both interface and class
+ * 
  * @author xzimol04
- * */
-public class UMLOperation extends UMLAttribute{
+ */
+public class UMLOperation extends UMLAttribute {
 
     /**
      * list of all parameters of this operation
-     * */
-    private List<UMLAttribute> parametersOfOperationList = new ArrayList<UMLAttribute>();
+     */
+    public List<UMLAttribute> parametersOfOperationList = new ArrayList<UMLAttribute>();
+
+    /**
+     * Default constructor used for json parsing
+     */
+    public UMLOperation() {
+    }
 
     /**
      * constructor for creating operation just with name
+     * 
      * @param name name of operation
-     * */
+     */
     public UMLOperation(String name) {
         super(name);
     }
 
     /**
      * constructor for creating operation with name and its type
-     * @param name name of operation
+     * 
+     * @param name       name of operation
      * @param returnType return type of operation
-     * */
+     */
     public UMLOperation(String name, String returnType, Character modifier) {
         super(modifier, name, returnType);
     }
 
     /**
      * adding parameter for this operation
+     * 
      * @param param UMLAttribute parameter of this operation
      * @returns success of this operation (true/false)
-     * */
-    public boolean addOperationParameter(UMLAttribute param){
-        for (Iterator<UMLAttribute> itr = parametersOfOperationList.iterator(); itr.hasNext(); ) {
+     */
+    public boolean addOperationParameter(UMLAttribute param) {
+        for (Iterator<UMLAttribute> itr = parametersOfOperationList.iterator(); itr.hasNext();) {
             UMLAttribute umlAttribute = itr.next();
 
-            //if attribute has been find with desired name then fail
+            // if attribute has been find with desired name then fail
             if (umlAttribute.getName() == param.getName()) {
                 return false;
             }
         }
 
-        //parameter hasn't been set yet
+        // parameter hasn't been set yet
         this.parametersOfOperationList.add(param);
         return true;
     }
 
     /**
      * method for get all parameters of this method
+     * 
      * @return list of params
-     * */
-    public List<UMLAttribute> getParametersOfOperationList(){
+     */
+    public List<UMLAttribute> getParametersOfOperationList() {
         return Collections.unmodifiableList(this.parametersOfOperationList);
     }
 

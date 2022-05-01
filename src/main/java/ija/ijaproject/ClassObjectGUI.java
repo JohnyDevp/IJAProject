@@ -1,5 +1,4 @@
 
-
 package ija.ijaproject;
 
 import ija.ijaproject.cls.UMLAttribute;
@@ -13,32 +12,40 @@ import java.util.Map;
 
 /**
  * class for creating new graphic representation of class
+ * 
  * @author xholan11
- * */
-public class ClassObjectGUI extends GUIClassInterfaceTemplate{
+ */
+public class ClassObjectGUI extends GUIClassInterfaceTemplate {
 
-    /**graphical parts of class object*/
+    /** graphical parts of class object */
     protected List<Text> listOfAttributes = new ArrayList<>();
-    protected Map<UMLAttribute,Text> mapOfAttributes = new HashMap<UMLAttribute,Text>();
+    protected Map<UMLAttribute, Text> mapOfAttributes = new HashMap<UMLAttribute, Text>();
 
     /**
      * getters
-     * */
-    public List<Text> getListOfAttributes() {return this.listOfAttributes;}
-    public UMLClass getUmlClass() { return (UMLClass) super.object; }
-    public Map<UMLAttribute,Text> getMapOfAttributes() {
+     */
+    public List<Text> getListOfAttributes() {
+        return this.listOfAttributes;
+    }
+
+    public UMLClass getUmlClass() {
+        return (UMLClass) super.object;
+    }
+
+    public Map<UMLAttribute, Text> getMapOfAttributes() {
         return mapOfAttributes;
     }
 
     /**
      * constructor for creating the class object
+     * 
      * @param umlClass name of the class
-     * */
-    public ClassObjectGUI(UMLClass umlClass){
+     */
+    public ClassObjectGUI(UMLClass umlClass) {
         super(umlClass);
 
-        //add attributes
-        for (UMLAttribute umlAttribute : umlClass.getUmlAttributesList()){
+        // add attributes
+        for (UMLAttribute umlAttribute : umlClass.getUmlAttributesList()) {
             this.addAtributeFromConstructor(umlAttribute);
         }
 
@@ -47,50 +54,56 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate{
     /**
      * @param umlAttribute intern representation of uml attribute
      *                     from that this method extract attribute name and type
-     * method for adding attribute to class diagram graphical representation
-     * @return null if the uml attribute either with this name or whole the same already exists as attribute of this class
-     * */
-    public Text addAttribute(UMLAttribute umlAttribute){
+     *                     method for adding attribute to class diagram graphical
+     *                     representation
+     * @return null if the uml attribute either with this name or whole the same
+     *         already exists as attribute of this class
+     */
+    public Text addAttribute(UMLAttribute umlAttribute) {
 
-        //if the attribute with the name is already there then it will fail and return null
-        if (!getUmlClass().addAttribute(umlAttribute)) {return null;}
+        // if the attribute with the name is already there then it will fail and return
+        // null
+        if (!getUmlClass().addAttribute(umlAttribute)) {
+            return null;
+        }
 
         return addAtributeFromConstructor(umlAttribute);
 
     }
 
-    /**function for removing attribute from graphical and all others intern representation
+    /**
+     * function for removing attribute from graphical and all others intern
+     * representation
      * remove from canvas HAS TO BE DONE BEFORE !!!!
-     * */
-    public void removeAttribute(UMLAttribute umlAttribute){
-        //remove text representation
+     */
+    public void removeAttribute(UMLAttribute umlAttribute) {
+        // remove text representation
         this.listOfAttributes.remove(this.mapOfAttributes.get(umlAttribute));
-        //remove map representation
+        // remove map representation
         this.mapOfAttributes.remove(umlAttribute);
-        //remove intern representation
-        ((UMLClass)this.getObject()).deleteAttribute(umlAttribute.getName());
+        // remove intern representation
+        ((UMLClass) this.getObject()).deleteAttribute(umlAttribute.getName());
 
-        //resize class gui iff necessary
+        // resize class gui iff necessary
         this.resizeObjectGUI();
     }
 
-
     /**
      * method without control - has been checked already - called by constructor
-     * non-adding umlattribute to umlclass - already there when calling from constructor
-     * */
-    private Text addAtributeFromConstructor(UMLAttribute umlAttribute){
+     * non-adding umlattribute to umlclass - already there when calling from
+     * constructor
+     */
+    private Text addAtributeFromConstructor(UMLAttribute umlAttribute) {
 
-        Text attribute = new Text(umlAttribute.getModifier() +umlAttribute.getName() + " : " + umlAttribute.getType());
+        Text attribute = new Text(umlAttribute.getModifier() + umlAttribute.getName() + " : " + umlAttribute.getType());
         attribute.setId(umlAttribute.getName());
 
-
-        //add attributes to map
-        this.mapOfAttributes.put(umlAttribute,attribute);
+        // add attributes to map
+        this.mapOfAttributes.put(umlAttribute, attribute);
 
         listOfAttributes.add(attribute);
 
-        //resizing width of class gui if necessary (according to text width)
+        // resizing width of class gui if necessary (according to text width)
         this.resizeObjectGUI();
 
         return attribute;

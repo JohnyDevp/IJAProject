@@ -1,43 +1,47 @@
 package ija.ijaproject.cls;
 
-public class UMLSeqClass extends Element{
+public class UMLSeqClass extends Element {
 
-    private UMLClass umlClass;
+    public UMLClass umlClass;
 
-    private Double Xcoord;
+    public Double Xcoord;
 
+    public UMLSeqClass() {
+    }
 
-    /**getter*/
+    /** getter */
     public UMLClass getUmlClass() {
         return umlClass;
     }
-    /**setter*/
+
+    /** setter */
     public void setUmlClass(UMLClass umlClass) {
         this.umlClass = umlClass;
     }
-    /**setter*/
+
+    /** setter */
     public void setXcoord(Double xcoord) {
         Xcoord = xcoord;
     }
-    /**getter*/
+
+    /** getter */
     public Double getXcoord() {
         return Xcoord;
     }
 
-    /**constructor - when non-existing uml object is add in sequence diagram*/
-    public UMLSeqClass(String name, Double xcoord){
+    /** constructor - when non-existing uml object is add in sequence diagram */
+    public UMLSeqClass(String name, Double xcoord) {
         super(name);
         setXcoord(xcoord);
-        //create temporary uml class
+        // create temporary uml class
         this.umlClass = new UMLClass("*");
     }
 
-    /**constructor*/
-    public UMLSeqClass(UMLClass umlClass, Double xcoord){
+    /** constructor */
+    public UMLSeqClass(UMLClass umlClass, Double xcoord) {
         super(umlClass.getName());
         this.umlClass = umlClass;
         setXcoord(xcoord);
     }
-
 
 }
