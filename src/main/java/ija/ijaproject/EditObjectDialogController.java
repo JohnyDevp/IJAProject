@@ -329,7 +329,8 @@ public class EditObjectDialogController {
 
         }
 
-
+        //deselect class
+        this.
         //close this dialog
         closeStage(e);
     }

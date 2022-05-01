@@ -188,6 +188,10 @@ public class SequenceObjectGUI {
     }
 
     public void moveActiveArea(){
+        //reset destroying stamp
+        this.objectDestroyedPosition = -1.0;
+
+        //reset the list of all active-area rectangles
         for (Rectangle rect : timeLineActiveRectangleList) {this.canvas.getChildren().remove(rect);}
         this.timeLineActiveRectangleList.clear();
 

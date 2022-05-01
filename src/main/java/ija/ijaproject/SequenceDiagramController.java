@@ -395,21 +395,5 @@ public class SequenceDiagramController {
             }
         }
 
-        //update messages
-        /*for (SequenceMessageGUI sequenceMessageGUI : sequenceMessageGUIList){
-            //firstly found whether exists the class containing this message
-            UMLClass msgReceiverOld = sequenceMessageGUI.getUmlMessage().getClassReceiver().getUmlClass();
-            UMLClassInterfaceTemplate msgReceiverCurrent = classDiagram.findObject(msgReceiverOld.getName());
-
-            if (msgReceiverCurrent != null && msgReceiverCurrent.getClass() == UMLClass.class){
-                //check whether the operation itself exists in the class
-
-            } else {
-                //class doesnt exist
-                sequenceMessageGUI.setExistsInClassDiagram(false);
-            }
-
-        }*/
-
     }
 }
