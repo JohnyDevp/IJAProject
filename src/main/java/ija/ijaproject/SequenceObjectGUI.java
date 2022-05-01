@@ -2,7 +2,6 @@ package ija.ijaproject;
 
 import ija.ijaproject.cls.Message;
 import ija.ijaproject.cls.SequenceDiagram;
-import ija.ijaproject.cls.UMLClass;
 import ija.ijaproject.cls.UMLSeqClass;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;

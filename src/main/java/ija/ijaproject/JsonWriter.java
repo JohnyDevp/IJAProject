@@ -2,36 +2,20 @@ package ija.ijaproject;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import ija.ijaproject.cls.*;
 
-import ija.ijaproject.cls.ClassDiagram;
-import ija.ijaproject.cls.SequenceDiagram;
-import ija.ijaproject.cls.UMLAttribute;
-import ija.ijaproject.cls.UMLClassInterfaceTemplate;
-import ija.ijaproject.cls.UMLClassInterfaceTemplateDesirializer;
-import ija.ijaproject.cls.UMLClassInterfaceTemplateSeriliazer;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class JsonWriter {
 
-    public boolean saveAllToFile(List<SequenceDiagram> seqDia, ClassDiagram clsDia) {
+    public boolean saveAllToFile(List<SequenceDiagram> seqDia, ClassDiagram clsDia, String filePath) {
 
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting().serializeNulls();
@@ -53,7 +37,7 @@ public class JsonWriter {
         String result = wholeFile.toString();
 
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("examples/test1.json"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
             writer.write(result);
 
             writer.close();

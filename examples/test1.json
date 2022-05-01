@@ -1,5 +1,14 @@
 {
-  "umlList": [],
+  "umlList": [
+    {
+      "umlAttributesList": [],
+      "umlOperationsList": [],
+      "Xcoord": 123.0,
+      "Ycoord": 44.0,
+      "name": "ahoj",
+      "isInterface": false
+    }
+  ],
   "umlRelationList": [],
   "name": "test"
 }

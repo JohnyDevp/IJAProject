@@ -7,8 +7,6 @@ import ija.ijaproject.cls.UMLOperation;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-import java.util.Map;
-
 public class Undo {
     public enum UndoOperation {RENAMEOBJECT, ADDATTRIBUTE, ADDOPERATION, REMOVEATTRIBUTE, REMOVEOPERATION};
 

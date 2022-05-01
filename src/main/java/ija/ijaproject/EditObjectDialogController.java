@@ -3,7 +3,6 @@
 package ija.ijaproject;
 
 import ija.ijaproject.cls.*;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 /**
  * Controller for editting either class or interface in class diagram - editting attributes and operations
  * @author xholan11

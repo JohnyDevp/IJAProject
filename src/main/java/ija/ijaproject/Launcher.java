@@ -1,5 +1,4 @@
 package ija.ijaproject;
-import ija.ijaproject.Main;
 
 /**
  * class for launching whole app - leads to Main class

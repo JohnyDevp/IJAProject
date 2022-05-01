@@ -1,7 +1,10 @@
 
 package ija.ijaproject;
 
-import ija.ijaproject.cls.*;
+import ija.ijaproject.cls.UMLAttribute;
+import ija.ijaproject.cls.UMLClass;
+import ija.ijaproject.cls.UMLClassInterfaceTemplate;
+import ija.ijaproject.cls.UMLOperation;
 import javafx.scene.Cursor;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;

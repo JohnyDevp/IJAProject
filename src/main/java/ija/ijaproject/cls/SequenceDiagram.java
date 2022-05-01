@@ -1,6 +1,7 @@
 package ija.ijaproject.cls;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * class representing sequence diagram with its components

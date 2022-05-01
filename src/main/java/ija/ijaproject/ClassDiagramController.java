@@ -18,7 +18,10 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Controller for class diagram GUI
@@ -510,6 +513,7 @@ public class ClassDiagramController {
         // save whole diagram to the file
         JsonWriter jsonWriter = new JsonWriter();
         jsonWriter.saveClassDiagramToFile(filePath, this.classDiagram);
+        jsonWriter.saveAllToFile(this.listOfSequenceDiagrams, this.classDiagram, filePath);
 
     }
 

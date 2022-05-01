@@ -1,7 +1,7 @@
 
 package ija.ijaproject;
 
-import ija.ijaproject.cls.*;
+import ija.ijaproject.cls.UMLAttribute;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;

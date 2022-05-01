@@ -1,11 +1,8 @@
 package ija.ijaproject;
 
-import ija.ijaproject.ClassDiagramController;
-import ija.ijaproject.ClassObjectGUI;
 import ija.ijaproject.cls.UMLClassInterfaceTemplate;
 import ija.ijaproject.cls.UMLRelation;
 import javafx.scene.Cursor;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;

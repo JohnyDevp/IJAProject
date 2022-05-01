@@ -1,26 +1,25 @@
 package ija.ijaproject;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-// import java.lang.ProcessBuilder.Redirect.Type;
-import java.lang.reflect.Type;
-import java.util.*;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-
-import java.util.ArrayList;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import ija.ijaproject.cls.*;
-
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.*;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+// import java.lang.ProcessBuilder.Redirect.Type;
 
 /**
  * class for parsing json file into class and sequence diagram

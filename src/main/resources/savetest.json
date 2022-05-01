@@ -1,0 +1,4 @@
+{
+  "classDiagram": "{\n  \"umlList\": [\n    {\n      \"umlAttributesList\": [],\n      \"umlOperationsList\": [],\n      \"Xcoord\": 123.0,\n      \"Ycoord\": 44.0,\n      \"name\": \"ahoj\",\n      \"isInterface\": false\n    }\n  ],\n  \"umlRelationList\": [],\n  \"name\": \"test\"\n}",
+  "sequenceDiagrams": "[]"
+}
