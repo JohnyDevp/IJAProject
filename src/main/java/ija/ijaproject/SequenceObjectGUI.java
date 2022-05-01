@@ -2,6 +2,7 @@ package ija.ijaproject;
 
 import ija.ijaproject.cls.Message;
 import ija.ijaproject.cls.SequenceDiagram;
+import ija.ijaproject.cls.UMLClass;
 import ija.ijaproject.cls.UMLSeqClass;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -16,6 +17,9 @@ import java.util.List;
 public class SequenceObjectGUI {
     //implicitly set Y for each object (not message)
     private static final int YCOORD_BEGIN = 30;
+
+    //if this object exists also in class diagram
+    private Boolean existsInClassDiagram = true;
 
     //variable storing whether this object is destroyed (value greated then -1) or not (value -1)
     private Double objectDestroyedPosition = -1.0;
@@ -90,7 +94,7 @@ public class SequenceObjectGUI {
         Rectangle objBackground = new Rectangle();
         objBackground.setWidth(objWidth);
         objBackground.setHeight(40);
-        objBackground.setFill(Color.LIGHTCYAN);
+        objBackground.setFill(Color.LIGHTGRAY);
         objBackground.setStroke(Color.BLACK);
         //SET X AND Y COORD OF BOX
         objBackground.setX(this.umlSeqClass.getXcoord());
@@ -120,8 +124,39 @@ public class SequenceObjectGUI {
         this.objNameText = objName;
     }
 
-    public void resizeObject(){
+    private void updateObjectName(){
+        this.umlSeqClass.setName(this.umlSeqClass.getUmlClass().getName());
+        this.objNameText.setText(":"+this.umlSeqClass.getName());
 
+        //compute the width of whole object
+        Double objWidth = this.objNameText.getLayoutBounds().getWidth() + 10;
+
+        //reset the width
+        objBackground.setWidth(objWidth);
+
+        Double prevLineX = this.objectTimeLine.getStartX();
+
+        //compute half of the background of the object exactly on X axis
+        Double halfOnXAxis = objBackground.getWidth() / 2 + objBackground.getX();
+
+        Double diffX = halfOnXAxis - prevLineX;
+
+        //move life-line
+        this.objectTimeLine.setStartX(halfOnXAxis);
+        this.objectTimeLine.setEndX(halfOnXAxis);
+
+        //move all active areas of this object
+        for (Rectangle activeArea : this.timeLineActiveRectangleList){
+            activeArea.setX(activeArea.getX() + diffX);
+        }
+
+        //move all messages related to this object
+        for (SequenceMessageGUI sequenceMessageGUI : this.sendingMessageGUIList){
+            sequenceMessageGUI.messageGuiMove();
+        }
+        for (SequenceMessageGUI sequenceMessageGUI : this.receivingMessageGUIList){
+            sequenceMessageGUI.messageGuiMove();
+        }
     }
 
     public void moveObject(Double diffX){
@@ -323,6 +358,41 @@ public class SequenceObjectGUI {
         if (this.objectDestroyedPosition > -1.0){
             this.objectTimeLine.setEndY(sequenceMessageGUI.getMessageLine().getEndY());
         }
+    }
+
+    /**
+     * set whether this class exists also in class diagram
+     * @param existsInClassDiagram
+     */
+    public void setExistsInClassDiagram(Boolean existsInClassDiagram, UMLSeqClass newUMLSeqClass) {
+        this.existsInClassDiagram = existsInClassDiagram;
+
+        //reset the color of the not-existing or existing class
+        if (existsInClassDiagram){
+            //reset displayed name -> cause it can exists in classdiagram, but gui isnt updated when name of class is changed
+            //reset the name both here and in its inner representation
+            updateObjectName();
+
+            this.objNameText.setFill(Color.BLACK);
+            //if new uml class has been set then change the current one
+            if (newUMLSeqClass != null){
+                this.umlSeqClass = newUMLSeqClass;
+            }
+        } else {
+            this.objNameText.setFill(Color.RED);
+        }
+
+        //upload messages
+        for (SequenceMessageGUI sequenceMessageGUI : this.sendingMessageGUIList){
+            sequenceMessageGUI.uploadRelatedSenderUmlSeqClasses(this.umlSeqClass);
+        }
+        for (SequenceMessageGUI sequenceMessageGUI : this.receivingMessageGUIList){
+            sequenceMessageGUI.uploadRelatedReceiverUmlSeqClasses(this.umlSeqClass);
+        }
+    }
+
+    public Boolean getExistsInClassDiagram() {
+        return existsInClassDiagram;
     }
 }
 

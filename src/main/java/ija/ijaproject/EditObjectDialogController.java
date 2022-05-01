@@ -56,14 +56,18 @@ public class EditObjectDialogController {
     //for the possibility of renaming object - has to be checked
     private ClassDiagram clsDiag;
     private Pane canvas;
+    private List<Undo> undoOperationList = null;
+
+    //list for adding attributes for newly creating operation (while creating)
     private List<UMLAttribute> attributesOfOperation = new ArrayList<>();
 
     /**
      * method for initialization of this controller */
-    public void init(GUIClassInterfaceTemplate guiObject, ClassDiagram clsDiag, Pane canvas){
+    public void init(GUIClassInterfaceTemplate guiObject, ClassDiagram clsDiag, List<Undo> undoOperationList, Pane canvas){
         this.guiObject = guiObject;
         this.canvas = canvas;
         this.clsDiag = clsDiag;
+        this.undoOperationList = undoOperationList;
 
         //disable attribute things iff interface take part
         if (guiObject.getClass() == InterfaceObjectGUI.class){
@@ -126,6 +130,15 @@ public class EditObjectDialogController {
             //take the newly created attribute and add it on canvas iff could be created
             Text newAttr = ((ClassObjectGUI)guiObject).addAttribute(dlgController.getUmlAttribute());
             if (newAttr != null) this.canvas.getChildren().add(newAttr);
+
+            //set undo operation
+            this.undoOperationList.add(new Undo(
+                    Undo.UndoOperation.REMOVEATTRIBUTE,
+                    this.canvas,
+                    this.clsDiag,
+                    this.guiObject,
+                    dlgController.getUmlAttribute() //currently added attribute - the attribute to be potentially removed
+            ));
         }
 
         //reload combobox
@@ -139,6 +152,15 @@ public class EditObjectDialogController {
         //loop the map of attributes and when find then remove it
         for (Map.Entry<UMLAttribute,Text> mapAttr : ((ClassObjectGUI)guiObject).getMapOfAttributes().entrySet()){
             if(cmbAttributes.getValue() == mapAttr.getValue().getText()){
+                //set undo operation
+                this.undoOperationList.add(new Undo(
+                        Undo.UndoOperation.ADDATTRIBUTE,
+                        this.canvas,
+                        this.clsDiag,
+                        this.guiObject,
+                        mapAttr.getKey() //currently removed attribute - the attribute to be potentially added
+                ));
+
                 //remove from canvas
                 this.canvas.getChildren().remove(mapAttr.getValue());
                 //remove attribute's representations
@@ -158,13 +180,22 @@ public class EditObjectDialogController {
             //check if there isnt ant other class with desired name
             UMLClass tmp = this.clsDiag.createClass(txtObjectName.getText());
             if (tmp != null){
+                //set undo operation
+                this.undoOperationList.add(new Undo(
+                        Undo.UndoOperation.RENAMEOBJECT,
+                        this.canvas,
+                        this.clsDiag,
+                        this.guiObject,
+                        this.guiObject.getObject().getName() //currently changing (so the old) name
+                        ));
                 //if not then delete the tmp class (testing the name) and set the name
                 this.clsDiag.deleteClass(tmp);
                 //set the new name for inner representation
                 this.guiObject.getObject().setName(txtObjectName.getText());
                 //set the name of label representing object name
                 this.guiObject.getClassNameLabel().setText(txtObjectName.getText());
-
+                //resize the object gui
+                this.guiObject.resizeObjectGUI();
             }
         }
     }
@@ -173,6 +204,15 @@ public class EditObjectDialogController {
         //loop the map of attributes and when find then remove it
         for (Map.Entry<UMLOperation,Text> mapAttr : ((ClassObjectGUI)guiObject).getMapOfOperations().entrySet()){
             if(cmbOperations.getValue() == mapAttr.getValue().getText()){
+                //set undo operation
+                this.undoOperationList.add(new Undo(
+                        Undo.UndoOperation.ADDOPERATION,
+                        this.canvas,
+                        this.clsDiag,
+                        this.guiObject,
+                        mapAttr.getKey() //currently removed operation - the operation to be potentially added
+                ));
+
                 //remove from canvas
                 this.canvas.getChildren().remove(mapAttr.getValue());
                 //remove attribute's representations
@@ -199,6 +239,15 @@ public class EditObjectDialogController {
         Text txtOpr = this.guiObject.addOperation(newOperation);
         if(txtOpr == null) return; //fail - already exists
         else {
+            //set undo operation
+            this.undoOperationList.add(new Undo(
+                    Undo.UndoOperation.REMOVEOPERATION,
+                    this.canvas,
+                    this.clsDiag,
+                    this.guiObject,
+                    newOperation //currently added operation - the operation to be potentially removed
+            ));
+
             //add it to canvas
             this.canvas.getChildren().add(txtOpr);
         }
@@ -235,7 +284,8 @@ public class EditObjectDialogController {
 
     /**remove whole object*/
     public void btnRemove(ActionEvent e){
-        //remove all relations from intern representation
+        //remove all relations from intern representation - also related undone-operations
+        this.undoOperationList.removeIf(undo -> undo.getGuiObject().equals(this.guiObject));
         this.clsDiag.deleteObject(this.guiObject.getObject());
 
         //remove object from canvas

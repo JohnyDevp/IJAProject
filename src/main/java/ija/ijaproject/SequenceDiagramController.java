@@ -51,8 +51,6 @@ public class SequenceDiagramController {
     @FXML
     public Button btnAddClass;
     @FXML
-    public Button btnAddMessage;
-    @FXML
     public Button btnDeleteClass;
     @FXML
     public Button btnDeleteMessage;
@@ -174,10 +172,9 @@ public class SequenceDiagramController {
     }
 
     /**
-     * method handling adding message
-     */
-    public void btnAddMessage(){
-
+     * */
+    public void btnSave(){
+        //TODO - sequenceDiagram
     }
 
     /**
@@ -224,6 +221,7 @@ public class SequenceDiagramController {
     }
 
     /*=================================================================================================================*/
+
     SequenceObjectGUI selectedObject = null; //variable storing currently selected object
     private SequenceMessageGUI selectedMessage = null; //variable for storing currently selected message
     private Double mouseX = 0.0;
@@ -243,13 +241,20 @@ public class SequenceDiagramController {
         sequenceObjectGUI.getObjBackground().setOnMouseClicked(mouseEvent -> {
             //change color of the previously selected object
             if (this.selectedObject != null){
+                //set as unselected the previously selected object
                 this.selectedObject.getObjBackground().setFill(Color.LIGHTGRAY);
+                //if the previously selected object was this object, then return (-> select "nothing")
                 if (sequenceObjectGUI == this.selectedObject){
                     this.selectedObject = null;
                     return;
+                } else {
+                    //otherwise set as newly selected object this object
+                    this.selectedObject = sequenceObjectGUI;
+                    sequenceObjectGUI.getObjBackground().setFill(Color.ORANGE);
                 }
             } else {
-                //set new selected object
+                //nothing to unselect
+                //set new selected object for this object
                 this.selectedObject = sequenceObjectGUI;
                 sequenceObjectGUI.getObjBackground().setFill(Color.ORANGE);
             }
@@ -331,7 +336,7 @@ public class SequenceDiagramController {
         sequenceMessageGUI.getMessageLine().setOnMouseClicked(mouseEvent -> {
             //change color of the previously selected object
             if (this.selectedMessage != null){
-                this.selectedMessage.getMessageLine().setFill(Color.BLACK);
+                this.selectedMessage.getMessageLine().setStroke(Color.BLACK);
                 if (sequenceMessageGUI == this.selectedMessage){
                     this.selectedMessage = null;
                     return;
@@ -339,7 +344,7 @@ public class SequenceDiagramController {
             } else {
                 //set new selected object
                 this.selectedMessage = sequenceMessageGUI;
-                sequenceMessageGUI.getMessageLine().setFill(Color.ORANGE);
+                sequenceMessageGUI.getMessageLine().setStroke(Color.ORANGE);
             }
         });
     }
@@ -362,5 +367,49 @@ public class SequenceDiagramController {
         if (this.selectedMessage == sequenceMessageGUI) {
             this.selectedMessage = null;
         }
+    }
+
+    /**
+     * this function updating all elements in this diagram
+     * */
+    public void updateDiagram(){
+        //update objects - classes
+        for (SequenceObjectGUI sequenceObjectGUI : sequenceObjectGUIList){
+            UMLClassInterfaceTemplate umlClassInterfaceTemplate = classDiagram.findObject(sequenceObjectGUI.getUmlSeqClass().getUmlClass().getName());
+            //if it is class
+            if (umlClassInterfaceTemplate != null && umlClassInterfaceTemplate.getClass() != UMLInterface.class) {
+                //class found - but there has to be another select, if the name fit -> will be implicitly reset in setExistsInClassDiagram function
+
+
+                //check if the class doesnt exist so far (now exists)
+                if (sequenceObjectGUI.getExistsInClassDiagram()){ //if it has existed already
+                    sequenceObjectGUI.setExistsInClassDiagram(true, null);
+                } else {
+                    //create new umlseqclass and add it to the class diagram and update this seq class object
+                    UMLSeqClass umlSeqClass = new UMLSeqClass((UMLClass) umlClassInterfaceTemplate, sequenceObjectGUI.getUmlSeqClass().getXcoord());
+                    sequenceObjectGUI.setExistsInClassDiagram(true,umlSeqClass);
+                }
+            } else {
+                //class name not found
+                sequenceObjectGUI.setExistsInClassDiagram(false, null);
+            }
+        }
+
+        //update messages
+        /*for (SequenceMessageGUI sequenceMessageGUI : sequenceMessageGUIList){
+            //firstly found whether exists the class containing this message
+            UMLClass msgReceiverOld = sequenceMessageGUI.getUmlMessage().getClassReceiver().getUmlClass();
+            UMLClassInterfaceTemplate msgReceiverCurrent = classDiagram.findObject(msgReceiverOld.getName());
+
+            if (msgReceiverCurrent != null && msgReceiverCurrent.getClass() == UMLClass.class){
+                //check whether the operation itself exists in the class
+
+            } else {
+                //class doesnt exist
+                sequenceMessageGUI.setExistsInClassDiagram(false);
+            }
+
+        }*/
+
     }
 }

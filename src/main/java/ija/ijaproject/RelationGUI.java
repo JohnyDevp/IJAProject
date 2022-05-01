@@ -166,16 +166,16 @@ public class RelationGUI{
             getRelLine().setEndY(getRelLine().getEndY() + diffY);
         }
 
-        //things that are moved the same way all time when moving relation
-        //canvas.getChildren().remove(getRelLineEnd());
+        //reset coordinates of relation in its intern representation
+        this.getUmlRelation().setStartX(getRelLine().getStartX());
+        this.getUmlRelation().setStartY(getRelLine().getStartY());
+        this.getUmlRelation().setEndX(getRelLine().getEndX());
+        this.getUmlRelation().setEndY(getRelLine().getEndY());
+
+        //set new position of the line endings (explicitly said the arrow)
         setNewRelLineEndPosition();
-        //canvas.getChildren().add(getRelLineEnd());
 
-        //change position of relation attributes (iff exist)
-        //canvas.getChildren().remove(getNameOfRelation());
-        //canvas.getChildren().remove(getCardinalityByToClass());
-        //canvas.getChildren().remove(getCardinalityByFromClass());
-
+        //reset also the cardinalities and the name of the relation
         if (getNameOfRelation() != null && !getNameOfRelation().getText().equals("")) setNameOfRelation(getNameOfRelation().getText());
         if ( getCardinalityByFromClass() != null && getCardinalityByToClass() != null && !(getCardinalityByFromClass().getText().equals("") && getCardinalityByToClass().getText().equals(""))) {
             setCardinalityByFromClass(getCardinalityByFromClass().getText());
@@ -308,7 +308,6 @@ public class RelationGUI{
 
         this.canvas.getChildren().add(getRelLineEnd());
     }
-
 
     public void setNameOfRelation(String name){
         //remove the label with name of relation if has been set already

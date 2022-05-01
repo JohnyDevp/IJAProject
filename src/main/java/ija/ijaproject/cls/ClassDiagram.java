@@ -12,12 +12,12 @@ public class ClassDiagram extends Element{
     /**
      * list of all classes and interfaces in class diagram
      * */
-    private List<UMLClassInterfaceTemplate> umlList = new ArrayList<>();
+    public List<UMLClassInterfaceTemplate> umlList = new ArrayList<>();
 
     /**
      * list of all relations in this diagram
      * */
-    private List<UMLRelation> umlRelationList = new ArrayList<>();
+    public List<UMLRelation> umlRelationList = new ArrayList<>();
 
     /**getter*/
     public List<UMLClassInterfaceTemplate> getUmlObjectsList(){return this.umlList;}

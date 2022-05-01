@@ -38,6 +38,16 @@ public class Message {
         this.receiverDeactivation = receiverDeactivation;
     }
 
+    /**setter*/
+    public void setClassReceiver(UMLSeqClass classReceiver) {
+        this.classReceiver = classReceiver;
+    }
+
+    /**setter*/
+    public void setClassSender(UMLSeqClass classSender) {
+        this.classSender = classSender;
+    }
+
     /**getter*/
     public Boolean getReceiverDeactivation() {
         return receiverDeactivation;
@@ -62,6 +72,9 @@ public class Message {
     public UMLSeqClass getClassSender() {
         return classSender;
     }
+
+    /**getter*/
+    public UMLSeqClass getClassReceiver(){ return  classReceiver;}
 
     /**getter*/
     public UMLOperation getUmlOperation() {

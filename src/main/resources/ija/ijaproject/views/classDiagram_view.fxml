@@ -15,7 +15,7 @@
       <ToolBar layoutY="35.0" prefWidth="570.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
         <items>
           <Button fx:id="btnSave" mnemonicParsing="false" onAction="#btnSave" text="Save" />
-            <Button mnemonicParsing="false" text="Undo" />
+            <Button fx:id="btnUndo" mnemonicParsing="false" onAction="#btnUndo" text="Undo" />
             <Button fx:id="btnClose" mnemonicParsing="false" onAction="#btnClose" text="Close" />
             <Button fx:id="btnAddClass" mnemonicParsing="false" onAction="#btnAddClass" text="ADD CLASS/INTERFACE" />
             <Button fx:id="btnAddRelation" mnemonicParsing="false" onAction="#btnAddRelation" text="ADD RELATION" />
