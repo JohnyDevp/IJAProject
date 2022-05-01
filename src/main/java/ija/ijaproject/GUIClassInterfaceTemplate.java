@@ -82,6 +82,7 @@ public abstract class GUIClassInterfaceTemplate {
      * @param umlClassInterfaceTemplate instance of UMLclass/UMLinterface
      * */
     public GUIClassInterfaceTemplate(UMLClassInterfaceTemplate umlClassInterfaceTemplate){
+
         //set the intern object representation
         this.object = umlClassInterfaceTemplate;
 
@@ -163,8 +164,7 @@ public abstract class GUIClassInterfaceTemplate {
     public void removeOperation(UMLOperation umlOperation){
         //remove text representation
         this.listOfOperations.remove(this.mapOfOperations.get(umlOperation));
-        //remove map representation
-        this.mapOfOperations.remove(umlOperation);
+
         //remove intern representation
         ((UMLClass)this.getObject()).deleteOperation(umlOperation.getName());
 

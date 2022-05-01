@@ -4,33 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_antkorwin_better_strings_0_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_antkorwin_ioutils_0_8.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_antkorwin_throwable_functions_1_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_12.xml" afterDir="false" />
+    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="merge done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IJAProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/IJAProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/test1.json" beforeDir="false" afterPath="$PROJECT_DIR$/examples/test1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/AddAttributeDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/AddAttributeDialogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/EditObjectDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/EditObjectDialogController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/GUIClassInterfaceTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/GUIClassInterfaceTemplate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/Launcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceMessageGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceMessageGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceObjectGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceObjectGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/Undo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/Undo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/ClassDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/ClassDiagram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/SequenceDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/SequenceDiagram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplateDesirializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplateDesirializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplateSeriliazer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplateSeriliazer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/savetest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/savetest.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +42,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="27Bbg2M2zhjR6T3YxNkIg8pfV1c" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -371,7 +348,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651233951690</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="merge done">
+      <created>1651432540312</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1651432540312</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -416,7 +400,8 @@
     <MESSAGE value="adding operation fixed, gui adding operation fix tbd" />
     <MESSAGE value="sequence diagram added" />
     <MESSAGE value="sequence diagram functionality done" />
-    <option name="LAST_COMMIT_MESSAGE" value="sequence diagram functionality done" />
+    <MESSAGE value="merge done" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -426,10 +411,24 @@
           <line>15</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/EditObjectDialogController.java</url>
+          <line>206</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="com.google.gson.JsonIOException" package="com.google.gson" />
           <option name="timeStamp" value="3" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java</url>
+          <line>116</line>
+          <properties class="ija.ijaproject.SequenceDiagramController" method="btnAddClass">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

@@ -201,6 +201,8 @@ public class EditObjectDialogController {
     }
 
     public void btnDeleteOperation(ActionEvent actionEvent) {
+        //variable for storing map object
+        Object toBeRemoved = null;
         //loop the map of attributes and when find then remove it
         for (Map.Entry<UMLOperation,Text> mapAttr : ((ClassObjectGUI)guiObject).getMapOfOperations().entrySet()){
             if(cmbOperations.getValue() == mapAttr.getValue().getText()){
@@ -217,8 +219,14 @@ public class EditObjectDialogController {
                 this.canvas.getChildren().remove(mapAttr.getValue());
                 //remove attribute's representations
                 guiObject.removeOperation(mapAttr.getKey());
+                toBeRemoved = mapAttr;
             }
         }
+
+        //remove map representation
+
+        guiObject.getMapOfOperations().remove(toBeRemoved);
+
         //reload combobox
         loadCmbOperations();
         cmbOperations.setItems(cmbOperations.getItems());
