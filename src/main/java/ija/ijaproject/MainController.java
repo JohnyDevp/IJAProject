@@ -163,10 +163,8 @@ public class MainController {
         classDiagramController.setTabPane(this.tabPane);
         classDiagramController.setMainController(this);
 
-        sequenceDiagramController.
-
         // disable buttons for loading and creating class diagram
-                this.btnLoadClassDiagram.setDisable(true);
+        this.btnLoadClassDiagram.setDisable(true);
         this.btnCreateNewClassDiagram.setDisable(true);
 
         classDiagramController.start();
