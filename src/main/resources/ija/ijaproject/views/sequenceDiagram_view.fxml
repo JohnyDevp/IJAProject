@@ -9,12 +9,9 @@
    <children>
       <ToolBar layoutX="27.0" layoutY="8.0" prefWidth="570.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
-            <Button mnemonicParsing="false" text="Save" />
             <Button mnemonicParsing="false" text="Discard" />
-            <Button mnemonicParsing="false" text="Undo" />
             <Button fx:id="btnClose" mnemonicParsing="false" onAction="#btnClose" text="Close" />
             <Button fx:id="btnAddClass" mnemonicParsing="false" onAction="#btnAddClass" text="ADD CLASS" />
-            <Button fx:id="btnAddMessage" mnemonicParsing="false" onAction="#btnAddMessage" text="ADD MESSAGE" />
             <Button fx:id="btnDeleteClass" mnemonicParsing="false" onAction="#btnDeleteClass" text="DELETE CLASS" />
             <Button fx:id="btnDeleteMessage" mnemonicParsing="false" onAction="#btnDeleteMessage" text="DELETE MESSAGE" />
          </items>

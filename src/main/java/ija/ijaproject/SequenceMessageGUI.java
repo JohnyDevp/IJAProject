@@ -13,6 +13,8 @@ public class SequenceMessageGUI {
     //defined according to where ends the box of object
     private static final int YCOORD_BEGIN = 80;
 
+    private Boolean existsInClassDiagram = true;
+
     private SequenceDiagram sequenceDiagram;
 
     private Message.MessageType messageType;
@@ -237,5 +239,29 @@ public class SequenceMessageGUI {
         //notify the related objects about movement of active area
         this.objectSender.moveActiveArea();
         this.objectReceiver.moveActiveArea();
+    }
+
+    public void setExistsInClassDiagram(Boolean existsInClassDiagram) {
+        this.existsInClassDiagram = existsInClassDiagram;
+        if (existsInClassDiagram){
+            this.messageText.setFill(Color.BLACK);
+        } else {
+            this.messageText.setFill(Color.RED);
+        }
+    }
+
+    public void uploadRelatedReceiverUmlSeqClasses(UMLSeqClass umlSeqClass){
+        this.umlMessage.setClassReceiver(umlSeqClass);
+
+        //check whether the class still contains this operation
+        if (umlSeqClass.getUmlClass().foundOperation(this.umlMessage.getUmlOperation())){
+            this.messageText.setFill(Color.BLACK);
+        } else {
+            this.messageText.setFill(Color.RED);
+        }
+    }
+
+    public void uploadRelatedSenderUmlSeqClasses(UMLSeqClass umlSeqClass){
+        this.umlMessage.setClassSender(umlSeqClass);
     }
 }

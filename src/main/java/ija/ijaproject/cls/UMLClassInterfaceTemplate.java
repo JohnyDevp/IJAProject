@@ -140,6 +140,63 @@ public abstract class UMLClassInterfaceTemplate extends Element {
     }
 
     /**
+     * function for get knowledge whether operation is in list of operations in this class
+     * used when updating message from sequence diagram
+     * @param operation
+     */
+    public boolean foundOperation(UMLOperation operation){
+        //operation can exists with same name but not with same return type
+        if (umlOperationsList.contains(operation)) {
+            //list already contains the attribute
+            return true;
+        } else {
+            //test each operation already added with operation desired to add
+            boolean found = false;
+            for (UMLOperation umlOperation : umlOperationsList){
+                //name check
+                if (umlOperation.getName().equals(operation.getName())){
+
+                    //each param is the same in order (considering adding operation and some of existing operations) - found
+                    //loop through params in operation and test for conformity
+
+                    //test for size of both lists - if different, continue
+                    if (operation.getParametersOfOperationList().size() != umlOperation.getParametersOfOperationList().size()) {
+                        continue;
+                    }
+
+                    boolean isDifferent = false;
+                    for (int index = 0; index < operation.getParametersOfOperationList().size(); index++){
+                        //get first param of adding operation
+                        UMLAttribute paramFromOpForAdding = operation.getParametersOfOperationList().get(index);
+                        UMLAttribute paramFromOperationFromList = umlOperation.getParametersOfOperationList().get(index);
+                        //different type -> continue
+                        if (!paramFromOpForAdding.getType().equals(paramFromOperationFromList.getType()) ||
+                            !paramFromOpForAdding.getName().equals(paramFromOperationFromList.getName())){
+                            isDifferent = true;
+                            break;
+                        }
+                    }
+
+                    if (isDifferent){
+                        continue; //params are different
+                    }
+
+                    //operation return-type check
+                    if(umlOperation.getType().equals(operation.getType())){
+
+                        //now everything is same
+                        found = true;
+                        break;
+                    }
+
+                }
+            }
+
+            return found;
+        }
+    }
+
+    /**
      * deleting an operation
      * 
      * @param name name of operation for deletion
