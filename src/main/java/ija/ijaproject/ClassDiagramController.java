@@ -326,6 +326,8 @@ public class ClassDiagramController {
         // create new sequence diagram - name according number of already existing
         // diagram controllers
         SequenceDiagram sequenceDiagram = new SequenceDiagram("seqDiag" + sequenceDiagramControllersList.size());
+        //at this sequence diagram to the list of diagrams
+        this.listOfSequenceDiagrams.add(sequenceDiagram);
 
         // initialize new sequence diagram
         sequenceDiagramController.init(sequenceDiagram, this.classDiagram);
