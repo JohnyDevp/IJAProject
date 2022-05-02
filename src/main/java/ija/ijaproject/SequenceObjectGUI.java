@@ -184,6 +184,9 @@ public class SequenceObjectGUI {
             sequenceMessageGUI.messageGuiMove();
         }
 
+        //set the new position also in its inner representation
+        this.umlSeqClass.setXcoord(this.objBackground.getX());
+
     }
 
     public void moveActiveArea(){
