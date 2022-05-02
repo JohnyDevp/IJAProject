@@ -186,12 +186,12 @@ public class EditObjectDialogController {
                         this.canvas,
                         this.clsDiag,
                         this.guiObject,
-                        this.guiObject.getObject().getName() //currently changing (so the old) name
+                        this.guiObject.getUmlObject().getName() //currently changing (so the old) name
                         ));
                 //if not then delete the tmp class (testing the name) and set the name
                 this.clsDiag.deleteClass(tmp);
                 //set the new name for inner representation
-                this.guiObject.getObject().setName(txtObjectName.getText());
+                this.guiObject.getUmlObject().setName(txtObjectName.getText());
                 //set the name of label representing object name
                 this.guiObject.getClassNameLabel().setText(txtObjectName.getText());
                 //resize the object gui
@@ -294,7 +294,7 @@ public class EditObjectDialogController {
     public void btnRemove(ActionEvent e){
         //remove all relations from intern representation - also related undone-operations
         this.undoOperationList.removeIf(undo -> undo.getGuiObject().equals(this.guiObject));
-        this.clsDiag.deleteObject(this.guiObject.getObject());
+        this.clsDiag.deleteObject(this.guiObject.getUmlObject());
 
         //remove object from canvas
         this.canvas.getChildren().removeAll(

@@ -238,17 +238,19 @@ public class ClassDiagramController {
                 umlRelation.relationToObject = this.classDiagram.findObject(umlRelation.relationToObjectName);
                 // create graphical representation
                 RelationGUI relationGUI = new RelationGUI(umlRelation, this.canvas);
+
                 addRelationOnCanvasAndSetActions(relationGUI);
+
                 // loop through graphical representation of classes and interfaces and when
                 // there is match between UMLClass of relation
                 // and graphical representation then add this relation to
                 for (GUIClassInterfaceTemplate guiObject : GUIObjectsList) {
-                    if (guiObject.getObject() == umlRelation.getRelationFromObject()) {
+                    if (guiObject.getUmlObject() == umlRelation.getRelationFromObject()) {
                         relationGUI.setRelationFrom(umlRelation.getRelationFromObject(), guiObject,
                                 umlRelation.getStartX(), umlRelation.getStartY());
                         // add graphical representation of relation to the GUIObject
                         guiObject.addRelation(relationGUI);
-                    } else if (guiObject.getObject() == umlRelation.getRelationToObject()) {
+                    } else if (guiObject.getUmlObject() == umlRelation.getRelationToObject()) {
                         relationGUI.setRelationTo(umlRelation.getRelationToObject(), guiObject, umlRelation.getEndX(),
                                 umlRelation.getEndY());
                         // add graphical representation of relation to the GUIObject
@@ -498,6 +500,7 @@ public class ClassDiagramController {
     public void btnSave() {
         // TODO - classDiagram
         // get the path to the file
+
         String filePath = "";
         if (getLoadedFilePath().equals("")) {
             try {
@@ -604,15 +607,15 @@ public class ClassDiagramController {
             // choose whether is setting the start or end of the relation
             if (!this.relation.getRelationFromSet()) {
                 // start relation
-                this.relation.setRelationFrom(classObject.getObject(), classObject, event.getX(), event.getY());
+                this.relation.setRelationFrom(classObject.getUmlObject(), classObject, event.getX(), event.getY());
                 classObject.addRelation(relation);
                 System.out.println(event.getX() + " " + event.getY());
             } else {
                 // end relation
-                if (this.relation.getRelClassFrom() == classObject.getObject())
+                if (this.relation.getRelClassFrom() == classObject.getUmlObject())
                     return; // if the click was twice to the same object
 
-                this.relation.setRelationTo(classObject.getObject(), classObject, event.getX(), event.getY());
+                this.relation.setRelationTo(classObject.getUmlObject(), classObject, event.getX(), event.getY());
 
                 // add reference for this relation to the end class object
                 classObject.addRelation(relation);
@@ -679,12 +682,13 @@ public class ClassDiagramController {
             // also set its intern coords
             classObject.getClickableCorner().setX(classObject.getClickableCorner().getX() + diffX);
             classObject.getClickableCorner().setY(classObject.getClickableCorner().getY() + diffY);
-            classObject.getObject().setXcoord(classObject.getClickableCorner().getX());
-            classObject.getObject().setYcoord(classObject.getClickableCorner().getY());
 
             // position of border of object
             classObject.getClassBorder().setX(classObject.getClassBorder().getX() + diffX);
             classObject.getClassBorder().setY(classObject.getClassBorder().getY() + diffY);
+
+            classObject.getUmlObject().setXcoord(classObject.getClassBorder().getX());
+            classObject.getUmlObject().setYcoord(classObject.getClassBorder().getY());
 
             // position of the rectangle representing the inner part of object (without
             // border)
@@ -733,7 +737,8 @@ public class ClassDiagramController {
             // position of point where relation begins/ends
             // also redrawing relation line end (arrow, etc.)
             for (RelationGUI rel : classObject.getListOfRelations()) {
-                rel.recomputeRelationDesign(classObject.getObject(), diffX, diffY);
+                System.out.println(diffX + "  " + diffY);
+                rel.recomputeRelationDesign(classObject.getUmlObject(), diffX, diffY);
             }
 
         });

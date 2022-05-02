@@ -82,7 +82,7 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate {
         // remove map representation
         this.mapOfAttributes.remove(umlAttribute);
         // remove intern representation
-        ((UMLClass) this.getObject()).deleteAttribute(umlAttribute.getName());
+        ((UMLClass) this.getUmlObject()).deleteAttribute(umlAttribute.getName());
 
         // resize class gui iff necessary
         this.resizeObjectGUI();

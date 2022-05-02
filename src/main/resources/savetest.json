@@ -1,12 +1,38 @@
-
-
 {
-  "umlSeqClasses": [
-    {
-      "name": "",
-      "umlClass": "",
-      "Xcoord": 21
-
-    }
-  ]
+  "sequenceDiagrams": [],
+  "classDiagram": {
+    "umlList": [
+      {
+        "umlAttributesList": [],
+        "umlOperationsList": [],
+        "Xcoord": 173.0,
+        "Ycoord": 104.0,
+        "name": "ads",
+        "isInterface": false
+      },
+      {
+        "umlAttributesList": [],
+        "umlOperationsList": [],
+        "Xcoord": 557.0,
+        "Ycoord": 46.0,
+        "name": "qwe",
+        "isInterface": false
+      }
+    ],
+    "umlRelationList": [
+      {
+        "relationFromObjectName": "ads",
+        "relationToObjectName": "qwe",
+        "relationType": "ASSOCIATION",
+        "cardinalityByFromClass": null,
+        "cardinalityByToClass": null,
+        "startX": 279.0,
+        "startY": 161.0,
+        "endX": 559.0,
+        "endY": 87.0,
+        "name": ""
+      }
+    ],
+    "name": "test"
+  }
 }

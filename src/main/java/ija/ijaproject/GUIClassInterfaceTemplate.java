@@ -58,7 +58,7 @@ public abstract class GUIClassInterfaceTemplate {
     /**
      * getters
      * */
-    public UMLClassInterfaceTemplate getObject() {return this.object; }
+    public UMLClassInterfaceTemplate getUmlObject() {return this.object; }
     public double getXcoord() {return this.Xcoord;}
     public double getYcoord() {return  this.Ycoord;}
     public Text getClassNameLabel() {return this.classNameLabel; }
@@ -166,7 +166,7 @@ public abstract class GUIClassInterfaceTemplate {
         this.listOfOperations.remove(this.mapOfOperations.get(umlOperation));
 
         //remove intern representation
-        ((UMLClass)this.getObject()).deleteOperation(umlOperation.getName());
+        ((UMLClass)this.getUmlObject()).deleteOperation(umlOperation.getName());
 
         //resize class gui iff necessary
         resizeObjectGUI();

@@ -77,7 +77,7 @@ public class Undo {
      * */
     public boolean doUndo(){
         //check whether the object gui still exists in diagram
-        if (this.classDiagram.findObject(this.guiObject.getObject()) == null){
+        if (this.classDiagram.findObject(this.guiObject.getUmlObject()) == null){
             return false;
         }
 
@@ -108,7 +108,7 @@ public class Undo {
             //if not then delete the tmp class (testing the name) and set the name
             this.classDiagram.deleteClass(tmp);
             //set the new name for inner representation
-            this.guiObject.getObject().setName(prevObjectName);
+            this.guiObject.getUmlObject().setName(prevObjectName);
             //set the name of label representing object name
             this.guiObject.getClassNameLabel().setText(prevObjectName);
             //resize the object gui

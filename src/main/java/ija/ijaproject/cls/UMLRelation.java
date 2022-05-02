@@ -6,6 +6,16 @@ package ija.ijaproject.cls;
  * @author xzimol04
  */
 public class UMLRelation extends Element {
+    @Override
+    public String toString() {
+        return "UMLRelation{" +
+                "startX=" + startX +
+                ", startY=" + startY +
+                ", endX=" + endX +
+                ", endY=" + endY +
+                '}';
+    }
+
     /**
      * type accesible through all classes to determine type of relation
      */

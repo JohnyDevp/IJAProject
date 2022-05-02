@@ -169,6 +169,7 @@ public class RelationGUI{
         this.getUmlRelation().setEndX(getRelLine().getEndX());
         this.getUmlRelation().setEndY(getRelLine().getEndY());
 
+
         //set new position of the line endings (explicitly said the arrow)
         setNewRelLineEndPosition();
 
@@ -179,11 +180,6 @@ public class RelationGUI{
             setCardinalityByToClass(getCardinalityByToClass().getText());
         }
 
-        //set new position of line end in its inner representation
-        this.umlRelation.setStartX(this.relLine.getStartX());
-        this.umlRelation.setStartY(this.relLine.getStartY());
-        this.umlRelation.setEndX(this.relLine.getEndX());
-        this.umlRelation.setEndY(this.relLine.getEndY());
     }
 
     /**
