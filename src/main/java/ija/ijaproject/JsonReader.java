@@ -2,6 +2,7 @@ package ija.ijaproject;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -32,14 +33,50 @@ public class JsonReader {
      * this is class diagram which will be
      */
     private ClassDiagram clsDiagram = new ClassDiagram("");
-    private ArrayList<SequenceDiagram> sequenceDiagrams = new ArrayList<SequenceDiagram>();
-    private ArrayList<UMLRelation> relations = new ArrayList<UMLRelation>();
+    public List<SequenceDiagram> sequenceDiagrams = new ArrayList<SequenceDiagram>();
 
     /**
      * getters
      */
     public ClassDiagram getClsDiagram() {
         return this.clsDiagram;
+    }
+
+    /**
+     * Parse whole file
+     * 
+     * @param filePath
+     * @return
+     */
+
+    public boolean parseJson(String filePath) {
+
+        try {
+
+            Object obj = new JSONParser().parse(new FileReader(filePath));
+
+            GsonBuilder builder = new GsonBuilder();
+            builder.registerTypeAdapter(UMLClassInterfaceTemplate.class,
+                    new UMLClassInterfaceTemplateSeriliazer());
+            builder.registerTypeAdapter(UMLClassInterfaceTemplate.class,
+                    new UMLClassInterfaceTemplateDesirializer());
+            Gson gson = builder.create();
+
+            Program wholeProgram = new Program();
+
+            wholeProgram = gson.fromJson(obj.toString(), wholeProgram.getClass());
+
+            this.clsDiagram = wholeProgram.classDiagram;
+            this.sequenceDiagrams = wholeProgram.sequenceDiagrams;
+
+            System.out.print(("Loaded"));
+
+        } catch (Exception e) {
+            System.out.println("ERROR: Loading json file - bad structure");
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -52,7 +89,9 @@ public class JsonReader {
         try {
 
             // parsing file
-            JsonObject obj = (JsonObject) new JSONParser().parse(new FileReader(filePath));
+            // JsonObject obj = (JsonObject) new JSONParser().parse(new
+            // FileReader(filePath));
+
             GsonBuilder builder = new GsonBuilder();
             builder.registerTypeAdapter(UMLClassInterfaceTemplate.class,
                     new UMLClassInterfaceTemplateSeriliazer());
@@ -60,7 +99,9 @@ public class JsonReader {
                     new UMLClassInterfaceTemplateDesirializer());
             Gson gson = builder.create();
 
-            this.clsDiagram = gson.fromJson(obj.get("classDiagram"), ClassDiagram.class);
+            // JsonElement obj = gson.fromJson(json, typeOfT)
+
+            // this.clsDiagram = gson.fromJson(obj.get("classDiagram"), ClassDiagram.class);
 
             System.out.print(("Loaded"));
 
@@ -78,7 +119,6 @@ public class JsonReader {
      * @param filePath path to json file
      */
     public boolean parseJsonSequenceDiagrams(String filePath) {
-        List<SequenceDiagram> listOfSequenceDiagrams = new ArrayList<>();
 
         // parsing file
 
@@ -91,38 +131,6 @@ public class JsonReader {
             Type sequenceListType = new TypeToken<ArrayList<SequenceDiagram>>() {
             }.getType();
             this.sequenceDiagrams = gson.fromJson(obj.get("sequenceDiagrams"), sequenceListType);
-
-            return true;
-        } catch (JsonSyntaxException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return false;
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return false;
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return false;
-        } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean parseJsonRelationships(String filePath) {
-
-        try {
-            JsonObject obj = (JsonObject) new JSONParser().parse(new FileReader(filePath));
-            GsonBuilder builder = new GsonBuilder();
-
-            Gson gson = builder.create();
-
-            Type relationListType = new TypeToken<ArrayList<UMLRelation>>() {
-            }.getType();
-            this.sequenceDiagrams = gson.fromJson(obj.get("relationships"), relationListType);
 
             return true;
         } catch (JsonSyntaxException e) {

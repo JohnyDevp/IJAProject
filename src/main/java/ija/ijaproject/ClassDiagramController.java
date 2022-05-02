@@ -207,11 +207,11 @@ public class ClassDiagramController {
      * overridden method
      * parsing file and loading it into tabPane if file has been set up
      */
-    protected void parseFile() {
+    void parseFile() {
         JsonReader jr = new JsonReader();
         String tmp_file_path = getLoadedFilePath();
         // TODO
-        if (jr.parseJsonClassDiagram(tmp_file_path)) {
+        if (jr.parseJson(tmp_file_path)) {
             this.classDiagram = jr.getClsDiagram();
             GUIObjectsList = new ArrayList<>();
             // add all created objects to canvas and list of them
@@ -234,6 +234,8 @@ public class ClassDiagramController {
 
             // add relations to canvas and to classes/interfaces which it is connected to
             for (UMLRelation umlRelation : this.classDiagram.getUmlRelationList()) {
+                umlRelation.relationFromObject = this.classDiagram.findObject(umlRelation.relationFromObjectName);
+                umlRelation.relationToObject = this.classDiagram.findObject(umlRelation.relationToObjectName);
                 // create graphical representation
                 RelationGUI relationGUI = new RelationGUI(umlRelation, this.canvas);
                 addRelationOnCanvasAndSetActions(relationGUI);
@@ -254,14 +256,22 @@ public class ClassDiagramController {
                     }
                 }
             }
+
+            // TODO: Load all sequence diagrams to view
+            this.listOfSequenceDiagrams = jr.sequenceDiagrams;
+
+            for (SequenceDiagram dia : this.listOfSequenceDiagrams) {
+
+                for (UMLSeqClass cl : dia.listOfObjectsParticipants) {
+                    cl.umlClass = (UMLClass) this.classDiagram.findObject(cl.umlClassName);
+                }
+
+            }
+
         } else {
             return;
         }
 
-        // if (clsDlg == null)
-
-        jr.parseJsonSequenceDiagrams(
-                "C:\\Users\\jhola\\IdeaProjects\\IJAProject\\src\\main\\resources\\test.json");
     }
 
     /**
@@ -326,7 +336,7 @@ public class ClassDiagramController {
         // create new sequence diagram - name according number of already existing
         // diagram controllers
         SequenceDiagram sequenceDiagram = new SequenceDiagram("seqDiag" + sequenceDiagramControllersList.size());
-        //at this sequence diagram to the list of diagrams
+        // at this sequence diagram to the list of diagrams
         this.listOfSequenceDiagrams.add(sequenceDiagram);
 
         // initialize new sequence diagram
@@ -514,7 +524,19 @@ public class ClassDiagramController {
         }
         // save whole diagram to the file
         JsonWriter jsonWriter = new JsonWriter();
-        jsonWriter.saveClassDiagramToFile(filePath, this.classDiagram);
+        // jsonWriter.saveClassDiagramToFile(filePath, this.classDiagram);
+
+        // Function to store class name in variable
+        // TODO: Check
+        for (SequenceDiagram dia : this.listOfSequenceDiagrams) {
+            for (UMLSeqClass cl : dia.listOfObjectsParticipants) {
+                cl.storeClassName();
+            }
+        }
+
+        for (UMLRelation rel : this.classDiagram.umlRelationList) {
+            rel.setRelationNames();
+        }
         jsonWriter.saveAllToFile(this.listOfSequenceDiagrams, this.classDiagram, filePath);
 
     }

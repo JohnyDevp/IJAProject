@@ -13,8 +13,10 @@ public class UMLRelation extends Element {
         ASSOCIATION, AGGREGATION, GENERALIZATION, COMPOSITION
     };
 
-    public UMLClassInterfaceTemplate relationFromObject;
-    public UMLClassInterfaceTemplate relationToObject;
+    public String relationFromObjectName;
+    public String relationToObjectName;
+    public transient UMLClassInterfaceTemplate relationFromObject;
+    public transient UMLClassInterfaceTemplate relationToObject;
     public RelationType relationType;
     public String cardinalityByFromClass;
     public String cardinalityByToClass;
@@ -24,6 +26,11 @@ public class UMLRelation extends Element {
     public double endX, endY;
 
     public UMLRelation() {
+    }
+
+    public void setRelationNames() {
+        relationFromObjectName = relationFromObject.name;
+        relationToObjectName = relationToObject.name;
     }
 
     /**

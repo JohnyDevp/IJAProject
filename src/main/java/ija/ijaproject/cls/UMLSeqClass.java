@@ -2,13 +2,19 @@ package ija.ijaproject.cls;
 
 public class UMLSeqClass extends Element {
 
-    public UMLClass umlClass;
+    public transient UMLClass umlClass;
+
+    public String umlClassName;
 
     public Double Xcoord;
 
     public Integer indexOfInstance = 0;
 
     public UMLSeqClass() {
+    }
+
+    public void storeClassName() {
+        umlClassName = umlClass.name;
     }
 
     /** getter */

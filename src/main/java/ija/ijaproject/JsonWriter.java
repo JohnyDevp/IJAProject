@@ -25,16 +25,21 @@ public class JsonWriter {
                 new UMLClassInterfaceTemplateDesirializer());
         Gson gson = builder.create();
 
-        String clsString = gson.toJson(clsDia, clsDia.getClass());
         Type sequenceListType = new TypeToken<ArrayList<SequenceDiagram>>() {
         }.getType();
-        String sequencesString = gson.toJson(seqDia, sequenceListType);
 
-        JsonObject wholeFile = new JsonObject();
-        wholeFile.getAsJsonObject().addProperty("classDiagram", clsString);
-        wholeFile.getAsJsonObject().addProperty("sequenceDiagrams", sequencesString);
+        Program wholeProgram = new Program();
 
-        String result = wholeFile.toString();
+        wholeProgram.classDiagram = clsDia;
+        wholeProgram.sequenceDiagrams = seqDia;
+
+        // JsonObject wholeFile = new JsonObject();
+        // wholeFile.getAsJsonObject().add("classDiagram", gson.toJsonTree(clsDia,
+        // clsDia.getClass()));
+        // wholeFile.getAsJsonObject().add("sequenceDiagrams", gson.toJsonTree(seqDia,
+        // sequenceListType));
+
+        String result = gson.toJson(wholeProgram, wholeProgram.getClass());
 
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
