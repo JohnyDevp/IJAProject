@@ -1,14 +1,25 @@
 {
-  "umlList": [
-    {
-      "umlAttributesList": [],
-      "umlOperationsList": [],
-      "Xcoord": 123.0,
-      "Ycoord": 44.0,
-      "name": "ahoj",
-      "isInterface": false
-    }
-  ],
-  "umlRelationList": [],
-  "name": "test"
+  "classDiagram": {
+    "umlList": [
+      {
+        "umlAttributesList": [],
+        "umlOperationsList": [],
+        "Xcoord": 148.0,
+        "Ycoord": 38.0,
+        "name": "TIm",
+        "isInterface": false
+      },
+      {
+        "umlAttributesList": [],
+        "umlOperationsList": [],
+        "Xcoord": 345.0,
+        "Ycoord": 35.0,
+        "name": "Bob",
+        "isInterface": false
+      }
+    ],
+    "umlRelationList": [],
+    "name": "test"
+  },
+  "sequenceDiagrams": []
 }

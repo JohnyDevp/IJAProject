@@ -262,6 +262,8 @@ public class ClassDiagramController {
 
         jr.parseJsonSequenceDiagrams(
                 "C:\\Users\\jhola\\IdeaProjects\\IJAProject\\src\\main\\resources\\test.json");
+
+        // TODO: Call getClass for all SeqClasses
     }
 
     /**
@@ -512,7 +514,15 @@ public class ClassDiagramController {
         }
         // save whole diagram to the file
         JsonWriter jsonWriter = new JsonWriter();
-        jsonWriter.saveClassDiagramToFile(filePath, this.classDiagram);
+        // jsonWriter.saveClassDiagramToFile(filePath, this.classDiagram);
+
+        // Function to store class name in variable
+        // TODO: Check
+        for (SequenceDiagram dia : this.listOfSequenceDiagrams) {
+            for (UMLSeqClass cl : dia.listOfObjectsParticipants) {
+                cl.storeClassName();
+            }
+        }
         jsonWriter.saveAllToFile(this.listOfSequenceDiagrams, this.classDiagram, filePath);
 
     }

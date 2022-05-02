@@ -78,7 +78,6 @@ public class JsonReader {
      * @param filePath path to json file
      */
     public boolean parseJsonSequenceDiagrams(String filePath) {
-        List<SequenceDiagram> listOfSequenceDiagrams = new ArrayList<>();
 
         // parsing file
 
