@@ -28,11 +28,18 @@ public class JsonWriter {
         Type sequenceListType = new TypeToken<ArrayList<SequenceDiagram>>() {
         }.getType();
 
-        JsonObject wholeFile = new JsonObject();
-        wholeFile.getAsJsonObject().add("classDiagram", gson.toJsonTree(clsDia, clsDia.getClass()));
-        wholeFile.getAsJsonObject().add("sequenceDiagrams", gson.toJsonTree(seqDia, sequenceListType));
+        Program wholeProgram = new Program();
 
-        String result = gson.toJson(wholeFile);
+        wholeProgram.classDiagram = clsDia;
+        wholeProgram.sequenceDiagrams = seqDia;
+
+        // JsonObject wholeFile = new JsonObject();
+        // wholeFile.getAsJsonObject().add("classDiagram", gson.toJsonTree(clsDia,
+        // clsDia.getClass()));
+        // wholeFile.getAsJsonObject().add("sequenceDiagrams", gson.toJsonTree(seqDia,
+        // sequenceListType));
+
+        String result = gson.toJson(wholeProgram, wholeProgram.getClass());
 
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));

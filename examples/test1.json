@@ -1,42 +1,38 @@
 {
+  "sequenceDiagrams": [],
   "classDiagram": {
     "umlList": [
       {
         "umlAttributesList": [],
         "umlOperationsList": [],
-        "Xcoord": 277.0,
-        "Ycoord": 64.0,
-        "name": "Auto",
+        "Xcoord": 293.0,
+        "Ycoord": 76.0,
+        "name": "Tom",
         "isInterface": false
       },
       {
         "umlAttributesList": [],
         "umlOperationsList": [],
-        "Xcoord": 416.0,
-        "Ycoord": 67.0,
-        "name": "Tom",
+        "Xcoord": 502.0,
+        "Ycoord": 75.0,
+        "name": "Ahoj",
         "isInterface": false
       }
     ],
-    "umlRelationList": [],
+    "umlRelationList": [
+      {
+        "relationFromObjectName": "Ahoj",
+        "relationToObjectName": "Tom",
+        "relationType": "ASSOCIATION",
+        "cardinalityByFromClass": null,
+        "cardinalityByToClass": null,
+        "startX": 0.0,
+        "startY": 0.0,
+        "endX": 0.0,
+        "endY": 0.0,
+        "name": ""
+      }
+    ],
     "name": "test"
-  },
-  "sequenceDiagrams": [
-    {
-      "listOfObjectsParticipants": [
-        {
-          "umlClassName": "Auto",
-          "Xcoord": 0.0,
-          "name": "Auto"
-        },
-        {
-          "umlClassName": "Tom",
-          "Xcoord": 0.0,
-          "name": "Tom"
-        }
-      ],
-      "messageList": [],
-      "name": "seqDiag1"
-    }
-  ]
+  }
 }
