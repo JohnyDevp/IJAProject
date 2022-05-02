@@ -131,14 +131,14 @@ public class SequenceDiagramController {
             return;
         }
 
-        //create dialog itself
+        //create dialog for choosing class desired to add
         ChoiceDialog<String> dialog = new ChoiceDialog<>(classesList.get(0).toString(),classesList);
         dialog.setTitle("Choose class");
         Optional<String> result = dialog.showAndWait();
 
         UMLClass chosenUmlClass = null;
 
-        //set the class name
+        //found related umlClass to the chosen name
         if (result.isPresent()){
              String chosenClass = result.get().toString();
              //loop through names of classes and set the umlClass when found
@@ -149,7 +149,7 @@ public class SequenceDiagramController {
              }
         }
 
-        //validation test
+        //validation test - if umlClass do exist (just so)
         if (chosenUmlClass == null){
             return;
         }
@@ -169,12 +169,6 @@ public class SequenceDiagramController {
         //add on canvas
         addClassOnCanvasAndSetActions(sequenceObjectGUI);
 
-    }
-
-    /**
-     * */
-    public void btnSave(){
-        //TODO - sequenceDiagram
     }
 
     /**
