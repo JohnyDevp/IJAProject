@@ -605,8 +605,15 @@ public class ClassDiagramController {
                 this.classDiagram.addRelation(umlRelation);
                 relation.setUmlRelation(umlRelation);
 
+                //set new position of line end in its inner representation
+                this.relation.getUmlRelation().setStartX(this.relation.getRelLine().getStartX());
+                this.relation.getUmlRelation().setStartY(this.relation.getRelLine().getStartY());
+                this.relation.getUmlRelation().setEndX(this.relation.getRelLine().getEndX());
+                this.relation.getUmlRelation().setEndY(this.relation.getRelLine().getEndY());
+
                 addRelationOnCanvasAndSetActions(this.relation);
-                System.out.println(this.relation.getRelLine().toString());
+
+
             }
 
         });
