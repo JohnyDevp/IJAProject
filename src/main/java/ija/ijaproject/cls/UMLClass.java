@@ -18,6 +18,7 @@ public class UMLClass extends UMLClassInterfaceTemplate {
      */
     public java.util.List<UMLAttribute> umlAttributesList = new ArrayList<UMLAttribute>();
 
+
     /**
      * Default constructor used for json parsing
      */

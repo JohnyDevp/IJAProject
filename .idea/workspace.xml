@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="removing operation from objectGUI fixed">
+    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="sequence diagram fixing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -361,7 +360,28 @@
       <option name="project" value="LOCAL" />
       <updated>1651441071489</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="removing operation from objectGUI fixed">
+      <created>1651477841499</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1651477841499</updated>
+    </task>
+    <task id="LOCAL-00037" summary="moving sequence class fixed">
+      <created>1651478528955</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1651478528955</updated>
+    </task>
+    <task id="LOCAL-00038" summary="sequence diagram fixing">
+      <created>1651481547361</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1651481547361</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,8 +402,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="movable object added to class diagram" />
-    <MESSAGE value="class diagram graphical representing done, relations to be done" />
     <MESSAGE value="added dialog for adding class object" />
     <MESSAGE value="full design for class diagram done" />
     <MESSAGE value="all relations has graphical representations" />
@@ -407,7 +425,9 @@
     <MESSAGE value="sequence diagram functionality done" />
     <MESSAGE value="merge done" />
     <MESSAGE value="removing operation from objectGUI fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="removing operation from objectGUI fixed" />
+    <MESSAGE value="moving sequence class fixed" />
+    <MESSAGE value="sequence diagram fixing" />
+    <option name="LAST_COMMIT_MESSAGE" value="sequence diagram fixing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -416,6 +436,31 @@
           <url>file://$PROJECT_DIR$/target/classes/ija/ijaproject/JsonWriter.class</url>
           <line>15</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java</url>
+          <line>119</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java</url>
+          <line>152</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/SequenceDiagram.java</url>
+          <line>68</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/SequenceDiagram.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/SequenceDiagram.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="com.google.gson.JsonIOException" package="com.google.gson" />

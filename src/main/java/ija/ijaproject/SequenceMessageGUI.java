@@ -101,9 +101,20 @@ public class SequenceMessageGUI {
     }
 
 
-    public void notifyObjectsAboutDeletion(){
-        this.objectSender.removeSendingMessageGui(this);
-        this.objectReceiver.removeReceivingMessageGui(this);
+    public void notifyObjectsAboutDeletion(String who){
+        switch (who){
+            case "sender":
+                this.objectSender.removeSendingMessageGui(this);
+                break;
+            case "receiver":
+                this.objectReceiver.removeReceivingMessageGui(this);
+                break;
+            case "both":
+                this.objectSender.removeSendingMessageGui(this);
+                this.objectReceiver.removeReceivingMessageGui(this);
+                break;
+
+        }
     }
 
     /**remove only gui of message and its intern representation*/

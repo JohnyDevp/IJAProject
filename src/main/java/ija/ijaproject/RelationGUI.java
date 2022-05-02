@@ -178,6 +178,12 @@ public class RelationGUI{
             setCardinalityByFromClass(getCardinalityByFromClass().getText());
             setCardinalityByToClass(getCardinalityByToClass().getText());
         }
+
+        //set new position of line end in its inner representation
+        this.umlRelation.setStartX(this.relLine.getStartX());
+        this.umlRelation.setStartY(this.relLine.getStartY());
+        this.umlRelation.setEndX(this.relLine.getEndX());
+        this.umlRelation.setEndY(this.relLine.getEndY());
     }
 
     /**
