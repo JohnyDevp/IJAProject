@@ -4,22 +4,39 @@
       {
         "umlAttributesList": [],
         "umlOperationsList": [],
-        "Xcoord": 148.0,
-        "Ycoord": 38.0,
-        "name": "TIm",
+        "Xcoord": 277.0,
+        "Ycoord": 64.0,
+        "name": "Auto",
         "isInterface": false
       },
       {
         "umlAttributesList": [],
         "umlOperationsList": [],
-        "Xcoord": 345.0,
-        "Ycoord": 35.0,
-        "name": "Bob",
+        "Xcoord": 416.0,
+        "Ycoord": 67.0,
+        "name": "Tom",
         "isInterface": false
       }
     ],
     "umlRelationList": [],
     "name": "test"
   },
-  "sequenceDiagrams": []
+  "sequenceDiagrams": [
+    {
+      "listOfObjectsParticipants": [
+        {
+          "umlClassName": "Auto",
+          "Xcoord": 0.0,
+          "name": "Auto"
+        },
+        {
+          "umlClassName": "Tom",
+          "Xcoord": 0.0,
+          "name": "Tom"
+        }
+      ],
+      "messageList": [],
+      "name": "seqDiag1"
+    }
+  ]
 }

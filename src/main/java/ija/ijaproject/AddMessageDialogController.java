@@ -28,7 +28,7 @@ public class AddMessageDialogController {
     @FXML
     private CheckBox checkBoxDeactivateReceiver;
 
-    /**variable storing all the objects taking part in this diagram*/
+    /** variable storing all the objects taking part in this diagram */
     private SequenceDiagram sequenceDiagram;
 
     private Boolean dataValid = false;
@@ -36,60 +36,66 @@ public class AddMessageDialogController {
     private UMLOperation messageOperation;
     private Message.MessageType messageType;
 
-    /**getter*/
+    /** getter */
     public Message.MessageType getMessageType() {
         return messageType;
     }
-    /**getter*/
+
+    /** getter */
     public Boolean getDataValid() {
         return dataValid;
     }
-    /**getter*/
+
+    /** getter */
     public UMLSeqClass getSeqClassReceiver() {
         return seqClassReceiver;
     }
-    /**getter*/
+
+    /** getter */
     public UMLOperation getMessageOperation() {
         return messageOperation;
     }
-    /**getter*/
+
+    /** getter */
     public Boolean getDeactivateSender() {
         return this.checkBoxDeactivateSender.isSelected();
     }
-    /**getter*/
-    public Boolean getDeactivateReceiver(){
+
+    /** getter */
+    public Boolean getDeactivateReceiver() {
         return this.checkBoxDeactivateReceiver.isSelected();
     }
 
     public void init(SequenceDiagram sequenceDiagram) {
-        //set all the classes which exists in diagram
+        // set all the classes which exists in diagram
         this.sequenceDiagram = sequenceDiagram;
-        //load them to the combobox
+        // load them to the combobox
         for (UMLSeqClass umlSeqClass : sequenceDiagram.getListOfObjectsParticipants()) {
             this.cmbMessageClasses.getItems().add(umlSeqClass.getName());
         }
 
         this.cmbMessageClasses.getSelectionModel().selectFirst();
 
-        //load operations
-        //get selected class
-        String selectedItem = (String)this.cmbMessageClasses.getSelectionModel().getSelectedItem();
+        // load operations
+        // get selected class
+        String selectedItem = (String) this.cmbMessageClasses.getSelectionModel().getSelectedItem();
 
-        //find the selected class
-        for (UMLSeqClass umlSeqClass : sequenceDiagram.getListOfObjectsParticipants()){
-            if (umlSeqClass.getName().equals(selectedItem)){
-                //loop through class operations
-                for (UMLOperation umlOperation : umlSeqClass.getUmlClass().getUmlOperationList()){
-                    //add only public operations
-                    if (umlOperation.getModifier().equals('+')){
-                        //create operation text
-                        StringBuilder textOfOperation = new StringBuilder(umlOperation.getModifier() + umlOperation.getName() + " (");
-                        for (UMLAttribute umlParam : umlOperation.getParametersOfOperationList()){
+        // find the selected class
+        for (UMLSeqClass umlSeqClass : sequenceDiagram.getListOfObjectsParticipants()) {
+            if (umlSeqClass.getName().equals(selectedItem)) {
+                // loop through class operations
+                for (UMLOperation umlOperation : umlSeqClass.getUmlClass().getUmlOperationList()) {
+                    // add only public operations
+                    if (umlOperation.getModifier().equals('+')) {
+                        // create operation text
+                        StringBuilder textOfOperation = new StringBuilder(
+                                umlOperation.getModifier() + umlOperation.getName() + " (");
+                        for (UMLAttribute umlParam : umlOperation.getParametersOfOperationList()) {
                             textOfOperation.append(umlParam.getName()).append(" : ").append(umlParam.getType());
                         }
                         textOfOperation.append(") : ").append(umlOperation.getType());
 
-                        //add it to the combobox
+                        // add it to the combobox
                         this.cmbMessageOperations.getItems().add(textOfOperation.toString());
                     }
                 }
@@ -97,45 +103,48 @@ public class AddMessageDialogController {
         }
         this.cmbMessageOperations.getSelectionModel().selectFirst();
 
-        if (this.cmbMessageOperations.getItems().size() == 0) { this.btnAddMessage.setDisable(true);}
-        else {this.btnAddMessage.setDisable(false);}
+        if (this.cmbMessageOperations.getItems().size() == 0) {
+            this.btnAddMessage.setDisable(true);
+        } else {
+            this.btnAddMessage.setDisable(false);
+        }
 
-        //load types of message
+        // load types of message
         cmbMessageTypes.getItems().addAll(
                 Message.MessageType.ASYNC,
                 Message.MessageType.SYNC,
                 Message.MessageType.CREATE,
                 Message.MessageType.DESTROY,
-                Message.MessageType.RETURN
-        );
+                Message.MessageType.RETURN);
 
-        //set selected first items in comboboxes
+        // set selected first items in comboboxes
         this.cmbMessageTypes.getSelectionModel().selectFirst();
 
     }
 
-    public void cmbMessageClassesOnAction(ActionEvent e){
-        //clear the combobox with operations
+    public void cmbMessageClassesOnAction(ActionEvent e) {
+        // clear the combobox with operations
         this.cmbMessageOperations.getItems().clear();
 
-        //get selected class
-        String selectedItem = (String)this.cmbMessageClasses.getSelectionModel().getSelectedItem();
+        // get selected class
+        String selectedItem = (String) this.cmbMessageClasses.getSelectionModel().getSelectedItem();
 
-        //find the selected class
-        for (UMLSeqClass umlSeqClass : sequenceDiagram.getListOfObjectsParticipants()){
-            if (umlSeqClass.getName().equals(selectedItem)){
-                //loop through class operations
-                for (UMLOperation umlOperation : umlSeqClass.getUmlClass().getUmlOperationList()){
-                    //add only public operations
-                    if (umlOperation.getModifier().equals('+')){
-                        //create operation text
-                        StringBuilder textOfOperation = new StringBuilder(umlOperation.getModifier() + umlOperation.getName() + " (");
-                        for (UMLAttribute umlParam : umlOperation.getParametersOfOperationList()){
+        // find the selected class
+        for (UMLSeqClass umlSeqClass : sequenceDiagram.getListOfObjectsParticipants()) {
+            if (umlSeqClass.getName().equals(selectedItem)) {
+                // loop through class operations
+                for (UMLOperation umlOperation : umlSeqClass.getUmlClass().getUmlOperationList()) {
+                    // add only public operations
+                    if (umlOperation.getModifier().equals('+')) {
+                        // create operation text
+                        StringBuilder textOfOperation = new StringBuilder(
+                                umlOperation.getModifier() + umlOperation.getName() + " (");
+                        for (UMLAttribute umlParam : umlOperation.getParametersOfOperationList()) {
                             textOfOperation.append(umlParam.getName()).append(" : ").append(umlParam.getType());
                         }
                         textOfOperation.append(") : ").append(umlOperation.getType());
 
-                        //add it to the combobox
+                        // add it to the combobox
                         this.cmbMessageOperations.getItems().add(textOfOperation.toString());
                     }
                 }
@@ -143,49 +152,53 @@ public class AddMessageDialogController {
         }
 
         this.cmbMessageOperations.getSelectionModel().selectFirst();
-        if (this.cmbMessageOperations.getItems().size() == 0) { this.btnAddMessage.setDisable(true);}
-        else {this.btnAddMessage.setDisable(false);}
+        if (this.cmbMessageOperations.getItems().size() == 0) {
+            this.btnAddMessage.setDisable(true);
+        } else {
+            this.btnAddMessage.setDisable(false);
+        }
     }
 
-    public void btnAddMessage(ActionEvent e){
-        //get selected class and operation
-        String selectedClass = (String)this.cmbMessageClasses.getSelectionModel().getSelectedItem();
-        String selectedOperation = (String)this.cmbMessageOperations.getSelectionModel().getSelectedItem();
+    public void btnAddMessage(ActionEvent e) {
+        // get selected class and operation
+        String selectedClass = (String) this.cmbMessageClasses.getSelectionModel().getSelectedItem();
+        String selectedOperation = (String) this.cmbMessageOperations.getSelectionModel().getSelectedItem();
 
-        //set the currently chosen type
+        // set the currently chosen type
         this.messageType = (Message.MessageType) this.cmbMessageTypes.getSelectionModel().getSelectedItem();
 
-        //find the selected class
-        for (UMLSeqClass umlSeqClass : sequenceDiagram.getListOfObjectsParticipants()){
-            if (umlSeqClass.getName().equals(selectedClass)){
-                //loop through class operations
-                for (UMLOperation umlOperation : umlSeqClass.getUmlClass().getUmlOperationList()){
-                    //compare only public operations
-                    if (umlOperation.getModifier().equals('+')){
-                        //create operation text
-                        StringBuilder textOfOperation = new StringBuilder(umlOperation.getModifier() + umlOperation.getName() + " (");
-                        for (UMLAttribute umlParam : umlOperation.getParametersOfOperationList()){
+        // find the selected class
+        for (UMLSeqClass umlSeqClass : sequenceDiagram.getListOfObjectsParticipants()) {
+            if (umlSeqClass.getName().equals(selectedClass)) {
+                // loop through class operations
+                for (UMLOperation umlOperation : umlSeqClass.getUmlClass().getUmlOperationList()) {
+                    // compare only public operations
+                    if (umlOperation.getModifier().equals('+')) {
+                        // create operation text
+                        StringBuilder textOfOperation = new StringBuilder(
+                                umlOperation.getModifier() + umlOperation.getName() + " (");
+                        for (UMLAttribute umlParam : umlOperation.getParametersOfOperationList()) {
                             textOfOperation.append(umlParam.getName()).append(" : ").append(umlParam.getType());
                         }
                         textOfOperation.append(") : ").append(umlOperation.getType());
 
-                        //compare with the selected operation
-                        if (selectedOperation.equals(textOfOperation.toString())){
+                        // compare with the selected operation
+                        if (selectedOperation.equals(textOfOperation.toString())) {
                             this.messageOperation = umlOperation;
                             break;
                         }
                     }
                 }
-                //set selected class
+                // set selected class
                 this.seqClassReceiver = umlSeqClass;
                 break;
             }
         }
         this.dataValid = true;
 
-        //close dialog
-        Node source = (Node)  e.getSource();
-        Stage stage  = (Stage) source.getScene().getWindow();
+        // close dialog
+        Node source = (Node) e.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }
 }
