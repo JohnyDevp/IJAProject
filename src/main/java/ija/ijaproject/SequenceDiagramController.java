@@ -180,10 +180,12 @@ public class SequenceDiagramController {
 
         //notify all its related messages
         for (SequenceMessageGUI sequenceMessageGUI : this.selectedObject.getSendingMessageGUIList()){
+            sequenceMessageGUI.notifyObjectsAboutDeletion("receiver");
             removeMessage(sequenceMessageGUI);
         }
 
         for (SequenceMessageGUI sequenceMessageGUI : this.selectedObject.getReceivingMessageGUIList()){
+            sequenceMessageGUI.notifyObjectsAboutDeletion("sender");
             removeMessage(sequenceMessageGUI);
         }
 
@@ -208,7 +210,7 @@ public class SequenceDiagramController {
         if (this.selectedMessage == null) return;
         else {
             //notify related objects about message deletion
-            this.selectedMessage.notifyObjectsAboutDeletion();
+            this.selectedMessage.notifyObjectsAboutDeletion("both");
 
             removeMessage(this.selectedMessage);
         }
@@ -348,6 +350,7 @@ public class SequenceDiagramController {
      * @param sequenceMessageGUI
      */
     private void removeMessage(SequenceMessageGUI sequenceMessageGUI){
+
         //remove all graphical parts of the message
         sequenceMessageGUI.removeMessageGui();
 
@@ -372,7 +375,7 @@ public class SequenceDiagramController {
             UMLClassInterfaceTemplate umlClassInterfaceTemplate = classDiagram.findObject(sequenceObjectGUI.getUmlSeqClass().getUmlClass().getName());
             //if it is class
             if (umlClassInterfaceTemplate != null && umlClassInterfaceTemplate.getClass() != UMLInterface.class) {
-                //class found - but there has to be another select, if the name fit -> will be implicitly reset in setExistsInClassDiagram function
+                //class found - but there has to be another check, if the name fit -> will be implicitly reset in setExistsInClassDiagram function
 
 
                 //check if the class doesnt exist so far (now exists)
@@ -383,7 +386,12 @@ public class SequenceDiagramController {
                     UMLSeqClass umlSeqClass = new UMLSeqClass((UMLClass) umlClassInterfaceTemplate, sequenceObjectGUI.getUmlSeqClass().getXcoord());
                     sequenceObjectGUI.setExistsInClassDiagram(true,umlSeqClass);
                 }
-            } else {
+            }/*
+            else if (umlClassInterfaceTemplate == null && sequenceObjectGUI.getUmlSeqClass().getName().equals("*")) {
+                //this is the possibility, when the name doesnt exist when loading file
+                UMLClassInterfaceTemplate umlClassInterfaceTemplate = classDiagram.findObject(sequenceObjectGUI.getUmlSeqClass().getUmlClass().getName());
+            }*/
+            else {
                 //class name not found
                 sequenceObjectGUI.setExistsInClassDiagram(false, null);
             }

@@ -6,6 +6,8 @@ public class UMLSeqClass extends Element {
 
     public Double Xcoord;
 
+    public Integer indexOfInstance = 0;
+
     public UMLSeqClass() {
     }
 
@@ -33,8 +35,8 @@ public class UMLSeqClass extends Element {
     public UMLSeqClass(String name, Double xcoord) {
         super(name);
         setXcoord(xcoord);
-        // create temporary uml class
-        this.umlClass = new UMLClass("*");
+        // create temporary uml class - with the name of this class
+        this.umlClass = new UMLClass(name);
     }
 
     /** constructor */
