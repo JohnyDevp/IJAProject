@@ -1,0 +1,38 @@
+{
+  "sequenceDiagrams": [],
+  "classDiagram": {
+    "umlList": [
+      {
+        "umlAttributesList": [],
+        "umlOperationsList": [],
+        "Xcoord": 293.0,
+        "Ycoord": 76.0,
+        "name": "Tom",
+        "isInterface": false
+      },
+      {
+        "umlAttributesList": [],
+        "umlOperationsList": [],
+        "Xcoord": 502.0,
+        "Ycoord": 75.0,
+        "name": "Ahoj",
+        "isInterface": false
+      }
+    ],
+    "umlRelationList": [
+      {
+        "relationFromObjectName": "Ahoj",
+        "relationToObjectName": "Tom",
+        "relationType": "ASSOCIATION",
+        "cardinalityByFromClass": null,
+        "cardinalityByToClass": null,
+        "startX": 0.0,
+        "startY": 0.0,
+        "endX": 0.0,
+        "endY": 0.0,
+        "name": ""
+      }
+    ],
+    "name": "test"
+  }
+}
