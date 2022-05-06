@@ -1,0 +1,70 @@
+{
+  "sequenceDiagrams": [
+    {
+      "listOfObjectsParticipants": [
+        {
+          "umlClassName": "TOm",
+          "Xcoord": 220.0,
+          "indexOfInstance": 0,
+          "name": "TOm"
+        },
+        {
+          "umlClassName": "Ahoj",
+          "Xcoord": 526.0,
+          "indexOfInstance": 0,
+          "name": "Ahoj"
+        }
+      ],
+      "messageList": [],
+      "name": "seqDiag1"
+    }
+  ],
+  "classDiagram": {
+    "umlList": [
+      {
+        "umlAttributesList": [
+          {
+            "type": "bool",
+            "modifier": "#",
+            "name": "isValid"
+          }
+        ],
+        "umlOperationsList": [
+          {
+            "parametersOfOperationList": [],
+            "type": "QString",
+            "modifier": "+",
+            "name": "getName"
+          }
+        ],
+        "Xcoord": 257.0,
+        "Ycoord": 63.0,
+        "name": "TOm",
+        "isInterface": false
+      },
+      {
+        "umlAttributesList": [],
+        "umlOperationsList": [],
+        "Xcoord": 516.0,
+        "Ycoord": 58.0,
+        "name": "Ahoj",
+        "isInterface": false
+      }
+    ],
+    "umlRelationList": [
+      {
+        "relationFromObjectName": "TOm",
+        "relationToObjectName": "Ahoj",
+        "relationType": "ASSOCIATION",
+        "cardinalityByFromClass": null,
+        "cardinalityByToClass": null,
+        "startX": 362.0,
+        "startY": 102.0,
+        "endX": 519.0,
+        "endY": 88.0,
+        "name": ""
+      }
+    ],
+    "name": "test"
+  }
+}
