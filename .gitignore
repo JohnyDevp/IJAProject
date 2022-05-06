@@ -1,2 +1,6 @@
 # Project exclude paths
 /target/
+/build
+dependency-reduced-pom.xml
+ija-app.iml
+/dest/
