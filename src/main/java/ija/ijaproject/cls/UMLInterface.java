@@ -3,7 +3,7 @@ package ija.ijaproject.cls;
 /**
  * class representing uml interface
  *
- * @author xholan11
+ * @author xholan11, xzimol04
  * @version 1.1
  */
 public class UMLInterface extends UMLClassInterfaceTemplate {

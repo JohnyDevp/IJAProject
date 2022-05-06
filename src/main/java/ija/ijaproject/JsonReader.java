@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * class for parsing json file into class and sequence diagram
  *
- * @author xholan11
+ * @author xholan11, xzimol04
  * @version 1.1
  */
 public class JsonReader {

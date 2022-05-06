@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
 /**
  * class for storing the relation between two classes
  *
- * @author xholan11
+ * @author xholan11, xzimol04
  * @version 1.1
  */
 public class RelationGUI {
@@ -362,9 +362,9 @@ public class RelationGUI {
     }
 
     /**
-     * <p>
+     * 
      * Setter for the field <code>nameOfRelation</code>.
-     * </p>
+     * 
      *
      * @param name a {@link java.lang.String} object
      */
@@ -397,9 +397,9 @@ public class RelationGUI {
     }
 
     /**
-     * <p>
+     * 
      * Setter for the field <code>cardinalityByToClass</code>.
-     * </p>
+     * 
      *
      * @param cardinality a {@link java.lang.String} object
      */
@@ -434,9 +434,9 @@ public class RelationGUI {
     }
 
     /**
-     * <p>
+     * 
      * Setter for the field <code>cardinalityByFromClass</code>.
-     * </p>
+     * 
      *
      * @param cardinality a {@link java.lang.String} object
      */
@@ -495,9 +495,9 @@ public class RelationGUI {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>umlRelation</code>.
-     * </p>
+     * 
      *
      * @return a {@link ija.ijaproject.cls.UMLRelation} object
      */
@@ -506,9 +506,9 @@ public class RelationGUI {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>cardinalityByToClass</code>.
-     * </p>
+     * 
      *
      * @return a {@link javafx.scene.text.Text} object
      */
@@ -517,9 +517,9 @@ public class RelationGUI {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>cardinalityByFromClass</code>.
-     * </p>
+     * 
      *
      * @return a {@link javafx.scene.text.Text} object
      */
@@ -528,9 +528,9 @@ public class RelationGUI {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>relationFromSet</code>.
-     * </p>
+     * 
      *
      * @return a boolean
      */
@@ -539,9 +539,9 @@ public class RelationGUI {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>relationType</code>.
-     * </p>
+     * 
      *
      * @return a {@link ija.ijaproject.cls.UMLRelation.RelationType} object
      */
@@ -550,9 +550,9 @@ public class RelationGUI {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>relClassFromGUI</code>.
-     * </p>
+     * 
      *
      * @return a {@link ija.ijaproject.GUIClassInterfaceTemplate} object
      */
@@ -561,9 +561,9 @@ public class RelationGUI {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>relClassFrom</code>.
-     * </p>
+     * 
      *
      * @return a {@link ija.ijaproject.cls.UMLClassInterfaceTemplate} object
      */
@@ -572,9 +572,9 @@ public class RelationGUI {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>relClassToGUI</code>.
-     * </p>
+     * 
      *
      * @return a {@link ija.ijaproject.GUIClassInterfaceTemplate} object
      */
@@ -583,9 +583,9 @@ public class RelationGUI {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>relClassTo</code>.
-     * </p>
+     * 
      *
      * @return a {@link ija.ijaproject.cls.UMLClassInterfaceTemplate} object
      */
@@ -594,9 +594,9 @@ public class RelationGUI {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>relLine</code>.
-     * </p>
+     * 
      *
      * @return a {@link javafx.scene.shape.Line} object
      */
@@ -605,9 +605,9 @@ public class RelationGUI {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>relLineEnd</code>.
-     * </p>
+     * 
      *
      * @return a {@link javafx.scene.shape.Polygon} object
      */

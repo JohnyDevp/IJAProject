@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * Dialog for adding new attribute - for adding attribute as attribute and
  * attribute as param for operation
  *
- * @author xholan11
+ * @author xholan11, xzimol04
  * @version 1.1
  */
 public class AddAttributeDialogController {
@@ -32,9 +32,9 @@ public class AddAttributeDialogController {
     public boolean isCmbModifierEnabled = false;
 
     /**
-     * <p>
+     * 
      * init.
-     * </p>
+     * 
      *
      * @param isCmbModifierEnabled a boolean
      */
@@ -47,9 +47,9 @@ public class AddAttributeDialogController {
     }
 
     /**
-     * <p>
+     * 
      * btnAddAttribute.
-     * </p>
+     * 
      *
      * @param actionEvent a {@link javafx.event.ActionEvent} object
      */

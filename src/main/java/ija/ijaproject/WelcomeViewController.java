@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 /**
  * controller for welcome view - view with info about controlling this app
  *
- * @author xzimol04
+ * @author xzimol04, xholan11
  * @version 1.1
  */
 public class WelcomeViewController {
@@ -22,9 +22,9 @@ public class WelcomeViewController {
     public TextFlow txtFlow;
 
     /**
-     * <p>
+     * 
      * initialize.
-     * </p>
+     * 
      */
     public void initialize() {
         Text t = new Text("" +
@@ -43,9 +43,9 @@ public class WelcomeViewController {
     }
 
     /**
-     * <p>
+     * 
      * btnOk.
-     * </p>
+     * 
      *
      * @param e a {@link javafx.event.ActionEvent} object
      */

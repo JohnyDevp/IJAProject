@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 /**
  * Dialog for adding new interface or class to diagram
  *
- * @author xholan11
+ * @author xholan11, xzimol04
  * @version 1.1
  */
 public class AddObjectDialogController {
@@ -33,9 +33,9 @@ public class AddObjectDialogController {
     private UMLClassInterfaceTemplate createdObject;
 
     /**
-     * <p>
+     * 
      * Constructor for AddObjectDialogController.
-     * </p>
+     * 
      */
     public AddObjectDialogController() {
         this.mainClassDiagram = null;

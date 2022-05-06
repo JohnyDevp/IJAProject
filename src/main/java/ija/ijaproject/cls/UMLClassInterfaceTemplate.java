@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * class representing template for both interface and class
  *
- * @author xholan11
+ * @author xholan11, xzimol04
  * @version 1.1
  */
 public abstract class UMLClassInterfaceTemplate extends Element {

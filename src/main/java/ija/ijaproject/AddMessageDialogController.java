@@ -10,11 +10,11 @@ import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 /**
- * <p>
- * AddMessageDialogController class.
- * </p>
+ * 
+ * Controller for adding a message.
+ * 
  *
- * @author musta-pollo
+ * @author xzimol04, xholan11
  * @version 1.1
  */
 public class AddMessageDialogController {
@@ -111,9 +111,9 @@ public class AddMessageDialogController {
     }
 
     /**
-     * <p>
+     * 
      * init.
-     * </p>
+     * 
      *
      * @param sequenceDiagram a {@link ija.ijaproject.cls.SequenceDiagram} object
      */
@@ -173,9 +173,9 @@ public class AddMessageDialogController {
     }
 
     /**
-     * <p>
+     * 
      * cmbMessageClassesOnAction.
-     * </p>
+     * 
      *
      * @param e a {@link javafx.event.ActionEvent} object
      */
@@ -217,9 +217,9 @@ public class AddMessageDialogController {
     }
 
     /**
-     * <p>
+     * 
      * btnAddMessage.
-     * </p>
+     * 
      *
      * @param e a {@link javafx.event.ActionEvent} object
      */

@@ -17,7 +17,7 @@ import java.io.IOException;
  * controller for handling creating or loading new class diagram from main
  * window
  *
- * @author xholan11
+ * @author xholan11, xzimol04
  * @version 1.1
  */
 public class MainController {
@@ -44,9 +44,9 @@ public class MainController {
     private Stage stage;
 
     /**
-     * <p>
+     * 
      * initialize.
-     * </p>
+     * 
      *
      * @throws java.io.IOException if any.
      */
@@ -65,9 +65,9 @@ public class MainController {
     }
 
     /**
-     * <p>
+     * 
      * Setter for the field <code>stage</code>.
-     * </p>
+     * 
      *
      * @param stage
      *              setting the stage for this view

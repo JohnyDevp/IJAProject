@@ -5,11 +5,11 @@ import com.google.gson.*;
 import java.lang.reflect.Type;
 
 /**
- * <p>
+ * 
  * UMLClassInterfaceTemplateSeriliazer class.
- * </p>
+ * 
  *
- * @author musta-pollo
+ * @author xzimol04, xholan11
  * @version 1.1
  */
 public class UMLClassInterfaceTemplateSeriliazer implements JsonSerializer<UMLClassInterfaceTemplate> {

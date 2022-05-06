@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * template for class and interface fui representation
  *
- * @author xholan11
+ * @author xholan11, xzimol04
  * @version 1.1
  */
 public abstract class GUIClassInterfaceTemplate {
@@ -62,9 +62,9 @@ public abstract class GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * setYcoord.
-     * </p>
+     * 
      *
      * @param ycoord a double
      */
@@ -73,9 +73,9 @@ public abstract class GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * Setter for the field <code>name</code>.
-     * </p>
+     * 
      *
      * @param name a {@link java.lang.String} object
      */
@@ -93,9 +93,9 @@ public abstract class GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * getXcoord.
-     * </p>
+     * 
      *
      * @return a double
      */
@@ -104,9 +104,9 @@ public abstract class GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * getYcoord.
-     * </p>
+     * 
      *
      * @return a double
      */
@@ -115,9 +115,9 @@ public abstract class GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>classNameLabel</code>.
-     * </p>
+     * 
      *
      * @return a {@link javafx.scene.text.Text} object
      */
@@ -126,9 +126,9 @@ public abstract class GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>classBorder</code>.
-     * </p>
+     * 
      *
      * @return a {@link javafx.scene.shape.Rectangle} object
      */
@@ -137,9 +137,9 @@ public abstract class GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>classBox</code>.
-     * </p>
+     * 
      *
      * @return a {@link javafx.scene.shape.Rectangle} object
      */
@@ -148,9 +148,9 @@ public abstract class GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>clickableCorner</code>.
-     * </p>
+     * 
      *
      * @return a {@link javafx.scene.shape.Rectangle} object
      */
@@ -159,9 +159,9 @@ public abstract class GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>listOfOperations</code>.
-     * </p>
+     * 
      *
      * @return a {@link java.util.List} object
      */
@@ -170,9 +170,9 @@ public abstract class GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>listOfRelations</code>.
-     * </p>
+     * 
      *
      * @return a {@link java.util.List} object
      */
@@ -181,9 +181,9 @@ public abstract class GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>line1</code>.
-     * </p>
+     * 
      *
      * @return a {@link javafx.scene.shape.Line} object
      */
@@ -192,9 +192,9 @@ public abstract class GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>line2</code>.
-     * </p>
+     * 
      *
      * @return a {@link javafx.scene.shape.Line} object
      */
@@ -206,9 +206,9 @@ public abstract class GUIClassInterfaceTemplate {
     private final Color deselectedClassColor = Color.rgb(80, 95, 230);
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>mapOfOperations</code>.
-     * </p>
+     * 
      *
      * @return a {@link java.util.Map} object
      */
@@ -289,9 +289,9 @@ public abstract class GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * addOperation.
-     * </p>
+     * 
      *
      * @param umlOperation UMLOperation object - stores all information about this
      *                     operation
@@ -431,9 +431,9 @@ public abstract class GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * addRelation.
-     * </p>
+     * 
      *
      * @param relation relation representing objects in the relation and relations
      *                 data

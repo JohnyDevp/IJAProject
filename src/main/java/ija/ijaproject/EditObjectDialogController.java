@@ -25,7 +25,7 @@ import java.util.Map;
  * Controller for editting either class or interface in class diagram - editting
  * attributes and operations
  *
- * @author xholan11
+ * @author xholan11, xzimol04
  * @version 1.1
  */
 public class EditObjectDialogController {
@@ -228,9 +228,9 @@ public class EditObjectDialogController {
     }
 
     /**
-     * <p>
+     * 
      * btnDeleteOperation.
-     * </p>
+     * 
      *
      * @param actionEvent a {@link javafx.event.ActionEvent} object
      */
@@ -267,9 +267,9 @@ public class EditObjectDialogController {
     }
 
     /**
-     * <p>
+     * 
      * btnAddOperation.
-     * </p>
+     * 
      *
      * @param actionEvent a {@link javafx.event.ActionEvent} object
      */

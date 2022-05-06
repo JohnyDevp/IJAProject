@@ -3,7 +3,7 @@ package ija.ijaproject.cls;
 /**
  * class representing uml relation between uml classes and interfaces
  *
- * @author xzimol04
+ * @author xzimol04, xholan11
  * @version 1.1
  */
 public class UMLRelation extends Element {
@@ -38,17 +38,17 @@ public class UMLRelation extends Element {
     public double endX, endY;
 
     /**
-     * <p>
+     * 
      * Constructor for UMLRelation.
-     * </p>
+     * 
      */
     public UMLRelation() {
     }
 
     /**
-     * <p>
+     * 
      * setRelationNames.
-     * </p>
+     * 
      */
     public void setRelationNames() {
         relationFromObjectName = relationFromObject.name;
@@ -142,9 +142,9 @@ public class UMLRelation extends Element {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>startY</code>.
-     * </p>
+     * 
      *
      * @return a double
      */
@@ -153,9 +153,9 @@ public class UMLRelation extends Element {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>endX</code>.
-     * </p>
+     * 
      *
      * @return a double
      */
@@ -164,9 +164,9 @@ public class UMLRelation extends Element {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>endY</code>.
-     * </p>
+     * 
      *
      * @return a double
      */

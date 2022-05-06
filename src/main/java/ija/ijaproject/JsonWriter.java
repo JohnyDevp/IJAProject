@@ -14,19 +14,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>
- * JsonWriter class.
- * </p>
+ * 
+ * Class responsible for writting apps content to file
+ * 
  *
- * @author musta-pollo
+ * @author xzimol04, xholan11
  * @version 1.1
  */
 public class JsonWriter {
 
     /**
-     * <p>
+     * 
      * saveAllToFile.
-     * </p>
+     * 
      *
      * @param seqDia   a {@link java.util.List} object
      * @param clsDia   a {@link ija.ijaproject.cls.ClassDiagram} object

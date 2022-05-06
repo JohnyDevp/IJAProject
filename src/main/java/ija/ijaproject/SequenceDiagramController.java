@@ -21,7 +21,7 @@ import java.util.Optional;
 /**
  * controller for gui for sequence diagram
  *
- * @author xzimol04
+ * @author xzimol04, xholan11
  * @version 1.1
  */
 public class SequenceDiagramController {

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * class representing sequence diagram with its components
  *
- * @author xholan11
+ * @author xholan11, xzimol04
  * @version 1.1
  */
 public class SequenceDiagram extends Element {
@@ -90,9 +90,9 @@ public class SequenceDiagram extends Element {
     }
 
     /**
-     * <p>
+     * 
      * createReturnMessage.
-     * </p>
+     * 
      *
      * @param Ycoord      a {@link java.lang.Double} object
      * @param clsSender   a {@link ija.ijaproject.cls.UMLSeqClass} object

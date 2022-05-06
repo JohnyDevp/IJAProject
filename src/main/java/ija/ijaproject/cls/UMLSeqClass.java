@@ -1,11 +1,11 @@
 package ija.ijaproject.cls;
 
 /**
- * <p>
- * UMLSeqClass class.
- * </p>
+ * 
+ * Class that represents UMLClass in sequence diagram
+ * 
  *
- * @author musta-pollo
+ * @author xzimol04, xholan11
  * @version 1.1
  */
 public class UMLSeqClass extends Element {
@@ -19,17 +19,17 @@ public class UMLSeqClass extends Element {
     public Integer indexOfInstance = 0;
 
     /**
-     * <p>
+     * 
      * Constructor for UMLSeqClass.
-     * </p>
+     * 
      */
     public UMLSeqClass() {
     }
 
     /**
-     * <p>
+     * 
      * storeClassName.
-     * </p>
+     * 
      */
     public void storeClassName() {
         umlClassName = umlClass.name;

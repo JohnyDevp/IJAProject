@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>
- * Program class.
- * </p>
+ * 
+ * Represents data of the whole programe. Is used for writing and reading from
+ * file.
+ * 
  *
- * @author musta-pollo
+ * @author xzimol04, xholan11
  * @version 1.1
  */
 public class Program {

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * class for representing uml operation for both interface and class
  *
- * @author xzimol04
+ * @author xzimol04, xholan11, dr.Koci
  * @version 1.1
  */
 public class UMLOperation extends UMLAttribute {

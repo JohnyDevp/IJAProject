@@ -4,7 +4,7 @@ package ija.ijaproject.cls;
  * class representing uml attribute of class or of operation in class or
  * interface
  *
- * @author xholan11
+ * @author xholan11, xzimol04
  * @author dr.Koci
  * @version 1.1
  */
@@ -32,9 +32,9 @@ public class UMLAttribute extends Element {
     }
 
     /**
-     * <p>
+     * 
      * Constructor for UMLAttribute.
-     * </p>
+     * 
      *
      * @param name a {@link java.lang.String} object
      * @param type a {@link java.lang.String} object

@@ -14,11 +14,11 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * <p>
- * SequenceObjectGUI class.
- * </p>
+ * 
+ * Represents GUI class in sequence diagram
+ * 
  *
- * @author musta-pollo
+ * @author xzimol04, xholan11
  * @version 1.1
  */
 public class SequenceObjectGUI {
@@ -215,9 +215,9 @@ public class SequenceObjectGUI {
     }
 
     /**
-     * <p>
+     * 
      * moveObject.
-     * </p>
+     * 
      *
      * @param diffX a {@link java.lang.Double} object
      */
@@ -255,9 +255,9 @@ public class SequenceObjectGUI {
     }
 
     /**
-     * <p>
+     * 
      * moveActiveArea.
-     * </p>
+     * 
      */
     public void moveActiveArea() {
         for (Rectangle rect : timeLineActiveRectangleList) {
@@ -310,9 +310,9 @@ public class SequenceObjectGUI {
     }
 
     /**
-     * <p>
+     * 
      * removeReceivingMessageGui.
-     * </p>
+     * 
      *
      * @param sequenceMessageGUI a {@link ija.ijaproject.SequenceMessageGUI} object
      */
@@ -340,9 +340,9 @@ public class SequenceObjectGUI {
     }
 
     /**
-     * <p>
+     * 
      * removeSendingMessageGui.
-     * </p>
+     * 
      *
      * @param sequenceMessageGUI a {@link ija.ijaproject.SequenceMessageGUI} object
      */
@@ -507,9 +507,9 @@ public class SequenceObjectGUI {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>existsInClassDiagram</code>.
-     * </p>
+     * 
      *
      * @return a {@link java.lang.Boolean} object
      */

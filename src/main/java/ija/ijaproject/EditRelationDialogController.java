@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 /**
  * controller for dialog for editing parameters of relation
  *
- * @author xholan11
+ * @author xholan11, xzimol04
  * @version 1.1
  */
 public class EditRelationDialogController {
@@ -40,9 +40,9 @@ public class EditRelationDialogController {
     private ClassDiagram classDiagram;
 
     /**
-     * <p>
+     * 
      * onShown.
-     * </p>
+     * 
      *
      * @param e a {@link javafx.event.ActionEvent} object
      */

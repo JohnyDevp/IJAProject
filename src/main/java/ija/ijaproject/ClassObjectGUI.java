@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * class for creating new graphic representation of class
  *
- * @author xholan11
+ * @author xholan11, xzimol04
  * @version 1.1
  */
 public class ClassObjectGUI extends GUIClassInterfaceTemplate {
@@ -32,9 +32,9 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * getUmlClass.
-     * </p>
+     * 
      *
      * @return a {@link ija.ijaproject.cls.UMLClass} object
      */
@@ -43,9 +43,9 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * Getter for the field <code>mapOfAttributes</code>.
-     * </p>
+     * 
      *
      * @return a {@link java.util.Map} object
      */
@@ -69,9 +69,9 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * addAttribute.
-     * </p>
+     * 
      *
      * @param umlAttribute intern representation of uml attribute
      *                     from that this method extract attribute name and type

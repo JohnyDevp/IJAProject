@@ -8,11 +8,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 /**
- * <p>
- * Undo class.
- * </p>
+ * 
+ * Represent Undo class used to undo operations
+ * 
  *
- * @author musta-pollo
+ * @author xzimol04, xholan11
  * @version 1.1
  */
 public class Undo {

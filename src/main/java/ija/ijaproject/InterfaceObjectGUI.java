@@ -6,7 +6,7 @@ import javafx.scene.text.Text;
 /**
  * gui representation of interface in class diagram
  *
- * @author xzimol04
+ * @author xzimol04, xholan11
  * @version 1.1
  */
 public class InterfaceObjectGUI extends GUIClassInterfaceTemplate {
@@ -23,9 +23,9 @@ public class InterfaceObjectGUI extends GUIClassInterfaceTemplate {
     }
 
     /**
-     * <p>
+     * 
      * getLabelOfInterface.
-     * </p>
+     * 
      *
      * @return a {@link javafx.scene.text.Text} object
      */

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * class representing the whole class diagram with its items
  *
- * @author xholan11
+ * @author xholan11, xzimol04, dr.Koci
  * @version 1.1
  */
 public class ClassDiagram extends Element {
@@ -164,9 +164,9 @@ public class ClassDiagram extends Element {
     }
 
     /**
-     * <p>
+     * 
      * findObject.
-     * </p>
+     * 
      *
      * @param o can be either name of object or object to found
      * @return found object or null if not found or bad object has been passed
@@ -187,9 +187,9 @@ public class ClassDiagram extends Element {
     }
 
     /**
-     * <p>
+     * 
      * createRelation.
-     * </p>
+     * 
      *
      * @param name of new relation
      * @return UMLRelation object
@@ -201,9 +201,9 @@ public class ClassDiagram extends Element {
     }
 
     /**
-     * <p>
+     * 
      * addRelation.
-     * </p>
+     * 
      *
      * @param umlRelation relation object
      * @return boolean according success of adding operation
@@ -213,9 +213,9 @@ public class ClassDiagram extends Element {
     }
 
     /**
-     * <p>
+     * 
      * removeRelation.
-     * </p>
+     * 
      *
      * @param umlRelation relation object to be removed
      */

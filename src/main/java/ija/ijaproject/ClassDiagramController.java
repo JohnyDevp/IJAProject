@@ -26,7 +26,7 @@ import java.util.Optional;
 /**
  * Controller for class diagram GUI
  *
- * @author xzimol04
+ * @author xzimol04, xholan11, xholan11
  * @version 1.1
  */
 public class ClassDiagramController {
@@ -564,9 +564,9 @@ public class ClassDiagramController {
     }
 
     /**
-     * <p>
+     * 
      * btnUndo.
-     * </p>
+     * 
      */
     @FXML
     public void btnUndo() {

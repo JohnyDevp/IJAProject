@@ -20,3 +20,5 @@ Program se ovládá pomocí tlačítek na horní liště - zde je ze začátku u
 
 *** UPOZORNĚNÍ ***	
 V dosavadní verzi jsou funkční právě a jen ta tlačítka, jež mají za úkol tu činnost, která souvisí s požadavky, jež byly popsány jako splněné v rámci souboru requirements.pdf!
+
+//TODO: build and dest must be empty

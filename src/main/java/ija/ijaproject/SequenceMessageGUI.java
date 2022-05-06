@@ -12,11 +12,11 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 
 /**
- * <p>
- * SequenceMessageGUI class.
- * </p>
+ * 
+ * Represent GUI Message in sequence diagram.
+ * 
  *
- * @author musta-pollo
+ * @author xzimol04, xholan11
  * @version 1.1
  */
 public class SequenceMessageGUI {
@@ -133,9 +133,9 @@ public class SequenceMessageGUI {
     }
 
     /**
-     * <p>
+     * 
      * notifyObjectsAboutDeletion.
-     * </p>
+     * 
      *
      * @param who a {@link java.lang.String} object
      */
@@ -304,9 +304,9 @@ public class SequenceMessageGUI {
     }
 
     /**
-     * <p>
+     * 
      * Setter for the field <code>existsInClassDiagram</code>.
-     * </p>
+     * 
      *
      * @param existsInClassDiagram a {@link java.lang.Boolean} object
      */
@@ -320,9 +320,9 @@ public class SequenceMessageGUI {
     }
 
     /**
-     * <p>
+     * 
      * uploadRelatedReceiverUmlSeqClasses.
-     * </p>
+     * 
      *
      * @param umlSeqClass a {@link ija.ijaproject.cls.UMLSeqClass} object
      */
@@ -338,9 +338,9 @@ public class SequenceMessageGUI {
     }
 
     /**
-     * <p>
+     * 
      * uploadRelatedSenderUmlSeqClasses.
-     * </p>
+     * 
      *
      * @param umlSeqClass a {@link ija.ijaproject.cls.UMLSeqClass} object
      */

@@ -1,6 +1,6 @@
 /**
  * Main class starting the application
- * @author xzimol04
+ * @author xzimol04, xholan11
  * */
 
 package ija.ijaproject;
@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * class starting whole gui
  *
- * @author xholan11
+ * @author xholan11, xzimol04
  * @version 1.1
  */
 public class Main extends Application {
@@ -53,9 +53,9 @@ public class Main extends Application {
 
     // MAIN METHOD - starting the application
     /**
-     * <p>
+     * 
      * main.
-     * </p>
+     * 
      *
      * @param args an array of {@link java.lang.String} objects
      */

@@ -35,9 +35,9 @@ public class Element {
     }
 
     /**
-     * <p>
+     * 
      * Setter for the field <code>name</code>.
-     * </p>
+     * 
      *
      * @param newName new name for property name
      *                it renames the property of this class name

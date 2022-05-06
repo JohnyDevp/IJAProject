@@ -1,11 +1,11 @@
 package ija.ijaproject.cls;
 
 /**
- * <p>
- * Message class.
- * </p>
+ * 
+ * Represent Message in suqence diagram
+ * 
  *
- * @author musta-pollo
+ * @author xzimol04, xholan11
  * @version 1.1
  */
 public class Message {
@@ -33,9 +33,9 @@ public class Message {
     }
 
     /**
-     * <p>
+     * 
      * Constructor for Message.
-     * </p>
+     * 
      *
      * @param Ycoord        a {@link java.lang.Double} object
      * @param classSender   a {@link ija.ijaproject.cls.UMLSeqClass} object

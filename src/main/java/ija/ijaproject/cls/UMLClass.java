@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * class representing uml class
  *
- * @author xholan11
+ * @author xholan11, xzimol04
  * @author dr.Koci
  * @version 1.1
  */
