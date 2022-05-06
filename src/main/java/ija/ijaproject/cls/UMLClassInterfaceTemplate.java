@@ -7,8 +7,9 @@ import java.util.List;
 
 /**
  * class representing template for both interface and class
- * 
+ *
  * @author xholan11
+ * @version 1.1
  */
 public abstract class UMLClassInterfaceTemplate extends Element {
     /**
@@ -31,7 +32,7 @@ public abstract class UMLClassInterfaceTemplate extends Element {
     /**
      * constructor
      * Creating an instance of object representing object in UML diagram
-     * 
+     *
      * @param name name of element
      */
     public UMLClassInterfaceTemplate(String name) {
@@ -40,7 +41,7 @@ public abstract class UMLClassInterfaceTemplate extends Element {
 
     /**
      * setter
-     * 
+     *
      * @param xcoord X coordination of the object on pane
      */
     public void setXcoord(double xcoord) {
@@ -49,7 +50,7 @@ public abstract class UMLClassInterfaceTemplate extends Element {
 
     /**
      * setter
-     * 
+     *
      * @param ycoord Y coordination of the object on pane
      */
     public void setYcoord(double ycoord) {
@@ -58,7 +59,7 @@ public abstract class UMLClassInterfaceTemplate extends Element {
 
     /**
      * getter
-     * 
+     *
      * @return X coordination of object
      */
     public double getXcoord() {
@@ -67,7 +68,7 @@ public abstract class UMLClassInterfaceTemplate extends Element {
 
     /**
      * getter
-     * 
+     *
      * @return Y coordination of object
      */
     public double getYcoord() {
@@ -76,7 +77,7 @@ public abstract class UMLClassInterfaceTemplate extends Element {
 
     /**
      * adding an operation (which is parameter) of this class
-     * 
+     *
      * @param operation parameter represent the whole operation
      * @return true or false according successfullness of this method
      */
@@ -129,51 +130,57 @@ public abstract class UMLClassInterfaceTemplate extends Element {
     }
 
     /**
-     * function for get knowledge whether operation is in list of operations in this class
+     * function for get knowledge whether operation is in list of operations in this
+     * class
      * used when updating message from sequence diagram
-     * @param operation
+     *
+     * @param operation a {@link ija.ijaproject.cls.UMLOperation} object
+     * @return a boolean
      */
-    public boolean foundOperation(UMLOperation operation){
-        //operation can exists with same name but not with same return type
+    public boolean foundOperation(UMLOperation operation) {
+        // operation can exists with same name but not with same return type
         if (umlOperationsList.contains(operation)) {
-            //list already contains the attribute
+            // list already contains the attribute
             return true;
         } else {
-            //test each operation already added with operation desired to add
+            // test each operation already added with operation desired to add
             boolean found = false;
-            for (UMLOperation umlOperation : umlOperationsList){
-                //name check
-                if (umlOperation.getName().equals(operation.getName())){
+            for (UMLOperation umlOperation : umlOperationsList) {
+                // name check
+                if (umlOperation.getName().equals(operation.getName())) {
 
-                    //each param is the same in order (considering adding operation and some of existing operations) - found
-                    //loop through params in operation and test for conformity
+                    // each param is the same in order (considering adding operation and some of
+                    // existing operations) - found
+                    // loop through params in operation and test for conformity
 
-                    //test for size of both lists - if different, continue
-                    if (operation.getParametersOfOperationList().size() != umlOperation.getParametersOfOperationList().size()) {
+                    // test for size of both lists - if different, continue
+                    if (operation.getParametersOfOperationList().size() != umlOperation.getParametersOfOperationList()
+                            .size()) {
                         continue;
                     }
 
                     boolean isDifferent = false;
-                    for (int index = 0; index < operation.getParametersOfOperationList().size(); index++){
-                        //get first param of adding operation
+                    for (int index = 0; index < operation.getParametersOfOperationList().size(); index++) {
+                        // get first param of adding operation
                         UMLAttribute paramFromOpForAdding = operation.getParametersOfOperationList().get(index);
-                        UMLAttribute paramFromOperationFromList = umlOperation.getParametersOfOperationList().get(index);
-                        //different type -> continue
+                        UMLAttribute paramFromOperationFromList = umlOperation.getParametersOfOperationList()
+                                .get(index);
+                        // different type -> continue
                         if (!paramFromOpForAdding.getType().equals(paramFromOperationFromList.getType()) ||
-                            !paramFromOpForAdding.getName().equals(paramFromOperationFromList.getName())){
+                                !paramFromOpForAdding.getName().equals(paramFromOperationFromList.getName())) {
                             isDifferent = true;
                             break;
                         }
                     }
 
-                    if (isDifferent){
-                        continue; //params are different
+                    if (isDifferent) {
+                        continue; // params are different
                     }
 
-                    //operation return-type check
-                    if(umlOperation.getType().equals(operation.getType())){
+                    // operation return-type check
+                    if (umlOperation.getType().equals(operation.getType())) {
 
-                        //now everything is same
+                        // now everything is same
                         found = true;
                         break;
                     }
@@ -187,7 +194,7 @@ public abstract class UMLClassInterfaceTemplate extends Element {
 
     /**
      * deleting an operation
-     * 
+     *
      * @param name name of operation for deletion
      */
     public void deleteOperation(String name) {
@@ -224,7 +231,7 @@ public abstract class UMLClassInterfaceTemplate extends Element {
 
     /**
      * method for get list of all operations
-     * 
+     *
      * @return unmodifiable list of all operations
      */
     public List<UMLOperation> getUmlOperationList() {

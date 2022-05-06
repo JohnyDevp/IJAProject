@@ -24,8 +24,9 @@ import java.util.Map;
 /**
  * Controller for editting either class or interface in class diagram - editting
  * attributes and operations
- * 
+ *
  * @author xholan11
+ * @version 1.1
  */
 public class EditObjectDialogController {
 
@@ -64,6 +65,12 @@ public class EditObjectDialogController {
 
     /**
      * method for initialization of this controller
+     *
+     * @param guiObject         a {@link ija.ijaproject.GUIClassInterfaceTemplate}
+     *                          object
+     * @param clsDiag           a {@link ija.ijaproject.cls.ClassDiagram} object
+     * @param undoOperationList a {@link java.util.List} object
+     * @param canvas            a {@link javafx.scene.layout.Pane} object
      */
     public void init(GUIClassInterfaceTemplate guiObject, ClassDiagram clsDiag, List<Undo> undoOperationList,
             Pane canvas) {
@@ -114,7 +121,12 @@ public class EditObjectDialogController {
         }
     }
 
-    /** adding attribute - for class */
+    /**
+     * adding attribute - for class
+     *
+     * @param actionEvent a {@link javafx.event.ActionEvent} object
+     * @throws java.io.IOException if any.
+     */
     public void btnAddAttribute(ActionEvent actionEvent) throws IOException {
         // show creating dialog
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("views/editObjectDialogAddAttribute_view.fxml"));
@@ -154,7 +166,11 @@ public class EditObjectDialogController {
 
     }
 
-    /** button for deleting attribute from class object - chosen in combobox */
+    /**
+     * button for deleting attribute from class object - chosen in combobox
+     *
+     * @param actionEvent a {@link javafx.event.ActionEvent} object
+     */
     public void btnDeleteAttribute(ActionEvent actionEvent) {
         // loop the map of attributes and when find then remove it
         for (Map.Entry<UMLAttribute, Text> mapAttr : ((ClassObjectGUI) guiObject).getMapOfAttributes().entrySet()) {
@@ -180,7 +196,11 @@ public class EditObjectDialogController {
 
     }
 
-    /** button for renaming the object */
+    /**
+     * button for renaming the object
+     *
+     * @param actionEvent a {@link javafx.event.ActionEvent} object
+     */
     public void btnRename(ActionEvent actionEvent) {
         // check if the name isnt empty
         if (!txtObjectName.getText().equals("")) {
@@ -207,6 +227,13 @@ public class EditObjectDialogController {
         }
     }
 
+    /**
+     * <p>
+     * btnDeleteOperation.
+     * </p>
+     *
+     * @param actionEvent a {@link javafx.event.ActionEvent} object
+     */
     public void btnDeleteOperation(ActionEvent actionEvent) {
         // variable for storing map object
         Object toBeRemoved = null;
@@ -239,6 +266,13 @@ public class EditObjectDialogController {
         cmbOperations.setItems(cmbOperations.getItems());
     }
 
+    /**
+     * <p>
+     * btnAddOperation.
+     * </p>
+     *
+     * @param actionEvent a {@link javafx.event.ActionEvent} object
+     */
     public void btnAddOperation(ActionEvent actionEvent) {
         // if one of required field is null then return
         if (txtOperationName.getText().equals("") || txtOperationType.getText().equals(""))
@@ -279,7 +313,12 @@ public class EditObjectDialogController {
         cmbAttributes.setItems(cmbAttributes.getItems());
     }
 
-    /** add attribute for operation */
+    /**
+     * add attribute for operation
+     *
+     * @param actionEvent a {@link javafx.event.ActionEvent} object
+     * @throws java.io.IOException if any.
+     */
     public void btnAddOperationAttribute(ActionEvent actionEvent) throws IOException {
         // show creating dialog
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("views/editObjectDialogAddAttribute_view.fxml"));
@@ -302,7 +341,11 @@ public class EditObjectDialogController {
         }
     }
 
-    /** remove whole object */
+    /**
+     * remove whole object
+     *
+     * @param e a {@link javafx.event.ActionEvent} object
+     */
     public void btnRemove(ActionEvent e) {
         // remove all relations from intern representation - also related
         // undone-operations

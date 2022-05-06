@@ -4,7 +4,16 @@ import com.google.gson.*;
 
 import java.lang.reflect.Type;
 
+/**
+ * <p>
+ * UMLClassInterfaceTemplateSeriliazer class.
+ * </p>
+ *
+ * @author musta-pollo
+ * @version 1.1
+ */
 public class UMLClassInterfaceTemplateSeriliazer implements JsonSerializer<UMLClassInterfaceTemplate> {
+    /** {@inheritDoc} */
     public JsonElement serialize(UMLClassInterfaceTemplate src, Type typeOfSrc, JsonSerializationContext context) {
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting().serializeNulls();

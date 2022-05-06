@@ -5,8 +5,9 @@ import java.util.List;
 
 /**
  * class representing the whole class diagram with its items
- * 
+ *
  * @author xholan11
+ * @version 1.1
  */
 public class ClassDiagram extends Element {
     /**
@@ -25,12 +26,20 @@ public class ClassDiagram extends Element {
     public ClassDiagram() {
     }
 
-    /** getter */
+    /**
+     * getter
+     *
+     * @return a {@link java.util.List} object
+     */
     public List<UMLClassInterfaceTemplate> getUmlObjectsList() {
         return this.umlList;
     }
 
-    /** getter */
+    /**
+     * getter
+     *
+     * @return a {@link java.util.List} object
+     */
     public List<UMLRelation> getUmlRelationList() {
         return umlRelationList;
     }
@@ -38,7 +47,7 @@ public class ClassDiagram extends Element {
     /**
      * constructor
      * set the name of this class diagram
-     * 
+     *
      * @param name name of this class diagram
      */
     public ClassDiagram(String name) {
@@ -48,7 +57,7 @@ public class ClassDiagram extends Element {
     /**
      * Creates an instance of UML class and inserts it into diagram
      * If the name already exists returns null
-     * 
+     *
      * @param name Name of the class
      * @return object representing class, if class already exists returns null
      */
@@ -69,8 +78,9 @@ public class ClassDiagram extends Element {
 
     /**
      * Adds created class to the diagram, if doesnt exists
-     * 
+     *
      * @param umlClass class to be added
+     * @return a boolean
      */
     public boolean addClass(UMLClass umlClass) {
         for (UMLClassInterfaceTemplate umlItem : umlList) {
@@ -87,14 +97,19 @@ public class ClassDiagram extends Element {
 
     /**
      * Removes class of the diagram, if exists
-     * 
+     *
      * @param umlClass class to be deleted
      */
     public void deleteClass(UMLClass umlClass) {
         umlList.remove(umlClass);
     }
 
-    /** remove object representation from uml class diagram */
+    /**
+     * remove object representation from uml class diagram
+     *
+     * @param umlObject a {@link ija.ijaproject.cls.UMLClassInterfaceTemplate}
+     *                  object
+     */
     public void deleteObject(UMLClassInterfaceTemplate umlObject) {
         umlList.remove(umlObject);
     }
@@ -102,7 +117,7 @@ public class ClassDiagram extends Element {
     /**
      * Creates an instance of UML interface and inserts it into diagram
      * If the name already exists returns null
-     * 
+     *
      * @param name Name of the class
      * @return object representing class, if class already exists returns null
      */
@@ -123,8 +138,9 @@ public class ClassDiagram extends Element {
 
     /**
      * Adds created interface to the diagram, if doesnt exists
-     * 
+     *
      * @param umlInterface interface to be added
+     * @return a boolean
      */
     public boolean addInterface(UMLInterface umlInterface) {
         for (UMLClassInterfaceTemplate umlItem : umlList) {
@@ -140,7 +156,7 @@ public class ClassDiagram extends Element {
 
     /**
      * Removes interface of the diagram, if exists
-     * 
+     *
      * @param umlInterface interface to be deleted
      */
     public void deleteInterface(UMLInterface umlInterface) {
@@ -148,6 +164,10 @@ public class ClassDiagram extends Element {
     }
 
     /**
+     * <p>
+     * findObject.
+     * </p>
+     *
      * @param o can be either name of object or object to found
      * @return found object or null if not found or bad object has been passed
      */
@@ -167,6 +187,10 @@ public class ClassDiagram extends Element {
     }
 
     /**
+     * <p>
+     * createRelation.
+     * </p>
+     *
      * @param name of new relation
      * @return UMLRelation object
      */
@@ -177,6 +201,10 @@ public class ClassDiagram extends Element {
     }
 
     /**
+     * <p>
+     * addRelation.
+     * </p>
+     *
      * @param umlRelation relation object
      * @return boolean according success of adding operation
      */
@@ -185,6 +213,10 @@ public class ClassDiagram extends Element {
     }
 
     /**
+     * <p>
+     * removeRelation.
+     * </p>
+     *
      * @param umlRelation relation object to be removed
      */
     public void removeRelation(UMLRelation umlRelation) {

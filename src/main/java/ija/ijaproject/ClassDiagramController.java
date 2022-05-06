@@ -25,8 +25,9 @@ import java.util.Optional;
 
 /**
  * Controller for class diagram GUI
- * 
+ *
  * @author xzimol04
+ * @version 1.1
  */
 public class ClassDiagramController {
 
@@ -107,7 +108,7 @@ public class ClassDiagramController {
 
     /**
      * setter
-     * 
+     *
      * @param tabPane reference of the tab where the diagram has been drawn
      */
     public final void setTabPane(TabPane tabPane) {
@@ -116,7 +117,7 @@ public class ClassDiagramController {
 
     /**
      * getter
-     * 
+     *
      * @return reference of the tabPane
      */
     public final TabPane getTabPane() {
@@ -143,7 +144,7 @@ public class ClassDiagramController {
 
     /**
      * setter
-     * 
+     *
      * @param path path of loaded file, when not loaded it will be empty
      */
     public void setLoadedFilePath(String path) {
@@ -162,7 +163,7 @@ public class ClassDiagramController {
 
     /**
      * setter
-     * 
+     *
      * @param mainController reference of main controller of whole window
      */
     public final void setMainController(MainController mainController) {
@@ -308,6 +309,8 @@ public class ClassDiagramController {
 
     /**
      * button action handling creating new tab and class for sequence diagram
+     *
+     * @throws java.lang.Exception if any.
      */
     @FXML
     public void createNewSequenceDiagramBtn() throws Exception {
@@ -367,6 +370,8 @@ public class ClassDiagramController {
 
     /**
      * method handling clicking on button for adding new class or interface
+     *
+     * @throws java.io.IOException if any.
      */
     @FXML
     public void btnAddClass() throws IOException {
@@ -408,6 +413,8 @@ public class ClassDiagramController {
 
     /**
      * method handling clicking on button for creating relation
+     *
+     * @param e a {@link javafx.event.ActionEvent} object
      */
     @FXML
     public void btnAddRelation(ActionEvent e) {
@@ -451,7 +458,12 @@ public class ClassDiagramController {
         }
     }
 
-    /** method handling creating dialog for editing object */
+    /**
+     * method handling creating dialog for editing object
+     *
+     * @param e a {@link javafx.event.ActionEvent} object
+     * @throws java.io.IOException if any.
+     */
     @FXML
     public void btnEditObject(ActionEvent e) throws IOException {
         if (this.selectedClass == null)
@@ -475,7 +487,12 @@ public class ClassDiagramController {
         notifySequenceDiagramsAboutChanges();
     }
 
-    /** method for handling creating dialog for editing relation */
+    /**
+     * method for handling creating dialog for editing relation
+     *
+     * @param e a {@link javafx.event.ActionEvent} object
+     * @throws java.io.IOException if any.
+     */
     @FXML
     public void btnEditRelation(ActionEvent e) throws IOException {
         if (this.selectedRelation == null)
@@ -495,7 +512,9 @@ public class ClassDiagramController {
 
     }
 
-    /** method for handling saving current state of class diagram to json file */
+    /**
+     * method for handling saving current state of class diagram to json file
+     */
     @FXML
     public void btnSave() {
         // TODO - classDiagram
@@ -544,6 +563,11 @@ public class ClassDiagramController {
 
     }
 
+    /**
+     * <p>
+     * btnUndo.
+     * </p>
+     */
     @FXML
     public void btnUndo() {
         if (this.listOfoperationsToBeUndone.size() == 0)
@@ -571,6 +595,8 @@ public class ClassDiagramController {
     /**
      * method for adding each class object from object list to canvas
      * and adding actions to handler for enabling control of these classes
+     *
+     * @param classObject a {@link ija.ijaproject.GUIClassInterfaceTemplate} object
      */
     public void addClassOrInterfaceOnCanvasAndSetActions(GUIClassInterfaceTemplate classObject) {
         // adding all objects elements to canvas
@@ -747,6 +773,8 @@ public class ClassDiagramController {
     /**
      * method for adding relation's graphical parts on canvas and setting up its
      * actions
+     *
+     * @param relation a {@link ija.ijaproject.RelationGUI} object
      */
     public void addRelationOnCanvasAndSetActions(RelationGUI relation) {
         // add relation on canvas

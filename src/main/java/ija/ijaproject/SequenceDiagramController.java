@@ -20,8 +20,9 @@ import java.util.Optional;
 
 /**
  * controller for gui for sequence diagram
- * 
+ *
  * @author xzimol04
+ * @version 1.1
  */
 public class SequenceDiagramController {
 
@@ -64,7 +65,7 @@ public class SequenceDiagramController {
 
     /**
      * setter
-     * 
+     *
      * @param tabPane reference of the tab where the diagram has been drawed
      */
     public final void setTabPane(TabPane tabPane) {
@@ -73,7 +74,7 @@ public class SequenceDiagramController {
 
     /**
      * setter
-     * 
+     *
      * @param tab reference of the tab where the diagram has been drawed
      */
     public final void setTab(Tab tab) {
@@ -82,7 +83,7 @@ public class SequenceDiagramController {
 
     /**
      * getter
-     * 
+     *
      * @return reference of the tab where diagram has been drawed
      */
     public final Tab getTab() {
@@ -91,7 +92,7 @@ public class SequenceDiagramController {
 
     /**
      * getter
-     * 
+     *
      * @return reference of the tabPane
      */
     public final TabPane getTabPane() {
@@ -119,6 +120,9 @@ public class SequenceDiagramController {
     /**
      * initial method
      * it is called from ClassDiagramController
+     *
+     * @param sequenceDiagram a {@link ija.ijaproject.cls.SequenceDiagram} object
+     * @param classDiagram    a {@link ija.ijaproject.cls.ClassDiagram} object
      */
     public void init(SequenceDiagram sequenceDiagram, ClassDiagram classDiagram) {
         this.sequenceDiagram = sequenceDiagram;
@@ -127,6 +131,8 @@ public class SequenceDiagramController {
 
     /**
      * method handling adding class
+     *
+     * @param event a {@link javafx.event.ActionEvent} object
      */
     @FXML
     public void btnAddClass(ActionEvent event) {
@@ -196,8 +202,8 @@ public class SequenceDiagramController {
 
     /**
      * object deleting actions - button click handling
-     * 
-     * @param e
+     *
+     * @param e a {@link javafx.event.ActionEvent} object
      */
     public void btnDeleteClass(ActionEvent e) {
         if (this.selectedObject == null) {
@@ -230,8 +236,8 @@ public class SequenceDiagramController {
 
     /**
      * message deleting actions - button click handling
-     * 
-     * @param e
+     *
+     * @param e a {@link javafx.event.ActionEvent} object
      */
     public void btnDeleteMessage(ActionEvent e) {
         if (this.selectedMessage == null)

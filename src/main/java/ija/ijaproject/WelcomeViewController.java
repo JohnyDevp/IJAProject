@@ -10,8 +10,10 @@ import javafx.stage.Stage;
 
 /**
  * controller for welcome view - view with info about controlling this app
+ *
  * @author xzimol04
- * */
+ * @version 1.1
+ */
 public class WelcomeViewController {
     @FXML
     public Button btnOk;
@@ -19,14 +21,20 @@ public class WelcomeViewController {
     @FXML
     public TextFlow txtFlow;
 
-    public void initialize(){
+    /**
+     * <p>
+     * initialize.
+     * </p>
+     */
+    public void initialize() {
         Text t = new Text("" +
                 "APP USAGE\n" +
                 "--- In main window you can either load new class diagram from json file (example in /data folder) or" +
                 "create new one. \n" +
                 "--- You can add new interface or class by clicking on ADD INTERFACE/CLASS button.\n" +
                 "--- Adding new attributes and operations to currently selected class (red sign) by clicking on" +
-                "EDIT CLASS/INTERFACE button, which will raise up new dialog where you can remove or add these attributes " +
+                "EDIT CLASS/INTERFACE button, which will raise up new dialog where you can remove or add these attributes "
+                +
                 "or operations\n" +
                 "--- Close all diagrams by clicking on CLOSE button\n" +
                 "\n\n\n" +
@@ -34,15 +42,23 @@ public class WelcomeViewController {
         txtFlow.getChildren().add(t);
     }
 
-    public void btnOk(ActionEvent e){
+    /**
+     * <p>
+     * btnOk.
+     * </p>
+     *
+     * @param e a {@link javafx.event.ActionEvent} object
+     */
+    public void btnOk(ActionEvent e) {
         closeStage(e);
     }
 
     /**
-     * method for closing this stage */
+     * method for closing this stage
+     */
     private void closeStage(ActionEvent event) {
-        Node source = (Node)  event.getSource();
-        Stage stage  = (Stage) source.getScene().getWindow();
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }
 }

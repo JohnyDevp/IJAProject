@@ -5,8 +5,9 @@ import java.util.List;
 
 /**
  * class representing sequence diagram with its components
- * 
+ *
  * @author xholan11
+ * @version 1.1
  */
 public class SequenceDiagram extends Element {
 
@@ -27,7 +28,7 @@ public class SequenceDiagram extends Element {
 
     /**
      * constructor
-     * 
+     *
      * @param name name of sequence diagram
      */
     public SequenceDiagram(String name) {
@@ -36,9 +37,10 @@ public class SequenceDiagram extends Element {
 
     /**
      * method for adding new participated class in sequence diagram
-     * 
+     *
      * @param umlSeqClass class representing the object which takes part in the
      *                    sequence diagram
+     * @return a boolean
      */
     public boolean addObject(UMLSeqClass umlSeqClass) {
         if (this.listOfObjectsParticipants.contains(umlSeqClass)) {
@@ -62,8 +64,8 @@ public class SequenceDiagram extends Element {
 
     /**
      * function for removing the object from the list
-     * 
-     * @param umlSeqClass
+     *
+     * @param umlSeqClass a {@link ija.ijaproject.cls.UMLSeqClass} object
      */
     public void removeObject(UMLSeqClass umlSeqClass) {
         this.getListOfObjectsParticipants().remove(umlSeqClass);
@@ -71,12 +73,13 @@ public class SequenceDiagram extends Element {
 
     /**
      * adding message to specific position - rest of messages will move forward +1
-     * 
+     *
      * @param messageType   type of the message (sync, async, ...)
      * @param Ycoord        Y coordination on timeline of object
      * @param classSender   class which is sending the message
      * @param classReceiver class which is receiving the message
      * @param umlOperation  operation representing the method which is called
+     * @return a {@link ija.ijaproject.cls.Message} object
      */
     public Message createMessage(Double Ycoord, UMLSeqClass classSender, UMLSeqClass classReceiver,
             UMLOperation umlOperation, Message.MessageType messageType) {
@@ -86,7 +89,18 @@ public class SequenceDiagram extends Element {
         return msg;
     }
 
-    public Message createReturnMessage(Double Ycoord, UMLSeqClass clsSender, UMLSeqClass clsReceiver, String text){
+    /**
+     * <p>
+     * createReturnMessage.
+     * </p>
+     *
+     * @param Ycoord      a {@link java.lang.Double} object
+     * @param clsSender   a {@link ija.ijaproject.cls.UMLSeqClass} object
+     * @param clsReceiver a {@link ija.ijaproject.cls.UMLSeqClass} object
+     * @param text        a {@link java.lang.String} object
+     * @return a {@link ija.ijaproject.cls.Message} object
+     */
+    public Message createReturnMessage(Double Ycoord, UMLSeqClass clsSender, UMLSeqClass clsReceiver, String text) {
         // create new message
         Message msg;
         msg = new Message(Ycoord, clsSender, clsReceiver, new UMLOperation(text), Message.MessageType.RETURN);
@@ -95,7 +109,7 @@ public class SequenceDiagram extends Element {
 
     /**
      * delete message from diagram
-     * 
+     *
      * @param message message object to be deleted
      */
     public void deleteMessage(Message message) {
@@ -108,7 +122,7 @@ public class SequenceDiagram extends Element {
 
     /**
      * getter
-     * 
+     *
      * @return list of all objects, which taken part in this sequence diagram
      */
     public List<UMLSeqClass> getListOfObjectsParticipants() {
@@ -117,7 +131,7 @@ public class SequenceDiagram extends Element {
 
     /**
      * getter
-     * 
+     *
      * @return map [integer, messageType] representing what type of message is sent
      *         in what time
      */

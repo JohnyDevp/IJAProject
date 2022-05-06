@@ -7,8 +7,9 @@ import java.util.List;
 
 /**
  * class for representing uml operation for both interface and class
- * 
+ *
  * @author xzimol04
+ * @version 1.1
  */
 public class UMLOperation extends UMLAttribute {
 
@@ -25,7 +26,7 @@ public class UMLOperation extends UMLAttribute {
 
     /**
      * constructor for creating operation just with name
-     * 
+     *
      * @param name name of operation
      */
     public UMLOperation(String name) {
@@ -34,9 +35,10 @@ public class UMLOperation extends UMLAttribute {
 
     /**
      * constructor for creating operation with name and its type
-     * 
+     *
      * @param name       name of operation
      * @param returnType return type of operation
+     * @param modifier   a {@link java.lang.Character} object
      */
     public UMLOperation(String name, String returnType, Character modifier) {
         super(modifier, name, returnType);
@@ -44,9 +46,9 @@ public class UMLOperation extends UMLAttribute {
 
     /**
      * adding parameter for this operation
-     * 
+     *
      * @param param UMLAttribute parameter of this operation
-     * @returns success of this operation (true/false)
+     * @return success of this operation (true/false)
      */
     public boolean addOperationParameter(UMLAttribute param) {
         for (Iterator<UMLAttribute> itr = parametersOfOperationList.iterator(); itr.hasNext();) {
@@ -65,7 +67,7 @@ public class UMLOperation extends UMLAttribute {
 
     /**
      * method for get all parameters of this method
-     * 
+     *
      * @return list of params
      */
     public List<UMLAttribute> getParametersOfOperationList() {

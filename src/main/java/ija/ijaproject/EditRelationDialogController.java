@@ -1,5 +1,4 @@
 
-
 package ija.ijaproject;
 
 import ija.ijaproject.cls.ClassDiagram;
@@ -15,8 +14,10 @@ import javafx.stage.Stage;
 
 /**
  * controller for dialog for editing parameters of relation
+ *
  * @author xholan11
- **/
+ * @version 1.1
+ */
 public class EditRelationDialogController {
     @FXML
     public Button btnSave;
@@ -33,37 +34,53 @@ public class EditRelationDialogController {
     @FXML
     public TextField txtCardinalityTo;
 
-    /**variable for storing currently changing variable*/
+    /** variable for storing currently changing variable */
     private RelationGUI relationGUI;
     private Pane canvas;
     private ClassDiagram classDiagram;
 
-    public void onShown(ActionEvent e){
+    /**
+     * <p>
+     * onShown.
+     * </p>
+     *
+     * @param e a {@link javafx.event.ActionEvent} object
+     */
+    public void onShown(ActionEvent e) {
 
-
-        //set text for all text fields according to the values of relation
-        //txtName.setText(relationGUI.getNameOfRelation().getText());
-        //txtCardinalityFrom.setText(relationGUI.getCardinalityByFromClass().getText());
-        //txtCardinalityTo.setText(relationGUI.getCardinalityByToClass().getText());
+        // set text for all text fields according to the values of relation
+        // txtName.setText(relationGUI.getNameOfRelation().getText());
+        // txtCardinalityFrom.setText(relationGUI.getCardinalityByFromClass().getText());
+        // txtCardinalityTo.setText(relationGUI.getCardinalityByToClass().getText());
     }
 
-    /**initialize dialog*/
-    public void init(RelationGUI relationGUI, Pane canvas, ClassDiagram classDiagram){
+    /**
+     * initialize dialog
+     *
+     * @param relationGUI  a {@link ija.ijaproject.RelationGUI} object
+     * @param canvas       a {@link javafx.scene.layout.Pane} object
+     * @param classDiagram a {@link ija.ijaproject.cls.ClassDiagram} object
+     */
+    public void init(RelationGUI relationGUI, Pane canvas, ClassDiagram classDiagram) {
         this.relationGUI = relationGUI;
         this.canvas = canvas;
-        this.classDiagram= classDiagram;
+        this.classDiagram = classDiagram;
         cmbRelationType.getItems().addAll("ASSOCIATION", "AGGREGATION", "GENERALIZATION", "COMPOSITION");
         cmbRelationType.getSelectionModel().selectFirst();
 
     }
 
-    /**saving current state for each textbox and cmbbox as relation new attributes*/
+    /**
+     * saving current state for each textbox and cmbbox as relation new attributes
+     *
+     * @param e a {@link javafx.event.ActionEvent} object
+     */
     public void btnSave(ActionEvent e) {
-        //change relation attributes
+        // change relation attributes
 
-        //change name
+        // change name
         this.relationGUI.setNameOfRelation(txtName.getText());
-        //cardinalities
+        // cardinalities
         if ((txtCardinalityFrom.getText().trim().matches("[0-9]+[\\.][\\.][0-9]+|[0-9]+[\\.][\\.][\\*]|[\\*]|[0-9]+") &&
                 txtCardinalityTo.getText().trim().matches("[0-9]+[\\.][\\.][0-9]+|[0-9]+[\\.][\\.][\\*]|[\\*]|[0-9]+"))
                 || (txtCardinalityFrom.getText().equals("") && txtCardinalityTo.getText().equals(""))) {
@@ -72,35 +89,47 @@ public class EditRelationDialogController {
             relationGUI.setCardinalityByToClass(txtCardinalityTo.getText().trim());
         }
 
-        //change relation
-        UMLRelation.RelationType relType = UMLRelation.RelationType.ASSOCIATION; //default relation
+        // change relation
+        UMLRelation.RelationType relType = UMLRelation.RelationType.ASSOCIATION; // default relation
 
-        switch (cmbRelationType.getSelectionModel().getSelectedItem().toString()){
-            case "ASSOCIATION": relType = UMLRelation.RelationType.ASSOCIATION; break;
-            case "AGGREGATION": relType = UMLRelation.RelationType.AGGREGATION; break;
-            case "GENERALIZATION": relType = UMLRelation.RelationType.GENERALIZATION; break;
-            case "COMPOSITION": relType = UMLRelation.RelationType.COMPOSITION; break;
+        switch (cmbRelationType.getSelectionModel().getSelectedItem().toString()) {
+            case "ASSOCIATION":
+                relType = UMLRelation.RelationType.ASSOCIATION;
+                break;
+            case "AGGREGATION":
+                relType = UMLRelation.RelationType.AGGREGATION;
+                break;
+            case "GENERALIZATION":
+                relType = UMLRelation.RelationType.GENERALIZATION;
+                break;
+            case "COMPOSITION":
+                relType = UMLRelation.RelationType.COMPOSITION;
+                break;
         }
         this.relationGUI.setRelationType(relType);
         this.relationGUI.setNewRelLineEndPosition();
 
-        //then it is possible to close the window
+        // then it is possible to close the window
         closeStage(e);
     }
 
-    /**deletion from space*/
-    public void btnDelete(ActionEvent e){
-        //change all colored operations in when it was generalization relation
+    /**
+     * deletion from space
+     *
+     * @param e a {@link javafx.event.ActionEvent} object
+     */
+    public void btnDelete(ActionEvent e) {
+        // change all colored operations in when it was generalization relation
         relationGUI.setRelationType(UMLRelation.RelationType.ASSOCIATION);
 
-        //remove relation from class diagram
+        // remove relation from class diagram
         this.classDiagram.removeRelation(this.relationGUI.getUmlRelation());
 
-        //remove relation references
+        // remove relation references
         this.relationGUI.getRelClassToGUI().getListOfRelations().remove(this.relationGUI);
         this.relationGUI.getRelClassFromGUI().getListOfRelations().remove(this.relationGUI);
 
-        //remove relation from canvas
+        // remove relation from canvas
         this.relationGUI.removeFromCanvas();
 
         closeStage(e);
@@ -108,10 +137,11 @@ public class EditRelationDialogController {
     }
 
     /**
-     * method for closing this stage - from */
+     * method for closing this stage - from
+     */
     private void closeStage(ActionEvent event) {
-        Node source = (Node)  event.getSource();
-        Stage stage  = (Stage) source.getScene().getWindow();
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }
 }

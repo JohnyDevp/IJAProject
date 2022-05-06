@@ -16,8 +16,9 @@ import java.io.IOException;
 /**
  * controller for handling creating or loading new class diagram from main
  * window
- * 
+ *
  * @author xholan11
+ * @version 1.1
  */
 public class MainController {
     /**
@@ -42,6 +43,13 @@ public class MainController {
      */
     private Stage stage;
 
+    /**
+     * <p>
+     * initialize.
+     * </p>
+     *
+     * @throws java.io.IOException if any.
+     */
     public void initialize() throws IOException {
         // show creating dialog
         FXMLLoader fxmlLoaderWelcome = new FXMLLoader(getClass().getResource("views/welcome_view.fxml"));
@@ -57,6 +65,10 @@ public class MainController {
     }
 
     /**
+     * <p>
+     * Setter for the field <code>stage</code>.
+     * </p>
+     *
      * @param stage
      *              setting the stage for this view
      */
@@ -67,6 +79,8 @@ public class MainController {
     /**
      * handling action when button createNewClassDiagramBtn is pressed
      * calling diagramTabConstructor with sufficient params
+     *
+     * @throws java.lang.Exception if any.
      */
     @FXML
     public void createNewClassDiagramBtn() throws Exception {
@@ -76,6 +90,8 @@ public class MainController {
     /**
      * handling action when button createNewClassDiagramBtn is pressed
      * calling diagramTabConstructor with sufficient params
+     *
+     * @throws java.lang.Exception if any.
      */
     @FXML
     public void saveAll() throws Exception {
@@ -85,6 +101,8 @@ public class MainController {
     /**
      * handling action when button loadClassDiagramBtn is pressed
      * calling diagramTabConstructor with sufficient params
+     *
+     * @throws java.lang.Exception if any.
      */
     @FXML
     public void loadClassDiagramBtn() throws Exception {

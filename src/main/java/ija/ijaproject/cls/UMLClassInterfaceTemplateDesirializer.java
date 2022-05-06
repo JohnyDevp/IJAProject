@@ -4,7 +4,16 @@ import com.google.gson.*;
 
 import java.lang.reflect.Type;
 
+/**
+ * <p>
+ * UMLClassInterfaceTemplateDesirializer class.
+ * </p>
+ *
+ * @author musta-pollo
+ * @version 1.1
+ */
 public class UMLClassInterfaceTemplateDesirializer implements JsonDeserializer<UMLClassInterfaceTemplate> {
+    /** {@inheritDoc} */
     public UMLClassInterfaceTemplate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
         boolean isInterface = Boolean.parseBoolean(json.getAsJsonObject().get("isInterface").toString());

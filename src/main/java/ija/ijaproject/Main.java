@@ -15,42 +15,52 @@ import java.io.IOException;
 
 /**
  * class starting whole gui
+ *
  * @author xholan11
- * */
+ * @version 1.1
+ */
 public class Main extends Application {
 
-    //main class loading first design window
+    // main class loading first design window
+    /** {@inheritDoc} */
     @Override
     public void start(Stage stage) throws IOException {
-        //load main fxml file and create the scene (stage is created - and passed as parameter)
+        // load main fxml file and create the scene (stage is created - and passed as
+        // parameter)
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/home_view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        //load css file
+        // load css file
         String css = this.getClass().getResource("/ija/ijaproject/css/home_view.css").toExternalForm();
         scene.getStylesheets().add(css);
 
-        //setting up the main window
+        // setting up the main window
         stage.setTitle("IJAProject");
-        //set icon of the window
+        // set icon of the window
         Image icon = new Image("icon.png");
         stage.getIcons().add(icon);
 
-        //set the current stage for the main controller
+        // set the current stage for the main controller
         MainController mainController = fxmlLoader.getController();
         mainController.setStage(stage);
 
-        //load the scene to stage and open it up
+        // load the scene to stage and open it up
         stage.setScene(scene);
 
         stage.show();
 
     }
 
-
-    //MAIN METHOD - starting the application
+    // MAIN METHOD - starting the application
+    /**
+     * <p>
+     * main.
+     * </p>
+     *
+     * @param args an array of {@link java.lang.String} objects
+     */
     public static void main(String[] args) {
-        //gives control to the design methods
+        // gives control to the design methods
         Application.launch();
 
     }

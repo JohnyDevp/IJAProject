@@ -7,6 +7,14 @@ import ija.ijaproject.cls.UMLOperation;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
+/**
+ * <p>
+ * Undo class.
+ * </p>
+ *
+ * @author musta-pollo
+ * @version 1.1
+ */
 public class Undo {
     public enum UndoOperation {
         RENAMEOBJECT, ADDATTRIBUTE, ADDOPERATION, REMOVEATTRIBUTE, REMOVEOPERATION
@@ -30,18 +38,33 @@ public class Undo {
     private UMLOperation umlOperation = null;
     private UMLAttribute umlAttribute = null;
 
-    /** getter of undo operation type */
+    /**
+     * getter of undo operation type
+     *
+     * @return a {@link ija.ijaproject.Undo.UndoOperation} object
+     */
     public UndoOperation getOperationType() {
         return operationType;
     }
 
-    /** getter of object */
+    /**
+     * getter of object
+     *
+     * @return a {@link ija.ijaproject.GUIClassInterfaceTemplate} object
+     */
     public GUIClassInterfaceTemplate getGuiObject() {
         return guiObject;
     }
 
     /**
      * constructor - renaming object
+     *
+     * @param operationType  a {@link ija.ijaproject.Undo.UndoOperation} object
+     * @param canvas         a {@link javafx.scene.layout.Pane} object
+     * @param classDiagram   a {@link ija.ijaproject.cls.ClassDiagram} object
+     * @param guiObject      a {@link ija.ijaproject.GUIClassInterfaceTemplate}
+     *                       object
+     * @param prevObjectName a {@link java.lang.String} object
      */
     public Undo(UndoOperation operationType, Pane canvas, ClassDiagram classDiagram,
             GUIClassInterfaceTemplate guiObject, String prevObjectName) {
@@ -54,6 +77,13 @@ public class Undo {
 
     /**
      * constructor - adding or removing attribute
+     *
+     * @param operationType a {@link ija.ijaproject.Undo.UndoOperation} object
+     * @param canvas        a {@link javafx.scene.layout.Pane} object
+     * @param classDiagram  a {@link ija.ijaproject.cls.ClassDiagram} object
+     * @param guiObject     a {@link ija.ijaproject.GUIClassInterfaceTemplate}
+     *                      object
+     * @param umlAttribute  a {@link ija.ijaproject.cls.UMLAttribute} object
      */
     public Undo(UndoOperation operationType, Pane canvas, ClassDiagram classDiagram,
             GUIClassInterfaceTemplate guiObject, UMLAttribute umlAttribute) {
@@ -66,6 +96,13 @@ public class Undo {
 
     /**
      * constructor - adding or removing operation
+     *
+     * @param operationType a {@link ija.ijaproject.Undo.UndoOperation} object
+     * @param canvas        a {@link javafx.scene.layout.Pane} object
+     * @param classDiagram  a {@link ija.ijaproject.cls.ClassDiagram} object
+     * @param guiObject     a {@link ija.ijaproject.GUIClassInterfaceTemplate}
+     *                      object
+     * @param umlOperation  a {@link ija.ijaproject.cls.UMLOperation} object
      */
     public Undo(UndoOperation operationType, Pane canvas, ClassDiagram classDiagram,
             GUIClassInterfaceTemplate guiObject, UMLOperation umlOperation) {
@@ -79,7 +116,7 @@ public class Undo {
     /**
      * function for realize the undo operation
      * here is decided which operation is going to take action
-     * 
+     *
      * @return whether the operation can be undone or not
      */
     public boolean doUndo() {

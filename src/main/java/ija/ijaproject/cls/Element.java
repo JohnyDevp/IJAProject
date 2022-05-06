@@ -2,8 +2,9 @@ package ija.ijaproject.cls;
 
 /**
  * class representing element in string format - to be inherited
- * 
+ *
  * @author dr.Koci
+ * @version 1.1
  */
 public class Element {
 
@@ -17,7 +18,7 @@ public class Element {
 
     /**
      * constructor
-     * 
+     *
      * @param name name of element
      */
     public Element(String name) {
@@ -26,12 +27,17 @@ public class Element {
 
     /**
      * method getName()
+     *
+     * @return a {@link java.lang.String} object
      */
     public String getName() {
         return this.name;
     }
 
     /**
+     * <p>
+     * Setter for the field <code>name</code>.
+     * </p>
      *
      * @param newName new name for property name
      *                it renames the property of this class name

@@ -1,5 +1,13 @@
 package ija.ijaproject.cls;
 
+/**
+ * <p>
+ * Message class.
+ * </p>
+ *
+ * @author musta-pollo
+ * @version 1.1
+ */
 public class Message {
 
     /**
@@ -24,6 +32,17 @@ public class Message {
     public Message() {
     }
 
+    /**
+     * <p>
+     * Constructor for Message.
+     * </p>
+     *
+     * @param Ycoord        a {@link java.lang.Double} object
+     * @param classSender   a {@link ija.ijaproject.cls.UMLSeqClass} object
+     * @param classReceiver a {@link ija.ijaproject.cls.UMLSeqClass} object
+     * @param umlOperation  a {@link ija.ijaproject.cls.UMLOperation} object
+     * @param messageType   a {@link ija.ijaproject.cls.Message.MessageType} object
+     */
     public Message(Double Ycoord, UMLSeqClass classSender, UMLSeqClass classReceiver, UMLOperation umlOperation,
             Message.MessageType messageType) {
         this.Ycoord = Ycoord;
@@ -33,62 +52,110 @@ public class Message {
         this.umlOperation = umlOperation;
     }
 
-    /** setters */
+    /**
+     * setters
+     *
+     * @param Ycoord a {@link java.lang.Double} object
+     */
     public void setYCoord(Double Ycoord) {
         this.Ycoord = Ycoord;
     }
 
-    /** setter */
+    /**
+     * setter
+     *
+     * @param senderDeactivation a {@link java.lang.Boolean} object
+     */
     public void setSenderDeactivation(Boolean senderDeactivation) {
         this.senderDeactivation = senderDeactivation;
     }
 
-    /** setter */
+    /**
+     * setter
+     *
+     * @param receiverDeactivation a {@link java.lang.Boolean} object
+     */
     public void setReceiverDeactivation(Boolean receiverDeactivation) {
         this.receiverDeactivation = receiverDeactivation;
     }
 
-    /** setter */
+    /**
+     * setter
+     *
+     * @param classReceiver a {@link ija.ijaproject.cls.UMLSeqClass} object
+     */
     public void setClassReceiver(UMLSeqClass classReceiver) {
         this.classReceiver = classReceiver;
     }
 
-    /** setter */
+    /**
+     * setter
+     *
+     * @param classSender a {@link ija.ijaproject.cls.UMLSeqClass} object
+     */
     public void setClassSender(UMLSeqClass classSender) {
         this.classSender = classSender;
     }
 
-    /** getter */
+    /**
+     * getter
+     *
+     * @return a {@link java.lang.Boolean} object
+     */
     public Boolean getReceiverDeactivation() {
         return receiverDeactivation;
     }
 
-    /** getter */
+    /**
+     * getter
+     *
+     * @return a {@link java.lang.Boolean} object
+     */
     public Boolean getSenderDeactivation() {
         return senderDeactivation;
     }
 
-    /** getter */
+    /**
+     * getter
+     *
+     * @return a {@link java.lang.Double} object
+     */
     public Double getYCoord() {
         return Ycoord;
     }
 
-    /** getter */
+    /**
+     * getter
+     *
+     * @return a {@link ija.ijaproject.cls.Message.MessageType} object
+     */
     public MessageType getMessageType() {
         return messageType;
     }
 
-    /** getter */
+    /**
+     * getter
+     *
+     * @return a {@link ija.ijaproject.cls.UMLSeqClass} object
+     */
     public UMLSeqClass getClassSender() {
         return classSender;
     }
 
-    /** getter */
+    /**
+     * getter
+     *
+     * @return a {@link ija.ijaproject.cls.UMLSeqClass} object
+     */
     public UMLSeqClass getClassReceiver() {
         return classReceiver;
     }
 
-    /** getter */
+    /**
+     * getter
+     *
+     * @return a {@link ija.ijaproject.cls.UMLOperation} object
+     */
     public UMLOperation getUmlOperation() {
         return umlOperation;
     }

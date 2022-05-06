@@ -7,9 +7,10 @@ import java.util.List;
 
 /**
  * class representing uml class
- * 
+ *
  * @author xholan11
  * @author dr.Koci
+ * @version 1.1
  */
 public class UMLClass extends UMLClassInterfaceTemplate {
 
@@ -17,7 +18,6 @@ public class UMLClass extends UMLClassInterfaceTemplate {
      * list of attributes of class
      */
     public java.util.List<UMLAttribute> umlAttributesList = new ArrayList<UMLAttribute>();
-
 
     /**
      * Default constructor used for json parsing
@@ -28,7 +28,7 @@ public class UMLClass extends UMLClassInterfaceTemplate {
     /**
      * constructor
      * Creating an instance of class representing class in UML diagram
-     * 
+     *
      * @param name name of class
      */
     public UMLClass(String name) {
@@ -38,7 +38,7 @@ public class UMLClass extends UMLClassInterfaceTemplate {
     /**
      * adding an attribute (which is parameter) of this class
      * checking whether theres no other attribute with same name
-     * 
+     *
      * @param attr parameter represent the whole attribute
      * @return true or false according successfulness of this method
      */
@@ -59,7 +59,7 @@ public class UMLClass extends UMLClassInterfaceTemplate {
 
     /**
      * deleting an attribute - returns nothing
-     * 
+     *
      * @param name name of attribute for deletion
      */
     public void deleteAttribute(String name) {
@@ -76,7 +76,7 @@ public class UMLClass extends UMLClassInterfaceTemplate {
     /**
      * find and get attribute according its name
      * also helper method for deleteAttribute()
-     * 
+     *
      * @param name attribute name
      * @return UMLAttribute or null if not found
      */
@@ -96,7 +96,7 @@ public class UMLClass extends UMLClassInterfaceTemplate {
 
     /**
      * method for get list of all attributes
-     * 
+     *
      * @return unmodifiable list of all attributes
      */
     public List<UMLAttribute> getUmlAttributesList() {

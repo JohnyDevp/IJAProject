@@ -9,6 +9,14 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
+/**
+ * <p>
+ * AddMessageDialogController class.
+ * </p>
+ *
+ * @author musta-pollo
+ * @version 1.1
+ */
 public class AddMessageDialogController {
     @FXML
     private ComboBox cmbMessageClasses;
@@ -39,41 +47,76 @@ public class AddMessageDialogController {
     private UMLOperation messageOperation;
     private Message.MessageType messageType;
 
-    /** getter */
+    /**
+     * getter
+     *
+     * @return a {@link ija.ijaproject.cls.Message.MessageType} object
+     */
     public Message.MessageType getMessageType() {
         return messageType;
     }
 
-    /** getter */
+    /**
+     * getter
+     *
+     * @return a {@link java.lang.Boolean} object
+     */
     public Boolean getDataValid() {
         return dataValid;
     }
 
-    /** getter */
+    /**
+     * getter
+     *
+     * @return a {@link ija.ijaproject.cls.UMLSeqClass} object
+     */
     public UMLSeqClass getSeqClassReceiver() {
         return seqClassReceiver;
     }
 
-    /** getter */
+    /**
+     * getter
+     *
+     * @return a {@link ija.ijaproject.cls.UMLOperation} object
+     */
     public UMLOperation getMessageOperation() {
         return messageOperation;
     }
 
-    /** getter */
+    /**
+     * getter
+     *
+     * @return a {@link java.lang.Boolean} object
+     */
     public Boolean getDeactivateSender() {
         return this.checkBoxDeactivateSender.isSelected();
     }
 
-    /** getter */
+    /**
+     * getter
+     *
+     * @return a {@link java.lang.Boolean} object
+     */
     public Boolean getDeactivateReceiver() {
         return this.checkBoxDeactivateReceiver.isSelected();
     }
 
-    /**getter*/
-    public Boolean getAddReturnMessage(){
+    /**
+     * getter
+     *
+     * @return a {@link java.lang.Boolean} object
+     */
+    public Boolean getAddReturnMessage() {
         return this.checkBoxAddReturnMessage.isSelected();
     }
 
+    /**
+     * <p>
+     * init.
+     * </p>
+     *
+     * @param sequenceDiagram a {@link ija.ijaproject.cls.SequenceDiagram} object
+     */
     public void init(SequenceDiagram sequenceDiagram) {
         // set all the classes which exists in diagram
         this.sequenceDiagram = sequenceDiagram;
@@ -129,6 +172,13 @@ public class AddMessageDialogController {
 
     }
 
+    /**
+     * <p>
+     * cmbMessageClassesOnAction.
+     * </p>
+     *
+     * @param e a {@link javafx.event.ActionEvent} object
+     */
     public void cmbMessageClassesOnAction(ActionEvent e) {
         // clear the combobox with operations
         this.cmbMessageOperations.getItems().clear();
@@ -166,6 +216,13 @@ public class AddMessageDialogController {
         }
     }
 
+    /**
+     * <p>
+     * btnAddMessage.
+     * </p>
+     *
+     * @param e a {@link javafx.event.ActionEvent} object
+     */
     public void btnAddMessage(ActionEvent e) {
         // get selected class and operation
         String selectedClass = (String) this.cmbMessageClasses.getSelectionModel().getSelectedItem();

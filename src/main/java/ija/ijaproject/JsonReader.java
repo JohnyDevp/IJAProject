@@ -24,8 +24,9 @@ import java.util.Map;
 
 /**
  * class for parsing json file into class and sequence diagram
- * 
+ *
  * @author xholan11
+ * @version 1.1
  */
 public class JsonReader {
 
@@ -37,6 +38,8 @@ public class JsonReader {
 
     /**
      * getters
+     *
+     * @return a {@link ija.ijaproject.cls.ClassDiagram} object
      */
     public ClassDiagram getClsDiagram() {
         return this.clsDiagram;
@@ -44,11 +47,10 @@ public class JsonReader {
 
     /**
      * Parse whole file
-     * 
-     * @param filePath
-     * @return
+     *
+     * @param filePath a {@link java.lang.String} object
+     * @return a boolean
      */
-
     public boolean parseJson(String filePath) {
 
         try {
@@ -83,6 +85,7 @@ public class JsonReader {
      * method parsing the json file to class diagram representation
      *
      * @param filePath path to json file
+     * @return a boolean
      */
     public boolean parseJsonClassDiagram(String filePath) {
 
@@ -117,6 +120,7 @@ public class JsonReader {
      * method parsing the json file to sequence diagrams representation
      *
      * @param filePath path to json file
+     * @return a boolean
      */
     public boolean parseJsonSequenceDiagrams(String filePath) {
 

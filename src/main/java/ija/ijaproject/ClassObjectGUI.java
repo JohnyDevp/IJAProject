@@ -12,8 +12,9 @@ import java.util.Map;
 
 /**
  * class for creating new graphic representation of class
- * 
+ *
  * @author xholan11
+ * @version 1.1
  */
 public class ClassObjectGUI extends GUIClassInterfaceTemplate {
 
@@ -23,22 +24,38 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate {
 
     /**
      * getters
+     *
+     * @return a {@link java.util.List} object
      */
     public List<Text> getListOfAttributes() {
         return this.listOfAttributes;
     }
 
+    /**
+     * <p>
+     * getUmlClass.
+     * </p>
+     *
+     * @return a {@link ija.ijaproject.cls.UMLClass} object
+     */
     public UMLClass getUmlClass() {
         return (UMLClass) super.object;
     }
 
+    /**
+     * <p>
+     * Getter for the field <code>mapOfAttributes</code>.
+     * </p>
+     *
+     * @return a {@link java.util.Map} object
+     */
     public Map<UMLAttribute, Text> getMapOfAttributes() {
         return mapOfAttributes;
     }
 
     /**
      * constructor for creating the class object
-     * 
+     *
      * @param umlClass name of the class
      */
     public ClassObjectGUI(UMLClass umlClass) {
@@ -52,6 +69,10 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate {
     }
 
     /**
+     * <p>
+     * addAttribute.
+     * </p>
+     *
      * @param umlAttribute intern representation of uml attribute
      *                     from that this method extract attribute name and type
      *                     method for adding attribute to class diagram graphical
@@ -75,6 +96,8 @@ public class ClassObjectGUI extends GUIClassInterfaceTemplate {
      * function for removing attribute from graphical and all others intern
      * representation
      * remove from canvas HAS TO BE DONE BEFORE !!!!
+     *
+     * @param umlAttribute a {@link ija.ijaproject.cls.UMLAttribute} object
      */
     public void removeAttribute(UMLAttribute umlAttribute) {
         // remove text representation

@@ -2,10 +2,12 @@ package ija.ijaproject.cls;
 
 /**
  * class representing uml relation between uml classes and interfaces
- * 
+ *
  * @author xzimol04
+ * @version 1.1
  */
 public class UMLRelation extends Element {
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "UMLRelation{" +
@@ -35,9 +37,19 @@ public class UMLRelation extends Element {
     public double startX, startY;
     public double endX, endY;
 
+    /**
+     * <p>
+     * Constructor for UMLRelation.
+     * </p>
+     */
     public UMLRelation() {
     }
 
+    /**
+     * <p>
+     * setRelationNames.
+     * </p>
+     */
     public void setRelationNames() {
         relationFromObjectName = relationFromObject.name;
         relationToObjectName = relationToObject.name;
@@ -45,7 +57,7 @@ public class UMLRelation extends Element {
 
     /**
      * constructor
-     * 
+     *
      * @param name name of relation
      */
     public UMLRelation(String name) {
@@ -60,7 +72,7 @@ public class UMLRelation extends Element {
 
     /**
      * constructor
-     * 
+     *
      * @param name               name of relation
      * @param relationFromObject interfaces or class where the relation begins
      * @param relationToObject   interface or class where the relation ends
@@ -77,7 +89,7 @@ public class UMLRelation extends Element {
 
     /**
      * getter
-     * 
+     *
      * @return object where the relation begins
      */
     public UMLClassInterfaceTemplate getRelationFromObject() {
@@ -86,7 +98,7 @@ public class UMLRelation extends Element {
 
     /**
      * getter
-     * 
+     *
      * @return object where the relation ends
      */
     public UMLClassInterfaceTemplate getRelationToObject() {
@@ -95,7 +107,7 @@ public class UMLRelation extends Element {
 
     /**
      * getter
-     * 
+     *
      * @return type of relation
      */
     public RelationType getRelationType() {
@@ -104,7 +116,7 @@ public class UMLRelation extends Element {
 
     /**
      * getter
-     * 
+     *
      * @return cardinality visible by ending relation object
      */
     public String getCardinalityByFromClass() {
@@ -113,73 +125,137 @@ public class UMLRelation extends Element {
 
     /**
      * getter
-     * 
+     *
      * @return cardinality visible by starting relation object
      */
     public String getCardinalityByToClass() {
         return cardinalityByToClass;
     }
 
-    /** getter */
+    /**
+     * getter
+     *
+     * @return a double
+     */
     public double getStartX() {
         return startX;
     }
 
+    /**
+     * <p>
+     * Getter for the field <code>startY</code>.
+     * </p>
+     *
+     * @return a double
+     */
     public double getStartY() {
         return startY;
     }
 
+    /**
+     * <p>
+     * Getter for the field <code>endX</code>.
+     * </p>
+     *
+     * @return a double
+     */
     public double getEndX() {
         return endX;
     }
 
+    /**
+     * <p>
+     * Getter for the field <code>endY</code>.
+     * </p>
+     *
+     * @return a double
+     */
     public double getEndY() {
         return endY;
     }
 
     /**
      * setter
+     *
+     * @param relationFromObject a
+     *                           {@link ija.ijaproject.cls.UMLClassInterfaceTemplate}
+     *                           object
      */
     public void setRelationFromObject(UMLClassInterfaceTemplate relationFromObject) {
         this.relationFromObject = relationFromObject;
     }
 
-    /** setter */
+    /**
+     * setter
+     *
+     * @param cardinalityByFromClass a {@link java.lang.String} object
+     */
     public void setCardinalityByFromClass(String cardinalityByFromClass) {
         this.cardinalityByFromClass = cardinalityByFromClass;
     }
 
-    /** setter */
+    /**
+     * setter
+     *
+     * @param cardinalityByToClass a {@link java.lang.String} object
+     */
     public void setCardinalityByToClass(String cardinalityByToClass) {
         this.cardinalityByToClass = cardinalityByToClass;
     }
 
-    /** setter */
+    /**
+     * setter
+     *
+     * @param relationToObject a
+     *                         {@link ija.ijaproject.cls.UMLClassInterfaceTemplate}
+     *                         object
+     */
     public void setRelationToObject(UMLClassInterfaceTemplate relationToObject) {
         this.relationToObject = relationToObject;
     }
 
-    /** setter */
+    /**
+     * setter
+     *
+     * @param relationType a {@link ija.ijaproject.cls.UMLRelation.RelationType}
+     *                     object
+     */
     public void setRelationType(RelationType relationType) {
         this.relationType = relationType;
     }
 
-    /** setter */
+    /**
+     * setter
+     *
+     * @param startX a double
+     */
     public void setStartX(double startX) {
         this.startX = startX;
     }
 
-    /** setter */
+    /**
+     * setter
+     *
+     * @param startY a double
+     */
     public void setStartY(double startY) {
         this.startY = startY;
     }
 
-    /** setter */
+    /**
+     * setter
+     *
+     * @param endX a double
+     */
     public void setEndX(double endX) {
         this.endX = endX;
     }
 
-    /** setter */
+    /**
+     * setter
+     *
+     * @param endY a double
+     */
     public void setEndY(double endY) {
         this.endY = endY;
     }
