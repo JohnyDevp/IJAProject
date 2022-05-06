@@ -18,8 +18,10 @@ public class Message {
     };
 
     public Double Ycoord;
-    public UMLSeqClass classSender;
-    public UMLSeqClass classReceiver;
+    public String senderName;
+    public String recieverName;
+    public transient UMLSeqClass classSender;
+    public transient UMLSeqClass classReceiver;
     public UMLOperation umlOperation;
     public Message.MessageType messageType;
 
@@ -59,6 +61,15 @@ public class Message {
      */
     public void setYCoord(Double Ycoord) {
         this.Ycoord = Ycoord;
+    }
+
+    /**
+     * Used before storing
+     */
+
+    public void setSenderRecieverName() {
+        senderName = classSender.name;
+        recieverName = classReceiver.name;
     }
 
     /**

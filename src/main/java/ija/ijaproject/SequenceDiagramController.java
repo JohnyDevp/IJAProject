@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * controller for gui for sequence diagram
@@ -97,6 +99,48 @@ public class SequenceDiagramController {
      */
     public final TabPane getTabPane() {
         return this.tabPane;
+    }
+
+    public void load() {
+        for (UMLSeqClass cl : sequenceDiagram.listOfObjectsParticipants) {
+            // create object gui
+            SequenceObjectGUI sequenceObjectGUI = new SequenceObjectGUI(cl, this.sequenceDiagram, canvas);
+            sequenceObjectGUIList.add(sequenceObjectGUI);
+            // create its gui
+            sequenceObjectGUI.createGUI();
+            // add on canvas
+            addClassOnCanvasAndSetActions(sequenceObjectGUI);
+        }
+
+        for (Message mes : sequenceDiagram.messageList) {
+            // find sender
+            List<SequenceObjectGUI> sender = sequenceObjectGUIList.stream()
+                    .filter(item -> item.getUmlSeqClass().name.equals(mes.getClassSender().name))
+                    .collect(Collectors.toList());
+            if (sender.size() != 1) {
+                Errors.showAlertDialog("In the diagram are incosistencies.", AlertType.ERROR);
+                // TODO: maybe aboard load
+            }
+            // find reciever
+            List<SequenceObjectGUI> reciever = sequenceObjectGUIList.stream()
+                    .filter(item -> item.getUmlSeqClass().name.equals(mes.getClassReceiver().name))
+                    .collect(Collectors.toList());
+            if (reciever.size() != 1) {
+                Errors.showAlertDialog("In the diagram are incosistencies.", AlertType.ERROR);
+                // TODO: maybe aboard load
+            }
+
+            SequenceMessageGUI newMessageGui = new SequenceMessageGUI(this.sequenceDiagram, mes,
+                    sender.get(0), reciever.get(0), this.canvas);
+            // add message to the list of messages
+            this.sequenceMessageGUIList.add(newMessageGui);
+            // add to related objects
+            sender.get(0).addSendingMessageGui(newMessageGui);
+            reciever.get(0).addReceivingMessageGui(newMessageGui);
+            // set new message actions
+            setMessageActions(newMessageGui);
+        }
+
     }
 
     /*
@@ -365,6 +409,8 @@ public class SequenceDiagramController {
                 // set new message actions
                 setMessageActions(newMessageGui);
 
+                this.sequenceDiagram.messageList.add(newMsg);
+
                 // add return message if selected
                 if (dlgController.getAddReturnMessage()) {
                     // create message
@@ -380,6 +426,8 @@ public class SequenceDiagramController {
                     guiReceiverObject.addSendingMessageGui(returnMessageGui);
                     // set new message actions
                     setMessageActions(returnMessageGui);
+
+                    this.sequenceDiagram.messageList.add(returnMsg);
                 }
             }
 

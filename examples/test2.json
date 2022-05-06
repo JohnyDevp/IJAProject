@@ -3,65 +3,95 @@
     {
       "listOfObjectsParticipants": [
         {
-          "umlClassName": "TOm",
-          "Xcoord": 220.0,
+          "umlClassName": "Tom",
+          "Xcoord": 231.0,
           "indexOfInstance": 0,
-          "name": "TOm"
+          "name": "Tom"
         },
         {
-          "umlClassName": "Ahoj",
-          "Xcoord": 526.0,
+          "umlClassName": "Martin",
+          "Xcoord": 693.0,
           "indexOfInstance": 0,
-          "name": "Ahoj"
+          "name": "Martin"
         }
       ],
-      "messageList": [],
+      "messageList": [
+        {
+          "Ycoord": 115.0,
+          "senderName": "Tom",
+          "recieverName": "Tom",
+          "umlOperation": {
+            "parametersOfOperationList": [],
+            "type": "String",
+            "modifier": "+",
+            "name": "getName"
+          },
+          "messageType": "ASYNC",
+          "senderDeactivation": false,
+          "receiverDeactivation": false
+        },
+        {
+          "Ycoord": 81.0,
+          "senderName": "Martin",
+          "recieverName": "Tom",
+          "umlOperation": {
+            "parametersOfOperationList": [],
+            "type": "String",
+            "modifier": "+",
+            "name": "getName"
+          },
+          "messageType": "ASYNC",
+          "senderDeactivation": false,
+          "receiverDeactivation": false
+        },
+        {
+          "Ycoord": 195.0,
+          "senderName": "Martin",
+          "recieverName": "Tom",
+          "umlOperation": {
+            "parametersOfOperationList": [],
+            "type": "String",
+            "modifier": "+",
+            "name": "getName"
+          },
+          "messageType": "ASYNC",
+          "senderDeactivation": false,
+          "receiverDeactivation": false
+        }
+      ],
       "name": "seqDiag1"
     }
   ],
   "classDiagram": {
     "umlList": [
       {
-        "umlAttributesList": [
-          {
-            "type": "bool",
-            "modifier": "#",
-            "name": "isValid"
-          }
-        ],
-        "umlOperationsList": [
-          {
-            "parametersOfOperationList": [],
-            "type": "QString",
-            "modifier": "+",
-            "name": "getName"
-          }
-        ],
-        "Xcoord": 257.0,
-        "Ycoord": 63.0,
-        "name": "TOm",
+        "umlAttributesList": [],
+        "umlOperationsList": [],
+        "Xcoord": 154.0,
+        "Ycoord": 57.0,
+        "name": "Tom",
         "isInterface": false
       },
       {
         "umlAttributesList": [],
         "umlOperationsList": [],
-        "Xcoord": 516.0,
-        "Ycoord": 58.0,
-        "name": "Ahoj",
+        "Xcoord": 403.0,
+        "Ycoord": 59.0,
+        "name": "Martin",
         "isInterface": false
       }
     ],
     "umlRelationList": [
       {
-        "relationFromObjectName": "TOm",
-        "relationToObjectName": "Ahoj",
+        "relationFromObjectName": "Tom",
+        "relationToObjectName": "Martin",
         "relationType": "ASSOCIATION",
         "cardinalityByFromClass": null,
         "cardinalityByToClass": null,
-        "startX": 362.0,
-        "startY": 102.0,
-        "endX": 519.0,
-        "endY": 88.0,
+        "startX": 261.0,
+        "startY": 110.0,
+        "endX": 406.0,
+        "endY": 109.0,
         "name": ""
       }
     ],

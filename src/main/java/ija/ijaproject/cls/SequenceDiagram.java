@@ -138,4 +138,21 @@ public class SequenceDiagram extends Element {
     public List<Message> getMessageList() {
         return this.messageList;
     }
+
+    /**
+     * 
+     * findObject.
+     * 
+     *
+     * @param o can be either name of object or object to found
+     * @return found object or null if not found or bad object has been passed
+     */
+    public UMLSeqClass findObject(String name) {
+        for (UMLSeqClass seqClass : getListOfObjectsParticipants()) {
+            if (seqClass.getName().equals(name)) {
+                return seqClass;
+            }
+        }
+        return null;
+    }
 }

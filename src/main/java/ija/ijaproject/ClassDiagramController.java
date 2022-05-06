@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -269,6 +270,25 @@ public class ClassDiagramController {
                     cl.umlClass = (UMLClass) this.classDiagram.findObject(cl.umlClassName);
                 }
 
+                for (Message mes : dia.messageList) {
+                    mes.classReceiver = dia.findObject(mes.recieverName);
+                    mes.classSender = dia.findObject(mes.senderName);
+
+                    if (mes.classReceiver == null || mes.classSender == null) {
+                        Errors.showAlertDialog("Some messages do not have a valid sender or reciever.",
+                                AlertType.WARNING);
+                    }
+                }
+
+                try {
+                    loadSequenceDiagram(dia);
+                } catch (Exception e) {
+                    Errors.showAlertDialog("Error while loading. Check file structure!", Alert.AlertType.WARNING); // nothing
+                                                                                                                   // to
+                                                                                                                   // be
+                                                                                                                   // undone
+                }
+
             }
 
         } else {
@@ -346,6 +366,41 @@ public class ClassDiagramController {
 
         // initialize new sequence diagram
         sequenceDiagramController.init(sequenceDiagram, this.classDiagram);
+
+    }
+
+    @FXML
+    public void loadSequenceDiagram(SequenceDiagram seqDia) throws Exception {
+        System.out.println("Loading sequence diagram from file...");
+
+        // create new tab
+        Tab tab = new Tab("Sequence diagram");
+
+        // load desired view to the anchorPane and then set the anchorPane as tab
+        // content
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("views/sequenceDiagram_view.fxml"));
+        AnchorPane anch = loader.load();
+
+        // get controller from either sequence or class diagram
+        SequenceDiagramController sequenceDiagramController = loader.getController();
+        tab.setContent(anch);
+
+        // add tab to tabPane
+        getTabPane().getTabs().add(tab);
+
+        // sets all necessary information for DiagramController
+        sequenceDiagramController.setTabPane(this.tabPane);
+        sequenceDiagramController.setTab(tab);
+
+        // add reference for this controller to the list
+        addNewSequenceDiagramControllerToList(sequenceDiagramController);
+
+        // initialize new sequence diagram
+        sequenceDiagramController.init(seqDia, this.classDiagram);
+
+        sequenceDiagramController.load();
+
+        sequenceDiagramController.updateDiagram();
 
     }
 
@@ -559,6 +614,13 @@ public class ClassDiagramController {
         for (UMLRelation rel : this.classDiagram.umlRelationList) {
             rel.setRelationNames();
         }
+
+        for (SequenceDiagram dia : this.listOfSequenceDiagrams) {
+            for (Message mes : dia.messageList) {
+                mes.setSenderRecieverName();
+            }
+        }
+
         jsonWriter.saveAllToFile(this.listOfSequenceDiagrams, this.classDiagram, filePath);
 
     }
