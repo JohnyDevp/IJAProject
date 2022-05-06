@@ -8,38 +8,43 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class Undo {
-    public enum UndoOperation {RENAMEOBJECT, ADDATTRIBUTE, ADDOPERATION, REMOVEATTRIBUTE, REMOVEOPERATION};
+    public enum UndoOperation {
+        RENAMEOBJECT, ADDATTRIBUTE, ADDOPERATION, REMOVEATTRIBUTE, REMOVEOPERATION
+    };
 
-    //type of operation to be undone
+    // type of operation to be undone
     private UndoOperation operationType;
 
-    //gui object where the undo operation will take place
-    //gui methods for adding also handling adding to inner representation of object (either umlclass or umlinterface)
+    // gui object where the undo operation will take place
+    // gui methods for adding also handling adding to inner representation of object
+    // (either umlclass or umlinterface)
     private GUIClassInterfaceTemplate guiObject;
 
     private ClassDiagram classDiagram;
 
     private Pane canvas;
 
-    //variables storing the old values (which will be reset to current objects if undo)
+    // variables storing the old values (which will be reset to current objects if
+    // undo)
     private String prevObjectName = null;
     private UMLOperation umlOperation = null;
     private UMLAttribute umlAttribute = null;
 
-    /**getter of undo operation type*/
+    /** getter of undo operation type */
     public UndoOperation getOperationType() {
         return operationType;
     }
 
-    /**getter of object*/
+    /** getter of object */
     public GUIClassInterfaceTemplate getGuiObject() {
         return guiObject;
     }
 
     /**
      * constructor - renaming object
-     * */
-    public Undo(UndoOperation operationType, Pane canvas, ClassDiagram classDiagram, GUIClassInterfaceTemplate guiObject, String prevObjectName){
+     */
+    public Undo(UndoOperation operationType, Pane canvas, ClassDiagram classDiagram,
+            GUIClassInterfaceTemplate guiObject, String prevObjectName) {
         this.operationType = operationType;
         this.guiObject = guiObject;
         this.prevObjectName = prevObjectName;
@@ -49,8 +54,9 @@ public class Undo {
 
     /**
      * constructor - adding or removing attribute
-     * */
-    public Undo(UndoOperation operationType, Pane canvas,ClassDiagram classDiagram, GUIClassInterfaceTemplate guiObject, UMLAttribute umlAttribute){
+     */
+    public Undo(UndoOperation operationType, Pane canvas, ClassDiagram classDiagram,
+            GUIClassInterfaceTemplate guiObject, UMLAttribute umlAttribute) {
         this.operationType = operationType;
         this.guiObject = guiObject;
         this.umlAttribute = umlAttribute;
@@ -58,11 +64,11 @@ public class Undo {
         this.canvas = canvas;
     }
 
-
     /**
      * constructor - adding or removing operation
-     * */
-    public Undo(UndoOperation operationType, Pane canvas,ClassDiagram classDiagram, GUIClassInterfaceTemplate guiObject, UMLOperation umlOperation){
+     */
+    public Undo(UndoOperation operationType, Pane canvas, ClassDiagram classDiagram,
+            GUIClassInterfaceTemplate guiObject, UMLOperation umlOperation) {
         this.operationType = operationType;
         this.guiObject = guiObject;
         this.umlOperation = umlOperation;
@@ -73,15 +79,16 @@ public class Undo {
     /**
      * function for realize the undo operation
      * here is decided which operation is going to take action
+     * 
      * @return whether the operation can be undone or not
-     * */
-    public boolean doUndo(){
-        //check whether the object gui still exists in diagram
-        if (this.classDiagram.findObject(this.guiObject.getUmlObject()) == null){
+     */
+    public boolean doUndo() {
+        // check whether the object gui still exists in diagram
+        if (this.classDiagram.findObject(this.guiObject.getUmlObject()) == null) {
             return false;
         }
 
-        switch (this.operationType){
+        switch (this.operationType) {
             case RENAMEOBJECT:
                 return doUndoRenameObject();
             case ADDATTRIBUTE:
@@ -94,7 +101,7 @@ public class Undo {
                 return doUndoRemoveAddedOperation();
         }
 
-        return false; //when operation is unknown
+        return false; // when operation is unknown
     }
 
     /**
@@ -111,6 +118,8 @@ public class Undo {
             this.guiObject.getUmlObject().setName(prevObjectName);
             //set the name of label representing object name
             this.guiObject.getClassNameLabel().setText(prevObjectName);
+
+            guiObject
             //resize the object gui
             this.guiObject.resizeObjectGUI();
 
@@ -121,42 +130,49 @@ public class Undo {
 
     /**
      * method for adding attribute, that has been removed
+     * 
      * @return if operation could have been done
      */
-    private boolean doUndoAddRemovedAttribute(){
-        //take the attribute gui and add it on canvas iff could be created
-        Text newAttr = ((ClassObjectGUI)guiObject).addAttribute(this.umlAttribute);
+    private boolean doUndoAddRemovedAttribute() {
+        // take the attribute gui and add it on canvas iff could be created
+        Text newAttr = ((ClassObjectGUI) guiObject).addAttribute(this.umlAttribute);
 
-        if (newAttr != null) this.canvas.getChildren().add(newAttr);
-        else return false;
+        if (newAttr != null)
+            this.canvas.getChildren().add(newAttr);
+        else
+            return false;
 
         return true;
     }
 
     /**
      * method for removing attribute, that has been added
+     * 
      * @return if operation could have been done
      */
-    private boolean doUndoRemoveAddedAttribute(){
-        Text attributeText = ((ClassObjectGUI)guiObject).getMapOfAttributes().get(this.umlAttribute);
-        if (attributeText == null) return false; //if the attribute doesnt exist then return fail
-        //remove from canvas
+    private boolean doUndoRemoveAddedAttribute() {
+        Text attributeText = ((ClassObjectGUI) guiObject).getMapOfAttributes().get(this.umlAttribute);
+        if (attributeText == null)
+            return false; // if the attribute doesnt exist then return fail
+        // remove from canvas
         this.canvas.getChildren().remove(attributeText);
-        //remove attribute's representations
+        // remove attribute's representations
         ((ClassObjectGUI) guiObject).removeAttribute(this.umlAttribute);
         return true;
     }
 
     /**
      * method for adding operation, that has been removed
+     * 
      * @return if operation could have been done
      */
-    private boolean doUndoAddRemovedOperation(){
-        //try to add operation to class and according to success add it to cmbbox
+    private boolean doUndoAddRemovedOperation() {
+        // try to add operation to class and according to success add it to cmbbox
         Text txtOpr = this.guiObject.addOperation(this.umlOperation);
-        if(txtOpr == null) return false; //fail - already exists
+        if (txtOpr == null)
+            return false; // fail - already exists
         else {
-            //add it to canvas
+            // add it to canvas
             this.canvas.getChildren().add(txtOpr);
         }
         return true;
@@ -164,15 +180,17 @@ public class Undo {
 
     /**
      * method for removing operation, that has been previously addded
+     * 
      * @return if operation could have been done
      */
-    private boolean doUndoRemoveAddedOperation(){
+    private boolean doUndoRemoveAddedOperation() {
         Text operationText = guiObject.getMapOfOperations().get(this.umlOperation);
-        if (operationText == null) return false; //if the operation doesnt exist then return fail
+        if (operationText == null)
+            return false; // if the operation doesnt exist then return fail
 
-        //remove from canvas
+        // remove from canvas
         this.canvas.getChildren().remove(operationText);
-        //remove attribute's representations
+        // remove attribute's representations
         guiObject.removeOperation(umlOperation);
         return true;
     }
