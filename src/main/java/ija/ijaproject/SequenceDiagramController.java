@@ -320,6 +320,21 @@ public class SequenceDiagramController {
                 guiReceiverObject.addReceivingMessageGui(newMessageGui);
                 //set new message actions
                 setMessageActions(newMessageGui);
+
+                //add return message if selected
+                if (dlgController.getAddReturnMessage()){
+                    //create message
+                    Message returnMsg = this.sequenceDiagram.createReturnMessage(mouseEvent.getY(), dlgController.getSeqClassReceiver(),  sequenceObjectGUI.getUmlSeqClass(),"return");
+                    returnMsg.setReceiverDeactivation(false);
+                    returnMsg.setSenderDeactivation(true);
+                    SequenceMessageGUI returnMessageGui = new SequenceMessageGUI(this.sequenceDiagram, returnMsg, guiReceiverObject, sequenceObjectGUI, this.canvas);
+
+                    //add to related objects
+                    sequenceObjectGUI.addReceivingMessageGui(returnMessageGui);
+                    guiReceiverObject.addSendingMessageGui(returnMessageGui);
+                    //set new message actions
+                    setMessageActions(returnMessageGui);
+                }
             }
 
         });

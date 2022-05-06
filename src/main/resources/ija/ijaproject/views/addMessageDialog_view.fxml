@@ -6,16 +6,17 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="268.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ija.ijaproject.AddMessageDialogController">
+<AnchorPane prefHeight="266.0" prefWidth="534.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ija.ijaproject.AddMessageDialogController">
    <children>
-      <ComboBox fx:id="cmbMessageClasses" layoutX="34.0" layoutY="48.0" onAction="#cmbMessageClassesOnAction" prefHeight="24.0" prefWidth="391.0" />
-      <ComboBox fx:id="cmbMessageOperations" layoutX="34.0" layoutY="115.0" prefHeight="24.0" prefWidth="391.0" />
-      <Button fx:id="btnAddMessage" layoutX="300.0" layoutY="212.0" mnemonicParsing="false" onAction="#btnAddMessage" prefHeight="24.0" prefWidth="134.0" text="Add message" />
+      <ComboBox fx:id="cmbMessageClasses" layoutX="34.0" layoutY="48.0" onAction="#cmbMessageClassesOnAction" prefHeight="24.0" prefWidth="467.0" />
+      <ComboBox fx:id="cmbMessageOperations" layoutX="34.0" layoutY="115.0" prefHeight="24.0" prefWidth="467.0" />
+      <Button fx:id="btnAddMessage" layoutX="367.0" layoutY="224.0" mnemonicParsing="false" onAction="#btnAddMessage" prefHeight="24.0" prefWidth="134.0" text="Add message" />
       <Label layoutX="34.0" layoutY="93.0" text="Choose message operation" />
       <Label layoutX="34.0" layoutY="22.0" text="Choose class to send message" />
-      <ComboBox fx:id="cmbMessageTypes" layoutX="34.0" layoutY="172.0" prefHeight="24.0" prefWidth="391.0" />
+      <ComboBox fx:id="cmbMessageTypes" layoutX="34.0" layoutY="172.0" prefHeight="24.0" prefWidth="467.0" />
       <Label layoutX="34.0" layoutY="150.0" text="Choose message type" />
       <CheckBox fx:id="checkBoxDeactivateSender" layoutX="34.0" layoutY="203.0" mnemonicParsing="false" text="Deactivate sender" />
       <CheckBox fx:id="checkBoxDeactivateReceiver" layoutX="34.0" layoutY="227.0" mnemonicParsing="false" text="Deactivate receiver" />
+      <CheckBox fx:id="checkBoxAddReturnMessage" layoutX="204.0" layoutY="202.0" mnemonicParsing="false" text="Add return message" />
    </children>
 </AnchorPane>
