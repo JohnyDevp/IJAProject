@@ -106,21 +106,21 @@ public class Undo {
 
     /**
      * method for renaming object
+     * 
      * @return if operation could have been done
      */
-    private boolean doUndoRenameObject(){
-        //check if there isnt ant other class with desired name
+    private boolean doUndoRenameObject() {
+        // check if there isnt ant other class with desired name
         UMLClass tmp = this.classDiagram.createClass(prevObjectName);
-        if (tmp != null){
-            //if not then delete the tmp class (testing the name) and set the name
+        if (tmp != null) {
+            // if not then delete the tmp class (testing the name) and set the name
             this.classDiagram.deleteClass(tmp);
-            //set the new name for inner representation
+            // set the new name for inner representation
             this.guiObject.getUmlObject().setName(prevObjectName);
-            //set the name of label representing object name
+            // set the name of label representing object name
             this.guiObject.getClassNameLabel().setText(prevObjectName);
 
-            guiObject
-            //resize the object gui
+            // resize the object gui
             this.guiObject.resizeObjectGUI();
 
             return true;

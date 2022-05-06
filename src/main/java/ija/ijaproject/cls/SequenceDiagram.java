@@ -86,6 +86,13 @@ public class SequenceDiagram extends Element {
         return msg;
     }
 
+    public Message createReturnMessage(Double Ycoord, UMLSeqClass clsSender, UMLSeqClass clsReceiver, String text){
+        // create new message
+        Message msg;
+        msg = new Message(Ycoord, clsSender, clsReceiver, new UMLOperation(text), Message.MessageType.RETURN);
+        return msg;
+    }
+
     /**
      * delete message from diagram
      * 

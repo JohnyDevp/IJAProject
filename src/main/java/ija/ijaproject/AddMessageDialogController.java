@@ -28,6 +28,9 @@ public class AddMessageDialogController {
     @FXML
     private CheckBox checkBoxDeactivateReceiver;
 
+    @FXML
+    private CheckBox checkBoxAddReturnMessage;
+
     /** variable storing all the objects taking part in this diagram */
     private SequenceDiagram sequenceDiagram;
 
@@ -64,6 +67,11 @@ public class AddMessageDialogController {
     /** getter */
     public Boolean getDeactivateReceiver() {
         return this.checkBoxDeactivateReceiver.isSelected();
+    }
+
+    /**getter*/
+    public Boolean getAddReturnMessage(){
+        return this.checkBoxAddReturnMessage.isSelected();
     }
 
     public void init(SequenceDiagram sequenceDiagram) {
@@ -114,8 +122,7 @@ public class AddMessageDialogController {
                 Message.MessageType.ASYNC,
                 Message.MessageType.SYNC,
                 Message.MessageType.CREATE,
-                Message.MessageType.DESTROY,
-                Message.MessageType.RETURN);
+                Message.MessageType.DESTROY);
 
         // set selected first items in comboboxes
         this.cmbMessageTypes.getSelectionModel().selectFirst();
@@ -201,4 +208,5 @@ public class AddMessageDialogController {
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }
+
 }
