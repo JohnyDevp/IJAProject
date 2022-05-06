@@ -1,6 +1,8 @@
 *** NÁZEV PROJEKTU ***
 Projekt z předmětu IJA
 
+//TODO: Replace pom.xml on submit
+
 *** AUTOŘI ***
 Jan Holáň, XHOLAN11
 Jan Zimola, XZIMOL04
@@ -20,3 +22,5 @@ Program se ovládá pomocí tlačítek na horní liště - zde je ze začátku u
 
 *** UPOZORNĚNÍ ***	
 V dosavadní verzi jsou funkční právě a jen ta tlačítka, jež mají za úkol tu činnost, která souvisí s požadavky, jež byly popsány jako splněné v rámci souboru requirements.pdf!
+
+
