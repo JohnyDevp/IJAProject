@@ -206,6 +206,29 @@ public class EditObjectDialogController {
     public void btnRename(ActionEvent actionEvent) {
         // check if the name isnt empty
         if (!txtObjectName.getText().equals("")) {
+            // check whether the sequence diagram contains this operation
+            boolean inconsistenceFound = false;
+            for (SequenceDiagram seqDiag : this.listOfSequenceDiagrams) {
+                for (UMLSeqClass cl : seqDiag.getListOfObjectsParticipants().values()) {
+                    if (cl.umlClass.name.equals(this.guiObject.object.name)) {
+                        inconsistenceFound = true;
+                    }
+                }
+            }
+            if (inconsistenceFound) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Inconsistence in sequence diagram found.");
+                alert.setHeaderText("Inconsistence in sequence diagram found.");
+                alert.setContentText("Proceed?");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    // OK - continue
+                } else {
+                    return;
+                }
+            }
+
             // check if there isnt ant other class with desired name
             UMLClass tmp = this.clsDiag.createClass(txtObjectName.getText());
             if (tmp != null) {
@@ -243,13 +266,13 @@ public class EditObjectDialogController {
         for (Map.Entry<UMLOperation, Text> mapAttr : ((ClassObjectGUI) guiObject).getMapOfOperations().entrySet()) {
             if (cmbOperations.getValue() == mapAttr.getValue().getText()) {
 
-                //check whether the sequence diagram contains this operation
+                // check whether the sequence diagram contains this operation
                 boolean inconsistenceFound = false;
-                for(SequenceDiagram seqDiag : this.listOfSequenceDiagrams){
-                    for(Message msg : seqDiag.messageList){
-                        //if there where found message using this operation
+                for (SequenceDiagram seqDiag : this.listOfSequenceDiagrams) {
+                    for (Message msg : seqDiag.messageList) {
+                        // if there where found message using this operation
                         if (msg.getUmlOperation().getName().equals(mapAttr.getKey().getName()) &&
-                            msg.getUmlOperation().getType().equals(mapAttr.getKey().getType())){
+                                msg.getUmlOperation().getType().equals(mapAttr.getKey().getType())) {
                             inconsistenceFound = true;
                         }
                     }
@@ -261,8 +284,8 @@ public class EditObjectDialogController {
                     alert.setContentText("Proceed?");
 
                     Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == ButtonType.OK){
-                        //  OK - continue
+                    if (result.get() == ButtonType.OK) {
+                        // OK - continue
                     } else {
                         return;
                     }
@@ -375,11 +398,11 @@ public class EditObjectDialogController {
      * @param e a {@link javafx.event.ActionEvent} object
      */
     public void btnRemove(ActionEvent e) {
-        //check whether the sequence diagram contains this operation
+        // check whether the sequence diagram contains this operation
         boolean inconsistenceFound = false;
-        for(SequenceDiagram seqDiag : this.listOfSequenceDiagrams){
-            for (UMLSeqClass cl : seqDiag.getListOfObjectsParticipants().values()){
-                if (cl.umlClass.name.equals(this.guiObject.object.name)){
+        for (SequenceDiagram seqDiag : this.listOfSequenceDiagrams) {
+            for (UMLSeqClass cl : seqDiag.getListOfObjectsParticipants().values()) {
+                if (cl.umlClass.name.equals(this.guiObject.object.name)) {
                     inconsistenceFound = true;
                 }
             }
@@ -391,8 +414,8 @@ public class EditObjectDialogController {
             alert.setContentText("Proceed?");
 
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK){
-                //  OK - continue
+            if (result.get() == ButtonType.OK) {
+                // OK - continue
             } else {
                 return;
             }
