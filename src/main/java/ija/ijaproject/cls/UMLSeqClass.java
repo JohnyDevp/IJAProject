@@ -16,8 +16,6 @@ public class UMLSeqClass extends Element {
 
     public Double Xcoord;
 
-    public Integer indexOfInstance = 0;
-
     /**
      * 
      * Constructor for UMLSeqClass.
@@ -33,6 +31,15 @@ public class UMLSeqClass extends Element {
      */
     public void storeClassName() {
         umlClassName = umlClass.name;
+    }
+
+    /**
+     * The name of instance + class is unique
+     * 
+     * @return
+     */
+    public String getUniqueName() {
+        return name + ":" + umlClass.name;
     }
 
     /**
@@ -72,28 +79,22 @@ public class UMLSeqClass extends Element {
     }
 
     /**
-     * constructor - when non-existing uml object is add in sequence diagram
-     *
-     * @param name   a {@link java.lang.String} object
-     * @param xcoord a {@link java.lang.Double} object
-     */
-    public UMLSeqClass(String name, Double xcoord) {
-        super(name);
-        setXcoord(xcoord);
-        // create temporary uml class - with the name of this class
-        this.umlClass = new UMLClass(name);
-    }
-
-    /**
      * constructor
      *
      * @param umlClass a {@link ija.ijaproject.cls.UMLClass} object
      * @param xcoord   a {@link java.lang.Double} object
      */
-    public UMLSeqClass(UMLClass umlClass, Double xcoord) {
-        super(umlClass.getName());
+    public UMLSeqClass(String name, UMLClass umlClass, Double xcoord) {
+        super(name);
         this.umlClass = umlClass;
         setXcoord(xcoord);
+    }
+
+    /**
+     * Check if name contains spaces
+     */
+    public boolean isCorrect() {
+        return !name.contains(" ");
     }
 
 }

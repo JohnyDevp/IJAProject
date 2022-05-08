@@ -121,8 +121,8 @@ public class AddMessageDialogController {
         // set all the classes which exists in diagram
         this.sequenceDiagram = sequenceDiagram;
         // load them to the combobox
-        for (UMLSeqClass umlSeqClass : sequenceDiagram.getListOfObjectsParticipants()) {
-            this.cmbMessageClasses.getItems().add(umlSeqClass.getName());
+        for (UMLSeqClass umlSeqClass : sequenceDiagram.getListOfObjectsParticipants().values()) {
+            this.cmbMessageClasses.getItems().add(umlSeqClass.getUniqueName());
         }
 
         this.cmbMessageClasses.getSelectionModel().selectFirst();
@@ -132,8 +132,8 @@ public class AddMessageDialogController {
         String selectedItem = (String) this.cmbMessageClasses.getSelectionModel().getSelectedItem();
 
         // find the selected class
-        for (UMLSeqClass umlSeqClass : sequenceDiagram.getListOfObjectsParticipants()) {
-            if (umlSeqClass.getName().equals(selectedItem)) {
+        for (UMLSeqClass umlSeqClass : sequenceDiagram.getListOfObjectsParticipants().values()) {
+            if (umlSeqClass.getUniqueName().equals(selectedItem)) {
                 // loop through class operations
                 for (UMLOperation umlOperation : umlSeqClass.getUmlClass().getUmlOperationList()) {
                     // add only public operations
@@ -187,8 +187,8 @@ public class AddMessageDialogController {
         String selectedItem = (String) this.cmbMessageClasses.getSelectionModel().getSelectedItem();
 
         // find the selected class
-        for (UMLSeqClass umlSeqClass : sequenceDiagram.getListOfObjectsParticipants()) {
-            if (umlSeqClass.getName().equals(selectedItem)) {
+        for (UMLSeqClass umlSeqClass : sequenceDiagram.getListOfObjectsParticipants().values()) {
+            if (umlSeqClass.getUniqueName().equals(selectedItem)) {
                 // loop through class operations
                 for (UMLOperation umlOperation : umlSeqClass.getUmlClass().getUmlOperationList()) {
                     // add only public operations
@@ -232,8 +232,8 @@ public class AddMessageDialogController {
         this.messageType = (Message.MessageType) this.cmbMessageTypes.getSelectionModel().getSelectedItem();
 
         // find the selected class
-        for (UMLSeqClass umlSeqClass : sequenceDiagram.getListOfObjectsParticipants()) {
-            if (umlSeqClass.getName().equals(selectedClass)) {
+        for (UMLSeqClass umlSeqClass : sequenceDiagram.getListOfObjectsParticipants().values()) {
+            if (umlSeqClass.getUniqueName().equals(selectedClass)) {
                 // loop through class operations
                 for (UMLOperation umlOperation : umlSeqClass.getUmlClass().getUmlOperationList()) {
                     // compare only public operations

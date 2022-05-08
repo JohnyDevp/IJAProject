@@ -102,7 +102,7 @@ public class SequenceDiagramController {
     }
 
     public void load() {
-        for (UMLSeqClass cl : sequenceDiagram.listOfObjectsParticipants) {
+        for (UMLSeqClass cl : sequenceDiagram.listOfObjectsParticipants.values()) {
             // create object gui
             SequenceObjectGUI sequenceObjectGUI = new SequenceObjectGUI(cl, this.sequenceDiagram, canvas);
             sequenceObjectGUIList.add(sequenceObjectGUI);
@@ -115,7 +115,7 @@ public class SequenceDiagramController {
         for (Message mes : sequenceDiagram.messageList) {
             // find sender
             List<SequenceObjectGUI> sender = sequenceObjectGUIList.stream()
-                    .filter(item -> item.getUmlSeqClass().name.equals(mes.getClassSender().name))
+                    .filter(item -> item.getUmlSeqClass().getUniqueName().equals(mes.getClassSender().getUniqueName()))
                     .collect(Collectors.toList());
             if (sender.size() != 1) {
                 Errors.showAlertDialog("In the diagram are incosistencies.", AlertType.ERROR);
@@ -123,7 +123,8 @@ public class SequenceDiagramController {
             }
             // find reciever
             List<SequenceObjectGUI> reciever = sequenceObjectGUIList.stream()
-                    .filter(item -> item.getUmlSeqClass().name.equals(mes.getClassReceiver().name))
+                    .filter(item -> item.getUmlSeqClass().getUniqueName()
+                            .equals(mes.getClassReceiver().getUniqueName()))
                     .collect(Collectors.toList());
             if (reciever.size() != 1) {
                 Errors.showAlertDialog("In the diagram are incosistencies.", AlertType.ERROR);
@@ -187,14 +188,7 @@ public class SequenceDiagramController {
         for (UMLClassInterfaceTemplate umlObject : this.classDiagram.getUmlObjectsList()) {
             if (umlObject.getClass() == UMLClass.class) {
 
-                boolean exists = false;
-                // Remove all classes that are already instanciated
-                for (UMLSeqClass seqClass : this.sequenceDiagram.listOfObjectsParticipants) {
-                    if (seqClass.umlClass.name == umlObject.name)
-                        exists = true;
-                }
-                if (!exists)
-                    classesList.add(umlObject.getName()); // if class then add to the class list
+                classesList.add(umlObject.getName()); // if class then add to the class list
             }
         }
 
@@ -227,9 +221,31 @@ public class SequenceDiagramController {
             return;
         }
 
+        // choose instance name
+        TextInputDialog instanceNameDialog = new TextInputDialog();
+
+        instanceNameDialog.setHeaderText(("Enter instance name:"));
+
+        Optional<String> resultInstance = instanceNameDialog.showAndWait();
+
+        if (resultInstance.isPresent()) {
+            // Check if the instance name constains spaces
+            if (resultInstance.get().contains(" ")) {
+                Errors.showAlertDialog("Instance name cannot contain spaces.", AlertType.WARNING);
+                return;
+            }
+            // Checke if the instance already exists
+            UMLSeqClass newClass = new UMLSeqClass(resultInstance.get(), chosenUmlClass, 0.0);
+            newClass.umlClass = chosenUmlClass;
+            if (sequenceDiagram.findObject(newClass.getUniqueName()) != null) {
+                Errors.showAlertDialog("That instance already exists", AlertType.WARNING);
+                return;
+            }
+        }
+
         // create sequence uml class
         // -1 coord says that it is not set yet
-        UMLSeqClass umlSeqClass = new UMLSeqClass(chosenUmlClass, 0.0);
+        UMLSeqClass umlSeqClass = new UMLSeqClass(resultInstance.get(), chosenUmlClass, 0.0);
 
         // add it to the diagram
         this.sequenceDiagram.addObject(umlSeqClass);
@@ -497,7 +513,8 @@ public class SequenceDiagramController {
                 } else {
                     // create new umlseqclass and add it to the class diagram and update this seq
                     // class object
-                    UMLSeqClass umlSeqClass = new UMLSeqClass((UMLClass) umlClassInterfaceTemplate,
+                    // TODO: Needs to be checked
+                    UMLSeqClass umlSeqClass = new UMLSeqClass("", (UMLClass) umlClassInterfaceTemplate,
                             sequenceObjectGUI.getUmlSeqClass().getXcoord());
                     sequenceObjectGUI.setExistsInClassDiagram(true, umlSeqClass);
                 }

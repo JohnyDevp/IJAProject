@@ -68,8 +68,8 @@ public class Message {
      */
 
     public void setSenderRecieverName() {
-        senderName = classSender.name;
-        recieverName = classReceiver.name;
+        senderName = classSender.getUniqueName();
+        recieverName = classReceiver.getUniqueName();
     }
 
     /**

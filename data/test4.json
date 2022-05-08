@@ -4,28 +4,28 @@
       "listOfObjectsParticipants": {
         ":Tom": {
           "umlClassName": "Tom",
-          "Xcoord": 291.0,
+          "Xcoord": 477.0,
           "indexOfInstance": 0,
           "name": ""
         },
         "C1:Tom": {
           "umlClassName": "Tom",
-          "Xcoord": 484.0,
+          "Xcoord": 189.0,
           "indexOfInstance": 0,
           "name": "C1"
         },
         "C2:Tom": {
           "umlClassName": "Tom",
-          "Xcoord": 644.0,
+          "Xcoord": 739.0,
           "indexOfInstance": 0,
-          "name": "C1"
+          "name": "C2"
         }
       },
       "messageList": [
         {
-          "Ycoord": 106.0,
-          "senderName": ":Tom",
-          "recieverName": "C1:Tom",
+          "Ycoord": 160.0,
+          "senderName": "C1",
+          "recieverName": "",
           "umlOperation": {
             "parametersOfOperationList": [],
             "type": "String",
@@ -52,9 +52,17 @@
             "name": "getName"
           }
         ],
-        "Xcoord": 205.0,
-        "Ycoord": 76.0,
+        "Xcoord": 241.0,
+        "Ycoord": 49.0,
         "name": "Tom",
+        "isInterface": false
+      },
+      {
+        "umlAttributesList": [],
+        "umlOperationsList": [],
+        "Xcoord": 493.0,
+        "Ycoord": 32.0,
+        "name": "Tim",
         "isInterface": false
       }
     ],

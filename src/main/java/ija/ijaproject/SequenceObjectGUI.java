@@ -140,7 +140,7 @@ public class SequenceObjectGUI {
     public void createGUI() {
         // set the graphical representation of text of the object
         Text objName = new Text();
-        objName.setText(":" + this.umlSeqClass.getName());
+        objName.setText(umlSeqClass.getUniqueName());
 
         // compute the width of whole object
         Double objWidth = objName.getLayoutBounds().getWidth() + 10;
@@ -180,8 +180,7 @@ public class SequenceObjectGUI {
     }
 
     private void updateObjectName() {
-        this.umlSeqClass.setName(this.umlSeqClass.getUmlClass().getName());
-        this.objNameText.setText(":" + this.umlSeqClass.getName());
+        this.objNameText.setText(umlSeqClass.getUniqueName());
 
         // compute the width of whole object
         Double objWidth = this.objNameText.getLayoutBounds().getWidth() + 10;

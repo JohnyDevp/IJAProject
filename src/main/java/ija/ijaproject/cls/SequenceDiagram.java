@@ -1,7 +1,9 @@
 package ija.ijaproject.cls;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * class representing sequence diagram with its components
@@ -15,7 +17,7 @@ public class SequenceDiagram extends Element {
      * list of uml classes, which are the only ones, which can participate in
      * sequence diagram
      */
-    public List<UMLSeqClass> listOfObjectsParticipants = new ArrayList<>();
+    public Map<String, UMLSeqClass> listOfObjectsParticipants = new HashMap<String, UMLSeqClass>();
 
     /** list of all messages used in this sequence diagram */
     public List<Message> messageList = new ArrayList<>();
@@ -43,22 +45,11 @@ public class SequenceDiagram extends Element {
      * @return a boolean
      */
     public boolean addObject(UMLSeqClass umlSeqClass) {
-        if (this.listOfObjectsParticipants.contains(umlSeqClass)) {
+        if (this.listOfObjectsParticipants.containsKey(umlSeqClass.getUniqueName())) {
             return false;
         } else {
-            // count all instances
-            // if there is more than one of one class, then add some number in brackets
-            // after the name of the other instances
-            int numOfSeqInstances = 0;
-            for (UMLSeqClass classItr : listOfObjectsParticipants) {
-                if (classItr.getUmlClass().getName().equals(umlSeqClass.getUmlClass().getName())) {
-                    numOfSeqInstances++;
-                }
-            }
-            if (numOfSeqInstances >= 1) {
-                umlSeqClass.setName(umlSeqClass.getName() + "(" + numOfSeqInstances + ")");
-            }
-            return this.listOfObjectsParticipants.add(umlSeqClass);
+            this.listOfObjectsParticipants.put(umlSeqClass.getUniqueName(), umlSeqClass);
+            return true;
         }
     }
 
@@ -68,7 +59,7 @@ public class SequenceDiagram extends Element {
      * @param umlSeqClass a {@link ija.ijaproject.cls.UMLSeqClass} object
      */
     public void removeObject(UMLSeqClass umlSeqClass) {
-        this.getListOfObjectsParticipants().remove(umlSeqClass);
+        this.getListOfObjectsParticipants().remove(umlSeqClass.getUniqueName());
     }
 
     /**
@@ -123,15 +114,6 @@ public class SequenceDiagram extends Element {
     /**
      * getter
      *
-     * @return list of all objects, which taken part in this sequence diagram
-     */
-    public List<UMLSeqClass> getListOfObjectsParticipants() {
-        return listOfObjectsParticipants;
-    }
-
-    /**
-     * getter
-     *
      * @return map [integer, messageType] representing what type of message is sent
      *         in what time
      */
@@ -148,11 +130,17 @@ public class SequenceDiagram extends Element {
      * @return found object or null if not found or bad object has been passed
      */
     public UMLSeqClass findObject(String name) {
-        for (UMLSeqClass seqClass : getListOfObjectsParticipants()) {
-            if (seqClass.getName().equals(name)) {
-                return seqClass;
-            }
-        }
-        return null;
+
+        return listOfObjectsParticipants.get(name);
     }
+
+    /**
+     * list of all objects, which taken part in this sequence diagram
+     * 
+     * @return
+     */
+    public Map<String, UMLSeqClass> getListOfObjectsParticipants() {
+        return listOfObjectsParticipants;
+    }
+
 }
