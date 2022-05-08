@@ -1,6 +1,5 @@
 pack:
 	rm -rf build;\
-	rm -rf lib;\
 	rm -rf dest;\
 	rm -rf doc;\
 	mkdir build;\

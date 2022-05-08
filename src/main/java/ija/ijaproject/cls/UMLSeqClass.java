@@ -91,7 +91,9 @@ public class UMLSeqClass extends Element {
     }
 
     /**
-     * Check if name contains spaces
+     * check if it contains spaces
+     * 
+     * @return
      */
     public boolean isCorrect() {
         return !name.contains(" ");

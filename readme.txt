@@ -1,8 +1,6 @@
 *** NÁZEV PROJEKTU ***
 Projekt z předmětu IJA
 
-//TODO: Replace pom.xml on submit
-
 *** AUTOŘI ***
 Jan Holáň, XHOLAN11
 Jan Zimola, XZIMOL04
