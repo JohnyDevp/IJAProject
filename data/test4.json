@@ -2,38 +2,61 @@
   "sequenceDiagrams": [
     {
       "listOfObjectsParticipants": {
-        ":Tom": {
-          "umlClassName": "Tom",
-          "Xcoord": 477.0,
-          "indexOfInstance": 0,
+        ":qwd": {
+          "umlClassName": "qwd",
+          "Xcoord": 182.0,
           "name": ""
         },
-        "C1:Tom": {
-          "umlClassName": "Tom",
-          "Xcoord": 189.0,
-          "indexOfInstance": 0,
-          "name": "C1"
-        },
-        "C2:Tom": {
-          "umlClassName": "Tom",
-          "Xcoord": 739.0,
-          "indexOfInstance": 0,
-          "name": "C2"
+        ":wdwd": {
+          "umlClassName": "wdwd",
+          "Xcoord": 428.0,
+          "name": ""
         }
       },
       "messageList": [
         {
-          "Ycoord": 160.0,
-          "senderName": "C1",
-          "recieverName": "",
+          "Ycoord": 105.0,
+          "senderName": ":qwd",
+          "recieverName": ":wdwd",
           "umlOperation": {
             "parametersOfOperationList": [],
-            "type": "String",
+            "type": "wdwd",
             "modifier": "+",
-            "name": "getName"
+            "name": "wqd"
           },
           "messageType": "ASYNC",
+          "messageParams": "",
           "senderDeactivation": false,
+          "receiverDeactivation": false
+        },
+        {
+          "Ycoord": 153.0,
+          "senderName": ":qwd",
+          "recieverName": ":wdwd",
+          "umlOperation": {
+            "parametersOfOperationList": [],
+            "type": "wd",
+            "modifier": "+",
+            "name": "qwd"
+          },
+          "messageType": "ASYNC",
+          "messageParams": "",
+          "senderDeactivation": false,
+          "receiverDeactivation": false
+        },
+        {
+          "Ycoord": 200.0,
+          "senderName": ":wdwd",
+          "recieverName": ":qwd",
+          "umlOperation": {
+            "parametersOfOperationList": [],
+            "type": null,
+            "modifier": null,
+            "name": "return"
+          },
+          "messageType": "RETURN",
+          "messageParams": null,
+          "senderDeactivation": true,
           "receiverDeactivation": false
         }
       ],
@@ -47,22 +70,41 @@
         "umlOperationsList": [
           {
             "parametersOfOperationList": [],
-            "type": "String",
+            "type": "qwd",
             "modifier": "+",
-            "name": "getName"
+            "name": "ads"
           }
         ],
-        "Xcoord": 241.0,
-        "Ycoord": 49.0,
-        "name": "Tom",
+        "Xcoord": 93.0,
+        "Ycoord": 31.0,
+        "name": "qwd",
         "isInterface": false
       },
       {
         "umlAttributesList": [],
-        "umlOperationsList": [],
-        "Xcoord": 493.0,
-        "Ycoord": 32.0,
-        "name": "Tim",
+        "umlOperationsList": [
+          {
+            "parametersOfOperationList": [],
+            "type": "wd",
+            "modifier": "+",
+            "name": "qwd"
+          },
+          {
+            "parametersOfOperationList": [],
+            "type": "wd",
+            "modifier": "+",
+            "name": "ahoj"
+          },
+          {
+            "parametersOfOperationList": [],
+            "type": "wdwd",
+            "modifier": "-",
+            "name": "wqd"
+          }
+        ],
+        "Xcoord": 300.0,
+        "Ycoord": 49.0,
+        "name": "wdwd",
         "isInterface": false
       }
     ],

@@ -140,6 +140,7 @@ public class SequenceObjectGUI {
     public void createGUI() {
         // set the graphical representation of text of the object
         Text objName = new Text();
+
         objName.setText(umlSeqClass.getUniqueName());
 
         // compute the width of whole object
@@ -170,7 +171,7 @@ public class SequenceObjectGUI {
         timeLine.setStartX(halfOnXAxis);
         timeLine.setStartY(bottomOfBackgroundOnYAxis);
         timeLine.setEndX(halfOnXAxis);
-        timeLine.setEndY(400); // todo - which height of object life-line should be chosen????
+        timeLine.setEndY(800); // todo - which height of object life-line should be chosen????
         timeLine.getStrokeDashArray().addAll(20d, 10d);
 
         // set all objects as attributes of this class
@@ -319,6 +320,11 @@ public class SequenceObjectGUI {
         // remove the message
         this.receivingMessageGUIList.remove(sequenceMessageGUI);
 
+        if (sequenceMessageGUI.getMessageType() == Message.MessageType.DESTROY){
+            this.objectDestroyedPosition = -1.0;
+
+            this.objectTimeLine.setEndY(800);
+        }
         // move all the active-rectangles
         moveActiveArea();
     }

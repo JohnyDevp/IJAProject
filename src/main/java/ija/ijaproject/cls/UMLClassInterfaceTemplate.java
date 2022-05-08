@@ -146,6 +146,7 @@ public abstract class UMLClassInterfaceTemplate extends Element {
             // test each operation already added with operation desired to add
             boolean found = false;
             for (UMLOperation umlOperation : umlOperationsList) {
+                if (umlOperation.getName() == null || operation == null) continue;
                 // name check
                 if (umlOperation.getName().equals(operation.getName())) {
 

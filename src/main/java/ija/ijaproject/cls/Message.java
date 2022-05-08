@@ -25,6 +25,23 @@ public class Message {
     public UMLOperation umlOperation;
     public Message.MessageType messageType;
 
+    /**
+     * setter for message params - generally message text
+     * */
+    public void setMessageParams(String messageParams) {
+        this.messageParams = messageParams;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getMessageParams(){
+        return this.messageParams;
+    }
+
+    public String messageParams;
+
     public Boolean senderDeactivation = false;
     public Boolean receiverDeactivation = false;
 

@@ -241,7 +241,7 @@ public class SequenceDiagramController {
                 Errors.showAlertDialog("That instance already exists", AlertType.WARNING);
                 return;
             }
-        }
+        } else return;
 
         // create sequence uml class
         // -1 coord says that it is not set yet
@@ -402,7 +402,9 @@ public class SequenceDiagramController {
                     dlgController.getMessageType());
             // set if newMsg activate or deactivate the related objects
             newMsg.setReceiverDeactivation(dlgController.getDeactivateReceiver());
-            newMsg.setSenderDeactivation(dlgController.getDeactivateSender());
+            newMsg.setSenderDeactivation(dlgController.getMessageType() == Message.MessageType.RETURN ? true : dlgController.getDeactivateSender());
+            //set message params
+            newMsg.setMessageParams(dlgController.getMessageParams());
 
             // find gui of receiver
             SequenceObjectGUI guiReceiverObject = null;
@@ -432,6 +434,8 @@ public class SequenceDiagramController {
                     // create message
                     Message returnMsg = this.sequenceDiagram.createReturnMessage(mouseEvent.getY(),
                             dlgController.getSeqClassReceiver(), sequenceObjectGUI.getUmlSeqClass(), "return");
+                    returnMsg.setMessageParams("return");
+
                     returnMsg.setReceiverDeactivation(false);
                     returnMsg.setSenderDeactivation(true);
                     SequenceMessageGUI returnMessageGui = new SequenceMessageGUI(this.sequenceDiagram, returnMsg,
