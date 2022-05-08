@@ -27,18 +27,16 @@ public class WelcomeViewController {
      * 
      */
     public void initialize() {
-        Text t = new Text("" +
-                "APP USAGE\n" +
-                "--- In main window you can either load new class diagram from json file (example in /data folder) or" +
-                "create new one. \n" +
-                "--- You can add new interface or class by clicking on ADD INTERFACE/CLASS button.\n" +
-                "--- Adding new attributes and operations to currently selected class (red sign) by clicking on" +
-                "EDIT CLASS/INTERFACE button, which will raise up new dialog where you can remove or add these attributes "
-                +
-                "or operations\n" +
-                "--- Close all diagrams by clicking on CLOSE button\n" +
-                "\n\n\n" +
-                "APP MADE BY: Jan ZIMOLA (xzimol04); Jan HOLAN (xholan11)");
+        String txt = String.join("\n",
+                "APP USAGE\n",
+                "In the main window, you can either load a new class diagram from a JSON file (example in /data folder) or create a new one.\n",
+                "You can add a new class by clicking on ADD CLASS button. Create relations by double-clicking on the edge of one class and then double-clicking on the edge of another class.\n",
+                "In the sequence diagram, you can add classes created in the class diagram and  create messages between them by right-clicking on the timeline below a class.\n",
+                "Edit by double-clicking on what you want to edit.\n",
+                "Close all diagrams by clicking on the CLOSE button in the class diagram.\n",
+                "Save all by clicking on the SAVE button in the class diagram.\n",
+                "APP MADE BY:  Jan Zimola (xzimol04); Jan Holáň (xholan11)\n");
+        Text t = new Text(txt);
         txtFlow.getChildren().add(t);
     }
 

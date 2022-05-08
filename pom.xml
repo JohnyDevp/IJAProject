@@ -6,7 +6,7 @@
 
     <groupId>ija.ijaproject</groupId>
     <artifactId>ija-app</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1</version>
     <name>IJAProject</name>
 
     <properties>
