@@ -86,7 +86,7 @@ public class ClassDiagramController {
      * variable storing list of all sequence diagrams
      */
     private List<SequenceDiagramController> sequenceDiagramControllersList = new ArrayList<SequenceDiagramController>();
-    private List<SequenceDiagram> listOfSequenceDiagrams = new ArrayList<>();
+    public List<SequenceDiagram> listOfSequenceDiagrams = new ArrayList<>();
 
     /**
      * variable storing class diagram
@@ -529,7 +529,7 @@ public class ClassDiagramController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("views/editObjectDialog_view.fxml"));
         Parent parent = fxmlLoader.load();
         EditObjectDialogController dlgController = fxmlLoader.<EditObjectDialogController>getController();
-        dlgController.init(this.selectedClass, this.classDiagram, this.listOfoperationsToBeUndone, this.canvas);
+        dlgController.init(this.selectedClass, this.classDiagram, this.listOfoperationsToBeUndone, this.listOfSequenceDiagrams, this.canvas);
 
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
@@ -559,7 +559,6 @@ public class ClassDiagramController {
         Parent parent = fxmlLoader.load();
         EditRelationDialogController dlgController = fxmlLoader.<EditRelationDialogController>getController();
         dlgController.init(this.selectedRelation, this.canvas, this.classDiagram);
-
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);

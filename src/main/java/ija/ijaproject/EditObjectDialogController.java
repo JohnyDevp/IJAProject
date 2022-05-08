@@ -8,9 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -20,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Controller for editting either class or interface in class diagram - editting
@@ -54,6 +53,7 @@ public class EditObjectDialogController {
     @FXML
     public TextField txtOperationType;
 
+    private List<SequenceDiagram> listOfSequenceDiagrams;
     private GUIClassInterfaceTemplate guiObject;
     // for the possibility of renaming object - has to be checked
     private ClassDiagram clsDiag;
@@ -73,11 +73,13 @@ public class EditObjectDialogController {
      * @param canvas            a {@link javafx.scene.layout.Pane} object
      */
     public void init(GUIClassInterfaceTemplate guiObject, ClassDiagram clsDiag, List<Undo> undoOperationList,
+            List<SequenceDiagram> listOfSequenceDiagrams,
             Pane canvas) {
         this.guiObject = guiObject;
         this.canvas = canvas;
         this.clsDiag = clsDiag;
         this.undoOperationList = undoOperationList;
+        this.listOfSequenceDiagrams = listOfSequenceDiagrams;
 
         // disable attribute things iff interface take part
         if (guiObject.getClass() == InterfaceObjectGUI.class) {
@@ -240,6 +242,32 @@ public class EditObjectDialogController {
         // loop the map of attributes and when find then remove it
         for (Map.Entry<UMLOperation, Text> mapAttr : ((ClassObjectGUI) guiObject).getMapOfOperations().entrySet()) {
             if (cmbOperations.getValue() == mapAttr.getValue().getText()) {
+
+                //check whether the sequence diagram contains this operation
+                boolean inconsistenceFound = false;
+                for(SequenceDiagram seqDiag : this.listOfSequenceDiagrams){
+                    for(Message msg : seqDiag.messageList){
+                        //if there where found message using this operation
+                        if (msg.getUmlOperation().getName().equals(mapAttr.getKey().getName()) &&
+                            msg.getUmlOperation().getType().equals(mapAttr.getKey().getType())){
+                            inconsistenceFound = true;
+                        }
+                    }
+                }
+                if (inconsistenceFound) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Inconsistence in sequence diagram found.");
+                    alert.setHeaderText("Inconsistence in sequence diagram found.");
+                    alert.setContentText("Proceed?");
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK){
+                        //  OK - continue
+                    } else {
+                        return;
+                    }
+                }
+
                 // set undo operation
                 this.undoOperationList.add(new Undo(
                         Undo.UndoOperation.ADDOPERATION,
@@ -347,6 +375,29 @@ public class EditObjectDialogController {
      * @param e a {@link javafx.event.ActionEvent} object
      */
     public void btnRemove(ActionEvent e) {
+        //check whether the sequence diagram contains this operation
+        boolean inconsistenceFound = false;
+        for(SequenceDiagram seqDiag : this.listOfSequenceDiagrams){
+            for (UMLSeqClass cl : seqDiag.getListOfObjectsParticipants().values()){
+                if (cl.umlClass.name.equals(this.guiObject.object.name)){
+                    inconsistenceFound = true;
+                }
+            }
+        }
+        if (inconsistenceFound) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Inconsistence in sequence diagram found.");
+            alert.setHeaderText("Inconsistence in sequence diagram found.");
+            alert.setContentText("Proceed?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                //  OK - continue
+            } else {
+                return;
+            }
+        }
+
         // remove all relations from intern representation - also related
         // undone-operations
         this.undoOperationList.removeIf(undo -> undo.getGuiObject().equals(this.guiObject));
