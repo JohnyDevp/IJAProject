@@ -7,9 +7,19 @@
     <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="class diagram relation move fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IJAProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/IJAProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/test2.json" beforeDir="false" afterPath="$PROJECT_DIR$/examples/test2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/test4.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/test4.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/AddMessageDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/AddMessageDialogController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceMessageGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceMessageGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceObjectGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceObjectGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/addMessageDialog_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/addMessageDialog_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/sequenceDiagram_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/sequenceDiagram_view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,12 +63,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
-  }
-}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\jhola\IdeaProjects\IJAProject\src\main\resources\ija\ijaproject\views" />
@@ -467,11 +471,6 @@
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java</url>
-          <line>173</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/SequenceDiagram.java</url>
           <line>75</line>
           <option name="timeStamp" value="18" />
@@ -482,9 +481,24 @@
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/SequenceDiagram.java</url>
-          <line>50</line>
-          <option name="timeStamp" value="20" />
+          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java</url>
+          <line>462</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java</url>
+          <line>289</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java</url>
+          <line>292</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java</url>
+          <line>279</line>
+          <option name="timeStamp" value="32" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="com.google.gson.JsonIOException" package="com.google.gson" />

@@ -1,3 +1,4 @@
+
 package ija.ijaproject;
 
 import ija.ijaproject.cls.UMLClassInterfaceTemplate;
@@ -245,7 +246,6 @@ public class RelationGUI {
         switch (this.relationType) {
             // filled arrow ("big")
             case GENERALIZATION: {
-                System.out.println("generalization");
                 arrowAngle = this.relLine.getStartX() > this.relLine.getEndX() ? Math.toRadians(45)
                         : -Math.toRadians(225);
                 arrowLength = 20;
@@ -265,7 +265,6 @@ public class RelationGUI {
 
             // white filled 4-point-polygon
             case AGGREGATION: {
-                System.out.println("aggregation");
                 arrowAngle = this.relLine.getStartX() > this.relLine.getEndX() ? Math.toRadians(45)
                         : -Math.toRadians(225);
                 arrowLength = 15;
@@ -295,7 +294,6 @@ public class RelationGUI {
 
             // black normal arrow
             case ASSOCIATION: {
-                System.out.println("association");
                 arrowAngle = this.relLine.getStartX() > this.relLine.getEndX() ? Math.toRadians(45)
                         : -Math.toRadians(225);
                 arrowLength = 21;
@@ -329,7 +327,6 @@ public class RelationGUI {
 
             // black filled 4-point-polygon
             case COMPOSITION: {
-                System.out.println("composition");
                 arrowAngle = this.relLine.getStartX() > this.relLine.getEndX() ? Math.toRadians(45)
                         : -Math.toRadians(225);
                 arrowLength = 15;
@@ -389,8 +386,6 @@ public class RelationGUI {
         text.setText(name);
         text.setStyle("-fx-background-color: red");
         text.setFont(Font.font("verdana", 15));
-        System.out.println(text.toString() + " " + lineLength + " " + u1 + " " + u2 + " " + Ax + " " + Ay);
-        System.out.println(resultX + " " + resultY);
         text.toFront();
         this.nameOfRelation = text;
         canvas.getChildren().add(text);

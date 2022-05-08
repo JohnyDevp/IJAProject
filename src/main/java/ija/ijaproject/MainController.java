@@ -136,7 +136,6 @@ public class MainController {
                 fileChooser.getExtensionFilters().add(
                         new FileChooser.ExtensionFilter("JSON", "*.json"));
                 File file = fileChooser.showOpenDialog(stage);
-                System.out.println(filePath);
 
                 // if the dialog has been closed then is necessary to exit the tab
                 // raising an alert

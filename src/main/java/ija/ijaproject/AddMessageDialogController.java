@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -39,14 +40,17 @@ public class AddMessageDialogController {
     @FXML
     private CheckBox checkBoxAddReturnMessage;
 
+    @FXML
+    private TextField txtMessageParams;
+
     /** variable storing all the objects taking part in this diagram */
     private SequenceDiagram sequenceDiagram;
 
     private Boolean dataValid = false;
+
     private UMLSeqClass seqClassReceiver;
     private UMLOperation messageOperation;
     private Message.MessageType messageType;
-
     /**
      * getter
      *
@@ -54,6 +58,14 @@ public class AddMessageDialogController {
      */
     public Message.MessageType getMessageType() {
         return messageType;
+    }
+
+    /**
+     * getter
+     * @return params of this message (or just text for the message)
+     */
+    public String getMessageParams() {
+        return txtMessageParams.getText();
     }
 
     /**
@@ -165,7 +177,8 @@ public class AddMessageDialogController {
                 Message.MessageType.ASYNC,
                 Message.MessageType.SYNC,
                 Message.MessageType.CREATE,
-                Message.MessageType.DESTROY);
+                Message.MessageType.DESTROY,
+                Message.MessageType.RETURN);
 
         // set selected first items in comboboxes
         this.cmbMessageTypes.getSelectionModel().selectFirst();
@@ -207,9 +220,21 @@ public class AddMessageDialogController {
                 }
             }
         }
-
+        Message.MessageType msgType = (Message.MessageType) this.cmbMessageTypes.getSelectionModel().getSelectedItem();
         this.cmbMessageOperations.getSelectionModel().selectFirst();
-        if (this.cmbMessageOperations.getItems().size() == 0) {
+        if (this.cmbMessageOperations.getItems().size() == 0 &&
+            (msgType == Message.MessageType.ASYNC || msgType == Message.MessageType.SYNC)) {
+            this.btnAddMessage.setDisable(true);
+        } else {
+            this.btnAddMessage.setDisable(false);
+        }
+    }
+
+    public void cmbMessageTypesOnAction(ActionEvent e){
+        Message.MessageType msgType = (Message.MessageType) this.cmbMessageTypes.getSelectionModel().getSelectedItem();
+        this.cmbMessageOperations.getSelectionModel().selectFirst();
+        if (this.cmbMessageOperations.getItems().size() == 0 &&
+                (msgType == Message.MessageType.ASYNC || msgType == Message.MessageType.SYNC)) {
             this.btnAddMessage.setDisable(true);
         } else {
             this.btnAddMessage.setDisable(false);

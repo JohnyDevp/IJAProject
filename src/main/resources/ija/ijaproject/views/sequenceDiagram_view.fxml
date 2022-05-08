@@ -9,7 +9,6 @@
    <children>
       <ToolBar layoutX="27.0" layoutY="8.0" prefWidth="570.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
-            <Button mnemonicParsing="false" text="Discard" />
             <Button fx:id="btnClose" mnemonicParsing="false" onAction="#btnClose" text="Close" />
             <Button fx:id="btnAddClass" mnemonicParsing="false" onAction="#btnAddClass" text="ADD CLASS" />
             <Button fx:id="btnDeleteClass" mnemonicParsing="false" onAction="#btnDeleteClass" text="DELETE CLASS" />

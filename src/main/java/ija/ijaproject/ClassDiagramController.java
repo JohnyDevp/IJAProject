@@ -262,11 +262,17 @@ public class ClassDiagramController {
             // Load all diagrams to view and connect created data with already loaded
             this.listOfSequenceDiagrams = jr.sequenceDiagrams;
 
+            Boolean isInconsistent = false;
             for (SequenceDiagram dia : this.listOfSequenceDiagrams) {
 
                 // Use stored name to connect it with a class
                 for (UMLSeqClass cl : dia.listOfObjectsParticipants.values()) {
                     cl.umlClass = (UMLClass) this.classDiagram.findObject(cl.umlClassName);
+                    //in case of non-existing class
+                    if (cl.umlClass == null){
+                        cl.umlClass = new UMLClass(cl.umlClassName);
+                        isInconsistent = true;
+                    }
                 }
 
                 // Connect message with sender and reciever
@@ -274,15 +280,16 @@ public class ClassDiagramController {
                     mes.classReceiver = dia.findObject(mes.recieverName);
                     mes.classSender = dia.findObject(mes.senderName);
 
-                    if (mes.classReceiver == null || mes.classSender == null) {
-                        Errors.showAlertDialog("Some messages do not have a valid sender or reciever.",
-                                AlertType.WARNING);
-                    }
                 }
 
+                if(isInconsistent) {
+                    Errors.showAlertDialog("Inconsistencies in sequence diagram found! \n Can be fixed by using the implemented \nfunctionalities of this program."
+                    , AlertType.WARNING);
+                }
                 try {
                     loadSequenceDiagram(dia);
                 } catch (Exception e) {
+                    e.printStackTrace();
                     Errors.showAlertDialog("Error while loading. Check file structure!", Alert.AlertType.WARNING); // nothing
                 }
             }
@@ -690,7 +697,6 @@ public class ClassDiagramController {
                 // start relation
                 this.relation.setRelationFrom(classObject.getUmlObject(), classObject, event.getX(), event.getY());
                 classObject.addRelation(relation);
-                System.out.println(event.getX() + " " + event.getY());
             } else {
                 // end relation
                 if (this.relation.getRelClassFrom() == classObject.getUmlObject())
@@ -817,7 +823,6 @@ public class ClassDiagramController {
             // position of point where relation begins/ends
             // also redrawing relation line end (arrow, etc.)
             for (RelationGUI rel : classObject.getListOfRelations()) {
-                System.out.println(diffX + "  " + diffY);
                 rel.recomputeRelationDesign(classObject.getUmlObject(), diffX, diffY);
             }
 

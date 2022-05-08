@@ -42,7 +42,10 @@ public class SequenceMessageGUI {
 
     private Line messageLine;
 
+    //polygon and lines represent the message line ending
     private Polygon messageArrow;
+    private Line line1;
+    private Line line2;
 
     // labels on the relation line
     private Text messageText;
@@ -209,13 +212,15 @@ public class SequenceMessageGUI {
 
         // set text of message
         // create operation text
-        StringBuilder textOfOperation = new StringBuilder(
-                umlMessage.getUmlOperation().getModifier() + umlMessage.getUmlOperation().getName() + " (");
-        for (UMLAttribute umlParam : umlMessage.getUmlOperation().getParametersOfOperationList()) {
-            textOfOperation.append(umlParam.getName()).append(" : ").append(umlParam.getType());
+        //according to the type of operation
+        StringBuilder textOfOperation = new StringBuilder();
+        if (messageType == Message.MessageType.CREATE || messageType == Message.MessageType.DESTROY){
+            textOfOperation.append( "\""+ this.umlMessage.getMessageParams() + "\"").append("  <<" + messageType.toString() + ">>");
+        } else if (messageType == Message.MessageType.RETURN){
+            textOfOperation.append( "\""+ this.umlMessage.getMessageParams() + "\"");
+        } else if (messageType == Message.MessageType.SYNC || messageType == Message.MessageType.ASYNC){ //SYNC AND ASYNC
+            textOfOperation.append(umlMessage.getUmlOperation().getName()).append(" (").append(umlMessage.getMessageParams()).append(") : ").append(umlMessage.getUmlOperation().getType());
         }
-        textOfOperation.append(") : ").append(umlMessage.getUmlOperation().getType()).append(" | ")
-                .append(this.messageType.toString());
 
         this.messageText = new Text(textOfOperation.toString());
         this.messageText.setX((this.messageLine.getStartX() + this.messageLine.getEndX()) / 2
@@ -228,7 +233,7 @@ public class SequenceMessageGUI {
         // add everything on canvas
         this.canvas.getChildren().addAll(
                 this.messageLine,
-                this.messageArrow,
+                //this.messageArrow,
                 this.messageText);
 
     }
@@ -237,8 +242,6 @@ public class SequenceMessageGUI {
      * creates message end - it has to be recomputed every time it has been moved
      */
     private void createMessageLineEnding() {
-        this.messageArrow = new Polygon();
-
         double slope = (this.messageLine.getStartY() - this.messageLine.getEndY())
                 / (this.messageLine.getStartX() - this.messageLine.getEndX());
         double lineAngle = Math.atan(slope);
@@ -246,36 +249,65 @@ public class SequenceMessageGUI {
                 + Math.pow((this.messageLine.getStartX() - this.messageLine.getEndX()), 2));
         double arrowAngle, arrowLength, arrowWide;
 
-        arrowAngle = this.messageLine.getStartX() > this.messageLine.getEndX() ? Math.toRadians(45)
-                : -Math.toRadians(225);
-        arrowLength = 20;
-        this.messageArrow.getPoints().addAll(
-                // the aim
-                this.messageLine.getEndX(), this.messageLine.getEndY(),
-                // left corner
-                arrowLength * Math.cos(lineAngle - arrowAngle) + this.messageLine.getEndX(),
-                arrowLength * Math.sin(lineAngle - arrowAngle) + this.messageLine.getEndY(),
-                // right corner
-                arrowLength * Math.cos(lineAngle + arrowAngle) + this.messageLine.getEndX(),
-                arrowLength * Math.sin(lineAngle + arrowAngle) + this.messageLine.getEndY());
-        this.messageArrow.setStroke(Color.BLACK);
-        this.messageArrow.setFill(Color.WHITE);
+        switch(umlMessage.messageType){
+            case SYNC:
+            case DESTROY:
+            case CREATE:
+                if (this.messageArrow != null) this.canvas.getChildren().remove(this.messageArrow);
+                this.messageArrow = new Polygon();
+                arrowAngle = this.messageLine.getStartX() > this.messageLine.getEndX() ? Math.toRadians(45)
+                        : -Math.toRadians(225);
+                arrowLength = 20;
+                this.messageArrow.getPoints().addAll(
+                        // the aim
+                        this.messageLine.getEndX(), this.messageLine.getEndY(),
+                        // left corner
+                        arrowLength * Math.cos(lineAngle - arrowAngle) + this.messageLine.getEndX(),
+                        arrowLength * Math.sin(lineAngle - arrowAngle) + this.messageLine.getEndY(),
+                        // right corner
+                        arrowLength * Math.cos(lineAngle + arrowAngle) + this.messageLine.getEndX(),
+                        arrowLength * Math.sin(lineAngle + arrowAngle) + this.messageLine.getEndY());
+                this.messageArrow.setStroke(Color.BLACK);
+                this.messageArrow.setFill(Color.BLACK);
 
-        /*
-         * switch (this.messageType){
-         * case CREATE: break;
-         * case SYNC: break;
-         * case ASYNC: break;
-         * case RETURN:
-         * //set dashed line
-         * this.messageLine.getStrokeDashArray().addAll(25d, 10d);
-         * 
-         * //set the end arrow
-         * 
-         * break;
-         * case DESTROY: break;
-         * }
-         */
+                this.canvas.getChildren().add(this.messageArrow);
+                break;
+
+            case ASYNC:
+            case RETURN:
+                arrowAngle = this.messageLine.getStartX() > this.messageLine.getEndX() ? Math.toRadians(45)
+                        : -Math.toRadians(225);
+                arrowLength = 21;
+                arrowWide = 10;
+                Line line1 = new Line(
+                        (arrowLength) * Math.cos(lineAngle - arrowAngle) + this.messageLine.getEndX(),
+                        arrowWide * Math.sin(lineAngle - arrowAngle) + this.messageLine.getEndY(),
+                        this.messageLine.getEndX(),
+                        this.messageLine.getEndY());
+                Line line2 = new Line(
+                        (arrowLength) * Math.cos(lineAngle + arrowAngle) + this.messageLine.getEndX(),
+                        arrowWide * Math.sin(lineAngle + arrowAngle) + this.messageLine.getEndY(),
+                        this.messageLine.getEndX(),
+                        this.messageLine.getEndY());
+                line1.setStrokeWidth(2.5);
+                line2.setStrokeWidth(2.5);
+
+                // adding both lines to canvas
+                // and removing old ones, if exists
+                // warning it has to be here
+                if (this.line1 != null)
+                    canvas.getChildren().remove(this.line1);
+                if (this.line2 != null)
+                    canvas.getChildren().remove(this.line2);
+                canvas.getChildren().add(line1);
+                canvas.getChildren().add(line2);
+                this.line1 = line1;
+                this.line2 = line2;
+                break;
+        }
+
+
+
     }
 
     /**
@@ -294,9 +326,9 @@ public class SequenceMessageGUI {
         this.messageText.setY(this.umlMessage.getYCoord() - 20);
 
         // reset the ending part of line (firstly remove it from canvas, then add)
-        this.canvas.getChildren().remove(this.messageArrow);
+        //this.canvas.getChildren().remove(this.messageArrow);
         createMessageLineEnding();
-        this.canvas.getChildren().add(this.messageArrow);
+        //this.canvas.getChildren().add(this.messageArrow);
 
         // notify the related objects about movement of active area
         this.objectSender.moveActiveArea();
@@ -332,7 +364,9 @@ public class SequenceMessageGUI {
         // check whether the class still contains this operation
         if (umlSeqClass.getUmlClass().foundOperation(this.umlMessage.getUmlOperation())) {
             this.messageText.setFill(Color.BLACK);
-        } else {
+        } else if (this.umlMessage.messageType != Message.MessageType.DESTROY &&
+                    this.umlMessage.messageType != Message.MessageType.CREATE &&
+                this.umlMessage.messageType != Message.MessageType.RETURN){
             this.messageText.setFill(Color.RED);
         }
     }
