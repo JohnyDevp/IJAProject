@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="DONE LTS 10.0">
+    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="(check for inconsistencies fix)DONE LTS 10.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/EditObjectDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/EditObjectDialogController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +49,9 @@
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -114,6 +116,7 @@
       <workItem from="1651484430062" duration="8491000" />
       <workItem from="1651824590060" duration="942000" />
       <workItem from="1651831859131" duration="332000" />
+      <workItem from="1652026070183" duration="420000" />
     </task>
     <task id="LOCAL-00001" summary="structure done">
       <created>1648809516399</created>
@@ -416,7 +419,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652023123155</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="(check for inconsistencies fix)DONE LTS 10.1">
+      <created>1652024491557</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1652024491557</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -437,7 +447,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="all graphical representations done, missing dialogs, editing both class objects and relations" />
     <MESSAGE value="parsing start" />
     <MESSAGE value="class diagram interface added" />
     <MESSAGE value="gui remaster begin" />
@@ -462,7 +471,8 @@
     <MESSAGE value="relation fix" />
     <MESSAGE value="class diagram relation move fix" />
     <MESSAGE value="DONE LTS 10.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="DONE LTS 10.0" />
+    <MESSAGE value="(check for inconsistencies fix)DONE LTS 10.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="(check for inconsistencies fix)DONE LTS 10.1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -489,18 +499,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java</url>
-          <line>289</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java</url>
           <line>292</line>
           <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java</url>
-          <line>279</line>
-          <option name="timeStamp" value="32" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="com.google.gson.JsonIOException" package="com.google.gson" />

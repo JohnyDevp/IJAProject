@@ -248,6 +248,7 @@ public class EditObjectDialogController {
                 for(SequenceDiagram seqDiag : this.listOfSequenceDiagrams){
                     for(Message msg : seqDiag.messageList){
                         //if there where found message using this operation
+                        if (msg.getUmlOperation() == null) continue;
                         if (msg.getUmlOperation().getName().equals(mapAttr.getKey().getName()) &&
                             msg.getUmlOperation().getType().equals(mapAttr.getKey().getType())){
                             inconsistenceFound = true;
