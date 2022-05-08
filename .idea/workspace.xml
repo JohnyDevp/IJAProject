@@ -4,22 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="class diagram relation move fix">
+    <list default="true" id="a7d34249-ff0b-4cd5-82be-d8cb4293512e" name="Changes" comment="DONE LTS 10.0">
+      <change afterPath="$PROJECT_DIR$/data/web_example.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/web_example_no_errors.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IJAProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/IJAProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/test4.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/test4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/AddMessageDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/AddMessageDialogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/ClassDiagramController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/JsonWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/RelationGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceDiagramController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceMessageGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceMessageGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceObjectGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/SequenceObjectGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ija/ijaproject/cls/UMLClassInterfaceTemplate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/addMessageDialog_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/addMessageDialog_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/sequenceDiagram_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ija/ijaproject/views/sequenceDiagram_view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -414,7 +402,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651488737943</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="DONE LTS 10.0">
+      <created>1652019695810</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1652019695810</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -435,7 +430,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="all relations has graphical representations" />
     <MESSAGE value="all graphical representations done, missing dialogs, editing both class objects and relations" />
     <MESSAGE value="parsing start" />
     <MESSAGE value="class diagram interface added" />
@@ -460,7 +454,8 @@
     <MESSAGE value="sequence diagram fixing" />
     <MESSAGE value="relation fix" />
     <MESSAGE value="class diagram relation move fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="class diagram relation move fix" />
+    <MESSAGE value="DONE LTS 10.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="DONE LTS 10.0" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
